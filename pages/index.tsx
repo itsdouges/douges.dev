@@ -12,7 +12,7 @@ import pkg from '../package.json';
 import toggleTheme from '../lib/toggle-theme';
 
 const heroStyles = css({
-  borderTop: `4px solid ${token('color.background.boldBrand.resting')}`,
+  borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
   height: '60vh',
   minHeight: 400,
   display: 'flex',
@@ -50,7 +50,7 @@ const stickyButtonStyles = css({
 const sectionStyles = css({
   margin: '0 auto',
   maxWidth: 840,
-  padding: '64px 32px',
+  padding: '128px 32px',
 });
 
 const sunkenStyles = css({
@@ -81,7 +81,9 @@ const Home: NextPage = () => {
       <main>
         <div css={heroStyles}>
           <div css={stickyButtonStyles}>
-            <Button onClick={toggleTheme}>Switch</Button>
+            <Button appearance="subtle" onClick={toggleTheme}>
+              ☾
+            </Button>
           </div>
 
           <h1 css={heroTitleStyles}>
@@ -119,7 +121,7 @@ const Home: NextPage = () => {
           <Label htmlFor="email" label="Join the waitlist today" />
           <div css={inlineGroupStyles}>
             <Textfield id="email" placeholder="you@beprimed.dev" />
-            <Button>Join</Button>
+            <Button appearance="primary">Join</Button>
           </div>
         </form>
       </main>

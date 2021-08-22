@@ -6,6 +6,7 @@ const labelStyles = css({
   color: token('color.text.mediumEmphasis'),
   fontSize: 20,
   display: 'inline',
+  fontWeight: 500,
 });
 
 const containerStyles = css({

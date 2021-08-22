@@ -3,19 +3,11 @@ import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 
 const buttonStyles = css({
-  padding: 8,
+  padding: '8px 12px',
   margin: 0,
   fontSize: 20,
   border: 0,
-  backgroundColor: token('color.background.boldBrand.resting'),
-  color: token('color.text.onBold'),
   borderRadius: 3,
-  ':hover': {
-    backgroundColor: token('color.background.boldBrand.hover'),
-  },
-  ':active': {
-    backgroundColor: token('color.background.boldBrand.pressed'),
-  },
   ':focus': {
     outline: 0,
   },
@@ -26,14 +18,44 @@ const buttonStyles = css({
   },
 });
 
+const primaryStyles = css({
+  color: token('color.text.onBold'),
+  backgroundColor: token('color.background.boldBrand.resting'),
+  ':hover': {
+    backgroundColor: token('color.background.boldBrand.hover'),
+  },
+  ':active': {
+    backgroundColor: token('color.background.boldBrand.pressed'),
+  },
+});
+
+const subtleStyles = css({
+  color: token('color.text.highEmphasis'),
+  backgroundColor: 'transparent',
+  ':hover': {
+    backgroundColor: token('color.background.transparentNeutral.hover'),
+  },
+  ':active': {
+    backgroundColor: token('color.background.transparentNeutral.pressed'),
+  },
+});
+
+const buttonAppearances = {
+  subtle: subtleStyles,
+  primary: primaryStyles,
+};
+
 interface ButtonProps {
+  appearance: 'primary' | 'subtle';
   onClick?: React.MouseEventHandler;
   children?: JSX.Element | string;
 }
 
-function Button({ children, onClick }: ButtonProps) {
+function Button({ children, onClick, appearance }: ButtonProps) {
+  const appearanceStyles = buttonAppearances[appearance];
+
   return (
-    <button type="button" onClick={onClick} css={buttonStyles}>
+    <button type="button" onClick={onClick} css={[buttonStyles, appearanceStyles]}>
       {children}
     </button>
   );
