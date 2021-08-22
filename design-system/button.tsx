@@ -27,12 +27,13 @@ const buttonStyles = css({
 });
 
 interface ButtonProps {
+  onClick?: React.MouseEventHandler;
   children?: JSX.Element | string;
 }
 
-function Button({ children }: ButtonProps) {
+function Button({ children, onClick }: ButtonProps) {
   return (
-    <button type="button" css={buttonStyles}>
+    <button type="button" onClick={onClick} css={buttonStyles}>
       {children}
     </button>
   );

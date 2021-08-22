@@ -9,8 +9,10 @@ import Textfield from 'design-system/textfield';
 import Label from 'design-system/label';
 import Button from 'design-system/button';
 import pkg from '../package.json';
+import toggleTheme from '../lib/toggle-theme';
 
 const heroStyles = css({
+  borderTop: `4px solid ${token('color.background.boldBrand.resting')}`,
   height: '60vh',
   minHeight: 400,
   display: 'flex',
@@ -29,9 +31,9 @@ const heroDescriptionStyles = css({
 });
 
 const groupStyles = css({
-  display: 'flex',
-  flexWrap: 'wrap',
+  display: 'grid',
   gap: 32,
+  gridTemplateColumns: '1fr 1fr',
 });
 
 const inlineGroupStyles = css({
@@ -39,9 +41,15 @@ const inlineGroupStyles = css({
   gap: 8,
 });
 
+const stickyButtonStyles = css({
+  position: 'absolute',
+  top: 32,
+  right: 32,
+});
+
 const sectionStyles = css({
   margin: '0 auto',
-  maxWidth: 1000,
+  maxWidth: 840,
   padding: '64px 32px',
 });
 
@@ -72,6 +80,10 @@ const Home: NextPage = () => {
 
       <main>
         <div css={heroStyles}>
+          <div css={stickyButtonStyles}>
+            <Button onClick={toggleTheme}>Switch</Button>
+          </div>
+
           <h1 css={heroTitleStyles}>
             <strong>beprimed.dev</strong>
           </h1>
@@ -90,15 +102,15 @@ const Home: NextPage = () => {
             />
             <Card
               title="Writing lint rules that scale"
-              secondary="An in-depth tutorial for writing custom ESLint rules successfully over large codebases with minimal friction."
+              secondary="An in-depth look at writing custom ESLint rules successfully over large codebases with minimal friction."
             />
             <Card
-              title="Code transformation doing more with less"
+              title="Build time code transformation"
               secondary="A three part series taking you in-depth into what it is, why its useful, and how to leverage it at scale."
             />
             <Card
-              title="...and more coming 2021"
-              secondary="Leveraging over 10 years of industry experience at scale, join others learning &amp; becoming primed developers."
+              title="Evolving with Codemods"
+              secondary="Access the power of codemods to leverage codebase evolutions at scale. Learn what codemods are, how they can be used to succes, and what resources are available."
             />
           </div>
         </div>

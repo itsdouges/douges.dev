@@ -5,19 +5,21 @@ import { token } from '@atlaskit/tokens';
 const cardStyles = css({
   backgroundColor: token('color.background.card'),
   boxShadow: token('shadow.card'),
-  padding: 16,
+  padding: 20,
+  borderRadius: 3,
   display: 'flex',
   flexDirection: 'column',
-  gap: 8,
+  gap: 10,
 });
 
 const cardHeadingStyles = css({
-  fontSize: '2rem',
+  color: token('color.text.mediumEmphasis'),
+  fontSize: 28,
 });
 
 const cardDescriptionStyles = css({
-  color: token('color.text.mediumEmphasis'),
-  fontSize: '1.5rem',
+  color: token('color.text.lowEmphasis'),
+  fontSize: 18,
 });
 
 interface CardProps {

@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import '@atlaskit/css-reset';
+import '@atlaskit/tokens/css/atlassian-light.css';
 import '@atlaskit/tokens/css/atlassian-dark.css';
 import Head from 'next/head';
 
