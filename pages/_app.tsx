@@ -12,8 +12,7 @@ function App({ Component, pageProps }: AppProps) {
         <style>{'*{box-sizing:border-box}'}</style>
         <script>
           {'(function(){'}
-          {setThemeOnLoad.toString()}
-          {'setThemeOnLoad()'}
+          {`(${setThemeOnLoad.toString()})()`}
           {'}())'}
         </script>
       </Head>
