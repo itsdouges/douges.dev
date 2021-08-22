@@ -9,17 +9,27 @@ const cardStyles = css({
   borderRadius: 3,
   display: 'flex',
   flexDirection: 'column',
-  gap: 10,
+  gap: 16,
 });
 
 const cardHeadingStyles = css({
   color: token('color.text.mediumEmphasis'),
   fontSize: 28,
+  margin: 0,
 });
 
 const cardDescriptionStyles = css({
   color: token('color.text.lowEmphasis'),
   fontSize: 18,
+});
+
+const cardImageStyles = css({
+  backgroundColor: token('color.background.subtleNeutral.resting'),
+  borderRadius: 3,
+  marginTop: -20,
+  marginLeft: -20,
+  marginRight: -20,
+  height: 168,
 });
 
 interface CardProps {
@@ -31,6 +41,7 @@ interface CardProps {
 function Card({ title, secondary }: CardProps) {
   return (
     <div css={cardStyles}>
+      <div css={cardImageStyles} />
       <h2 css={cardHeadingStyles}>{title}</h2>
       <span css={cardDescriptionStyles}>{secondary}</span>
     </div>

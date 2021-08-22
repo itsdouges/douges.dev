@@ -5,10 +5,9 @@ import Head from 'next/head';
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 import Card from 'design-system/card';
-import Textfield from 'design-system/textfield';
-import Label from 'design-system/label';
 import Button from 'design-system/button';
 import pkg from '../package.json';
+import SignUp from 'components/sign-up';
 import toggleTheme from '../lib/toggle-theme';
 
 const heroStyles = css({
@@ -19,6 +18,8 @@ const heroStyles = css({
   alignItems: 'center',
   flexDirection: 'column',
   justifyContent: 'center',
+  gap: 64,
+  textAlign: 'left',
 });
 
 const heroTitleStyles = css({
@@ -36,11 +37,6 @@ const groupStyles = css({
   gridTemplateColumns: '1fr 1fr',
 });
 
-const inlineGroupStyles = css({
-  display: 'flex',
-  gap: 8,
-});
-
 const stickyButtonStyles = css({
   position: 'absolute',
   top: 32,
@@ -50,7 +46,12 @@ const stickyButtonStyles = css({
 const sectionStyles = css({
   margin: '0 auto',
   maxWidth: 840,
-  padding: '128px 32px',
+  width: '100%',
+});
+
+const separatedSectionStyles = css({
+  paddingTop: '128px',
+  paddingBottom: '128px',
 });
 
 const sunkenStyles = css({
@@ -86,14 +87,20 @@ const Home: NextPage = () => {
             </Button>
           </div>
 
-          <h1 css={heroTitleStyles}>
-            <strong>beprimed.dev</strong>
-          </h1>
-          <span css={heroDescriptionStyles}>{pkg.description}</span>
+          <div css={sectionStyles}>
+            <h1 css={heroTitleStyles}>
+              <strong>beprimed.dev</strong>
+            </h1>
+            <span css={heroDescriptionStyles}>{pkg.description}</span>
+          </div>
+
+          <div css={sectionStyles}>
+            <SignUp />
+          </div>
         </div>
 
         <div css={sunkenStyles}>
-          <div css={[groupStyles, sectionStyles]}>
+          <div css={[groupStyles, sectionStyles, separatedSectionStyles]}>
             <Card
               title={'The "at scale" mindset'}
               secondary="Features have many implications when initially written and maintained at scale. Learn the tricks of the trade, the power of no, and how to make features that survive at scale."
@@ -117,13 +124,9 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <form css={sectionStyles}>
-          <Label htmlFor="email" label="Join the waitlist today" />
-          <div css={inlineGroupStyles}>
-            <Textfield id="email" placeholder="you@beprimed.dev" />
-            <Button appearance="primary">Join</Button>
-          </div>
-        </form>
+        <div css={[sectionStyles, separatedSectionStyles]}>
+          <SignUp />
+        </div>
       </main>
     </Fragment>
   );

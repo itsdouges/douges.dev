@@ -8,7 +8,7 @@ class BePrimedDocument extends Document<{ cookies: any }> {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" data-theme="dark">
         <Head />
         <body>
           <Main />

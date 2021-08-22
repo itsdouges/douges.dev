@@ -4,9 +4,9 @@ import { token } from '@atlaskit/tokens';
 
 const labelStyles = css({
   color: token('color.text.mediumEmphasis'),
-  fontSize: 20,
+  fontSize: 16,
   display: 'inline',
-  fontWeight: 500,
+  fontWeight: 600,
 });
 
 const containerStyles = css({

@@ -8,6 +8,7 @@ const buttonStyles = css({
   fontSize: 20,
   border: 0,
   borderRadius: 3,
+  fontWeight: 600,
   ':focus': {
     outline: 0,
   },
