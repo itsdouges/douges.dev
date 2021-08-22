@@ -1,7 +1,17 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import '@atlaskit/css-reset';
+import '@atlaskit/tokens/css/atlassian-dark.css';
+import Head from 'next/head';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Head>
+        <style>{'*{box-sizing:border-box}'}</style>
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
-export default MyApp
+
+export default App;
