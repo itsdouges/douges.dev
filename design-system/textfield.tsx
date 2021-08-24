@@ -7,13 +7,8 @@ const inputStyles = css({
   fontSize: '2rem',
   borderRadius: 3,
   padding: 8,
-  color: token('color.text.highEmphasis'),
-  background: token('color.background.subtleNeutral.resting'),
   '::placeholder': {
     color: token('color.text.mediumEmphasis'),
-  },
-  ':hover': {
-    background: 'transparent',
   },
   ':focus': {
     outline: 'none',
@@ -22,13 +17,36 @@ const inputStyles = css({
   },
 });
 
+const interactiveStyles = css({
+  color: token('color.text.highEmphasis'),
+  background: token('color.background.subtleNeutral.resting'),
+  ':hover': {
+    background: 'transparent',
+  },
+});
+
+const disabledStyles = css({
+  color: token('color.text.disabled'),
+  background: token('color.background.disabled'),
+  cursor: 'not-allowed',
+});
+
 interface TextfieldProps {
   id?: string;
+  isDisabled?: boolean;
   placeholder?: string;
 }
 
-function Textfield({ id, placeholder }: TextfieldProps) {
-  return <input id={id} css={inputStyles} placeholder={placeholder} />;
+function Textfield({ id, placeholder, isDisabled }: TextfieldProps) {
+  return (
+    <input
+      type="text"
+      id={id}
+      disabled={isDisabled}
+      css={[inputStyles, isDisabled ? disabledStyles : interactiveStyles]}
+      placeholder={placeholder}
+    />
+  );
 }
 
 export default Textfield;

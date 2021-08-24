@@ -10,12 +10,14 @@ const cardStyles = css({
   display: 'flex',
   flexDirection: 'column',
   gap: 16,
+  fontWeight: 300,
 });
 
 const cardHeadingStyles = css({
   color: token('color.text.mediumEmphasis'),
-  fontSize: 28,
+  fontSize: 24,
   margin: 0,
+  fontWeight: 400,
 });
 
 const cardDescriptionStyles = css({

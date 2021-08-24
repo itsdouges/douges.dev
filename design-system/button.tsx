@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
+import usePressable from 'lib/use-pressable';
 
 const buttonStyles = css({
   padding: '8px 12px',
@@ -25,6 +26,9 @@ const primaryStyles = css({
   ':hover': {
     backgroundColor: token('color.background.boldBrand.hover'),
   },
+});
+
+const primaryActiveStyles = css({
   ':active': {
     backgroundColor: token('color.background.boldBrand.pressed'),
   },
@@ -36,6 +40,9 @@ const subtleStyles = css({
   ':hover': {
     backgroundColor: token('color.background.transparentNeutral.hover'),
   },
+});
+
+const subtleActiveStyles = css({
   ':active': {
     backgroundColor: token('color.background.transparentNeutral.pressed'),
   },
@@ -46,6 +53,11 @@ const buttonAppearances = {
   primary: primaryStyles,
 };
 
+const buttonActiveAppearances = {
+  subtle: subtleActiveStyles,
+  primary: primaryActiveStyles,
+};
+
 interface ButtonProps {
   appearance: 'primary' | 'subtle';
   onClick?: React.MouseEventHandler;
@@ -54,9 +66,15 @@ interface ButtonProps {
 
 function Button({ children, onClick, appearance }: ButtonProps) {
   const appearanceStyles = buttonAppearances[appearance];
+  const activeAppearanceStyles = buttonActiveAppearances[appearance];
+  const { isActive, buttonProps } = usePressable();
 
   return (
-    <button type="button" onClick={onClick} css={[buttonStyles, appearanceStyles]}>
+    <button
+      {...buttonProps}
+      type="button"
+      onClick={onClick}
+      css={[buttonStyles, appearanceStyles, isActive && activeAppearanceStyles]}>
       {children}
     </button>
   );

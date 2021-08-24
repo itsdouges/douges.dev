@@ -17,7 +17,7 @@ function SignUp() {
     <form>
       <Label htmlFor="email" label="Join the waitlist today" />
       <div css={inlineGroupStyles}>
-        <Textfield id="email" placeholder="you@beprimed.dev" />
+        <Textfield isDisabled={isLoading} id="email" placeholder="you@beprimed.dev" />
         <Button onClick={() => setIsLoading(true)} appearance="primary">
           {isLoading ? '...' : 'Join'}
         </Button>
