@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
+import Heading from 'design-system/heading';
 
 const cardStyles = css({
   backgroundColor: token('color.background.card'),
@@ -11,18 +12,15 @@ const cardStyles = css({
   flexDirection: 'column',
   gap: 16,
   fontWeight: 300,
-});
-
-const cardHeadingStyles = css({
-  color: token('color.text.mediumEmphasis'),
-  fontSize: 24,
-  margin: 0,
-  fontWeight: 400,
+  ':hover': {
+    backgroundColor: token('color.background.overlay'),
+    boxShadow: token('shadow.overlay'),
+  },
 });
 
 const cardDescriptionStyles = css({
   color: token('color.text.lowEmphasis'),
-  fontSize: 18,
+  fontSize: 16,
 });
 
 const cardImageStyles = css({
@@ -44,7 +42,7 @@ function Card({ title, secondary }: CardProps) {
   return (
     <div css={cardStyles}>
       <div css={cardImageStyles} />
-      <h2 css={cardHeadingStyles}>{title}</h2>
+      <Heading level={3}>{title}</Heading>
       <span css={cardDescriptionStyles}>{secondary}</span>
     </div>
   );

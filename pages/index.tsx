@@ -4,11 +4,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
-import Card from 'design-system/card';
 import Button from 'design-system/button';
 import pkg from '../package.json';
 import SignUp from 'components/sign-up';
 import toggleTheme from '../lib/toggle-theme';
+import Card from 'design-system/card';
+import Blog from 'components/blog';
+import Heading from 'design-system/heading';
+import Stack from 'design-system/stack';
 
 const heroStyles = css({
   borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
@@ -18,8 +21,8 @@ const heroStyles = css({
   alignItems: 'center',
   flexDirection: 'column',
   justifyContent: 'center',
-  gap: 64,
   textAlign: 'left',
+  borderBottom: `2px solid ${token('color.border.neutral')}`,
 });
 
 const heroTitleStyles = css({
@@ -31,7 +34,7 @@ const heroDescriptionStyles = css({
   fontSize: 18,
 });
 
-const groupStyles = css({
+const gridListStyles = css({
   display: 'grid',
   gap: 32,
   gridTemplateColumns: '1fr 1fr',
@@ -81,46 +84,45 @@ const Home: NextPage = () => {
 
       <main>
         <div css={heroStyles}>
-          <div css={stickyButtonStyles}>
-            <Button appearance="subtle" onClick={toggleTheme}>
-              ☾
-            </Button>
-          </div>
+          <Stack gap={8} align="center">
+            <div css={stickyButtonStyles}>
+              <Button appearance="subtle" onClick={toggleTheme}>
+                ☾
+              </Button>
+            </div>
 
-          <div css={sectionStyles}>
-            <h1 css={heroTitleStyles}>
-              <strong>beprimed.dev</strong>
-            </h1>
-            <span css={heroDescriptionStyles}>{pkg.description}</span>
-          </div>
+            <div css={sectionStyles}>
+              <h1 css={heroTitleStyles}>
+                <strong>beprimed.dev</strong>
+              </h1>
+              <span css={heroDescriptionStyles}>{pkg.description}</span>
+            </div>
 
-          <div css={sectionStyles}>
-            <SignUp />
-          </div>
+            <div css={sectionStyles}>
+              <SignUp />
+            </div>
+          </Stack>
+        </div>
+
+        <div css={[sectionStyles, separatedSectionStyles]}>
+          <Blog />
         </div>
 
         <div css={sunkenStyles}>
-          <div css={[groupStyles, sectionStyles, separatedSectionStyles]}>
-            <Card
-              title={'The "at scale" mindset'}
-              secondary="Features have many implications when initially written and maintained at scale. Learn the tricks of the trade, the power of no, and how to make features that survive at scale."
-            />
-            <Card
-              title="The art of codebase evolution"
-              secondary="Codebases that can evolve rapidly are able to leverage new technology and continue shipping fast. Learn the primed pointers for successful codebase evolution and practical real-world examples to help you get started."
-            />
-            <Card
-              title="Writing lint rules that scale"
-              secondary="An in-depth look at writing custom ESLint rules successfully over large codebases with minimal friction."
-            />
-            <Card
-              title="Build time code transformation"
-              secondary="A three part series taking you in-depth into what it is, why its useful, and how to leverage it at scale."
-            />
-            <Card
-              title="Evolving with Codemods"
-              secondary="Access the power of codemods to leverage codebase evolutions at scale. Learn what codemods are, how they can be used to succes, and what resources are available."
-            />
+          <div css={[sectionStyles, separatedSectionStyles]}>
+            <Stack gap={2}>
+              <Heading level={2}>There&apos;s more where that came from</Heading>
+              <div css={gridListStyles}>
+                <Card
+                  title="Evolving with Codemods"
+                  secondary="Access the power of codemods to leverage codebase evolutions at scale. Learn what codemods are, how they can be used to succes, and what resources are available."
+                />
+                <Card
+                  title={'The "at scale" mindset'}
+                  secondary="Features have many implications when initially written and maintained at scale. Learn the tricks of the trade, the power of no, and how to make features that survive at scale."
+                />
+              </div>
+            </Stack>
           </div>
         </div>
 

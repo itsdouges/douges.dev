@@ -64,7 +64,7 @@ function SignUp() {
           isDisabled={isLoading}
           type="email"
           id="email"
-          placeholder="douges@beprimed.dev"
+          placeholder="me@beprimed.dev"
         />
         <Button type="submit" isDisabled={isLoading} appearance="primary">
           <Fragment>
