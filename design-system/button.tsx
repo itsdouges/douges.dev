@@ -66,12 +66,13 @@ const buttonActiveAppearances = {
 
 interface ButtonProps {
   appearance: 'primary' | 'subtle';
+  type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler;
   children?: JSX.Element | string;
   isDisabled?: boolean;
 }
 
-function Button({ children, onClick, appearance, isDisabled }: ButtonProps) {
+function Button({ children, onClick, appearance, type = 'button', isDisabled }: ButtonProps) {
   const appearanceStyles = buttonAppearances[appearance];
   const activeAppearanceStyles = buttonActiveAppearances[appearance];
   const { isActive, buttonProps } = usePressable();
@@ -79,7 +80,7 @@ function Button({ children, onClick, appearance, isDisabled }: ButtonProps) {
   return (
     <button
       {...buttonProps}
-      type="button"
+      type={type}
       disabled={isDisabled}
       onClick={onClick}
       css={[

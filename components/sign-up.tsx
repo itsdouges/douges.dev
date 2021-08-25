@@ -14,11 +14,21 @@ function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <form>
-      <Label htmlFor="email" label="Join the waitlist today" />
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setIsLoading(true);
+      }}>
+      <Label htmlFor="email" label="Join the mailing list today" />
       <div css={inlineGroupStyles}>
-        <Textfield isDisabled={isLoading} id="email" placeholder="you@beprimed.dev" />
-        <Button isDisabled={isLoading} onClick={() => setIsLoading(true)} appearance="primary">
+        <Textfield
+          isRequired
+          isDisabled={isLoading}
+          type="email"
+          id="email"
+          placeholder="you@beprimed.dev"
+        />
+        <Button type="submit" isDisabled={isLoading} appearance="primary">
           Join
         </Button>
       </div>

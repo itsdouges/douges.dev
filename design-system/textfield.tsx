@@ -33,14 +33,17 @@ const disabledStyles = css({
 
 interface TextfieldProps {
   id?: string;
+  type?: 'email' | 'text';
+  isRequired?: boolean;
   isDisabled?: boolean;
   placeholder?: string;
 }
 
-function Textfield({ id, placeholder, isDisabled }: TextfieldProps) {
+function Textfield({ id, placeholder, type = 'text', isRequired, isDisabled }: TextfieldProps) {
   return (
     <input
-      type="text"
+      type={type}
+      required={isRequired}
       id={id}
       disabled={isDisabled}
       css={[inputStyles, isDisabled ? disabledStyles : interactiveStyles]}

@@ -2,7 +2,7 @@
   "name": "beprimed.dev",
   "version": "0.1.0",
   "private": true,
-  "description": "Learn the skills, tools, and mindset to gain frontend superpowers for you and your peers.",
+  "description": "Learn the skills, tools, and mindset to gain frontend superpowers. An interactive learning blog by Michael Dougall.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
