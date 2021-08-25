@@ -14,21 +14,27 @@ const metaStyles = css({
   color: token('color.text.lowEmphasis'),
 });
 
-interface BlogProps {}
+interface BlogProps {
+  title: string;
+  publishDate: string;
+  humanPublishDate: string;
+  minutesToRead: number;
+  children?: JSX.Element | JSX.Element[];
+}
 
-function Blog({}: BlogProps) {
+function Blog({ title, publishDate, children, humanPublishDate, minutesToRead }: BlogProps) {
   return (
     <article>
       <Stack gap={4}>
         <div css={heroImageStyles} />
         <header>
-          <Heading level={1}>Build time code transformation</Heading>
+          <Heading level={1}>{title}</Heading>
           <div css={metaStyles}>
-            <time dateTime="2021-25-08">August 25th, 2021</time> · 9 min read
+            <time dateTime={publishDate}>{humanPublishDate}</time> · {minutesToRead} min read
           </div>
         </header>
 
-        <main></main>
+        <main>{children}</main>
       </Stack>
     </article>
   );

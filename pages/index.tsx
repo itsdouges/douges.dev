@@ -26,7 +26,7 @@ const heroStyles = css({
 });
 
 const heroTitleStyles = css({
-  fontSize: '7rem',
+  fontSize: 112,
 });
 
 const heroDescriptionStyles = css({
@@ -105,7 +105,11 @@ const Home: NextPage = () => {
         </div>
 
         <div css={[sectionStyles, separatedSectionStyles]}>
-          <Blog />
+          <Blog
+            title="Build time code transformation"
+            minutesToRead={9}
+            humanPublishDate="August 25th, 2021"
+            publishDate="2021-25-08"></Blog>
         </div>
 
         <div css={sunkenStyles}>

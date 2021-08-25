@@ -24,7 +24,7 @@ const completeStyles = css({
   left: 0,
   borderRadius: 3,
   padding: 8,
-  fontSize: '1.5em',
+  fontSize: 28,
   color: token('color.text.onBold'),
   background: token('color.background.boldSuccess.resting'),
 });

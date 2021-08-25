@@ -23,11 +23,12 @@ const mediumHeadingStyles = css({
 });
 
 const smallHeadingStyles = css({
-  fontSize: 28,
+  fontSize: 22,
   lineHeight: 1.2,
   color: token('color.text.mediumEmphasis'),
-  fontWeight: 600,
+  fontWeight: 1000,
   letterSpacing: '-0.01em',
+  textTransform: 'uppercase',
 });
 
 const headingStyles = {

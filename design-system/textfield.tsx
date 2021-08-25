@@ -4,7 +4,7 @@ import { token } from '@atlaskit/tokens';
 
 const inputStyles = css({
   border: `2px solid ${token('color.border.neutral')}`,
-  fontSize: '2rem',
+  fontSize: 32,
   borderRadius: 3,
   padding: 8,
   '::placeholder': {
