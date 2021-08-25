@@ -48,6 +48,12 @@ const subtleActiveStyles = css({
   },
 });
 
+const disabledStyles = css({
+  color: token('color.text.disabled'),
+  backgroundColor: token('color.background.disabled'),
+  cursor: 'not-allowed',
+});
+
 const buttonAppearances = {
   subtle: subtleStyles,
   primary: primaryStyles,
@@ -62,9 +68,10 @@ interface ButtonProps {
   appearance: 'primary' | 'subtle';
   onClick?: React.MouseEventHandler;
   children?: JSX.Element | string;
+  isDisabled?: boolean;
 }
 
-function Button({ children, onClick, appearance }: ButtonProps) {
+function Button({ children, onClick, appearance, isDisabled }: ButtonProps) {
   const appearanceStyles = buttonAppearances[appearance];
   const activeAppearanceStyles = buttonActiveAppearances[appearance];
   const { isActive, buttonProps } = usePressable();
@@ -73,8 +80,13 @@ function Button({ children, onClick, appearance }: ButtonProps) {
     <button
       {...buttonProps}
       type="button"
+      disabled={isDisabled}
       onClick={onClick}
-      css={[buttonStyles, appearanceStyles, isActive && activeAppearanceStyles]}>
+      css={[
+        buttonStyles,
+        isDisabled ? disabledStyles : appearanceStyles,
+        !isDisabled && isActive && activeAppearanceStyles,
+      ]}>
       {children}
     </button>
   );

@@ -1,6 +1,6 @@
 import { useRef, useState, MouseEventHandler } from 'react';
 
-interface UsePressableOut {
+interface UsePressable {
   isActive: boolean;
   buttonProps: {
     onMouseOver: MouseEventHandler;
@@ -10,7 +10,7 @@ interface UsePressableOut {
   };
 }
 
-function usePressable(): UsePressableOut {
+function usePressable(): UsePressable {
   const [isActive, setIsActive] = useState(false);
   const isPressed = useRef(false);
 
