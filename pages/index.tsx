@@ -21,17 +21,13 @@ const LatestBlog = dynamic(() => import('./blog/build-time-code-transformation.m
 const heroStyles = css({
   borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
   height: '60vh',
-  minHeight: 400,
+  minHeight: 650,
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
   justifyContent: 'center',
   textAlign: 'left',
   borderBottom: `2px solid ${token('color.border.neutral')}`,
-});
-
-const heroTitleStyles = css({
-  fontSize: 112,
 });
 
 const heroDescriptionStyles = css({
@@ -42,18 +38,22 @@ const heroDescriptionStyles = css({
 const gridListStyles = css({
   display: 'grid',
   gap: 32,
-  gridTemplateColumns: '1fr 1fr',
+  gridTemplateColumns: '1fr',
+  '@media screen and (min-width: 650px)': {
+    gridTemplateColumns: '1fr 1fr',
+  },
 });
 
 const stickyButtonStyles = css({
   position: 'absolute',
-  top: 32,
+  top: 40,
   right: 32,
 });
 
 const sectionStyles = css({
   margin: '0 auto',
-  maxWidth: 840,
+  maxWidth: 900,
+  padding: 16,
   width: '100%',
 });
 
@@ -70,7 +70,9 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
   return (
     <Fragment>
       <Head>
-        <title>beprimed.dev | {pkg.description}</title>
+        <title>
+          {pkg.name} | {pkg.description}
+        </title>
         <meta name="description" content={pkg.description} />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:title" content="beprimed.dev" />
@@ -82,7 +84,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         <meta property="og:image:height" content="" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@itsdouges" />
-        <meta name="twitter:title" content="beprimed.dev" />
+        <meta name="twitter:title" content={pkg.name} />
         <meta name="twitter:image" content="" />
         <meta name="twitter:description" content={pkg.description} />
       </Head>
@@ -97,9 +99,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
             </div>
 
             <div css={sectionStyles}>
-              <h1 css={heroTitleStyles}>
-                <strong>beprimed.dev</strong>
-              </h1>
+              <Heading level={0}>beprimed&#8203;.dev</Heading>
               <span css={heroDescriptionStyles}>{pkg.description}</span>
             </div>
 
@@ -145,7 +145,7 @@ export async function getStaticProps() {
   const latest = mdxBlogs[0].meta;
   const moreBlogs = mdxBlogs.slice(1).map((blog) => blog.meta);
 
-  return Promise.resolve({ props: { latest: mdxBlogs[0].meta, moreBlogs } });
+  return Promise.resolve({ props: { latest, moreBlogs } });
 }
 
 export default Home;

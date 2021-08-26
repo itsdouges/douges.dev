@@ -7,6 +7,8 @@ const inputStyles = css({
   fontSize: 32,
   borderRadius: 3,
   padding: 8,
+  width: '100%',
+  maxWidth: 500,
   '::placeholder': {
     color: token('color.text.mediumEmphasis'),
   },

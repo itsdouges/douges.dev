@@ -7,11 +7,16 @@ import Stack from 'design-system/stack';
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
   height: 164,
-  margin: '0 -128px',
+  '@media screen and (min-width: 1000px)': {
+    margin: '0 -64px',
+  },
+  '@media screen and (min-width: 1200px)': {
+    margin: '0 -128px',
+  },
 });
 
 const metaStyles = css({
-  color: token('color.text.lowEmphasis'),
+  color: token('color.text.mediumEmphasis'),
 });
 
 export interface BlogProps {
