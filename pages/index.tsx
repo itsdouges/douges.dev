@@ -12,7 +12,11 @@ import Card from 'design-system/card';
 import Blog from 'components/blog';
 import Heading from 'design-system/heading';
 import Stack from 'design-system/stack';
-import LatestBlog from './blog/build-time-code-transformation.mdx';
+import dynamic from 'next/dynamic';
+import { promises as fs } from 'fs';
+import type { BlogMeta } from '../types/types';
+
+const LatestBlog = dynamic(() => import('./blog/build-time-code-transformation.mdx'));
 
 const heroStyles = css({
   borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
@@ -62,7 +66,7 @@ const sunkenStyles = css({
   backgroundColor: token('color.background.sunken'),
 });
 
-const Home: NextPage = () => {
+const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, moreBlogs }) => {
   return (
     <Fragment>
       <Head>
@@ -106,7 +110,7 @@ const Home: NextPage = () => {
         </div>
 
         <div css={[sectionStyles, separatedSectionStyles]}>
-          <Blog {...LatestBlog.meta}>
+          <Blog {...latest}>
             <LatestBlog />
           </Blog>
         </div>
@@ -116,14 +120,9 @@ const Home: NextPage = () => {
             <Stack gap={2}>
               <Heading level={2}>There&apos;s more where that came from</Heading>
               <div css={gridListStyles}>
-                <Card
-                  title="Evolving with Codemods"
-                  secondary="Access the power of codemods to leverage codebase evolutions at scale. Learn what codemods are, how they can be used to succes, and what resources are available."
-                />
-                <Card
-                  title={'The "at scale" mindset'}
-                  secondary="Features have many implications when initially written and maintained at scale. Learn the tricks of the trade, the power of no, and how to make features that survive at scale."
-                />
+                {moreBlogs.map((blog, index) => (
+                  <Card key={index} title={blog.title} secondary={blog.blurb} />
+                ))}
               </div>
             </Stack>
           </div>
@@ -136,5 +135,17 @@ const Home: NextPage = () => {
     </Fragment>
   );
 };
+
+export async function getStaticProps() {
+  const allBlogs = await fs.readdir(process.cwd() + '/pages/blog');
+  const mdxBlogs = allBlogs.map((name) => require(`./blog/${name}`).default);
+
+  mdxBlogs.sort((a, b) => b.order - a.order).reverse();
+
+  const latest = mdxBlogs[0].meta;
+  const moreBlogs = mdxBlogs.slice(1).map((blog) => blog.meta);
+
+  return Promise.resolve({ props: { latest: mdxBlogs[0].meta, moreBlogs } });
+}
 
 export default Home;

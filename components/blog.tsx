@@ -14,7 +14,7 @@ const metaStyles = css({
   color: token('color.text.lowEmphasis'),
 });
 
-interface BlogProps {
+export interface BlogProps {
   title: string;
   publishDate: string;
   humanPublishDate: string;
