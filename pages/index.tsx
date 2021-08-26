@@ -12,6 +12,7 @@ import Card from 'design-system/card';
 import Blog from 'components/blog';
 import Heading from 'design-system/heading';
 import Stack from 'design-system/stack';
+import LatestBlog from './blog/build-time-code-transformation.mdx';
 
 const heroStyles = css({
   borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
@@ -84,7 +85,7 @@ const Home: NextPage = () => {
 
       <main>
         <div css={heroStyles}>
-          <Stack gap={8} align="center">
+          <Stack gap={8}>
             <div css={stickyButtonStyles}>
               <Button appearance="subtle" onClick={toggleTheme}>
                 ☾
@@ -105,11 +106,9 @@ const Home: NextPage = () => {
         </div>
 
         <div css={[sectionStyles, separatedSectionStyles]}>
-          <Blog
-            title="Build time code transformation"
-            minutesToRead={9}
-            humanPublishDate="August 25th, 2021"
-            publishDate="2021-25-08"></Blog>
+          <Blog {...LatestBlog.meta}>
+            <LatestBlog />
+          </Blog>
         </div>
 
         <div css={sunkenStyles}>
