@@ -28,7 +28,7 @@ export interface BlogProps {
   publishDate: string;
   minutesToRead: number;
   slug: string;
-  children?: JSX.Element | JSX.Element[];
+  children: JSX.Element;
 }
 
 function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) {
@@ -53,7 +53,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) 
           </div>
         </header>
 
-        <main>{children}</main>
+        {children}
       </Stack>
     </article>
   );

@@ -76,14 +76,13 @@ interface ButtonProps {
 function Button({ children, onClick, appearance, type = 'button', isDisabled }: ButtonProps) {
   const appearanceStyles = buttonAppearances[appearance];
   const activeAppearanceStyles = buttonActiveAppearances[appearance];
-  const { isActive, buttonProps } = usePressable();
+  const { isActive, buttonProps } = usePressable({ onClick });
 
   return (
     <button
       {...buttonProps}
       type={type}
       disabled={isDisabled}
-      onClick={onClick}
       css={[
         buttonStyles,
         isDisabled ? disabledStyles : appearanceStyles,

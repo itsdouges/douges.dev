@@ -6,11 +6,15 @@ interface UsePressable {
     onMouseOver: MouseEventHandler;
     onMouseOut: MouseEventHandler;
     onMouseDown: MouseEventHandler;
-    onMouseUp: MouseEventHandler;
+    onClick: MouseEventHandler;
   };
 }
 
-function usePressable(): UsePressable {
+interface UsePressableOpts {
+  onClick?: MouseEventHandler;
+}
+
+function usePressable(opts: UsePressableOpts): UsePressable {
   const [isActive, setIsActive] = useState(false);
   const isPressed = useRef(false);
 
@@ -19,22 +23,29 @@ function usePressable(): UsePressable {
       setIsActive(true);
     }
   };
+
   const onMouseOut: MouseEventHandler = () => {
+    isPressed.current = false;
     if (isActive) {
       setIsActive(false);
     }
   };
+
   const onMouseDown: MouseEventHandler = () => {
     isPressed.current = true;
     if (!isActive) {
       setIsActive(true);
     }
   };
-  const onMouseUp: MouseEventHandler = () => {
-    isPressed.current = false;
-    if (isActive) {
-      setIsActive(false);
+
+  const onClick: MouseEventHandler = (e) => {
+    if (!isPressed.current) {
+      e.stopPropagation();
+      e.preventDefault();
+      return;
     }
+
+    opts.onClick?.(e);
   };
 
   return {
@@ -43,7 +54,7 @@ function usePressable(): UsePressable {
       onMouseOver,
       onMouseOut,
       onMouseDown,
-      onMouseUp,
+      onClick,
     },
   };
 }

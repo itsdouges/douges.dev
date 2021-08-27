@@ -3,7 +3,7 @@ export const getTime = (date: string): number => {
 };
 
 export const friendlyDate = (date: string): string => {
-  return new Date(date).toLocaleDateString(undefined, {
+  return new Date(date).toLocaleDateString('en-US', {
     weekday: 'long',
     day: 'numeric',
     month: 'long',

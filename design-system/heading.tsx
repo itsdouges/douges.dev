@@ -60,18 +60,13 @@ interface HeadingProps {
   as?: 'div' | 'h1' | 'h2' | 'h3';
   level: 0 | 1 | 2 | 3;
   children: JSX.Element | string;
-  className?: string;
 }
 
-function Heading({ level, as, children, className }: HeadingProps) {
+function Heading({ level, as, children }: HeadingProps) {
   const styles = headingStyles[level];
   const Level: any = as || headingLevel[level];
 
-  return (
-    <Level className={className} css={[resetStyles, styles]}>
-      {children}
-    </Level>
-  );
+  return <Level css={[resetStyles, styles]}>{children}</Level>;
 }
 
 export default Heading;

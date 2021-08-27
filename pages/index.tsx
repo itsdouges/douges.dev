@@ -153,8 +153,6 @@ export async function getStaticProps() {
 
   mdxBlogs.sort((a, b) => getTime(b.publishDate) - getTime(a.publishDate));
 
-  console.log(mdxBlogs);
-
   const latest = mdxBlogs[0];
   const moreBlogs = mdxBlogs.slice(1);
 

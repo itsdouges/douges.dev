@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { forwardRef } from 'react';
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 
@@ -18,12 +19,12 @@ interface LinkProps {
   children: JSX.Element | string;
 }
 
-function Link({ children, ...props }: LinkProps) {
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link({ children, ...props }, ref) {
   return (
-    <a {...props} css={linkStyles}>
+    <a {...props} css={linkStyles} ref={ref}>
       {children}
     </a>
   );
-}
+});
 
 export default Link;
