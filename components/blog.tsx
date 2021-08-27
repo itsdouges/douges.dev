@@ -3,6 +3,9 @@ import { css } from '@emotion/react';
 import Heading from 'design-system/heading';
 import { token } from '@atlaskit/tokens';
 import Stack from 'design-system/stack';
+import { friendlyDate } from 'lib/time';
+import Link from 'next/link';
+import A from 'design-system/link';
 
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
@@ -17,25 +20,36 @@ const heroImageStyles = css({
 
 const metaStyles = css({
   color: token('color.text.mediumEmphasis'),
+  marginBottom: 20,
 });
 
 export interface BlogProps {
   title: string;
   publishDate: string;
-  humanPublishDate: string;
   minutesToRead: number;
+  slug: string;
   children?: JSX.Element | JSX.Element[];
 }
 
-function Blog({ title, publishDate, children, humanPublishDate, minutesToRead }: BlogProps) {
+function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) {
   return (
     <article>
       <Stack gap={4}>
         <div css={heroImageStyles} />
+
         <header>
-          <Heading level={1}>{title}</Heading>
+          <Heading level={1}>
+            {slug ? (
+              <Link passHref href={`/blog/${slug}`}>
+                <A>{title}</A>
+              </Link>
+            ) : (
+              title
+            )}
+          </Heading>
           <div css={metaStyles}>
-            <time dateTime={publishDate}>{humanPublishDate}</time> · {minutesToRead} min read
+            <time dateTime={publishDate}>{friendlyDate(publishDate)}</time> · {minutesToRead} min
+            read
           </div>
         </header>
 

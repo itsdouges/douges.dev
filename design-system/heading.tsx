@@ -59,7 +59,7 @@ const headingLevel = {
 interface HeadingProps {
   as?: 'div' | 'h1' | 'h2' | 'h3';
   level: 0 | 1 | 2 | 3;
-  children: string;
+  children: JSX.Element | string;
   className?: string;
 }
 

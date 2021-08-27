@@ -15,7 +15,7 @@ const components: MDXProviderComponents = {
     return <div>DO_NOT_USE_H1</div>;
   },
   h2(props) {
-    return <Heading {...props} level={2} css={{ marginTop: 70, marginBottom: 30 }} />;
+    return <Heading {...props} level={2} css={{ marginTop: 70, marginBottom: 20 }} />;
   },
   h3(props) {
     return <Heading {...props} level={3} css={{ marginTop: 50, marginBottom: 15 }} />;
