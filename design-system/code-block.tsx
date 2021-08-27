@@ -10,6 +10,7 @@ const codeBlockStyles = css({
   borderRadius: 3,
   backgroundColor: token('color.background.subtleNeutral.resting'),
   padding: '16px',
+  margin: 0,
 });
 
 function CodeBlock({ children }: CodeBlockProps) {

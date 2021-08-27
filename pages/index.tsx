@@ -4,10 +4,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
-import Button from 'design-system/button';
 import pkg from '../package.json';
-import SignUp from 'components/sign-up';
-import toggleTheme from 'lib/toggle-theme';
 import { getTime } from 'lib/time';
 import Card from 'design-system/card';
 import Blog from 'components/blog';
@@ -16,8 +13,10 @@ import Stack from 'design-system/stack';
 import dynamic from 'next/dynamic';
 import { promises as fs } from 'fs';
 import Link from 'next/link';
+import Section from 'design-system/section';
 import A from 'design-system/link';
 import type { BlogMeta } from 'types/types';
+import SignUp from 'components/sign-up';
 
 let LatestBlog: ComponentType<{}>;
 
@@ -46,28 +45,6 @@ const gridListStyles = css({
   '@media screen and (min-width: 650px)': {
     gridTemplateColumns: '1fr 1fr',
   },
-});
-
-const stickyButtonStyles = css({
-  position: 'absolute',
-  top: 40,
-  right: 32,
-});
-
-const sectionStyles = css({
-  margin: '0 auto',
-  maxWidth: 900,
-  padding: 16,
-  width: '100%',
-});
-
-const separatedSectionStyles = css({
-  paddingTop: '128px',
-  paddingBottom: '128px',
-});
-
-const sunkenStyles = css({
-  backgroundColor: token('color.background.sunken'),
 });
 
 const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, moreBlogs }) => {
@@ -100,45 +77,37 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
       <main>
         <div css={heroStyles}>
           <Stack gap={8}>
-            <div css={stickyButtonStyles}>
-              <Button appearance="subtle" onClick={toggleTheme}>
-                ☾
-              </Button>
-            </div>
-
-            <div css={sectionStyles}>
+            <Section>
               <Heading level={0}>beprimed&#8203;.dev</Heading>
               <div css={heroDescriptionStyles}>{pkg.description}</div>
-            </div>
+            </Section>
           </Stack>
         </div>
 
-        <div css={[sectionStyles, separatedSectionStyles]}>
+        <Section isSeparated>
           <Blog {...latest}>
             <LatestBlog />
           </Blog>
-        </div>
+        </Section>
 
-        <div css={sunkenStyles}>
-          <div css={[sectionStyles, separatedSectionStyles]}>
-            <Stack gap={2}>
-              <Heading level={2}>There&apos;s more where that came from</Heading>
-              <div css={gridListStyles}>
-                {moreBlogs.map((blog, index) => (
-                  <Link key={index} href={`/blog/${blog.slug}`} passHref>
-                    <A>
-                      <Card title={blog.title} secondary={blog.blurb} />
-                    </A>
-                  </Link>
-                ))}
-              </div>
-            </Stack>
-          </div>
-        </div>
+        <Section isSeparated isSunken>
+          <Stack gap={2}>
+            <Heading level={2}>There&apos;s more where that came from</Heading>
+            <div css={gridListStyles}>
+              {moreBlogs.map((blog, index) => (
+                <Link key={index} href={`/blog/${blog.slug}`} passHref>
+                  <A>
+                    <Card title={blog.title} secondary={blog.blurb} />
+                  </A>
+                </Link>
+              ))}
+            </div>
+          </Stack>
+        </Section>
 
-        <div css={[sectionStyles, separatedSectionStyles]}>
+        <Section isSeparated>
           <SignUp />
-        </div>
+        </Section>
       </main>
     </Fragment>
   );

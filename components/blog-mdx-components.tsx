@@ -7,11 +7,15 @@ import Code from 'design-system/code';
 
 const paragraphStyles = css({
   fontSize: 18,
+  margin: 0,
 });
 
 const wrapperStyles = css({
-  h1: { marginTop: 70, marginBottom: 20 },
-  h2: { marginTop: 50, marginBottom: 15 },
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 30,
+  h1: { marginTop: 70 },
+  h2: { marginTop: 50 },
 });
 
 const components: MDXProviderComponents = {
@@ -30,8 +34,11 @@ const components: MDXProviderComponents = {
   h3(props) {
     return <Heading {...props} level={3} />;
   },
-  code(props) {
+  pre(props) {
     return <CodeBlock {...props} />;
+  },
+  code({ children }) {
+    return children;
   },
   inlineCode(props) {
     return <Code {...props} />;
