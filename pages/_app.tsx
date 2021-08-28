@@ -38,6 +38,7 @@ function App({ Component, pageProps, router }: AppProps) {
     <MDXProvider components={components}>
       <Head>
         <style>{'*{box-sizing:border-box}'}</style>
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
       </Head>
 
       <div css={appStyles}>
