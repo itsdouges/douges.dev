@@ -6,6 +6,7 @@ import Stack from 'design-system/stack';
 import { friendlyDate } from 'lib/time';
 import Link from 'next/link';
 import A from 'design-system/link';
+import { useRouter } from 'next/router';
 
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
@@ -32,6 +33,8 @@ export interface BlogProps {
 }
 
 function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) {
+  const { route } = useRouter();
+
   return (
     <article>
       <Stack gap={4}>
@@ -39,7 +42,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) 
 
         <header>
           <Heading level={1}>
-            <Link passHref href={slug ? `/blog/${slug}` : window.location}>
+            <Link passHref href={slug ? `/blog/${slug}` : route}>
               <A>{title}</A>
             </Link>
           </Heading>

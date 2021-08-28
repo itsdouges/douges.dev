@@ -36,6 +36,8 @@ function App({ Component, pageProps, router }: AppProps) {
       <Head>
         <style>{'*{box-sizing:border-box}'}</style>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:type" content="website" />
       </Head>
 
       <header css={headerStyles}>

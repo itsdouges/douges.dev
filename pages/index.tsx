@@ -17,7 +17,7 @@ import type { BlogMeta } from 'types/types';
 import SignUp from 'components/sign-up';
 import { getAllBlogPosts } from 'lib/blog';
 
-let LatestBlog: ComponentType<{}>;
+const PinnedBlogContent = dynamic(() => import('./blog/writing-eslint-rules-successfully.mdx'));
 
 const heroStyles = css({
   height: '55vh',
@@ -46,10 +46,6 @@ const gridListStyles = css({
 });
 
 const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, moreBlogs }) => {
-  if (!LatestBlog) {
-    LatestBlog = dynamic(() => import(`./blog/${latest.slug}.mdx`));
-  }
-
   return (
     <Fragment>
       <Head>
@@ -57,14 +53,8 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
           {pkg.name} | {pkg.description}
         </title>
         <meta name="description" content={pkg.description} />
-        <link rel="icon" href="/favicon.ico" />
         <meta property="og:title" content="beprimed.dev" />
         <meta property="og:description" content={pkg.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="" />
-        <meta property="og:image:alt" content="" />
-        <meta property="og:image:width" content="" />
-        <meta property="og:image:height" content="" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@itsdouges" />
         <meta name="twitter:title" content={pkg.name} />
@@ -84,7 +74,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
 
         <Section isSeparated>
           <Blog {...latest}>
-            <LatestBlog />
+            <PinnedBlogContent />
           </Blog>
         </Section>
 
