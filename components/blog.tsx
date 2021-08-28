@@ -48,8 +48,11 @@ function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) 
             )}
           </Heading>
           <div css={metaStyles}>
-            <time dateTime={publishDate}>{friendlyDate(publishDate)}</time> · {minutesToRead} min
-            read
+            <a href="https://twitter.com/itsdouges">Michael Dougall</a> ·{' '}
+            <time title={publishDate} dateTime={publishDate}>
+              {friendlyDate(publishDate)}
+            </time>{' '}
+            · {minutesToRead} min read
           </div>
         </header>
 

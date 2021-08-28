@@ -8,7 +8,7 @@ import '@atlaskit/tokens/css/atlassian-dark.css';
 import Head from 'next/head';
 import { MDXProvider } from '@mdx-js/react';
 import Blog from 'components/blog';
-import Button from 'design-system/button';
+import IconButton from 'design-system/icon-button';
 import Section from 'design-system/section';
 import toggleTheme from 'lib/toggle-theme';
 import components from 'components/blog-mdx-components';
@@ -42,22 +42,20 @@ function App({ Component, pageProps, router }: AppProps) {
       </Head>
 
       <div css={appStyles}>
+        {isBlogRoute && (
+          <div css={stickyBackButtonStyles}>
+            <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
+          </div>
+        )}
+
         <div css={stickyButtonStyles}>
-          <Button appearance="subtle" onClick={toggleTheme}>
-            ☾
-          </Button>
+          <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
         </div>
       </div>
 
       {isBlogRoute ? (
         <Fragment>
           <Section isSeparated>
-            <div css={stickyBackButtonStyles}>
-              <Button appearance="subtle" onClick={() => router.push('/')}>
-                ←
-              </Button>
-            </div>
-
             <Blog {...(Component as any).meta}>
               <Component {...pageProps} />
             </Blog>

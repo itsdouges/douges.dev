@@ -69,7 +69,7 @@ interface ButtonProps {
   appearance: 'primary' | 'subtle';
   type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler;
-  children?: JSX.Element | string;
+  children?: React.ReactNode;
   isDisabled?: boolean;
 }
 
