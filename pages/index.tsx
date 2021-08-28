@@ -5,23 +5,21 @@ import Head from 'next/head';
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 import pkg from '../package.json';
-import { getTime } from 'lib/time';
 import Card from 'design-system/card';
 import Blog from 'components/blog';
 import Heading from 'design-system/heading';
 import Stack from 'design-system/stack';
 import dynamic from 'next/dynamic';
-import { promises as fs } from 'fs';
 import Link from 'next/link';
 import Section from 'design-system/section';
 import A from 'design-system/link';
 import type { BlogMeta } from 'types/types';
 import SignUp from 'components/sign-up';
+import { getAllBlogPosts } from 'lib/blog';
 
 let LatestBlog: ComponentType<{}>;
 
 const heroStyles = css({
-  borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
   height: '55vh',
   minHeight: 600,
   display: 'flex',
@@ -114,18 +112,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
 };
 
 export async function getStaticProps() {
-  const allBlogs = await fs.readdir(process.cwd() + '/pages/blog');
-  const mdxBlogs = allBlogs.map((filename) => ({
-    slug: filename.replace('.mdx', ''),
-    ...require(`./blog/${filename}`).meta,
-  }));
-
-  mdxBlogs.sort((a, b) => getTime(b.publishDate) - getTime(a.publishDate));
-
-  const latest = mdxBlogs[0];
-  const moreBlogs = mdxBlogs.slice(1);
-
-  return Promise.resolve({ props: { latest, moreBlogs } });
+  return getAllBlogPosts();
 }
 
 export default Home;

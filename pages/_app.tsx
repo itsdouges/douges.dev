@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import type { AppProps } from 'next/app';
 import { css } from '@emotion/react';
+import { Fragment } from 'react';
 import '@atlaskit/css-reset';
 import '@atlaskit/tokens/css/atlassian-light.css';
 import '@atlaskit/tokens/css/atlassian-dark.css';
@@ -11,11 +12,23 @@ import Button from 'design-system/button';
 import Section from 'design-system/section';
 import toggleTheme from 'lib/toggle-theme';
 import components from 'components/blog-mdx-components';
+import { token } from '@atlaskit/tokens';
+import SignUp from 'components/sign-up';
 
 const stickyButtonStyles = css({
   position: 'absolute',
   top: 40,
   right: 32,
+});
+
+const stickyBackButtonStyles = css({
+  position: 'absolute',
+  top: 40,
+  left: 32,
+});
+
+const appStyles = css({
+  borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
 });
 
 function App({ Component, pageProps, router }: AppProps) {
@@ -27,18 +40,32 @@ function App({ Component, pageProps, router }: AppProps) {
         <style>{'*{box-sizing:border-box}'}</style>
       </Head>
 
-      <div css={stickyButtonStyles}>
-        <Button appearance="subtle" onClick={toggleTheme}>
-          ☾
-        </Button>
+      <div css={appStyles}>
+        <div css={stickyButtonStyles}>
+          <Button appearance="subtle" onClick={toggleTheme}>
+            ☾
+          </Button>
+        </div>
       </div>
 
       {isBlogRoute ? (
-        <Section>
-          <Blog {...(Component as any).meta}>
-            <Component {...pageProps} />
-          </Blog>
-        </Section>
+        <Fragment>
+          <Section isSeparated>
+            <div css={stickyBackButtonStyles}>
+              <Button appearance="subtle" onClick={() => router.push('/')}>
+                ←
+              </Button>
+            </div>
+
+            <Blog {...(Component as any).meta}>
+              <Component {...pageProps} />
+            </Blog>
+          </Section>
+
+          <Section isSunken isSeparated>
+            <SignUp />
+          </Section>
+        </Fragment>
       ) : (
         <Component {...pageProps} />
       )}

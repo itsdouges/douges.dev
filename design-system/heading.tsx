@@ -2,8 +2,15 @@
 import { token } from '@atlaskit/tokens';
 import { css } from '@emotion/react';
 
-const resetStyles = css({
+const defaultHeadingStyles = css({
   margin: 0,
+  wordBreak: 'break-word',
+  hyphens: 'auto',
+  letterSpacing: '-0.01em',
+  '@media screen and (min-width: 500px)': {
+    wordBreak: 'inherit',
+    hyphens: 'none',
+  },
 });
 
 const heroHeadingStyles = css({
@@ -11,7 +18,6 @@ const heroHeadingStyles = css({
   lineHeight: 1.1,
   color: token('color.text.highEmphasis'),
   fontWeight: 900,
-  letterSpacing: '-0.01em',
   '@media screen and (min-width: 800px)': {
     fontSize: 112,
   },
@@ -22,7 +28,6 @@ const largeHeadingStyles = css({
   lineHeight: 1.1,
   color: token('color.text.highEmphasis'),
   fontWeight: 900,
-  letterSpacing: '-0.01em',
 });
 
 const mediumHeadingStyles = css({
@@ -30,7 +35,6 @@ const mediumHeadingStyles = css({
   lineHeight: 1.16,
   color: token('color.text.highEmphasis'),
   fontWeight: 700,
-  letterSpacing: '-0.01em',
 });
 
 const smallHeadingStyles = css({
@@ -38,7 +42,6 @@ const smallHeadingStyles = css({
   lineHeight: 1.2,
   color: token('color.text.mediumEmphasis'),
   fontWeight: 1000,
-  letterSpacing: '-0.01em',
   textTransform: 'uppercase',
 });
 
@@ -66,7 +69,7 @@ function Heading({ level, as, children }: HeadingProps) {
   const styles = headingStyles[level];
   const Level: any = as || headingLevel[level];
 
-  return <Level css={[resetStyles, styles]}>{children}</Level>;
+  return <Level css={[defaultHeadingStyles, styles]}>{children}</Level>;
 }
 
 export default Heading;
