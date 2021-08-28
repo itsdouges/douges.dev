@@ -39,13 +39,9 @@ function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) 
 
         <header>
           <Heading level={1}>
-            {slug ? (
-              <Link passHref href={`/blog/${slug}`}>
-                <A>{title}</A>
-              </Link>
-            ) : (
-              title
-            )}
+            <Link passHref href={slug ? `/blog/${slug}` : window.location}>
+              <A>{title}</A>
+            </Link>
           </Heading>
           <div css={metaStyles}>
             <a href="https://twitter.com/itsdouges">Michael Dougall</a> ·{' '}

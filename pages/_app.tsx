@@ -12,22 +12,19 @@ import IconButton from 'design-system/icon-button';
 import Section from 'design-system/section';
 import toggleTheme from 'lib/toggle-theme';
 import components from 'components/blog-mdx-components';
-import { token } from '@atlaskit/tokens';
 import SignUp from 'components/sign-up';
+import { token } from '@atlaskit/tokens';
 
-const stickyButtonStyles = css({
-  position: 'absolute',
-  top: 40,
-  right: 32,
+const navigationBarStyles = css({
+  position: 'relative',
+  padding: '16px 16px 0',
+  display: 'flex',
+  '> :last-child': {
+    marginLeft: 'auto',
+  },
 });
 
-const stickyBackButtonStyles = css({
-  position: 'absolute',
-  top: 40,
-  left: 32,
-});
-
-const appStyles = css({
+const headerStyles = css({
   borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
 });
 
@@ -41,17 +38,12 @@ function App({ Component, pageProps, router }: AppProps) {
         <meta name="viewport" content="width=device-width, user-scalable=no" />
       </Head>
 
-      <div css={appStyles}>
-        {isBlogRoute && (
-          <div css={stickyBackButtonStyles}>
-            <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
-          </div>
-        )}
-
-        <div css={stickyButtonStyles}>
+      <header css={headerStyles}>
+        <nav css={navigationBarStyles}>
+          {isBlogRoute && <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />}
           <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
-        </div>
-      </div>
+        </nav>
+      </header>
 
       {isBlogRoute ? (
         <Fragment>
