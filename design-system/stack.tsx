@@ -9,7 +9,7 @@ const stackStyles = css({
 
 interface StackProps {
   gap: number;
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
 }
 
 function Stack({ children, gap }: StackProps) {

@@ -11,7 +11,6 @@ const cardStyles = css({
   display: 'flex',
   flexDirection: 'column',
   gap: 16,
-  fontWeight: 300,
   height: '100%',
   ':hover': {
     backgroundColor: token('color.background.overlay'),

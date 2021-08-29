@@ -3,6 +3,12 @@ import { css } from '@emotion/react';
 import Button from './button';
 import VisuallyHidden from './visually-hidden';
 
+const iconStyles = css({
+  width: 25,
+  height: 25,
+  display: 'block',
+});
+
 interface IconButtonProps {
   icon?: React.ReactNode;
   onClick?: React.MouseEventHandler;
@@ -13,7 +19,7 @@ function IconButton({ icon, label, onClick }: IconButtonProps) {
   return (
     <Button onClick={onClick} appearance="subtle">
       <VisuallyHidden>{label}</VisuallyHidden>
-      {icon}
+      <span css={iconStyles}>{icon}</span>
     </Button>
   );
 }

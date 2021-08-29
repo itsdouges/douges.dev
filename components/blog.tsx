@@ -21,7 +21,6 @@ const heroImageStyles = css({
 
 const metaStyles = css({
   color: token('color.text.mediumEmphasis'),
-  marginBottom: 20,
 });
 
 export interface BlogProps {
@@ -29,7 +28,7 @@ export interface BlogProps {
   publishDate: string;
   minutesToRead: number;
   slug: string;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) {
@@ -37,7 +36,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) 
 
   return (
     <article>
-      <Stack gap={4}>
+      <Stack gap={6}>
         <div css={heroImageStyles} />
 
         <header>
@@ -46,12 +45,12 @@ function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) 
               <A>{title}</A>
             </Link>
           </Heading>
+
           <div css={metaStyles}>
-            <a href="https://twitter.com/itsdouges">Michael Dougall</a> ·{' '}
             <time title={publishDate} dateTime={publishDate}>
               {friendlyDate(publishDate)}
             </time>{' '}
-            · {minutesToRead} min read
+            · <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min read
           </div>
         </header>
 

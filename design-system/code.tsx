@@ -8,7 +8,7 @@ interface CodeProps {
 
 const codeStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
-  padding: '4px 8px',
+  padding: '4px 6px',
   borderRadius: 3,
 });
 

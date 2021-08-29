@@ -4,7 +4,7 @@ import { token } from '@atlaskit/tokens';
 import usePressable from 'lib/use-pressable';
 
 const buttonStyles = css({
-  padding: '8px 12px',
+  padding: 8,
   margin: 0,
   fontSize: 20,
   border: 0,

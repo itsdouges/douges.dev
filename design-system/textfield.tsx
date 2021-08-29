@@ -4,7 +4,7 @@ import { token } from '@atlaskit/tokens';
 
 const inputStyles = css({
   border: `2px solid ${token('color.border.neutral')}`,
-  fontSize: 32,
+  fontSize: 26,
   borderRadius: 3,
   padding: 8,
   width: '100%',
@@ -39,11 +39,20 @@ interface TextfieldProps {
   isRequired?: boolean;
   isDisabled?: boolean;
   placeholder?: string;
+  name?: string;
 }
 
-function Textfield({ id, placeholder, type = 'text', isRequired, isDisabled }: TextfieldProps) {
+function Textfield({
+  id,
+  placeholder,
+  name,
+  type = 'text',
+  isRequired,
+  isDisabled,
+}: TextfieldProps) {
   return (
     <input
+      name={name}
       type={type}
       required={isRequired}
       id={id}

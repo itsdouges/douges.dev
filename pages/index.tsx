@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Fragment, ComponentType } from 'react';
+import { Fragment } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { css } from '@emotion/react';
@@ -17,7 +17,7 @@ import type { BlogMeta } from 'types/types';
 import SignUp from 'components/sign-up';
 import { getAllBlogPosts } from 'lib/blog';
 
-const PinnedBlogContent = dynamic(() => import('./blog/writing-eslint-rules-successfully.mdx'));
+const LatestBlogContent = dynamic(() => import('./blog/writing-eslint-rules-successfully.mdx'));
 
 const heroStyles = css({
   height: '55vh',
@@ -53,10 +53,8 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
           {pkg.name} | {pkg.description}
         </title>
         <meta name="description" content={pkg.description} />
-        <meta property="og:title" content="beprimed.dev" />
+        <meta property="og:title" content={pkg.name} />
         <meta property="og:description" content={pkg.description} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:creator" content="@itsdouges" />
         <meta name="twitter:title" content={pkg.name} />
         <meta name="twitter:image" content="" />
         <meta name="twitter:description" content={pkg.description} />
@@ -74,7 +72,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
 
         <Section isSeparated>
           <Blog {...latest}>
-            <PinnedBlogContent />
+            <LatestBlogContent />
           </Blog>
         </Section>
 

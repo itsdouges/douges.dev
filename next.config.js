@@ -1,5 +1,6 @@
-const hoistMdxMeta = require('./lib/hoist-mdx-meta');
-const withMDX = require('@next/mdx')({ options: { remarkPlugins: [hoistMdxMeta] } });
+const hoistMdxMeta = require('./lib/remark-hoist-mdx-meta');
+const readTime = require('./lib/remark-read-time');
+const withMDX = require('@next/mdx')({ options: { remarkPlugins: [readTime, hoistMdxMeta] } });
 
 /** @type {import('next').NextConfig} */
 module.exports = withMDX({

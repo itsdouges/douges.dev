@@ -1,0 +1,162 @@
+export const meta = {
+  title: 'Taming the beast that is CSS-in-JS',
+  blurb:
+    'While working on the Atlassian Design System we found it difficult to analyze and evolve how we style our components. Read how we took control of our CSS-in-JS usage without needing to introduce another library.',
+  publishDate: '2021-09-01',
+};
+
+CSS-in-JS is awesome.
+When it was gaining traction I remember how freeing it was to use it –
+in a time when [custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) weren't widely available they allowed us to create rich dynamic experiences right inside JavaScript!
+Even better being able to consume a component library from [NPM](https://npmjs.com) without needing insane bundler configuration was made into a reality,
+just import and go!
+While working at [Atlassian](https://atlassian.com) I've had the privilage to work on the [Atlassian Design System](https://atlassian.design/) which leans heavily on CSS-in-JS to author styles.
+During this time I've seen components styled with `styled-components` and `emotion`,
+styles defined using `strings` & `objects`,
+and the hidden costs that you wouldn't immediately think about such as difficulty in statically analyzing style declarations,
+performance gotchas,
+and evolution stagnation.
+
+In this blog post I want to articulate to you the benefits of adding constraints to how we use CSS-in-JS and the potential it gives us for better performance,
+more automated control,
+and healthy code evolution without needing to jump to yet another library (just yet).
+
+## All the colors of the rainbow
+
+One of the benefits of CSS-in-JS is that it is very flexible,
+however that is also one of its biggest drawbacks.
+Pick your flavor we got 'em all!
+As `emotion` is our current library of choice I'll show you some examples from code I've seen.
+
+### String styles
+
+A CSS purists joy,
+writing with strings (template literals) is the closest you can get to writing _actual_ CSS (in JS) at the detriment of type safety.
+
+```jsx
+import { css } from '@emotion/react';
+
+<div
+  css={css`
+    outline: 0;
+    border: 0;
+    background-color: blue;
+  `}
+/>;
+```
+
+### Object styles
+
+Objects, they're obviously type-safe,
+right?
+Well it depends how you're defining them,
+I've seen examples where they are but they miss half the point!
+If you were to hoist the object out of the the CSS prop that delicious type safety is laid to rest.
+It also raises the question all static analysis tools want to know –
+is this _actually_ a style declaration?
+
+```jsx
+<div
+  css={{
+    outline: 0,
+    border: 0,
+    backgroundColor: 'blue',
+  }}
+/>
+```
+
+// interactive hoist example of object styles here
+
+### Function styles
+
+The most nefarious of the lot,
+functions that return styles.
+Applications today are very dynamic,
+and the components we write in the Atlassian Design System are no different.
+Different appearances,
+states,
+and sizes –
+you're at risk of a huge combinatorial explosion!
+
+```jsx
+const styles = (isDisabled) => {
+  return {
+    outline: 0,
+    border: 0,
+    backgroundColor: 'blue',
+    ...isDisabled ? {
+      opacity: 0.5,
+      backgroundColor: 'gray',
+    },
+  };
+};
+
+<div css={styles(isDisabled)} />
+```
+
+// iteractive example of adding more states and sub-states to see the explosion
+
+## Pulling back from infinity
+
+As a codebase grows I've found myself wanting to automate away all of the nitty gritty,
+and work towards the holy grail of code consistency.
+We reached a point internally where enough was enough,
+we _need_ automated linting to set maintainers up for success.
+Amusingly however it was hard to find and analyze our style declarations!
+A combination of not having clear call sites for our style declarations and complex style interpolations made it difficult,
+almost impossible,
+to successfully lint them.
+
+We had a final destination in mind: Being able to exhaustively lint our style declarations.
+However what we found on the way proved to have benefits above and beyond just linting!
+To get there we came up with a list of requirements:
+
+- Clear call site
+- Typed declarations
+- Easily scanned by engineers
+- Exhaustively statically analysable
+
+### Starting with CSS prop
+
+The first line in the sand was making official something already implied,
+use CSS prop.
+With one hard requirement however to use values sourced from a `css` object.
+
+```jsx
+const styles = css({
+  margin: 0,
+});
+
+<div css={styles} />;
+```
+
+Right off the bat we've already checked two items off the list.
+
+- Clear call site ✅
+- Typed declarations ✅
+
+### Prefer static styles
+
+- Declarations need to be top level
+- Easily scanned by engineers ✅
+- Exhaustively statically analysable ✅
+
+### Dynamic inline styles
+
+- Static through CSS, dynamic through styles
+- User interaction cost (tons of styles generated) ⭐
+- SSR amount of styles generated combination explode ⭐
+- Example could be press a button to add an avatar during SSR
+
+// example adding user data flowing through a single declaration vs. using inline styles
+
+### Exhasutively linted
+
+- Can't mix declarations together, combine in css prop
+- Single module
+
+## The future will come tomorrow
+
+- Lint rules
+- Moving to compile time library
+- Codemod ⭐
