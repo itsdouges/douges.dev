@@ -17,7 +17,7 @@ import type { BlogMeta } from 'types/types';
 import SignUp from 'components/sign-up';
 import { getAllBlogPosts } from 'lib/blog';
 
-const LatestBlogContent = dynamic(() => import('./blog/writing-eslint-rules-successfully.mdx'));
+const LatestBlogContent = dynamic(() => import('./blog/taming-the-beast-that-is-css-in-js.mdx'));
 
 const heroStyles = css({
   height: '55vh',

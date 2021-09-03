@@ -11,72 +11,28 @@ in a time when [custom properties](https://developer.mozilla.org/en-US/docs/Web/
 Even better being able to consume a component library from [NPM](https://npmjs.com) without needing insane bundler configuration was made into a reality,
 just import and go!
 While working at [Atlassian](https://atlassian.com) I've had the privilage to work on the [Atlassian Design System](https://atlassian.design/) which leans heavily on CSS-in-JS to author styles.
-During this time I've seen components styled with `styled-components` and `emotion`,
-styles defined using `strings` & `objects`,
-and the hidden costs that you wouldn't immediately think about such as difficulty in statically analyzing style declarations,
+During this time I've seen components styled with [styled-components](https://styled-components.com/) and [emotion](https://emotion.sh/docs/introduction),
+styles defined using strings & objects and the costs you wouldn't immediately think about such as difficulty in statically analyzing style declarations,
 performance gotchas,
 and evolution stagnation.
 
-In this blog post I want to articulate to you the benefits of adding constraints to how we use CSS-in-JS and the potential it gives us for better performance,
-more automated control,
-and healthy code evolution without needing to jump to yet another library (just yet).
+There are benefits to be gained by adding constraints to how we use CSS-in-JS such as better performance,
+static analysis,
+and healthy code evolution without needing to jump to yet another library (for now).
+Let's dig in.
 
 ## All the colors of the rainbow
 
 One of the benefits of CSS-in-JS is that it is very flexible,
 however that is also one of its biggest drawbacks.
-Pick your flavor we got 'em all!
-As `emotion` is our current library of choice I'll show you some examples from code I've seen.
-
-### String styles
-
-A CSS purists joy,
-writing with strings (template literals) is the closest you can get to writing _actual_ CSS (in JS) at the detriment of type safety.
-
-```jsx
-import { css } from '@emotion/react';
-
-<div
-  css={css`
-    outline: 0;
-    border: 0;
-    background-color: blue;
-  `}
-/>;
-```
-
-### Object styles
-
-Objects, they're obviously type-safe,
-right?
-Well it depends how you're defining them,
-I've seen examples where they are but they miss half the point!
-If you were to hoist the object out of the the CSS prop that delicious type safety is laid to rest.
-It also raises the question all static analysis tools want to know –
-is this _actually_ a style declaration?
-
-```jsx
-<div
-  css={{
-    outline: 0,
-    border: 0,
-    backgroundColor: 'blue',
-  }}
-/>
-```
-
-// interactive hoist example of object styles here
-
-### Function styles
-
-The most nefarious of the lot,
-functions that return styles.
-Applications today are very dynamic,
-and the components we write in the Atlassian Design System are no different.
-Different appearances,
+The experiences we write today are very dynamic,
+different appearances,
 states,
-and sizes –
-you're at risk of a huge combinatorial explosion!
+and sizes,
+with a few different ways to turn these on and off.
+One common way I've seen combines styles using conditional object spreads but given a large enough prop set you're at risk of combinatorial explosion!
+
+Let's have a play and see what that looks like in practice.
 
 ```jsx
 const styles = (isDisabled) => {
@@ -91,32 +47,63 @@ const styles = (isDisabled) => {
   };
 };
 
-<div css={styles(isDisabled)} />
+
+function StyledComponent({ isDisabled }) {
+  return <div css={styles(isDisabled)} />;
+}
 ```
 
-// iteractive example of adding more states and sub-states to see the explosion
+It get's increasingly more complex to understand this declaration both as a human and as a static analysis tool!
 
 ## Pulling back from infinity
 
-As a codebase grows I've found myself wanting to automate away all of the nitty gritty,
+As a codebase grows I find myself wanting to automate away all of the nitty gritty,
 and work towards the holy grail of code consistency.
-We reached a point internally where enough was enough,
-we _need_ automated linting to set maintainers up for success.
-Amusingly however it was hard to find and analyze our style declarations!
-A combination of not having clear call sites for our style declarations and complex style interpolations made it difficult,
-almost impossible,
-to successfully lint them.
+Amusingly however if you take the code above it turns out not having clear call sites for style declarations and complex style combination makes it difficult,
+almost impossible to successfully lint and evolve the written styles.
+In my opinion it also makes styles harder to reason about.
 
-We had a final destination in mind: Being able to exhaustively lint our style declarations.
-However what we found on the way proved to have benefits above and beyond just linting!
-To get there we came up with a list of requirements:
+If we could come up with a list of "goals" to write the best CSS (in JS) what would they be?
+My list includes:
 
-- Clear call site
+- Clear call sites
 - Typed declarations
 - Easily scanned by engineers
-- Exhaustively statically analysable
+- Encourages statically declared styles
+- Styles have to be declared in the same module as the component
+- Flowing through a single method of styling
 
-### Starting with CSS prop
+To accomplish the goals we could set some constraints.
+My list of constraints ends up being:
+
+- Use CSS prop
+- Use CSS objects
+- Style declarations declared in the top level scope of a module
+- Dynamic styles flow through inline styles
+
+And after applying those constraingts if we transform the example above it looks like this:
+
+```jsx
+const styles = css({
+  outline: 0,
+  border: 0,
+  backgroundColor: 'blue',
+});
+
+const disabledStyles = css({
+  opacity: 0.5,
+  backgroundColor: 'gray',
+});
+
+function StyledComponent({ isDisabled }) {
+  return <div css={[styles, isDisabled && disabledStyles]} />;
+}
+```
+
+If you're feeling what I'm feeling you'll notice the output of this appears very similar to how you'd use CSS modules!
+This isn't a coincidence.
+
+## What it means
 
 The first line in the sand was making official something already implied,
 use CSS prop.
