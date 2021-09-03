@@ -13,7 +13,7 @@ const wrapperStyles = css({
   fontSize: 18,
   'p,ul,ol': { margin: 0 },
   h2: { marginTop: 50 },
-  h3: { marginTop: 40 },
+  h3: { marginTop: 30 },
 });
 
 const hrStyles = css({

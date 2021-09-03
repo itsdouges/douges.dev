@@ -70,18 +70,18 @@ My list includes:
 - Typed declarations
 - Easily scanned by engineers
 - Encourages statically declared styles
-- Styles have to be declared in the same module as the component
-- Flowing through a single method of styling
+- One way to style
 
-To accomplish the goals we could set some constraints.
+To enact these we could set some constraints.
 My list of constraints ends up being:
 
 - Use CSS prop
-- Use CSS objects
-- Style declarations declared in the top level scope of a module
-- Dynamic styles flow through inline styles
+- Use JS objects
+- Styles must be declared in the top level scope
+- Styles can't be imported or exported
+- Styles can't be composed together in their own declarations
 
-And after applying those constraingts if we transform the example above it looks like this:
+Applying these constraints to the example above it looks like this:
 
 ```jsx
 const styles = css({
@@ -103,47 +103,69 @@ function StyledComponent({ isDisabled }) {
 If you're feeling what I'm feeling you'll notice the output of this appears very similar to how you'd use CSS modules!
 This isn't a coincidence.
 
-## What it means
+## Tying it all together
 
-The first line in the sand was making official something already implied,
-use CSS prop.
-With one hard requirement however to use values sourced from a `css` object.
+Imposing constraints correlates to better outcomes in code even if it isn't immediately obvious.
+Let's walk through a few examples of what is improved because of the constraints we've applied.
 
-```jsx
-const styles = css({
-  margin: 0,
-});
+### Performance
 
-<div css={styles} />;
+Let's start with the more interesting aspect around performance.
+These constraints generate less styles when rendered on the server,
+have a play with this example.
+
+```
+<Avatar />
 ```
 
-Right off the bat we've already checked two items off the list.
+```
+const styles = css({});
 
-- Clear call site ✅
-- Typed declarations ✅
+function Avatar({ url }) {
+  return <div css={styles} />;
+}
+```
 
-### Prefer static styles
+Notice there is an extra style block rendered to the HTML for every unique user,
+versus when the constraints are applied only one is ever created.
 
-- Declarations need to be top level
-- Easily scanned by engineers ✅
-- Exhaustively statically analysable ✅
+### Code analysis
 
-### Dynamic inline styles
+Linting falls under this bucket.
+Style declarations written with these constraints are clear and simple,
+so simple in fact that statically analysing them can be done exhaustively.
+This is fantastic for the fact that you can write some very powerful rules for how these styles should be written.
+Ordering,
+disallowed styles,
+enforced color usage,
+even through to controlling how they are dynamically applied through CSS prop.
 
-- Static through CSS, dynamic through styles
-- User interaction cost (tons of styles generated) ⭐
-- SSR amount of styles generated combination explode ⭐
-- Example could be press a button to add an avatar during SSR
+```
+example linting here
+```
 
-// example adding user data flowing through a single declaration vs. using inline styles
+### Code evolution
 
-### Exhasutively linted
+A logical next step when the code your write is easily staticly analyzable is that you can change it at scale.
+Let's say we've decided that the library we're using isn't performance enough so we decide to move to a compile time solution.
+We're now in a great position because it's very easy to automate the transformation!
 
-- Can't mix declarations together, combine in css prop
-- Single module
+Here's an example where we transform the code to use [vanilla-extract](https://vanilla-extract.style/),
+have a play yourself!
 
-## The future will come tomorrow
+```
+each step of a transformation here
+```
 
-- Lint rules
-- Moving to compile time library
-- Codemod ⭐
+Because we know what the floor is,
+the absolute worst case of how the code can be written,
+we're in complete control.
+
+## Not just limited to styling
+
+Hopefully you've found this read as interesting as I did when I first starting reshaping how we style our experiences.
+Finding constraints to apply to the code we write applies to more than just styling our experiences however!
+Next time you're deep in your code base think through what opportunities might arise if you applied more constraints to how you write your state management,
+your components,
+and APIs.
+You'll be suprised at what you find.
