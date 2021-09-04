@@ -4,7 +4,6 @@ import Section from 'design-system/section';
 
 const containerStyles = css({
   margin: '0 -16px',
-  fontSize: 12,
 });
 
 interface ExampleContainerProps {

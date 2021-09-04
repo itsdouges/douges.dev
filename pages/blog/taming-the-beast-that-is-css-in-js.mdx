@@ -1,9 +1,3 @@
-import AvatarExample from 'components/examples/avatar-ssr';
-import DynamicStyles from 'components/examples/dynamic-styles';
-import ConstrainStyles from 'components/examples/constrain-styles';
-import CodemodStyles from 'components/examples/codemod-styles';
-import ExampleContainer from 'components/examples/container';
-
 export const meta = {
   title: 'Taming the beast that is CSS-in-JS',
   blurb:
@@ -94,8 +88,8 @@ These constraints mean less styles are generated when rendered on the server!
   <AvatarExample />
 </ExampleContainer>
 
-Notice there is an extra style block rendered to the HTML for every unique user,
-versus when the constraints are applied only one is ever created.
+Notice there is a style declaration for every unique avatar,
+versus a single one when the constraints are applied.
 We can extrapolate this further with the knowledge that this is true for styles on the client,
 whereby only a finite amount of styles will ever be generated in a session and always before user interaction.
 

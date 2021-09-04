@@ -16,7 +16,7 @@ function DynamicStyles() {
     outline: 0,
     border: 0,
     backgroundColor: 'blue',
-    ...isDisabled ? {
+    ...isDisabled && {
       opacity: 0.5,
       backgroundColor: 'gray',
     },

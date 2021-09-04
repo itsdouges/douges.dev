@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css, SerializedStyles } from '@emotion/react';
-import { memo } from 'react';
 import { token } from '@atlaskit/tokens';
-import { refractor, RefractorElement, Text } from 'refractor/lib/core.js';
-import jsx from 'refractor/lang/jsx.js';
+import { refractor, RefractorElement, Text } from 'refractor/lib/core';
+import jsx from 'refractor/lang/jsx';
 
 refractor.register(jsx);
 
@@ -13,9 +12,10 @@ interface CodeBlockProps {
 
 const codeBlockStyles = css({
   borderRadius: 3,
-  backgroundColor: token('color.background.subtleNeutral.resting'),
+  backgroundColor: token('color.background.default'),
   padding: '16px',
   margin: 0,
+  fontSize: 12,
   overflow: 'auto',
   width: '100%',
 });
@@ -58,7 +58,7 @@ const elementStyles: Record<string, SerializedStyles> = {
   parameter: defaultStyles,
 };
 
-const toJSX = (node: RefractorElement | Text): React.ReactNode => {
+const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode => {
   switch (node.type) {
     case 'element': {
       const Node = node.tagName as any;
@@ -68,6 +68,7 @@ const toJSX = (node: RefractorElement | Text): React.ReactNode => {
 
       return (
         <Node
+          key={index}
           data-node={process.env.NODE_ENV === 'development' ? classNames.join(' ') : undefined}
           css={classNames.map((cn) => elementStyles[cn])}>
           {node.children.map(toJSX)}
@@ -82,6 +83,8 @@ const toJSX = (node: RefractorElement | Text): React.ReactNode => {
   }
 };
 
+toJSX.displayName = 'CodeBlock';
+
 function CodeBlock({ children }: CodeBlockProps) {
   const root = refractor.highlight(children, 'jsx');
   return (
@@ -91,4 +94,4 @@ function CodeBlock({ children }: CodeBlockProps) {
   );
 }
 
-export default memo(CodeBlock);
+export default CodeBlock;

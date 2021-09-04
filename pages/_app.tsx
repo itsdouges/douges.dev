@@ -31,7 +31,11 @@ function App({ Component, pageProps, router }: AppProps) {
   return (
     <MDXProvider components={components}>
       <Head>
-        <style>{'*{box-sizing:border-box}'}</style>
+        <style>
+          {
+            '*{box-sizing:border-box;scrollbar-color:var(--background-boldNeutral-resting) var(--background-subtleNeutral-resting)}'
+          }
+        </style>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:type" content="website" />
