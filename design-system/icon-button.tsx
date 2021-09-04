@@ -6,6 +6,7 @@ import VisuallyHidden from './visually-hidden';
 const iconStyles = css({
   width: 25,
   height: 25,
+  fontSize: 20,
   display: 'block',
 });
 
