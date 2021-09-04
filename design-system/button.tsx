@@ -29,6 +29,14 @@ const primaryStyles = css({
   },
 });
 
+const selectedStyles = css({
+  color: token('color.text.selected'),
+  backgroundColor: token('color.background.selected.resting'),
+  ':hover': {
+    backgroundColor: token('color.background.selected.hover'),
+  },
+});
+
 const primaryActiveStyles = css({
   ':active': {
     backgroundColor: token('color.background.boldBrand.pressed'),
@@ -49,6 +57,12 @@ const subtleActiveStyles = css({
   },
 });
 
+const primarySelectedStyles = css({
+  ':active': {
+    backgroundColor: token('color.background.selected.pressed'),
+  },
+});
+
 const disabledStyles = css({
   color: token('color.text.disabled'),
   backgroundColor: token('color.background.disabled'),
@@ -58,24 +72,35 @@ const disabledStyles = css({
 const buttonAppearances = {
   subtle: subtleStyles,
   primary: primaryStyles,
+  selected: selectedStyles,
 };
 
 const buttonActiveAppearances = {
   subtle: subtleActiveStyles,
   primary: primaryActiveStyles,
+  selected: primarySelectedStyles,
 };
 
 interface ButtonProps {
-  appearance: 'primary' | 'subtle';
+  appearance?: 'primary' | 'subtle';
   type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
   isDisabled?: boolean;
+  isSelected?: boolean;
 }
 
-function Button({ children, onClick, appearance, type = 'button', isDisabled }: ButtonProps) {
-  const appearanceStyles = buttonAppearances[appearance];
-  const activeAppearanceStyles = buttonActiveAppearances[appearance];
+function Button({
+  children,
+  isSelected,
+  onClick,
+  appearance = 'subtle',
+  type = 'button',
+  isDisabled,
+}: ButtonProps) {
+  const mappedAppearance = isSelected ? 'selected' : appearance;
+  const appearanceStyles = buttonAppearances[mappedAppearance];
+  const activeAppearanceStyles = buttonActiveAppearances[mappedAppearance];
   const { isActive, buttonProps } = usePressable({ onClick });
 
   return (

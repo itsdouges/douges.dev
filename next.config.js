@@ -6,4 +6,7 @@ const withMDX = require('@next/mdx')({ options: { remarkPlugins: [readTime, hois
 module.exports = withMDX({
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'mdx'],
+  images: {
+    domains: ['i.pravatar.cc'],
+  },
 });

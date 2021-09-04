@@ -1,3 +1,5 @@
+import AvatarExample from 'components/examples/avatar-ssr';
+
 export const meta = {
   title: 'Taming the beast that is CSS-in-JS',
   blurb:
@@ -12,7 +14,8 @@ Even better being able to consume a component library from [NPM](https://npmjs.c
 just import and go!
 While working at [Atlassian](https://atlassian.com) I've had the privilage to work on the [Atlassian Design System](https://atlassian.design/) which leans heavily on CSS-in-JS to author styles.
 During this time I've seen components styled with [styled-components](https://styled-components.com/) and [emotion](https://emotion.sh/docs/introduction),
-styles defined using strings & objects and the costs you wouldn't immediately think about such as difficulty in statically analyzing style declarations,
+styles defined using strings & objects,
+and the costs you wouldn't immediately think about such as difficulty in statically analyzing style declarations,
 performance gotchas,
 and evolution stagnation.
 
@@ -114,17 +117,7 @@ Let's start with the more interesting aspect around performance.
 These constraints generate less styles when rendered on the server,
 have a play with this example.
 
-```
-<Avatar />
-```
-
-```
-const styles = css({});
-
-function Avatar({ url }) {
-  return <div css={styles} />;
-}
-```
+<AvatarExample />
 
 Notice there is an extra style block rendered to the HTML for every unique user,
 versus when the constraints are applied only one is ever created.

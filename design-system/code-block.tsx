@@ -11,6 +11,7 @@ const codeBlockStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
   padding: '16px',
   margin: 0,
+  overflow: 'auto',
 });
 
 function CodeBlock({ children }: CodeBlockProps) {
