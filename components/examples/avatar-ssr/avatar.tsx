@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
-import Image from 'next/image';
 
 const avatarStyles = css({
   border: `2px solid ${token('color.background.default')}`,
@@ -11,18 +10,22 @@ const avatarStyles = css({
   display: 'inline-block',
   backgroundColor: token('color.text.lowEmphasis'),
   overflow: 'hidden',
-  position: 'relative',
+  backgroundSize: 'contain',
 });
 
 interface AvatarProps {
   url: string;
+  isConstrained: boolean;
 }
 
-function Avatar({ url }: AvatarProps) {
+function Avatar({ url, isConstrained }: AvatarProps) {
+  const bgStyles = { backgroundImage: `url(${url})` };
+
   return (
-    <div css={[avatarStyles]}>
-      <Image layout="fill" alt="" src={url} />
-    </div>
+    <div
+      css={[avatarStyles, !isConstrained && bgStyles]}
+      style={isConstrained ? bgStyles : undefined}
+    />
   );
 }
 

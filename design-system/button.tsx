@@ -6,7 +6,7 @@ import usePressable from 'lib/use-pressable';
 const buttonStyles = css({
   padding: 8,
   margin: 0,
-  fontSize: 20,
+  fontSize: 16,
   border: 0,
   borderRadius: 3,
   fontWeight: 600,
