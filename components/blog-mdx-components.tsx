@@ -39,10 +39,10 @@ const components: MDXProviderComponents = {
     return <Heading {...props} level={3} />;
   },
   pre(props) {
-    return <CodeBlock {...props} />;
+    return props.children;
   },
-  code({ children }) {
-    return children;
+  code(props) {
+    return <CodeBlock {...props} />;
   },
   inlineCode(props) {
     return <Code {...props} />;

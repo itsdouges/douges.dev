@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { token } from '@atlaskit/tokens';
+import Surface from 'design-system/surface';
 
 const sectionStyles = css({
   margin: '0 auto',
@@ -14,10 +14,6 @@ const separatedSectionStyles = css({
   paddingBottom: '128px',
 });
 
-const sunkenStyles = css({
-  backgroundColor: token('color.background.sunken'),
-});
-
 interface SectionProps {
   isSeparated?: boolean;
   isSunken?: boolean;
@@ -27,9 +23,9 @@ interface SectionProps {
 function Section({ children, isSeparated, isSunken }: SectionProps) {
   if (isSunken) {
     return (
-      <div css={sunkenStyles}>
+      <Surface appearance="sunken">
         <div css={[sectionStyles, isSeparated && separatedSectionStyles]}>{children}</div>
-      </div>
+      </Surface>
     );
   }
 

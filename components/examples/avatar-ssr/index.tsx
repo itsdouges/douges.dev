@@ -3,18 +3,19 @@ import Button from 'design-system/button';
 import CodeBlock from 'design-system/code-block';
 import Avatar from './avatar';
 import Inline from 'design-system/inline';
+import TimeoutButton from 'design-system/timeout-button';
 import Stack from 'design-system/stack';
 
 const url = (index: number) => `https://i.pravatar.cc/150?u=${index + 1}`;
 
 const generateConstrainedStyle = () => {
   return `.css-141d2k2 {
-    border: 2px solid var(--background-default);
+    border: 2px solid currentColor;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     display: inline-block;
-    background-color: var(--text-lowEmphasis),
+    background-color: currentColor;
     overflow: hidden,
     background-size: contain;
   }`;
@@ -23,12 +24,12 @@ const generateConstrainedStyle = () => {
 const classNames = ['1udhswa', '1cpwmbr', 'am987o', 'fh3pzc', 'gjefnh', '1xc7c06', '1evb93a'];
 const generateStyle = (index: number) => {
   return `.css-${classNames[index]} {
-    border: 2px solid var(--background-default);
+    border: 2px solid currentColor;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     display: inline-block;
-    background-color: var(--text-lowEmphasis),
+    background-color: currentColor;
     overflow: hidden,
     background-size: contain;
     background-style: url(https://i.pravatar.cc/150?u=${index});
@@ -44,18 +45,12 @@ function AvatarExample() {
   return (
     <Stack gap={2}>
       <Inline gap={1} align="left">
-        <Button
-          isDisabled={count === 1}
-          appearance="subtle"
-          onClick={() => setCount((prev) => prev - 1)}>
+        <Button isDisabled={count === 1} onClick={() => setCount((prev) => prev - 1)}>
           Remove avatar
         </Button>
-        <Button
-          isDisabled={count >= 7}
-          appearance="subtle"
-          onClick={() => setCount((prev) => prev + 1)}>
+        <TimeoutButton isDisabled={count >= 7} onClick={() => setCount((prev) => prev + 1)}>
           Add avatar
-        </Button>
+        </TimeoutButton>
         <Inline marginLeft="auto" align="right">
           <Button isSelected={constrainStyles} onClick={() => setConstrainStyles((prev) => !prev)}>
             {styleButtonText}

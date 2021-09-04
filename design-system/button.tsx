@@ -11,11 +11,12 @@ const buttonStyles = css({
   borderRadius: 3,
   fontWeight: 600,
   position: 'relative',
+  overflow: 'hidden',
   ':focus': {
     outline: 0,
   },
   ':focus-visible': {
-    boxShadow: `0 0 0 2px ${token('color.background.default')}, 0 0 0 4px ${token(
+    boxShadow: `0 0 0 2px var(--surface, ${token('color.background.default')}), 0 0 0 4px ${token(
       'color.border.focus'
     )}`,
   },
@@ -51,6 +52,20 @@ const subtleStyles = css({
   },
 });
 
+const defaultStyles = css({
+  color: token('color.text.highEmphasis'),
+  backgroundColor: token('color.background.subtleNeutral.resting'),
+  ':hover': {
+    backgroundColor: token('color.background.subtleNeutral.hover'),
+  },
+});
+
+const defaultActiveStyles = css({
+  ':active': {
+    backgroundColor: token('color.background.subtleNeutral.pressed'),
+  },
+});
+
 const subtleActiveStyles = css({
   ':active': {
     backgroundColor: token('color.background.transparentNeutral.pressed'),
@@ -70,19 +85,21 @@ const disabledStyles = css({
 });
 
 const buttonAppearances = {
+  default: defaultStyles,
   subtle: subtleStyles,
   primary: primaryStyles,
   selected: selectedStyles,
 };
 
 const buttonActiveAppearances = {
+  default: defaultActiveStyles,
   subtle: subtleActiveStyles,
   primary: primaryActiveStyles,
   selected: primarySelectedStyles,
 };
 
-interface ButtonProps {
-  appearance?: 'primary' | 'subtle';
+export interface ButtonProps {
+  appearance?: 'primary' | 'subtle' | 'default';
   type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
@@ -94,7 +111,7 @@ function Button({
   children,
   isSelected,
   onClick,
-  appearance = 'subtle',
+  appearance = 'default',
   type = 'button',
   isDisabled,
 }: ButtonProps) {

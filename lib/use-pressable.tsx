@@ -4,7 +4,7 @@ interface UsePressable {
   isActive: boolean;
   buttonProps: {
     onMouseOver: MouseEventHandler;
-    onMouseOut: MouseEventHandler;
+    onMouseLeave: MouseEventHandler;
     onMouseDown: MouseEventHandler;
     onClick: MouseEventHandler;
   };
@@ -24,7 +24,7 @@ function usePressable(opts: UsePressableOpts): UsePressable {
     }
   };
 
-  const onMouseOut: MouseEventHandler = () => {
+  const onMouseLeave: MouseEventHandler = () => {
     isPressed.current = false;
     if (isActive) {
       setIsActive(false);
@@ -52,7 +52,7 @@ function usePressable(opts: UsePressableOpts): UsePressable {
     isActive,
     buttonProps: {
       onMouseOver,
-      onMouseOut,
+      onMouseLeave,
       onMouseDown,
       onClick,
     },

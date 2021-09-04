@@ -1,31 +1,29 @@
 import AvatarExample from 'components/examples/avatar-ssr';
 import DynamicStyles from 'components/examples/dynamic-styles';
 import ConstrainStyles from 'components/examples/constrain-styles';
+import CodemodStyles from 'components/examples/codemod-styles';
 import ExampleContainer from 'components/examples/container';
 
 export const meta = {
   title: 'Taming the beast that is CSS-in-JS',
   blurb:
     'While working on the Atlassian Design System we found it difficult to analyze and evolve how we style our components. Read how we took control of our CSS-in-JS usage without needing to introduce another library.',
-  publishDate: '2021-09-01',
+  publishDate: '2021-09-05',
 };
 
 CSS-in-JS is awesome.
 When it was gaining traction I remember how freeing it was to use it –
 in a time when [custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) weren't widely available they allowed us to create rich dynamic experiences right inside JavaScript!
-Even better being able to consume a component library from [NPM](https://npmjs.com) without needing insane bundler configuration was made into a reality,
+Even better being able to consume a component library from [NPM](https://npmjs.com) without needing inane bundler configuration was made into a reality,
 just import and go!
+
 While working at [Atlassian](https://atlassian.com) I've had the privilage to work on the [Atlassian Design System](https://atlassian.design/) which leans heavily on CSS-in-JS to author styles.
 During this time I've seen components styled with [styled-components](https://styled-components.com/) and [emotion](https://emotion.sh/docs/introduction),
 styles defined using strings & objects,
-and the costs you wouldn't immediately think about such as difficulty in statically analyzing style declarations,
-performance gotchas,
+and the costs you wouldn't immediately think about such as performance gotchas,
+difficulty in statically analyzing style declarations,
 and evolution stagnation.
-
-There are benefits to be gained by adding constraints to how we use CSS-in-JS such as better performance,
-static analysis,
-and healthy code evolution without needing to jump to yet another library (for now).
-Let's dig in.
+What if we could improve these without needing to jump to another library?
 
 ## All the colors of the rainbow
 
@@ -38,7 +36,8 @@ and sizes,
 with a few different ways to turn these on and off.
 One common way I've seen combines styles using conditional object spreads but given a large enough prop set you're at risk of combinatorial explosion!
 
-Let's have a play and see what that looks like in practice.
+Let's have a play and see what that looks like in practice,
+press the button to add more permutations.
 
 <ExampleContainer>
   <DynamicStyles />
@@ -121,12 +120,11 @@ A logical next step when the code your write is easily staticly analyzable is th
 Let's say we've decided that the library we're using isn't performance enough so we decide to move to a compile time solution.
 We're now in a great position because it's very easy to automate the transformation!
 
-Here's an example where we transform the code to use [vanilla-extract](https://vanilla-extract.style/),
-have a play yourself!
+Here's an example where we transform the code to use the a library that creates styles at build time: [vanilla-extract](https://vanilla-extract.style/).
 
-```
-each step of a transformation here
-```
+<ExampleContainer>
+  <CodemodStyles />
+</ExampleContainer>
 
 Because we know what the floor is,
 the absolute worst case of how the code can be written,
