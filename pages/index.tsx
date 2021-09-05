@@ -62,8 +62,8 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         {latest.heroImage && (
           <meta property="og:image:width" content={`${latest.heroImage.width}`} />
         )}
-        <meta name="twitter:title" content={pkg.name} />
-        <meta name="twitter:description" content={pkg.description} />
+        <meta name="twitter:card" content="summary_large_image" />
+        {latest.heroImage && <meta name="twitter:image" content={latest.heroImage.src} />}
       </Head>
 
       <main>
