@@ -46,7 +46,7 @@ function CodemodStyles() {
 
   return (
     <Stack gap={2}>
-      <Inline>
+      <Inline gap={1}>
         <Button isSelected={isTransformed} onClick={() => setIsTransformed((prev) => !prev)}>
           Transform styles
         </Button>

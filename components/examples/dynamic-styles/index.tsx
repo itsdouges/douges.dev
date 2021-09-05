@@ -6,6 +6,15 @@ import Inline from 'design-system/inline';
 import { useState } from 'react';
 
 const steps = [
+  `const styles = {
+  borderRadius: 3,
+  backgroundColor: 'lightgrey',
+  color: 'black',
+};
+
+function Tag({ children }) {
+  return <span css={styles}>{children}</span>;
+}`,
   `const styles = (isDisabled) => {
   return {
     borderRadius: 3,
@@ -17,7 +26,6 @@ const steps = [
     },
   };
 };
-
 
 function Tag({ isDisabled, children }) {
   return <span css={styles(isDisabled)}>{children}</span>;
@@ -38,18 +46,29 @@ function Tag({ isDisabled, children }) {
   };
 };
 
-
 function Tag({ isDisabled, children, isBold }) {
   return <span css={styles(isDisabled, isBold)}>{children}</span>;
 }`,
-  `const styles = (isDisabled, isBold) => {
+  `const styles = (isDisabled, isBold, appearance) => {
   return {
     borderRadius: 3,
-    backgroundColor: 'lightgrey',
-    color: 'black',
-    ...isBold && {
-      backgroundColor: 'black',
-      color: 'lightgrey',
+    ...appearance === 'default' && {
+      ...isBold ? {
+        backgroundColor: 'black',
+        color: 'lightgrey',
+      } : {
+        backgroundColor: 'lightgrey',
+        color: 'black',
+      },
+    },
+    ...appearance === 'primary' && {
+      ...isBold ? {
+        backgroundColor: 'blue',
+        color: 'white',
+      } : {
+        backgroundColor: 'white',
+        color: 'blue',
+      },
     },
     ...isDisabled && {
       backgroundColor: 'gray',
@@ -57,7 +76,6 @@ function Tag({ isDisabled, children, isBold }) {
     },
   };
 };
-
 
 function Tag({ isDisabled, children, isBold, appearance }) {
   return <span css={styles(isDisabled, isBold)}>{children}</span>;
@@ -69,14 +87,15 @@ function DynamicStyles() {
 
   return (
     <Stack gap={2}>
-      <Inline>
-        <TimeoutButton onClick={() => setStep((prev) => prev + 1)}>Add prop</TimeoutButton>
-
-        <Inline marginLeft="auto">
-          <Button isDisabled={step === 0} onClick={() => setStep(0)}>
-            ↺ Reset
-          </Button>
-        </Inline>
+      <Inline gap={1}>
+        <Button isDisabled={step === 0} onClick={() => setStep((prev) => prev - 1)}>
+          Remove prop
+        </Button>
+        <TimeoutButton
+          isDisabled={steps[step + 1] === undefined}
+          onClick={() => setStep((prev) => prev + 1)}>
+          Add prop
+        </TimeoutButton>
       </Inline>
 
       <CodeBlock>{steps[step]}</CodeBlock>

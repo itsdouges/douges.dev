@@ -55,7 +55,10 @@ function SignUp() {
   return (
     <Stack gap={2}>
       <Heading level={3}>Like it? Don&apos;t miss a beat!</Heading>
-      <Text as="p">Unsubscribe at any time, get notified early when new content is available.</Text>
+      <Text as="p">
+        Join others like you and get notified early when new content is available, unsubscribe at
+        any time.
+      </Text>
 
       <form
         onSubmit={async (e) => {
@@ -71,7 +74,7 @@ function SignUp() {
             isDisabled={isLoading}
             type="email"
             id="email"
-            placeholder="me@beprimed.dev"
+            placeholder="me@douges.dev"
           />
           <Button type="submit" isDisabled={isLoading} appearance="primary">
             <Fragment>

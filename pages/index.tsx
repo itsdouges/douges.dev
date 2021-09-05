@@ -20,8 +20,8 @@ import { getAllBlogPosts } from 'lib/blog';
 const LatestBlogContent = dynamic(() => import('./blog/taming-the-beast-that-is-css-in-js.mdx'));
 
 const heroStyles = css({
-  height: '55vh',
-  minHeight: 600,
+  height: '40vh',
+  minHeight: 450,
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',

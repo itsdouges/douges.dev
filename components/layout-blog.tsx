@@ -22,9 +22,10 @@ function LayoutBlog({ blog, children }: LayoutBlogProps) {
         <meta name="description" content={blog.blurb} />
         <meta property="og:title" content={blog.title} />
         <meta property="og:description" content={blog.blurb} />
+        <meta property="og:image" content={blog.heroImage} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={blog.title} />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content={blog.heroImage} />
         <meta name="twitter:description" content={blog.blurb} />
       </Head>
 

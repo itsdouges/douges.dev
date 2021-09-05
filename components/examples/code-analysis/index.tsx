@@ -6,7 +6,7 @@ import Inline from 'design-system/inline';
 function CodeAnalysis() {
   return (
     <Stack gap={2}>
-      <Inline>
+      <Inline gap={1}>
         <Button>Add permutation</Button>
 
         <Inline marginLeft="auto" align="right">

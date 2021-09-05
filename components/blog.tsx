@@ -5,14 +5,16 @@ import { token } from '@atlaskit/tokens';
 import Stack from 'design-system/stack';
 import { friendlyDate } from 'lib/time';
 import Link from 'next/link';
-import A from 'design-system/link';
+import DSLink from 'design-system/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
-  height: 400,
+  height: 300,
   position: 'relative',
+  margin: '0 -16px',
+  borderRadius: 3,
   '@media screen and (min-width: 1000px)': {
     margin: '0 -64px',
   },
@@ -42,20 +44,14 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
       <Stack gap={6}>
         <div css={heroImageStyles}>
           {heroImage && (
-            <Image
-              objectPosition="center center"
-              objectFit="cover"
-              layout="fill"
-              src={heroImage}
-              alt=""
-            />
+            <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
           )}
         </div>
 
         <header>
           <Heading level={1}>
             <Link passHref href={slug ? `/blog/${slug}` : route}>
-              <A>{title}</A>
+              <DSLink>{title}</DSLink>
             </Link>
           </Heading>
 

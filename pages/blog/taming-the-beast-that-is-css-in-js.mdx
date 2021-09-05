@@ -1,9 +1,11 @@
+import heroImage from '/public/taming-css-hero.png';
+
 export const meta = {
   title: 'Taming the beast that is CSS-in-JS',
   blurb:
     'While working on the Atlassian Design System we found it difficult to analyze and evolve how we style our components. Read how we took control of our CSS-in-JS usage without needing to introduce another library.',
   publishDate: '2021-09-05',
-  heroImage: '/css-hero.png',
+  heroImage,
 };
 
 CSS-in-JS is awesome.
@@ -19,7 +21,7 @@ and the costs you wouldn't immediately think about such as performance gotchas,
 difficulty in statically analyzing style declarations,
 and evolution stagnation.
 
-What if we could improve how we use [emotion] without needing to jump to another library [yet]?
+What if we could improve how we use [emotion] without needing to jump to another library [just yet]?
 
 # Colors of the rainbow
 
@@ -29,20 +31,21 @@ The experiences we write today are very dynamic,
 different appearances,
 states,
 and sizes,
-with a few different ways to turn these on and off.
-One common way I've seen combines styles using conditional object spreads but given a large enough prop set you're at risk of combinatorial explosion!
-Also consider that over time a component could go through multiple engineers,
+all with a few different ways to implement.
+One common way I've seen combines styles using conditional object spreads but given a large enough prop set you're at risk of a combinatorial explosion!
+Consider that over time a component could go through multiple engineers,
 even teams!
 
 Let's have a play and see what that looks like,
-press the button to add more permutations!
+press the button to add more permutations.
 
 <ExampleContainer>
   <DynamicStyles />
 </ExampleContainer>
 
 It is increasingly more complex to understand this declaration both as a human and static analysis tool!
-Styles returned from a function [are these styles?] and indirection from pass-through arguments/nested styles results in the link between input and prop usage being blurry at best.
+Styles returned from a function [are these styles?] and indirection from pass-through arguments make the link between input and usage blurry at best.
+It can be confusing to understand what the current state of a component could be given a particular set in inputs.
 
 # Pulling back from infinity
 
@@ -71,14 +74,14 @@ My list of constraints ends up being:
 - Styles can't be nested
 - Styles can't be composed together [in their own declarations]
 
-Applying these constraints to the example above it looks like this:
+Have a play and see what it looks like when we constrain the styles from the example above.
 
 <ExampleContainer>
   <ConstrainStyles />
 </ExampleContainer>
 
 If you're feeling what I'm feeling you'll notice the output of this appears very similar to how you'd use CSS modules!
-This isn't a coincidence.
+Simple bite sized style declarations that are composed together in the owning component.
 
 # Tying it all together
 
@@ -131,9 +134,9 @@ where static styles flow [CSS prop],
 and where dynamic styles flow [inline styles],
 we're in complete control.
 
-# Bigger than just styling
+# More than just styling
 
-Hopefully you've found this read as interesting as I did when I first starting reshaping how we style our experiences.
+Hopefully you've found this read as interesting as I did when I first started thinking about it.
 Finding constraints to apply to the code we write applies to more than just styling our experiences however!
 
 Next time you're deep in your code base think through what opportunities might arise if you applied more constraints to how you write your state management,
@@ -141,4 +144,5 @@ your components,
 APIs,
 even features that you ship [or won't ship].
 You'll be suprised at what opportunities arise!
+
 All the best.
