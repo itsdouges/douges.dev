@@ -72,9 +72,9 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
             <Section>
               <Heading level={0}>douges&#8203;.dev</Heading>
               <div css={heroDescriptionStyles}>
-                Learn the skills, tools, and mindset to gain frontend superpowers. An interactive
-                frontend learning blog by{' '}
-                <a href="https://twitter.com/itsdouges">Michael Dougall</a>.
+                An interactive frontend learning blog written by{' '}
+                <a href="https://twitter.com/itsdouges">Michael Dougall</a>. Learn the skills,
+                tools, and mindset to gain frontend superpowers.
               </div>
             </Section>
           </Stack>

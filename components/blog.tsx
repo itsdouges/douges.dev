@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
-  height: 300,
+  height: 250,
   position: 'relative',
   margin: '0 -16px',
   borderRadius: 3,

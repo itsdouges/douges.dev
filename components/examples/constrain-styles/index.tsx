@@ -8,8 +8,8 @@ import { useState } from 'react';
 const steps = [
   `const styles = {
   borderRadius: 3,
-  backgroundColor: 'lightgrey',
   color: 'black',
+  backgroundColor: 'lightgrey',
 };
 
 function Tag({ children }) {
@@ -18,11 +18,11 @@ function Tag({ children }) {
   `const styles = (isDisabled) => {
   return {
     borderRadius: 3,
-    backgroundColor: 'lightgrey',
     color: 'black',
+    backgroundColor: 'lightgrey',
     ...isDisabled && {
-      backgroundColor: 'gray',
       color: 'lightgrey',
+      backgroundColor: 'gray',
     },
   };
 };
@@ -33,15 +33,15 @@ function Tag({ isDisabled, children }) {
   `const styles = (isDisabled, isBold) => {
   return {
     borderRadius: 3,
-    backgroundColor: 'lightgrey',
     color: 'black',
+    backgroundColor: 'lightgrey',
     ...isBold && {
-      backgroundColor: 'black',
       color: 'lightgrey',
+      backgroundColor: 'black',
     },
     ...isDisabled && {
-      backgroundColor: 'gray',
       color: 'lightgrey',
+      backgroundColor: 'gray',
     },
   };
 };
@@ -54,25 +54,25 @@ function Tag({ isDisabled, children, isBold }) {
     borderRadius: 3,
     ...appearance === 'default' && {
       ...isBold ? {
-        backgroundColor: 'black',
         color: 'lightgrey',
+        backgroundColor: 'black',
       } : {
-        backgroundColor: 'lightgrey',
         color: 'black',
+        backgroundColor: 'lightgrey',
       },
     },
     ...appearance === 'primary' && {
       ...isBold ? {
-        backgroundColor: 'blue',
         color: 'white',
+        backgroundColor: 'blue',
       } : {
-        backgroundColor: 'white',
         color: 'blue',
+        backgroundColor: 'white',
       },
     },
     ...isDisabled && {
-      backgroundColor: 'gray',
       color: 'lightgrey',
+      backgroundColor: 'gray',
     },
   };
 };
@@ -85,8 +85,8 @@ function Tag({ isDisabled, children, isBold, appearance }) {
 const constrainedSteps = [
   `const styles = css({
   borderRadius: 3,
-  backgroundColor: 'lightgrey',
   color: 'black',
+  backgroundColor: 'lightgrey',
 });
 
 function Tag({ children }) {
@@ -97,13 +97,13 @@ function Tag({ children }) {
 });
 
 const disabledStyles = css({
-  backgroundColor: 'gray',
   color: 'lightgrey',
+  backgroundColor: 'gray',
 });
 
 const enabledStyles = css({
-  backgroundColor: 'lightgrey',
   color: 'black',
+  backgroundColor: 'lightgrey',
 });
 
 function Tag({ isDisabled, children }) {
@@ -114,18 +114,18 @@ function Tag({ isDisabled, children }) {
 });
 
 const disabledStyles = css({
-  backgroundColor: 'gray',
   color: 'lightgrey',
+  backgroundColor: 'gray',
 });
 
 const subtleStyles = css({
-  backgroundColor: 'lightgrey',
   color: 'black',
+  backgroundColor: 'lightgrey',
 });
 
 const boldStyles = css({
-  backgroundColor: 'black',
   color: 'lightgrey',
+  backgroundColor: 'black',
 });
 
 function Tag({ isDisabled, children, isBold }) {
@@ -141,36 +141,49 @@ function Tag({ isDisabled, children, isBold }) {
     </span>
   );
 }`,
-  `const styles = (isDisabled, isBold, appearance) => {
-  return {
-    borderRadius: 3,
-    ...appearance === 'default' && {
-      ...isBold ? {
-        backgroundColor: 'black',
-        color: 'lightgrey',
-      } : {
-        backgroundColor: 'lightgrey',
-        color: 'black',
-      },
-    },
-    ...appearance === 'primary' && {
-      ...isBold ? {
-        backgroundColor: 'blue',
-        color: 'white',
-      } : {
-        backgroundColor: 'white',
-        color: 'blue',
-      },
-    },
-    ...isDisabled && {
-      backgroundColor: 'gray',
-      color: 'lightgrey',
-    },
-  };
+  `const styles = css({
+  borderRadius: 3,
+});
+
+const disabledStyles = css({
+  color: 'lightgrey',
+  backgroundColor: 'gray',
+});
+
+const subtleStyles = {
+  default: css({
+    color: 'black',
+    backgroundColor: 'lightgrey',
+  }),
+  primary: css({
+    color: 'blue',
+    backgroundColor: 'white',
+  }),
+};
+
+const boldStyles = {
+  default: css({
+    color: 'lightgrey',
+    backgroundColor: 'black',
+  }),
+  primary: css({
+    color: 'white',
+    backgroundColor: 'blue',
+  }),
 };
 
 function Tag({ isDisabled, children, isBold, appearance }) {
-  return <span css={styles(isDisabled, isBold)}>{children}</span>;
+  const appearanceStyles = isBold ? boldStyles[appearance] : subtleStyles[appearance];
+  return (
+    <span
+      css={[
+        styles,
+        isDisabled ? disabledStyles : appearanceStyles,
+      ]}
+    >
+      {children}
+    </span>
+  );
 }`,
 ];
 

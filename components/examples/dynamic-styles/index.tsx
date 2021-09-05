@@ -8,8 +8,8 @@ import { useState } from 'react';
 const steps = [
   `const styles = {
   borderRadius: 3,
-  backgroundColor: 'lightgrey',
   color: 'black',
+  backgroundColor: 'lightgrey',
 };
 
 function Tag({ children }) {
@@ -18,11 +18,11 @@ function Tag({ children }) {
   `const styles = (isDisabled) => {
   return {
     borderRadius: 3,
-    backgroundColor: 'lightgrey',
     color: 'black',
+    backgroundColor: 'lightgrey',
     ...isDisabled && {
-      backgroundColor: 'gray',
       color: 'lightgrey',
+      backgroundColor: 'gray',
     },
   };
 };
@@ -33,15 +33,15 @@ function Tag({ isDisabled, children }) {
   `const styles = (isDisabled, isBold) => {
   return {
     borderRadius: 3,
-    backgroundColor: 'lightgrey',
     color: 'black',
+    backgroundColor: 'lightgrey',
     ...isBold && {
-      backgroundColor: 'black',
       color: 'lightgrey',
+      backgroundColor: 'black',
     },
     ...isDisabled && {
-      backgroundColor: 'gray',
       color: 'lightgrey',
+      backgroundColor: 'gray',
     },
   };
 };
@@ -54,25 +54,25 @@ function Tag({ isDisabled, children, isBold }) {
     borderRadius: 3,
     ...appearance === 'default' && {
       ...isBold ? {
-        backgroundColor: 'black',
         color: 'lightgrey',
+        backgroundColor: 'black',
       } : {
-        backgroundColor: 'lightgrey',
         color: 'black',
+        backgroundColor: 'lightgrey',
       },
     },
     ...appearance === 'primary' && {
       ...isBold ? {
-        backgroundColor: 'blue',
         color: 'white',
+        backgroundColor: 'blue',
       } : {
-        backgroundColor: 'white',
         color: 'blue',
+        backgroundColor: 'white',
       },
     },
     ...isDisabled && {
-      backgroundColor: 'gray',
       color: 'lightgrey',
+      backgroundColor: 'gray',
     },
   };
 };

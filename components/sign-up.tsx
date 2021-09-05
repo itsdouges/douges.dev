@@ -53,11 +53,10 @@ function SignUp() {
   const [isComplete, setIsComplete] = useState(false);
 
   return (
-    <Stack gap={2}>
-      <Heading level={3}>Like it? Don&apos;t miss a beat!</Heading>
+    <Stack gap={1}>
+      <Heading level={3}>Like it? Come hang out again soon.</Heading>
       <Text as="p">
-        Join others like you and get notified early when new content is available, unsubscribe at
-        any time.
+        Join others and get notified early when new content is available, unsubscribe at any time.
       </Text>
 
       <form
