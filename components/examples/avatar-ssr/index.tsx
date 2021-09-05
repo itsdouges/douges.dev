@@ -40,7 +40,7 @@ function AvatarExample() {
   const [count, setCount] = useState(1);
   const [constrainStyles, setConstrainStyles] = useState(false);
   const arr = Array(count).fill(undefined);
-  const styleButtonText = constrainStyles ? 'Constrained' : 'Constrain styles';
+  const styleButtonText = constrainStyles ? 'Styles constrained' : 'Constrain styles';
 
   return (
     <Stack gap={2}>

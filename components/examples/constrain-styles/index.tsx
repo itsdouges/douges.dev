@@ -41,9 +41,9 @@ function ConstrainStyles() {
 
   return (
     <Stack gap={2}>
-      <Inline align="right">
+      <Inline>
         <Button isSelected={isTransformed} onClick={() => setIsTransformed((prev) => !prev)}>
-          Transform styles
+          {isTransformed ? 'Constraints applied' : 'Apply constraints'}
         </Button>
       </Inline>
 

@@ -4,4 +4,5 @@ export interface BlogMeta {
   publishDate: string;
   minutesToRead: number;
   slug: string;
+  heroImage: string;
 }

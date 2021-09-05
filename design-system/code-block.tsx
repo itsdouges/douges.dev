@@ -83,9 +83,10 @@ const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode =>
   }
 };
 
+// This is needed for some weird NextJS SSR transform.
 toJSX.displayName = 'CodeBlock';
 
-function CodeBlock({ children }: CodeBlockProps) {
+function CodeBlock({ children = '' }: CodeBlockProps) {
   const root = refractor.highlight(children, 'jsx');
   return (
     <pre css={codeBlockStyles}>

@@ -7,10 +7,12 @@ import { friendlyDate } from 'lib/time';
 import Link from 'next/link';
 import A from 'design-system/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
-  height: 164,
+  height: 400,
+  position: 'relative',
   '@media screen and (min-width: 1000px)': {
     margin: '0 -64px',
   },
@@ -29,15 +31,26 @@ export interface BlogProps {
   minutesToRead: number;
   slug: string;
   children: React.ReactNode;
+  heroImage?: string;
 }
 
-function Blog({ title, publishDate, children, slug, minutesToRead }: BlogProps) {
+function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: BlogProps) {
   const { route } = useRouter();
 
   return (
     <article>
       <Stack gap={6}>
-        <div css={heroImageStyles} />
+        <div css={heroImageStyles}>
+          {heroImage && (
+            <Image
+              objectPosition="center center"
+              objectFit="cover"
+              layout="fill"
+              src={heroImage}
+              alt=""
+            />
+          )}
+        </div>
 
         <header>
           <Heading level={1}>

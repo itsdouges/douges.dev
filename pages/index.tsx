@@ -64,8 +64,12 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         <div css={heroStyles}>
           <Stack gap={8}>
             <Section>
-              <Heading level={0}>beprimed&#8203;.dev</Heading>
-              <div css={heroDescriptionStyles}>{pkg.description}</div>
+              <Heading level={0}>douges&#8203;.dev</Heading>
+              <div css={heroDescriptionStyles}>
+                Learn the skills, tools, and mindset to gain frontend superpowers. An interactive
+                frontend learning blog by{' '}
+                <a href="https://twitter.com/itsdouges">Michael Dougall</a>.
+              </div>
             </Section>
           </Stack>
         </div>

@@ -9,6 +9,7 @@ import AvatarExample from 'components/examples/avatar-ssr';
 import DynamicStyles from 'components/examples/dynamic-styles';
 import ConstrainStyles from 'components/examples/constrain-styles';
 import CodemodStyles from 'components/examples/codemod-styles';
+import CodeAnalysis from 'components/examples/code-analysis';
 import ExampleContainer from 'components/examples/container';
 
 const wrapperStyles = css({
@@ -33,17 +34,18 @@ const components: MDXProviderComponents = {
   DynamicStyles,
   ConstrainStyles,
   CodemodStyles,
+  CodeAnalysis,
   wrapper({ children }) {
     return <div css={wrapperStyles}>{children}</div>;
   },
   hr(props) {
     return <hr {...props} css={hrStyles} />;
   },
-  h1() {
-    return <div>DO_NOT_USE_H1</div>;
+  h1(props) {
+    return <Heading {...props} level={2} />;
   },
   h2(props) {
-    return <Heading {...props} level={2} />;
+    return <Heading {...props} level={3} />;
   },
   h3(props) {
     return <Heading {...props} level={3} />;
