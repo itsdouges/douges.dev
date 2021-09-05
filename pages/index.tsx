@@ -55,8 +55,9 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         <meta name="description" content={pkg.description} />
         <meta property="og:title" content={pkg.name} />
         <meta property="og:description" content={pkg.description} />
+        <meta property="og:image" content={latest.heroImage} />
         <meta name="twitter:title" content={pkg.name} />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content={latest.heroImage} />
         <meta name="twitter:description" content={pkg.description} />
       </Head>
 
