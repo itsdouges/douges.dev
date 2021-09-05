@@ -33,7 +33,7 @@ export interface BlogProps {
   minutesToRead: number;
   slug: string;
   children: React.ReactNode;
-  heroImage: StaticImageData;
+  heroImage?: StaticImageData;
 }
 
 function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: BlogProps) {
