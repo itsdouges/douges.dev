@@ -38,7 +38,7 @@ function App({ Component, pageProps, router }: AppProps) {
         </style>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:type" content="website" />
+        <meta key="og:type" property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@itsdouges" />
       </Head>
