@@ -2,7 +2,7 @@
   "name": "douges.dev",
   "version": "0.1.0",
   "private": true,
-  "description": "An interactive frontend learning blog written by Michael Dougall. Learn the skills, tools, and mindset to gain frontend superpowers.",
+  "description": "An interactive frontend learning blog by Michael Dougall. Learn from experience the skills, tools, and mindset to gain frontend superpowers.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

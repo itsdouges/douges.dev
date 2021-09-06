@@ -71,11 +71,15 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
           <Stack gap={8}>
             <Section>
               <Heading level={0}>douges&#8203;.dev</Heading>
-              <div css={heroDescriptionStyles}>
-                An interactive frontend learning blog written by{' '}
-                <a href="https://twitter.com/itsdouges">Michael Dougall</a>. Learn the skills,
-                tools, and mindset to gain frontend superpowers.
-              </div>
+              <div
+                css={heroDescriptionStyles}
+                dangerouslySetInnerHTML={{
+                  __html: pkg.description.replace(
+                    'Michael Dougall',
+                    '<a href="https://twitter.com/itsdouges">Michael Dougall</a>'
+                  ),
+                }}
+              />
             </Section>
           </Stack>
         </div>

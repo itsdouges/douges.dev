@@ -40,17 +40,20 @@ const visibleStyles = css({
   opacity: 1,
 });
 
-const sendSignUpRequest = (_: string) => {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 1000);
+const sendSignUpRequest = async (email: string) => {
+  const formData = new FormData();
+  formData.append('email', email);
+
+  await fetch('https://buttondown.email/api/emails/embed-subscribe/douges.dev', {
+    method: 'POST',
+    body: formData,
   });
 };
 
 function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const [email, setEmail] = useState('');
 
   return (
     <Stack gap={1}>
@@ -63,7 +66,7 @@ function SignUp() {
         onSubmit={async (e) => {
           e.preventDefault();
           setIsLoading(true);
-          await sendSignUpRequest('email');
+          await sendSignUpRequest(email);
           setIsComplete(true);
         }}>
         <Label htmlFor="email" label="Join the mailing list today" />
@@ -74,6 +77,7 @@ function SignUp() {
             type="email"
             id="email"
             placeholder="me@douges.dev"
+            onChange={setEmail}
           />
           <Button type="submit" isDisabled={isLoading} appearance="primary">
             <Fragment>

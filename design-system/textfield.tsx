@@ -40,6 +40,8 @@ interface TextfieldProps {
   isDisabled?: boolean;
   placeholder?: string;
   name?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 function Textfield({
@@ -49,6 +51,8 @@ function Textfield({
   type = 'text',
   isRequired,
   isDisabled,
+  value,
+  onChange,
 }: TextfieldProps) {
   return (
     <input
@@ -59,6 +63,8 @@ function Textfield({
       disabled={isDisabled}
       css={[inputStyles, isDisabled ? disabledStyles : interactiveStyles]}
       placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange?.(e.target.value)}
     />
   );
 }
