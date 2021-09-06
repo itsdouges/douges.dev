@@ -16,6 +16,7 @@ import A from 'design-system/link';
 import type { BlogMeta } from 'types/types';
 import SignUp from 'components/sign-up';
 import { getAllBlogPosts } from 'lib/blog';
+import Text from 'design-system/text';
 
 const LatestBlogContent = dynamic(() => import('./blog/taming-the-beast-that-is-css-in-js.mdx'));
 
@@ -26,7 +27,7 @@ const heroStyles = css({
   alignItems: 'center',
   flexDirection: 'column',
   justifyContent: 'center',
-  textAlign: 'left',
+  textAlign: 'center',
   borderBottom: `2px solid ${token('color.border.neutral')}`,
 });
 
@@ -68,20 +69,21 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
 
       <main>
         <div css={heroStyles}>
-          <Stack gap={8}>
-            <Section>
+          <Section>
+            <Stack gap={1}>
               <Heading level={0}>douges&#8203;.dev</Heading>
-              <div
-                css={heroDescriptionStyles}
-                dangerouslySetInnerHTML={{
-                  __html: pkg.description.replace(
-                    'Michael Dougall',
-                    '<a href="https://twitter.com/itsdouges">Michael Dougall</a>'
-                  ),
-                }}
-              />
-            </Section>
-          </Stack>
+              <Text color="medium">
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: pkg.description.replace(
+                      'Michael Dougall',
+                      '<a href="https://twitter.com/itsdouges">Michael Dougall</a>'
+                    ),
+                  }}
+                />
+              </Text>
+            </Stack>
+          </Section>
         </div>
 
         <Section isSeparated>

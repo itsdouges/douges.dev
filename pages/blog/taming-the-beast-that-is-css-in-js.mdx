@@ -3,7 +3,7 @@ import heroImage from '/public/taming-css-hero.png';
 export const meta = {
   title: 'Taming the beast that is CSS-in-JS',
   blurb: '',
-  publishDate: '2021-09-05',
+  publishDate: '2021-09-07',
   heroImage,
 };
 
@@ -91,13 +91,13 @@ Let's walk through a few examples of what is improved because of the constraints
 
 Let's start with the more interesting aspect around performance.
 These constraints mean less styles are generated when rendered on the server!
+Notice there is a style declaration for every unique avatar,
+versus a single one when the constraints are applied.
 
 <ExampleContainer>
   <AvatarExample />
 </ExampleContainer>
 
-Notice there is a style declaration for every unique avatar,
-versus a single one when the constraints are applied.
 We can extrapolate this further with the knowledge that this is true for styles on the client,
 whereby only a finite amount of styles will ever be generated in a session and always before user interaction.
 
