@@ -50,7 +50,7 @@ const stepDescription = [
     Template literal styles with interpolations make analysis harder
   </Text>,
   <Text key="1" color="success" isSmall>
-    Simple works best seprating complex logic from styles
+    Simple works best seprating style composition from declaration
   </Text>,
 ];
 

@@ -77,22 +77,24 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
           </Blog>
         </Section>
 
-        <Section isSeparated isSunken>
-          <Stack gap={2}>
-            <Heading level={2}>There&apos;s more where that came from</Heading>
-            <Grid columns={2} gap={4}>
-              {moreBlogs.map((blog, index) => (
-                <Link key={index} href={`/blog/${blog.slug}`} passHref>
-                  <A>
-                    <Card title={blog.title} secondary={blog.blurb} />
-                  </A>
-                </Link>
-              ))}
-            </Grid>
-          </Stack>
-        </Section>
+        {moreBlogs.length > 0 && (
+          <Section isSeparated isSunken>
+            <Stack gap={2}>
+              <Heading level={2}>There&apos;s more where that came from</Heading>
+              <Grid columns={2} gap={4}>
+                {moreBlogs.map((blog, index) => (
+                  <Link key={index} href={`/blog/${blog.slug}`} passHref>
+                    <A>
+                      <Card title={blog.title} secondary={blog.blurb} />
+                    </A>
+                  </Link>
+                ))}
+              </Grid>
+            </Stack>
+          </Section>
+        )}
 
-        <Section isSeparated>
+        <Section isSeparated isSunken={moreBlogs.length === 0}>
           <SignUp />
         </Section>
       </main>
