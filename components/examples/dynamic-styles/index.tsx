@@ -88,10 +88,16 @@ function DynamicStyles() {
   return (
     <Stack gap={2}>
       <Inline gap={1}>
-        <Button isDisabled={step === 0} onClick={() => setStep((prev) => prev - 1)}>
+        <Button
+          data-splitbee-event="Remove Prop"
+          data-splitbee-event-type="Dynamic Example"
+          isDisabled={step === 0}
+          onClick={() => setStep((prev) => prev - 1)}>
           Remove prop
         </Button>
         <TimeoutButton
+          data-splitbee-event="Add Prop"
+          data-splitbee-event-type="Remove Example"
           isDisabled={steps[step + 1] === undefined}
           onClick={() => setStep((prev) => prev + 1)}>
           Add prop

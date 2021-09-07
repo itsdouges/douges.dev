@@ -115,6 +115,7 @@ function Button({
   appearance = 'default',
   type = 'button',
   isDisabled,
+  ...props
 }: ButtonProps) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
   const appearanceStyles = buttonAppearances[mappedAppearance];
@@ -124,6 +125,7 @@ function Button({
   return (
     <button
       {...buttonProps}
+      {...props}
       type={type}
       disabled={isDisabled}
       css={[

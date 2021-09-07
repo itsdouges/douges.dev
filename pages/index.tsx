@@ -62,7 +62,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
                   dangerouslySetInnerHTML={{
                     __html: pkg.description.replace(
                       'Michael Dougall',
-                      '<a href="https://twitter.com/itsdouges">Michael Dougall</a>'
+                      '<a data-splitbee-event="External Link" data-splitbee-event-type="twitter" href="https://twitter.com/itsdouges">Michael Dougall</a>'
                     ),
                   }}
                 />
@@ -84,7 +84,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
               <Grid columns={2} gap={4}>
                 {moreBlogs.map((blog, index) => (
                   <Link key={index} href={`/blog/${blog.slug}`} passHref>
-                    <A>
+                    <A data-splitbee-event="More Blog">
                       <Card title={blog.title} secondary={blog.blurb} />
                     </A>
                   </Link>

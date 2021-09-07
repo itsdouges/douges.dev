@@ -41,12 +41,25 @@ function App({ Component, pageProps, router }: AppProps) {
         <meta key="og:type" property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@itsdouges" />
+        <script data-respect-dnt async src="https://cdn.splitbee.io/sb.js" />
       </Head>
 
       <header css={headerStyles}>
         <nav css={navigationBarStyles}>
-          {isBlogRoute && <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />}
-          <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
+          {isBlogRoute && (
+            <IconButton
+              data-splitbee-event="Go Home"
+              icon="←"
+              label="Go home"
+              onClick={() => router.push('/')}
+            />
+          )}
+          <IconButton
+            data-splitbee-event="Switch Theme"
+            icon="☾"
+            label="Switch theme"
+            onClick={toggleTheme}
+          />
         </nav>
       </header>
 

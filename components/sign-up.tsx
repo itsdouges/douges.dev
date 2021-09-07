@@ -63,6 +63,7 @@ function SignUp() {
       </Text>
 
       <form
+        data-splitbee-event="Submit Mailing List Form"
         onSubmit={async (e) => {
           e.preventDefault();
           setIsLoading(true);
@@ -75,8 +76,8 @@ function SignUp() {
             isRequired
             isDisabled={isLoading}
             type="email"
-            name="newsletter"
-            id="newsletter"
+            name="mailing-list"
+            id="mailing-list"
             placeholder="Your email here"
             onChange={setEmail}
           />

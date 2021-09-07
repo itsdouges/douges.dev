@@ -50,7 +50,7 @@ const stepDescription = [
     Template literal styles with interpolations make analysis harder
   </Text>,
   <Text key="1" color="success" isSmall>
-    Simple works best seprating style composition from declaration
+    Simple works best separating style composition from declaration
   </Text>,
 ];
 
@@ -61,10 +61,16 @@ function CodeAnalysis() {
   return (
     <Stack gap={2}>
       <Inline justify="middle" gap={1}>
-        <Button isDisabled={step === 0} onClick={() => setStep((next) => next - 1)}>
+        <Button
+          data-splitbee-event="Previous"
+          data-splitbee-event-type="Code Analysis Example"
+          isDisabled={step === 0}
+          onClick={() => setStep((next) => next - 1)}>
           Previous
         </Button>
         <TimeoutButton
+          data-splitbee-event="Next"
+          data-splitbee-event-type="Code Analysis Example"
           isDisabled={steps[step + 1] === undefined}
           onClick={() => setStep((next) => next + 1)}>
           Next

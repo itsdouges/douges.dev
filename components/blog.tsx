@@ -59,7 +59,14 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
             <time title={publishDate} dateTime={publishDate}>
               {friendlyDate(publishDate)}
             </time>{' '}
-            · <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min read
+            ·{' '}
+            <a
+              data-splitbee-event="External Link"
+              data-splitbee-event-type="twitter"
+              href="https://twitter.com/itsdouges">
+              Michael Dougall
+            </a>{' '}
+            · {minutesToRead} min read
           </div>
         </header>
 
