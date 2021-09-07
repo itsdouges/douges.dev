@@ -14,7 +14,7 @@ in a time when [custom properties](https://developer.mozilla.org/en-US/docs/Web/
 Even better consuming a component library from [NPM](https://npmjs.com) without needing inane bundler configuration was made into a reality,
 just import and go!
 
-While working at [Atlassian](https://atlassian.com) I've had the privilage to work on the [Atlassian Design System](https://atlassian.design/) which leans heavily on CSS-in-JS to author styles.
+While working at [Atlassian](https://atlassian.com) I've had the privilege to work on the [Atlassian Design System](https://atlassian.design/) which leans heavily on CSS-in-JS to author styles.
 During this time I've seen components styled with [styled-components](https://styled-components.com/) and [emotion](https://emotion.sh/docs/introduction),
 styles defined using strings & objects,
 and the costs you wouldn't immediately think about such as performance gotchas,
@@ -93,7 +93,7 @@ Let's walk through a few examples of what is improved because of the constraints
 
 Let's start with the more interesting aspect around performance.
 These constraints mean less styles are generated when rendered on the server!
-This is exhaserbated when styles can't be known ahead of time,
+This is exacerbated when styles can't be known ahead of time,
 for example when all users have their own image.
 Notice there is a style declaration for every unique avatar,
 versus a single one when the constraints are applied.
@@ -103,9 +103,9 @@ versus a single one when the constraints are applied.
 </ExampleContainer>
 
 Having truly dynamic styles flow through the style prop is something we should keep in our toolbox,
-and these contraints really make us use it.
+and these constraints really make us use it.
 They enforce that static styles flow through the CSS prop,
-dynamic styles flow through the stype prop,
+dynamic styles flow through the style prop,
 and we generate less styles on the server?
 Sound pretty great to me.
 
@@ -127,11 +127,11 @@ Nothing is off the table.
 </ExampleContainer>
 
 Style declarations written with these constraints are clear and simple,
-so simple in fact that statically analysing them can be done exhaustively.
+so simple in fact that statically analyzing them can be done exhaustively.
 
 ## Code evolution
 
-A logical next step when the code you write is easily staticly analyzable is that you can change it [at scale].
+A logical next step when the code you write is easily statically analyzable is that you can change it [at scale].
 Using compile time CSS-in-JS solutions are gaining in popularity so if you're aiming to min-max your app you'll definitely want to consider using them.
 Let's say we are.
 
@@ -152,7 +152,7 @@ Next time you're deep in your code base think through what opportunities might a
 components,
 define APIs,
 even features that you ship [or don't].
-You'll be suprised at the possibilities!
+You'll be surprised at the possibilities!
 
 [Let me know on Twitter](https://twitter.com/itsdouges) what you thought of this blog!
 More to come.
