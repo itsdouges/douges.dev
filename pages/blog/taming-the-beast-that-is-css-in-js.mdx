@@ -2,7 +2,8 @@ import heroImage from '/public/taming-css-hero.png';
 
 export const meta = {
   title: 'Taming the beast that is CSS-in-JS',
-  blurb: '',
+  blurb:
+    'CSS-in-JS is awesome, but flexible. What if we could change how we write styles to improve performance and understanding without needing to jump to another library?',
   publishDate: '2021-09-07',
   heroImage,
 };
@@ -51,8 +52,7 @@ It can be confusing to understand what the current state of a component could be
 As a codebase grows I find myself wanting to automate away all of the nitty gritty,
 and work towards the holy grail of code consistency.
 Amusingly however if you take the code above it turns out not having clear call sites for style declarations and complex style combination makes it difficult,
-almost impossible to successfully lint and evolve the written styles at scale.
-In my opinion it also makes styles harder to reason about.
+almost impossible to successfully lint and evolve the authored styles at scale.
 
 If we could come up with a list of goals to write the best CSS (in JS) what would they be?
 My list includes:

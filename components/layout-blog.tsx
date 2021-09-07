@@ -23,7 +23,7 @@ function LayoutBlog({ blog, children }: LayoutBlogProps) {
         <meta property="og:title" content={blog.title} />
         <meta property="og:description" content={blog.blurb} />
         {blog.heroImage && (
-          <meta property="og:image" content={`https://${pkg.name}/${blog.heroImage.src}`} />
+          <meta property="og:image" content={`https://${pkg.name}${blog.heroImage.src}`} />
         )}
         <meta property="og:url" content={`https://${pkg.name}/blog/${blog.slug}`} />
         <meta property="og:type" content="article" key="og:type" />
@@ -31,7 +31,7 @@ function LayoutBlog({ blog, children }: LayoutBlogProps) {
         {blog.heroImage && <meta property="og:image:width" content={`${blog.heroImage.width}`} />}
         <meta name="twitter:card" content="summary_large_image" />
         {blog.heroImage && (
-          <meta name="twitter:image" content={`https://${pkg.name}/${blog.heroImage.src}`} />
+          <meta name="twitter:image" content={`https://${pkg.name}${blog.heroImage.src}`} />
         )}
       </Head>
 
