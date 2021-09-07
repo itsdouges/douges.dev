@@ -39,7 +39,7 @@ function App({ Component, pageProps, router }: AppProps) {
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <link rel="icon" href="/favicon.ico" />
         <meta key="og:type" property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@itsdouges" />
         <script data-respect-dnt async src="https://cdn.splitbee.io/sb.js" />
       </Head>
