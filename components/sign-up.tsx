@@ -75,8 +75,9 @@ function SignUp() {
             isRequired
             isDisabled={isLoading}
             type="email"
-            id="email"
-            placeholder="me@douges.dev"
+            name="newsletter"
+            id="newsletter"
+            placeholder="Your email here"
             onChange={setEmail}
           />
           <Button type="submit" isDisabled={isLoading} appearance="primary">

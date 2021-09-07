@@ -12,6 +12,7 @@ const buttonStyles = css({
   fontWeight: 600,
   position: 'relative',
   overflow: 'hidden',
+  flexShrink: 0,
   ':focus': {
     outline: 0,
   },

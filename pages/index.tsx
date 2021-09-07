@@ -49,7 +49,6 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         {latest.heroImage && (
           <meta property="og:image:width" content={`${latest.heroImage.width}`} />
         )}
-        <meta name="twitter:card" content="summary_large_image" />
         {latest.heroImage && <meta name="twitter:image" content={latest.heroImage.src} />}
       </Head>
 
@@ -58,7 +57,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
           <Section>
             <Stack gap={1}>
               <Heading level={0}>douges&#8203;.dev</Heading>
-              <Text emphasis="medium">
+              <Text color="medium">
                 <span
                   dangerouslySetInnerHTML={{
                     __html: pkg.description.replace(

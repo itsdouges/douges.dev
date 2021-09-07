@@ -10,7 +10,7 @@ export const meta = {
 CSS-in-JS is awesome.
 When it was gaining traction I remember how freeing it was to use it –
 in a time when [custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) weren't widely available they allowed us to create rich dynamic experiences right inside JavaScript!
-Even better being able to consume a component library from [NPM](https://npmjs.com) without needing inane bundler configuration was made into a reality,
+Even better consuming a component library from [NPM](https://npmjs.com) without needing inane bundler configuration was made into a reality,
 just import and go!
 
 While working at [Atlassian](https://atlassian.com) I've had the privilage to work on the [Atlassian Design System](https://atlassian.design/) which leans heavily on CSS-in-JS to author styles.
@@ -31,30 +31,30 @@ different appearances,
 states,
 and sizes,
 all with a few different ways to implement.
-One common way I've seen combines styles using conditional object spreads but given a large enough prop set you're at risk of a combinatorial explosion!
+One common way I've seen combines styles using conditional object spreads [or even worse if statements] but given a large enough prop set you're at risk of a combinatorial explosion!
 Consider that over time a component could go through multiple engineers,
-even teams!
+even teams! That's a lot of potential misunderstanding.
 
-Let's have a play and see what that looks like,
-press the button to add more permutations.
+Let's have a play and see what that looks like in practice,
+press the button to add more props.
 
 <ExampleContainer>
   <DynamicStyles />
 </ExampleContainer>
 
-It is increasingly more complex to understand this declaration both as a human and static analysis tool!
-Styles returned from a function [are these styles?] and indirection from pass-through arguments make the link between input and usage blurry at best.
-It can be confusing to understand what the current state of a component could be given a particular set in inputs.
+It's increasingly more complex to understand this declaration both as a human and static analysis tool!
+Styles built up and returned from a function and the indirection from pass-through arguments make the link between input and usage blurry at best.
+It can be confusing to understand what the current state of a component could be given a particular set of inputs.
 
 # Pulling back from infinity
 
 As a codebase grows I find myself wanting to automate away all of the nitty gritty,
 and work towards the holy grail of code consistency.
 Amusingly however if you take the code above it turns out not having clear call sites for style declarations and complex style combination makes it difficult,
-almost impossible to successfully lint and evolve the written styles.
+almost impossible to successfully lint and evolve the written styles at scale.
 In my opinion it also makes styles harder to reason about.
 
-If we could come up with a list of "goals" to write the best CSS (in JS) what would they be?
+If we could come up with a list of goals to write the best CSS (in JS) what would they be?
 My list includes:
 
 - Clear call sites
@@ -73,6 +73,7 @@ My list of constraints ends up being:
 - Styles can't be nested
 - Styles can't be composed together [in their own declarations]
 
+What would yours look like?
 Have a play and see what it looks like when we constrain the styles from the example above.
 
 <ExampleContainer>
@@ -81,6 +82,7 @@ Have a play and see what it looks like when we constrain the styles from the exa
 
 If you're feeling what I'm feeling you'll notice the output of this appears very similar to how you'd use CSS modules!
 Simple bite sized style declarations that are composed together in the owning component.
+Total lines of code may increase but the connections and flow analysis we gain more than makes up for it.
 
 # Tying it all together
 
@@ -91,6 +93,8 @@ Let's walk through a few examples of what is improved because of the constraints
 
 Let's start with the more interesting aspect around performance.
 These constraints mean less styles are generated when rendered on the server!
+This is exhaserbated when styles can't be known ahead of time,
+for example when all users have their own image.
 Notice there is a style declaration for every unique avatar,
 versus a single one when the constraints are applied.
 
@@ -98,23 +102,30 @@ versus a single one when the constraints are applied.
   <AvatarExample />
 </ExampleContainer>
 
-We can extrapolate this further with the knowledge that this is true for styles on the client,
-whereby only a finite amount of styles will ever be generated in a session and always before user interaction.
+Having truly dynamic styles flow through the `style` prop is something we should keep in our toolbox,
+and these contraints really make us use it.
+They enforce that static styles flow through the CSS prop,
+and dynamic styles flow through the `style` prop.
 
 ## Code analysis
 
-Linting falls under this bucket.
-Style declarations written with these constraints are clear and simple,
-so simple in fact that statically analysing them can be done exhaustively.
-This is fantastic for the fact that you can write some very powerful rules for how these styles should be written.
+Imagine the scenario described earlier whereby styles are defined with no clear call site and nested conditional rest objects or if statements,
+and then also imagine trying to write a lint rule,
+it's no easy feat!
+
+These constraints are fantastic for the fact that you can write some very powerful rules for how these styles should be written.
 Ordering,
 disallowed styles,
 enforced color usage,
 even through to controlling how they are dynamically applied through CSS prop.
+Nothing is off the table.
 
 <ExampleContainer>
   <CodeAnalysis />
 </ExampleContainer>
+
+Style declarations written with these constraints are clear and simple,
+so simple in fact that statically analysing them can be done exhaustively.
 
 ## Code evolution
 
@@ -138,10 +149,11 @@ Here's an example that transforms code to use a library just like that, [vanilla
 Hopefully you've found this read as interesting as I did when I first started thinking about it.
 Finding constraints to apply to the code we write applies to more than just styling our experiences however!
 
-Next time you're deep in your code base think through what opportunities might arise if you applied more constraints to how you write your state management,
-your components,
-APIs,
+Next time you're deep in your code base think through what opportunities might arise if you applied more constraints to how you write state management,
+components,
+define APIs,
 even features that you ship [or don't].
 You'll be suprised at what opportunities arise!
 
+[Let me know on Twitter](https://twitter.com/itsdouges) what you thought of this blog!
 All the best.

@@ -6,10 +6,6 @@ import jsx from 'refractor/lang/jsx';
 
 refractor.register(jsx);
 
-interface CodeBlockProps {
-  children: string;
-}
-
 const codeBlockStyles = css({
   borderRadius: 3,
   backgroundColor: token('color.background.default'),
@@ -85,6 +81,10 @@ const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode =>
 
 // This is needed for some weird NextJS SSR transform.
 toJSX.displayName = 'CodeBlock';
+
+interface CodeBlockProps {
+  children: string;
+}
 
 function CodeBlock({ children = '' }: CodeBlockProps) {
   const root = refractor.highlight(children, 'jsx');

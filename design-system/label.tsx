@@ -1,13 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { token } from '@atlaskit/tokens';
-
-const labelStyles = css({
-  color: token('color.text.mediumEmphasis'),
-  fontSize: 16,
-  display: 'inline',
-  fontWeight: 600,
-});
+import Text from 'design-system/text';
 
 const containerStyles = css({
   paddingBottom: 8,
@@ -21,8 +14,10 @@ interface LabelProps {
 function Label({ label, htmlFor }: LabelProps) {
   return (
     <div css={containerStyles}>
-      <label htmlFor={htmlFor} css={labelStyles}>
-        {label}
+      <label htmlFor={htmlFor}>
+        <Text isSmall color="medium">
+          <strong>{label}</strong>
+        </Text>
       </label>
     </div>
   );

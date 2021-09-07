@@ -7,6 +7,10 @@ const textStyles = css({
   margin: 0,
 });
 
+const isSmallStyles = css({
+  fontSize: 16,
+});
+
 const lowEmphasisStyles = css({
   color: token('color.text.lowEmphasis'),
 });
@@ -19,22 +23,38 @@ const highEmphasisStyles = css({
   color: token('color.text.highEmphasis'),
 });
 
+const success = css({
+  color: token('color.text.success'),
+});
+
+const warning = css({
+  color: token('color.text.warning'),
+});
+
+const danger = css({
+  color: token('color.text.danger'),
+});
+
 const emphasisColorMap = {
   low: lowEmphasisStyles,
   medium: mediumEmphasisStyles,
   high: highEmphasisStyles,
   inherit: undefined,
+  success,
+  warning,
+  danger,
 };
 
 interface TextProps {
   children: React.ReactNode;
   as?: 'span' | 'div' | 'p';
-  emphasis?: 'low' | 'medium' | 'high' | 'inherit';
+  color?: 'low' | 'medium' | 'high' | 'inherit' | 'warning' | 'success' | 'danger';
+  isSmall?: boolean;
 }
 
-function Text({ children, as: Markup = 'span', emphasis = 'high' }: TextProps) {
-  const colorStyles = emphasisColorMap[emphasis];
-  return <Markup css={[textStyles, colorStyles]}>{children}</Markup>;
+function Text({ children, as: Markup = 'span', color = 'high', isSmall }: TextProps) {
+  const colorStyles = emphasisColorMap[color];
+  return <Markup css={[textStyles, colorStyles, isSmall && isSmallStyles]}>{children}</Markup>;
 }
 
 export default Text;

@@ -4,83 +4,7 @@ import CodeBlock from 'design-system/code-block';
 import Stack from 'design-system/stack';
 import Inline from 'design-system/inline';
 import { useState } from 'react';
-
-const steps = [
-  `const styles = {
-  borderRadius: 3,
-  color: 'black',
-  backgroundColor: 'lightgrey',
-};
-
-function Tag({ children }) {
-  return <span css={styles}>{children}</span>;
-}`,
-  `const styles = (isDisabled) => {
-  return {
-    borderRadius: 3,
-    color: 'black',
-    backgroundColor: 'lightgrey',
-    ...isDisabled && {
-      color: 'lightgrey',
-      backgroundColor: 'gray',
-    },
-  };
-};
-
-function Tag({ isDisabled, children }) {
-  return <span css={styles(isDisabled)}>{children}</span>;
-}`,
-  `const styles = (isDisabled, isBold) => {
-  return {
-    borderRadius: 3,
-    color: 'black',
-    backgroundColor: 'lightgrey',
-    ...isBold && {
-      color: 'lightgrey',
-      backgroundColor: 'black',
-    },
-    ...isDisabled && {
-      color: 'lightgrey',
-      backgroundColor: 'gray',
-    },
-  };
-};
-
-function Tag({ isDisabled, children, isBold }) {
-  return <span css={styles(isDisabled, isBold)}>{children}</span>;
-}`,
-  `const styles = (isDisabled, isBold, appearance) => {
-  return {
-    borderRadius: 3,
-    ...appearance === 'default' && {
-      ...isBold ? {
-        color: 'lightgrey',
-        backgroundColor: 'black',
-      } : {
-        color: 'black',
-        backgroundColor: 'lightgrey',
-      },
-    },
-    ...appearance === 'primary' && {
-      ...isBold ? {
-        color: 'white',
-        backgroundColor: 'blue',
-      } : {
-        color: 'blue',
-        backgroundColor: 'white',
-      },
-    },
-    ...isDisabled && {
-      color: 'lightgrey',
-      backgroundColor: 'gray',
-    },
-  };
-};
-
-function Tag({ isDisabled, children, isBold, appearance }) {
-  return <span css={styles(isDisabled, isBold)}>{children}</span>;
-}`,
-];
+import { steps } from '../dynamic-styles';
 
 const constrainedSteps = [
   `const styles = css({
@@ -89,7 +13,7 @@ const constrainedSteps = [
   backgroundColor: 'lightgrey',
 });
 
-function Tag({ children }) {
+function Lozenge({ children }) {
   return <span css={styles}>{children}</span>;
 }`,
   `const styles = css({
@@ -106,7 +30,7 @@ const enabledStyles = css({
   backgroundColor: 'lightgrey',
 });
 
-function Tag({ isDisabled, children }) {
+function Lozenge({ children, isDisabled }) {
   return <span css={[styles, isDisabled ? disabledStyles : enabledStyles]}>{children}</span>;
 }`,
   `const styles = css({
@@ -128,13 +52,13 @@ const boldStyles = css({
   backgroundColor: 'black',
 });
 
-function Tag({ isDisabled, children, isBold }) {
+function Lozenge({ children, isDisabled, isBold }) {
+  const appearanceStyles = isBold ? boldStyles : subtleStyles;
   return (
     <span
       css={[
         styles,
-        isBold ? boldStyles : subtleStyles,
-        isDisabled && disabledStyles,
+        isDisabled ? disabledStyles : appearanceStyles,
       ]}
     >
       {children}
@@ -172,7 +96,7 @@ const boldStyles = {
   }),
 };
 
-function Tag({ isDisabled, children, isBold, appearance }) {
+function Lozenge({ children, isDisabled, isBold, appearance }) {
   const appearanceStyles = isBold ? boldStyles[appearance] : subtleStyles[appearance];
   return (
     <span

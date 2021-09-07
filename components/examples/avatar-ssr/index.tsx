@@ -70,7 +70,7 @@ function AvatarExample() {
             (_, index) =>
               `<div ${
                 constrainStyles
-                  ? `class="css-141d2k2" style="background-image:${url(index)}"`
+                  ? `class="css-yh5789" style="background-image:${url(index)}"`
                   : `class="css-${classNames[index]}"`
               }></div>`
           )

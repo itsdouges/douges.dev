@@ -5,14 +5,14 @@ import Stack from 'design-system/stack';
 import Inline from 'design-system/inline';
 import { useState } from 'react';
 
-const steps = [
+export const steps = [
   `const styles = {
   borderRadius: 3,
   color: 'black',
   backgroundColor: 'lightgrey',
 };
 
-function Tag({ children }) {
+function Lozenge({ children }) {
   return <span css={styles}>{children}</span>;
 }`,
   `const styles = (isDisabled) => {
@@ -27,7 +27,7 @@ function Tag({ children }) {
   };
 };
 
-function Tag({ isDisabled, children }) {
+function Lozenge({ children, isDisabled }) {
   return <span css={styles(isDisabled)}>{children}</span>;
 }`,
   `const styles = (isDisabled, isBold) => {
@@ -46,7 +46,7 @@ function Tag({ isDisabled, children }) {
   };
 };
 
-function Tag({ isDisabled, children, isBold }) {
+function Lozenge({ children, isDisabled, isBold }) {
   return <span css={styles(isDisabled, isBold)}>{children}</span>;
 }`,
   `const styles = (isDisabled, isBold, appearance) => {
@@ -77,7 +77,7 @@ function Tag({ isDisabled, children, isBold }) {
   };
 };
 
-function Tag({ isDisabled, children, isBold, appearance }) {
+function Lozenge({ children, isDisabled, isBold, appearance }) {
   return <span css={styles(isDisabled, isBold)}>{children}</span>;
 }`,
 ];
