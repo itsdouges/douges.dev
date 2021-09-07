@@ -55,6 +55,7 @@ function AvatarExample() {
         <TimeoutButton
           data-splitbee-event="Add Avatar"
           data-splitbee-event-type="Avatar Example"
+          data-splitbee-event-finish={count === 6 ? true : undefined}
           isDisabled={count >= 7}
           onClick={() => setCount((prev) => prev + 1)}>
           Add avatar

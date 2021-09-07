@@ -102,16 +102,18 @@ versus a single one when the constraints are applied.
   <AvatarExample />
 </ExampleContainer>
 
-Having truly dynamic styles flow through the `style` prop is something we should keep in our toolbox,
+Having truly dynamic styles flow through the style prop is something we should keep in our toolbox,
 and these contraints really make us use it.
 They enforce that static styles flow through the CSS prop,
-and dynamic styles flow through the `style` prop.
+dynamic styles flow through the stype prop,
+and we generate less styles on the server?
+Sound pretty great to me.
 
 ## Code analysis
 
-Imagine the scenario described earlier whereby styles are defined with no clear call site and nested conditional rest objects or if statements,
-and then also imagine trying to write a lint rule,
-it's no easy feat!
+Imagine the scenario described earlier where styles are defined with no clear call site and use nested conditional rest objects and if statements,
+and then also imagine trying to write a lint rule for this,
+it's no easy feat let me tell you!
 
 These constraints are fantastic for the fact that you can write some very powerful rules for how these styles should be written.
 Ordering,

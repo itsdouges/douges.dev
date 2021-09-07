@@ -37,7 +37,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
     <Fragment>
       <Head>
         <title>
-          {pkg.name} | {pkg.description}
+          {pkg.name} · {pkg.description}
         </title>
         <meta name="description" content={pkg.description} />
         <meta property="og:title" content={pkg.name} />

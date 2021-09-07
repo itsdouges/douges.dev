@@ -128,6 +128,7 @@ function ConstrainStyles() {
         <TimeoutButton
           data-splitbee-event="Add Prop"
           data-splitbee-event-type="Constrain Example"
+          data-splitbee-event-finish={steps[step + 2] === undefined ? true : undefined}
           isDisabled={steps[step + 1] === undefined}
           onClick={() => setStep((prev) => prev + 1)}>
           Add prop

@@ -117,6 +117,7 @@ function CodemodStyles() {
         <TimeoutButton
           data-splitbee-event="Next"
           data-splitbee-event-type="Codemod Example"
+          data-splitbee-event-finish={steps[step + 2] === undefined ? true : undefined}
           isDisabled={steps[step + 1] === undefined}
           onClick={() => setStep((next) => next + 1)}>
           Next

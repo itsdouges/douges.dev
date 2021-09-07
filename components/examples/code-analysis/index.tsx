@@ -41,7 +41,7 @@ const stepDescription = [
     Could be styles but also could just be an object
   </Text>,
   <Text key="1" color="danger" isSmall>
-    Same problem with this template literal
+    Same problem with template literals
   </Text>,
   <Text key="1" color="warning" isSmall>
     Clear call site is better but function indirection makes analysis harder
@@ -71,6 +71,7 @@ function CodeAnalysis() {
         <TimeoutButton
           data-splitbee-event="Next"
           data-splitbee-event-type="Code Analysis Example"
+          data-splitbee-event-finish={steps[step + 2] === undefined ? 'true' : undefined}
           isDisabled={steps[step + 1] === undefined}
           onClick={() => setStep((next) => next + 1)}>
           Next
