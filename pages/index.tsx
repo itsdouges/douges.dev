@@ -42,14 +42,19 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         <meta name="description" content={pkg.description} />
         <meta property="og:title" content={pkg.name} />
         <meta property="og:description" content={pkg.description} />
-        {latest.heroImage && <meta property="og:image" content={latest.heroImage.src} />}
+        <meta property="og:url" content={`https://${pkg.name}`} />
+        {latest.heroImage && (
+          <meta property="og:image" content={`https://${pkg.name}/${latest.heroImage.src}`} />
+        )}
         {latest.heroImage && (
           <meta property="og:image:height" content={`${latest.heroImage.height}`} />
         )}
         {latest.heroImage && (
           <meta property="og:image:width" content={`${latest.heroImage.width}`} />
         )}
-        {latest.heroImage && <meta name="twitter:image" content={latest.heroImage.src} />}
+        {latest.heroImage && (
+          <meta name="twitter:image" content={`https://${pkg.name}/${latest.heroImage.src}`} />
+        )}
       </Head>
 
       <main>
