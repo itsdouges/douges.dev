@@ -17,6 +17,7 @@ import type { BlogMeta } from 'types/types';
 import SignUp from 'components/sign-up';
 import { getAllBlogPosts } from 'lib/blog';
 import Text from 'design-system/text';
+import Grid from 'design-system/grid';
 
 const LatestBlogContent = dynamic(() => import('./blog/taming-the-beast-that-is-css-in-js.mdx'));
 
@@ -29,21 +30,6 @@ const heroStyles = css({
   justifyContent: 'center',
   textAlign: 'center',
   borderBottom: `2px solid ${token('color.border.neutral')}`,
-});
-
-const heroDescriptionStyles = css({
-  color: token('color.text.mediumEmphasis'),
-  fontSize: 18,
-  marginTop: 8,
-});
-
-const gridListStyles = css({
-  display: 'grid',
-  gap: 32,
-  gridTemplateColumns: '1fr',
-  '@media screen and (min-width: 650px)': {
-    gridTemplateColumns: '1fr 1fr',
-  },
 });
 
 const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, moreBlogs }) => {
@@ -72,7 +58,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
           <Section>
             <Stack gap={1}>
               <Heading level={0}>douges&#8203;.dev</Heading>
-              <Text color="medium">
+              <Text emphasis="medium">
                 <span
                   dangerouslySetInnerHTML={{
                     __html: pkg.description.replace(
@@ -95,7 +81,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         <Section isSeparated isSunken>
           <Stack gap={2}>
             <Heading level={2}>There&apos;s more where that came from</Heading>
-            <div css={gridListStyles}>
+            <Grid columns={2} gap={4}>
               {moreBlogs.map((blog, index) => (
                 <Link key={index} href={`/blog/${blog.slug}`} passHref>
                   <A>
@@ -103,7 +89,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
                   </A>
                 </Link>
               ))}
-            </div>
+            </Grid>
           </Stack>
         </Section>
 

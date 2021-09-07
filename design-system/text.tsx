@@ -7,28 +7,33 @@ const textStyles = css({
   margin: 0,
 });
 
-const lowColorStyles = css({
+const lowEmphasisStyles = css({
   color: token('color.text.lowEmphasis'),
 });
 
-const mediumColorStyles = css({
+const mediumEmphasisStyles = css({
   color: token('color.text.mediumEmphasis'),
 });
 
-const colorMap = {
-  low: lowColorStyles,
-  medium: mediumColorStyles,
+const highEmphasisStyles = css({
+  color: token('color.text.highEmphasis'),
+});
+
+const emphasisColorMap = {
+  low: lowEmphasisStyles,
+  medium: mediumEmphasisStyles,
+  high: highEmphasisStyles,
   inherit: undefined,
 };
 
 interface TextProps {
   children: React.ReactNode;
   as?: 'span' | 'div' | 'p';
-  color?: 'low' | 'medium' | 'inherit';
+  emphasis?: 'low' | 'medium' | 'high' | 'inherit';
 }
 
-function Text({ children, as: Markup = 'span', color = 'inherit' }: TextProps) {
-  const colorStyles = colorMap[color];
+function Text({ children, as: Markup = 'span', emphasis = 'high' }: TextProps) {
+  const colorStyles = emphasisColorMap[emphasis];
   return <Markup css={[textStyles, colorStyles]}>{children}</Markup>;
 }
 
