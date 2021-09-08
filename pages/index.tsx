@@ -19,7 +19,9 @@ import { getAllBlogPosts } from 'lib/blog';
 import Text from 'design-system/text';
 import Grid from 'design-system/grid';
 
-const LatestBlogContent = dynamic(() => import('./blog/taming-the-beast-that-is-css-in-js.mdx'));
+const LatestBlogContent = dynamic(
+  () => import('./blog/writing-eslint-rules-that-developers-love.mdx')
+);
 
 const heroStyles = css({
   height: '40vh',
@@ -90,7 +92,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
                 {moreBlogs.map((blog, index) => (
                   <Link key={index} href={`/blog/${blog.slug}`} passHref>
                     <A data-splitbee-event="More Blog">
-                      <Card title={blog.title} secondary={blog.blurb} />
+                      <Card title={blog.title} secondary={blog.blurb} heroImage={blog.heroImage} />
                     </A>
                   </Link>
                 ))}
