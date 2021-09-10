@@ -20,7 +20,7 @@ import Text from 'design-system/text';
 import Grid from 'design-system/grid';
 
 const LatestBlogContent = dynamic(
-  () => import('./blog/writing-eslint-rules-that-developers-love.mdx')
+  () => import('./blog/write-eslint-rules-that-developers-love.mdx')
 );
 
 const heroStyles = css({

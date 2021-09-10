@@ -33,7 +33,7 @@ function App({ Component, pageProps, router }: AppProps) {
       <Head>
         <style>
           {
-            '*{box-sizing:border-box;scrollbar-color:var(--background-boldNeutral-resting) var(--background-subtleNeutral-resting)}'
+            '*{box-sizing:border-box;scrollbar-color:var(--border-neutral) var(--background-default)}::-webkit-scrollbar{background-color:var(--background-default);width:10px}::-webkit-scrollbar-thumb{background-color:var(--border-neutral);border-radius:30px}'
           }
         </style>
         <meta name="viewport" content="width=device-width, user-scalable=no" />

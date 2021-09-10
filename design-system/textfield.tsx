@@ -10,7 +10,7 @@ const inputStyles = css({
   width: '100%',
   maxWidth: 500,
   '::placeholder': {
-    color: token('color.text.mediumEmphasis'),
+    color: token('color.text.lowEmphasis'),
   },
   ':focus': {
     outline: 'none',

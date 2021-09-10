@@ -41,7 +41,7 @@ const smallHeadingStyles = css({
   fontSize: 22,
   lineHeight: 1.2,
   color: token('color.text.mediumEmphasis'),
-  fontWeight: 1000,
+  fontWeight: 900,
   textTransform: 'uppercase',
 });
 

@@ -4,7 +4,7 @@ import { token } from '@atlaskit/tokens';
 import { css } from '@emotion/react';
 import Button, { ButtonProps } from './button';
 
-const TIMEOUT = 500;
+const TIMEOUT = 300;
 
 const timeoutStyles = css({
   position: 'absolute',
