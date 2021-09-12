@@ -6,9 +6,7 @@ import FocusRing from 'design-system/focus-ring';
 
 const styles = css({
   reset: {
-    margin: 0,
     fontSize: 16,
-    border: 0,
     fontWeight: 600,
     position: 'relative',
     overflow: 'hidden',
