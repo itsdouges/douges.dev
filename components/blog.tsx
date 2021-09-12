@@ -10,6 +10,7 @@ import Image from 'next/image';
 import Text from 'design-system/text';
 import SelectionActionBar from 'components/selection-action-bar';
 import Box from 'design-system/box';
+import Button from 'design-system/button';
 
 const styles = css({
   heroImage: {
@@ -36,6 +37,7 @@ export interface BlogProps {
 
 function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: BlogProps) {
   const { route } = useRouter();
+  const link = slug ? `/blog/${slug}` : route;
 
   return (
     <article>
@@ -50,7 +52,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
 
         <header>
           <Heading level={1}>
-            <Link passHref href={slug ? `/blog/${slug}` : route}>
+            <Link passHref href={link}>
               <DSLink>{title}</DSLink>
             </Link>
           </Heading>
@@ -70,7 +72,26 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
           </Text>
         </header>
 
-        <SelectionActionBar>{children}</SelectionActionBar>
+        <SelectionActionBar
+          actions={({ selection }) => [
+            <Button
+              key="tweet"
+              appearance="transparent"
+              onClick={() => {
+                window.open(
+                  `https://twitter.com/intent/tweet?text="${window.encodeURIComponent(
+                    selection
+                  )}" https://douges.dev${link}`
+                );
+              }}>
+              Tweet
+            </Button>,
+            <Button key="comment" appearance="transparent">
+              Comment
+            </Button>,
+          ]}>
+          {children}
+        </SelectionActionBar>
       </Stack>
     </article>
   );

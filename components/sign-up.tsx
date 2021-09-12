@@ -9,7 +9,6 @@ import Heading from 'design-system/heading';
 import Stack from 'design-system/stack';
 import Text from 'design-system/text';
 import Inline from 'design-system/inline';
-import Box from 'design-system/box';
 
 const styles = css({
   complete: {

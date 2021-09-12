@@ -1,15 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import Popup from 'design-system/popup';
 import { useEffect, useState, useRef } from 'react';
-import Button from 'design-system/button';
 import Inline from 'design-system/inline';
 
 interface SelectionActionBarProps {
   children: React.ReactNode;
+  actions: (props: { selection: string }) => React.ReactNode[];
 }
 
-function SelectionActionBar({ children }: SelectionActionBarProps) {
+function SelectionActionBar({ children, actions }: SelectionActionBarProps) {
   const [isHighlighted, setIsHighlighted] = useState(false);
+  const selectedText = useRef('');
   const [anchorRef, setAnchorRef] = useState<Node | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const onMouseUp = () => {
@@ -29,10 +30,12 @@ function SelectionActionBar({ children }: SelectionActionBarProps) {
         selection.focusNode &&
         containerRef.current?.contains(selection.focusNode)
       ) {
+        selectedText.current = selectionText;
         setAnchorRef(selection.focusNode.parentElement);
       } else if (!selectionText?.trim()) {
         setAnchorRef(null);
         setIsHighlighted(false);
+        selectedText.current = '';
       }
     });
   }, []);
@@ -42,12 +45,7 @@ function SelectionActionBar({ children }: SelectionActionBarProps) {
       {children}
       <Popup
         isOpen={isHighlighted}
-        content={() => (
-          <Inline>
-            <Button appearance="transparent">Tweet</Button>
-            <Button appearance="transparent">Comment</Button>
-          </Inline>
-        )}>
+        content={() => <Inline>{actions({ selection: selectedText.current })}</Inline>}>
         {({ ref }) => {
           ref.current = anchorRef;
           return null;
