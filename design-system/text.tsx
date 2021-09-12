@@ -34,7 +34,7 @@ interface TextProps {
   size?: 'tiny' | 'small' | 'regular';
 }
 
-function Text({ children, as: Markup = 'span', color = 'high', size = 'regular' }: TextProps) {
+function Text({ children, as: Markup = 'span', color = 'inherit', size = 'regular' }: TextProps) {
   const colorStyle = colorStyles[color];
   const textStyle = textStyles[size];
 

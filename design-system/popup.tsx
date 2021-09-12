@@ -15,6 +15,7 @@ interface PopupProps {
   children: (props: { ref: React.MutableRefObject<any> }) => React.ReactNode;
   content: () => React.ReactNode;
   isOpen: boolean;
+  background?: 'neutralBold' | 'overlay';
 }
 
 interface Position {
@@ -23,7 +24,7 @@ interface Position {
   height: number;
 }
 
-function Popup({ children, content, isOpen }: PopupProps) {
+function Popup({ children, content, background = 'overlay', isOpen }: PopupProps) {
   const [position, setPosition] = useState<undefined | Position>();
   const targetRef = useRef<any>(null);
   const calculatePosition = useCallback(() => {
@@ -50,7 +51,12 @@ function Popup({ children, content, isOpen }: PopupProps) {
       {children({ ref: targetRef })}
       {isOpen && position && (
         <Portal>
-          <Box shouldForwardProps background="overlay" padding="small">
+          <Box
+            shadow="overlay"
+            borderRadius="default"
+            shouldForwardProps
+            background={background}
+            padding="small">
             <div
               style={{
                 top: position.top,

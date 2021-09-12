@@ -12,7 +12,7 @@ const styles = css({
     },
   },
   separator: {
-    height: '50%',
+    height: '70%',
     alignSelf: 'center',
     borderRight: `1px solid ${token('color.border.neutral')}`,
   },

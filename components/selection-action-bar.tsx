@@ -45,7 +45,7 @@ function SelectionActionBar({ children, actions }: SelectionActionBarProps) {
       {children}
       <Popup
         isOpen={isHighlighted}
-        content={() => <Inline>{actions({ selection: selectedText.current })}</Inline>}>
+        content={() => <Inline>{actions({ selection: selectedText.current.trim() })}</Inline>}>
         {({ ref }) => {
           ref.current = anchorRef;
           return null;

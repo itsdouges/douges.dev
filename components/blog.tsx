@@ -11,6 +11,7 @@ import Text from 'design-system/text';
 import SelectionActionBar from 'components/selection-action-bar';
 import Box from 'design-system/box';
 import Button from 'design-system/button';
+import Tooltip from 'design-system/tooltip';
 
 const styles = css({
   heroImage: {
@@ -58,9 +59,13 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
           </Heading>
 
           <Text color="low" size="tiny">
-            <time title={publishDate} dateTime={publishDate}>
-              {friendlyDate(publishDate)}
-            </time>{' '}
+            <Tooltip content={publishDate}>
+              {(tt) => (
+                <time {...tt} dateTime={publishDate}>
+                  {friendlyDate(publishDate)}
+                </time>
+              )}
+            </Tooltip>{' '}
             ·{' '}
             <a
               data-splitbee-event="External Link"

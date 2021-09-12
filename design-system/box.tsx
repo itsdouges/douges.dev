@@ -60,11 +60,9 @@ const backgroundStyles = css({
   },
   card: {
     backgroundColor: token('color.background.card'),
-    boxShadow: token('shadow.card'),
   },
   overlay: {
     backgroundColor: token('color.background.overlay'),
-    boxShadow: token('shadow.overlay'),
   },
   disabled: {
     color: token('color.text.disabled'),
@@ -79,10 +77,24 @@ const backgroundStyles = css({
     color: token('color.text.onBold'),
     backgroundColor: token('color.background.boldBrand.resting'),
   },
+  neutralBold: {
+    color: token('color.text.onBold'),
+    backgroundColor: token('color.background.boldNeutral.resting'),
+  },
   subtleBorderedNeutral: {
     color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.subtleBorderedNeutral.resting'),
     border: `2px solid ${token('color.border.neutral')}`,
+  },
+});
+
+const shadowStyles = css({
+  none: {},
+  card: {
+    boxShadow: token('shadow.card'),
+  },
+  overlay: {
+    boxShadow: token('shadow.overlay'),
   },
 });
 
@@ -131,6 +143,7 @@ interface BoxProps {
   background?: keyof typeof backgroundStyles;
   padding?: keyof typeof paddingStyles;
   borderRadius?: keyof typeof borderRadiusStyles;
+  shadow?: keyof typeof shadowStyles;
   isPressed?: boolean;
   isInteractive?: boolean;
   hasBorder?: boolean;
@@ -147,12 +160,14 @@ function Box({
   background = 'none',
   padding = 'none',
   borderRadius = 'none',
+  shadow = 'none',
   isPressed,
   isInteractive: isHoverable,
   shouldForwardProps,
   hasBorder,
 }: BoxProps) {
   const appear = backgroundStyles[background];
+  const boxShadow = shadowStyles[shadow];
   const pad = paddingStyles[padding];
   const br = borderRadiusStyles[borderRadius];
   const hover = (backgroundUniqueHoverStyles as any)[background] || styles.hover;
@@ -166,6 +181,7 @@ function Box({
           appear,
           pad,
           br,
+          boxShadow,
           isHoverable && !isDisabled && hover,
           hasBorder && border,
           isPressed && !isDisabled && styles.pressed,
