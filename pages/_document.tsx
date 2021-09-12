@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
-class BePrimedDocument extends Document<{ cookies: any }> {
+class AppDocument extends Document<{ cookies: any }> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps, cookies: ctx.req?.headers?.cookie };
@@ -19,4 +19,4 @@ class BePrimedDocument extends Document<{ cookies: any }> {
   }
 }
 
-export default BePrimedDocument;
+export default AppDocument;

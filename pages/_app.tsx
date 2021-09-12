@@ -31,6 +31,11 @@ function App({ Component, pageProps, router }: AppProps) {
   return (
     <MDXProvider components={components}>
       <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(()=>{try{var p=/theme=(.+;?)/.exec(document.cookie);if(p) document.documentElement.setAttribute('data-theme',p[1])}catch(e){}})()`,
+          }}
+        />
         <style>
           {
             '*{box-sizing:border-box;scrollbar-color:var(--border-neutral) var(--background-default)}::-webkit-scrollbar{background-color:var(--background-default);width:10px}::-webkit-scrollbar-thumb{background-color:var(--border-neutral);border-radius:30px}'

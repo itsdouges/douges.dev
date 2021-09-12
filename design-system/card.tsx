@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 import Heading from 'design-system/heading';
 import Image from 'next/image';
+import Text from 'design-system/text';
 
 const cardStyles = css({
   backgroundColor: token('color.background.card'),
@@ -19,28 +20,26 @@ const cardStyles = css({
   },
 });
 
-const cardDescriptionStyles = css({
-  color: token('color.text.lowEmphasis'),
-  fontSize: 16,
-});
-
 const cardImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
-  borderRadius: 3,
+  borderTopLeftRadius: 3,
+  borderTopRightRadius: 3,
   marginTop: -20,
   marginLeft: -20,
   marginRight: -20,
   height: 168,
   position: 'relative',
+  overflow: 'hidden',
 });
 
 interface CardProps {
   heroImage?: StaticImageData;
   title: string;
   secondary: string;
+  tags?: string[];
 }
 
-function Card({ title, secondary, heroImage }: CardProps) {
+function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
     <div css={cardStyles}>
       <div css={cardImageStyles}>
@@ -49,7 +48,14 @@ function Card({ title, secondary, heroImage }: CardProps) {
         )}
       </div>
       <Heading level={3}>{title}</Heading>
-      <span css={cardDescriptionStyles}>{secondary}</span>
+      <Text color="medium" size="small">
+        {secondary}
+      </Text>
+      {tags.map((tag, index) => (
+        <Text color="low" size="tiny" key={index}>
+          {tag}
+        </Text>
+      ))}
     </div>
   );
 }

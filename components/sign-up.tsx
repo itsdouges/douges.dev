@@ -8,12 +8,7 @@ import { token } from '@atlaskit/tokens';
 import Heading from 'design-system/heading';
 import Stack from 'design-system/stack';
 import Text from 'design-system/text';
-
-const inlineGroupStyles = css({
-  display: 'flex',
-  gap: 8,
-  position: 'relative',
-});
+import Inline from 'design-system/inline';
 
 const completeStyles = css({
   display: 'flex',
@@ -54,6 +49,7 @@ function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [email, setEmail] = useState('');
+  const id = 'mailing-list';
 
   return (
     <Stack gap={1}>
@@ -70,14 +66,14 @@ function SignUp() {
           await sendSignUpRequest(email);
           setIsComplete(true);
         }}>
-        <Label htmlFor="email" label="Join the mailing list today" />
-        <div css={inlineGroupStyles}>
+        <Label htmlFor={id} label="Join the mailing list today" />
+        <Inline gap={1}>
           <Textfield
             isRequired
             isDisabled={isLoading}
             type="email"
-            name="mailing-list"
-            id="mailing-list"
+            name={id}
+            id={id}
             placeholder="Your email here"
             onChange={setEmail}
           />
@@ -87,7 +83,7 @@ function SignUp() {
               Join
             </Fragment>
           </Button>
-        </div>
+        </Inline>
       </form>
     </Stack>
   );

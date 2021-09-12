@@ -1,60 +1,44 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
+import css from 'design-system/css';
 
 const textStyles = css({
-  fontSize: 18,
-  margin: 0,
+  regular: {
+    fontSize: 18,
+    margin: 0,
+  },
+  small: {
+    fontSize: 16,
+    margin: 0,
+  },
+  tiny: {
+    fontSize: 14,
+    margin: 0,
+  },
 });
 
-const isSmallStyles = css({
-  fontSize: 16,
+const colorStyles = css({
+  low: { color: token('color.text.lowEmphasis') },
+  medium: { color: token('color.text.mediumEmphasis') },
+  high: { color: token('color.text.highEmphasis') },
+  success: { color: token('color.text.success') },
+  warning: { color: token('color.text.warning') },
+  danger: { color: token('color.text.danger') },
+  inherit: {},
 });
-
-const lowEmphasisStyles = css({
-  color: token('color.text.lowEmphasis'),
-});
-
-const mediumEmphasisStyles = css({
-  color: token('color.text.mediumEmphasis'),
-});
-
-const highEmphasisStyles = css({
-  color: token('color.text.highEmphasis'),
-});
-
-const success = css({
-  color: token('color.text.success'),
-});
-
-const warning = css({
-  color: token('color.text.warning'),
-});
-
-const danger = css({
-  color: token('color.text.danger'),
-});
-
-const emphasisColorMap = {
-  low: lowEmphasisStyles,
-  medium: mediumEmphasisStyles,
-  high: highEmphasisStyles,
-  inherit: undefined,
-  success,
-  warning,
-  danger,
-};
 
 interface TextProps {
   children: React.ReactNode;
   as?: 'span' | 'div' | 'p';
   color?: 'low' | 'medium' | 'high' | 'inherit' | 'warning' | 'success' | 'danger';
-  isSmall?: boolean;
+  size?: 'tiny' | 'small' | 'regular';
 }
 
-function Text({ children, as: Markup = 'span', color = 'high', isSmall }: TextProps) {
-  const colorStyles = emphasisColorMap[color];
-  return <Markup css={[textStyles, colorStyles, isSmall && isSmallStyles]}>{children}</Markup>;
+function Text({ children, as: Markup = 'span', color = 'high', size = 'regular' }: TextProps) {
+  const colorStyle = colorStyles[color];
+  const textStyle = textStyles[size];
+
+  return <Markup css={[textStyle, colorStyle]}>{children}</Markup>;
 }
 
 export default Text;

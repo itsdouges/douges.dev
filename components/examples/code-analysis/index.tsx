@@ -37,19 +37,19 @@ const steps = [
 ];
 
 const stepDescription = [
-  <Text key="1" color="danger" isSmall>
+  <Text key="1" color="danger" size="small">
     Could be styles but also could just be an object
   </Text>,
-  <Text key="1" color="danger" isSmall>
+  <Text key="1" color="danger" size="small">
     Same problem with template literals
   </Text>,
-  <Text key="1" color="warning" isSmall>
+  <Text key="1" color="warning" size="small">
     Clear call site is better but function indirection makes analysis harder
   </Text>,
-  <Text key="1" color="warning" isSmall>
+  <Text key="1" color="warning" size="small">
     Template literal styles with interpolations make analysis harder
   </Text>,
-  <Text key="1" color="success" isSmall>
+  <Text key="1" color="success" size="small">
     Simple works best separating style composition from declaration
   </Text>,
 ];

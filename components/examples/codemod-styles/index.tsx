@@ -123,7 +123,7 @@ function CodemodStyles() {
           Next
         </TimeoutButton>
         <Inline marginLeft="auto">
-          <Text color="medium" isSmall>
+          <Text color="medium" size="small">
             <strong>{stepDescription[step]}</strong>
           </Text>
         </Inline>
