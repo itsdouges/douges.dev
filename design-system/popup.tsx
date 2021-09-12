@@ -33,7 +33,7 @@ function Popup({ children, content, isOpen }: PopupProps) {
 
       setPosition({
         top: element.offsetTop,
-        left: element.offsetLeft,
+        left: element.offsetLeft + elementBox.width / 2,
         height: elementBox.height,
       });
     }
@@ -55,7 +55,7 @@ function Popup({ children, content, isOpen }: PopupProps) {
               style={{
                 top: position.top,
                 left: position.left,
-                transform: `translateY(calc(${Math.ceil(position.height)}px + 8px))`,
+                transform: `translate3d(-50%, calc(${Math.ceil(position.height)}px + 8px), 0)`,
               }}
               css={styles.popup}>
               {content()}
