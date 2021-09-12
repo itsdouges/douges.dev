@@ -9,6 +9,7 @@ import Heading from 'design-system/heading';
 import Stack from 'design-system/stack';
 import Text from 'design-system/text';
 import Inline from 'design-system/inline';
+import Box from 'design-system/box';
 
 const styles = css({
   complete: {
@@ -76,7 +77,7 @@ function SignUp() {
               id={id}
               onChange={setEmail}
             />
-            <Button type="submit" isDisabled={isLoading} appearance="bold-brand">
+            <Button type="submit" isDisabled={isLoading} appearance="brandBold">
               <Fragment>
                 <div css={[styles.complete, isComplete ? styles.visible : styles.hidden]}>✓</div>
                 Join

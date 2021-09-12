@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { CSSProperties } from 'react';
+import { CSSProperties, Children } from 'react';
 import css from 'design-system/css';
+import { token } from '@atlaskit/tokens';
 
 const styles = css({
   inline: {
@@ -9,6 +10,11 @@ const styles = css({
     '> *': {
       marginRight: 'var(--gap)',
     },
+  },
+  separator: {
+    height: '50%',
+    alignSelf: 'center',
+    borderRight: `1px solid ${token('color.border.neutral')}`,
   },
 });
 
@@ -42,6 +48,7 @@ interface InlineProps {
   align?: 'left' | 'right' | 'center';
   justify?: 'top' | 'middle' | 'bottom';
   marginLeft?: string;
+  hasSeparator?: boolean;
 }
 
 function Inline({ children, align, marginLeft, justify, gap = 0 }: InlineProps) {
@@ -59,7 +66,13 @@ function Inline({ children, align, marginLeft, justify, gap = 0 }: InlineProps) 
           '--gap': finalGap < 0 ? `${finalGap}px` : undefined,
         } as CSSProperties
       }>
-      {children}
+      {Children.map(children, (child, index) => {
+        if (index + 1 < Children.count(children)) {
+          return [child, <span key={`s-${index}`} css={styles.separator} />];
+        }
+
+        return child;
+      })}
     </div>
   );
 }

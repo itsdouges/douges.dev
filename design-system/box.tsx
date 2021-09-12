@@ -5,7 +5,7 @@ import { token } from '@atlaskit/tokens';
 import { CSSProperties, cloneElement, Children } from 'react';
 
 const styles = css({
-  active: {
+  pressed: {
     position: 'relative',
     transform: 'scale(0.95)',
     '::before': {
@@ -42,9 +42,9 @@ const styles = css({
   },
 });
 
-const appearanceStyles = css({
+const backgroundStyles = css({
   none: {},
-  'subtle-neutral': {
+  neutralSubtle: {
     color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.subtleNeutral.resting'),
   },
@@ -52,7 +52,7 @@ const appearanceStyles = css({
     color: token('color.text.highEmphasis'),
     backgroundColor: 'transparent',
   },
-  default: {
+  body: {
     backgroundColor: token('color.background.default'),
   },
   sunken: {
@@ -75,20 +75,27 @@ const appearanceStyles = css({
     color: token('color.text.selected'),
     backgroundColor: token('color.background.selected.resting'),
   },
-  'bold-brand': {
+  brandBold: {
     color: token('color.text.onBold'),
     backgroundColor: token('color.background.boldBrand.resting'),
   },
-  'subtle-bordered-neutral': {
+  subtleBorderedNeutral: {
     color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.subtleBorderedNeutral.resting'),
+    border: `2px solid ${token('color.border.neutral')}`,
   },
 });
 
-const appearanceUniqueHoverStyles = css({
-  'subtle-bordered-neutral': {
+const backgroundUniqueHoverStyles = css({
+  subtleBorderedNeutral: {
     ':hover,:focus': {
       backgroundColor: 'transparent',
+    },
+  },
+  card: {
+    ':hover': {
+      backgroundColor: token('color.background.overlay'),
+      boxShadow: token('shadow.overlay'),
     },
   },
 });
@@ -112,33 +119,45 @@ const paddingStyles = css({
   },
 });
 
+const borderRadiusStyles = css({
+  none: {},
+  default: {
+    borderRadius: 3,
+  },
+});
+
 interface BoxProps {
   children: JSX.Element;
-  appearance?: keyof typeof appearanceStyles;
+  background?: keyof typeof backgroundStyles;
   padding?: keyof typeof paddingStyles;
-  hasBorderRadius?: boolean;
-  isActive?: boolean;
-  isHoverable?: boolean;
+  borderRadius?: keyof typeof borderRadiusStyles;
+  isPressed?: boolean;
+  isInteractive?: boolean;
   hasBorder?: boolean;
   style?: CSSProperties;
   shouldForwardProps?: boolean;
+  width?: number;
+  height?: number;
+  maxWidth?: number;
+  maxHeight?: number;
 }
 
 function Box({
   children,
-  appearance = 'none',
+  background = 'none',
   padding = 'none',
-  hasBorderRadius,
-  isActive,
-  isHoverable,
+  borderRadius = 'none',
+  isPressed,
+  isInteractive: isHoverable,
   shouldForwardProps,
   hasBorder,
 }: BoxProps) {
-  const appear = appearanceStyles[appearance];
+  const appear = backgroundStyles[background];
   const pad = paddingStyles[padding];
-  const hover = (appearanceUniqueHoverStyles as any)[appearance] || styles.hover;
-  const border = (borderStyles as any)[appearance] || borderStyles.default;
-  const isDisabled = appearance === 'disabled';
+  const br = borderRadiusStyles[borderRadius];
+  const hover = (backgroundUniqueHoverStyles as any)[background] || styles.hover;
+  const border = (borderStyles as any)[background] || borderStyles.default;
+  const isDisabled = background === 'disabled';
 
   return (
     <ClassNames>
@@ -146,10 +165,10 @@ function Box({
         const className = cn([
           appear,
           pad,
-          hasBorderRadius && styles.borderRadius,
+          br,
           isHoverable && !isDisabled && hover,
           hasBorder && border,
-          isActive && !isDisabled && styles.active,
+          isPressed && !isDisabled && styles.pressed,
         ]);
 
         if (shouldForwardProps) {

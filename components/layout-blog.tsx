@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import type { BlogMeta } from 'types/types';
 import { Fragment } from 'react';
 import Blog from 'components/blog';

@@ -25,7 +25,7 @@ const styles = css({
 });
 
 export interface ButtonProps {
-  appearance?: 'bold-brand' | 'transparent' | 'subtle-neutral';
+  appearance?: 'brandBold' | 'transparent' | 'neutralSubtle';
   type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
@@ -37,7 +37,7 @@ function Button({
   children,
   isSelected,
   onClick,
-  appearance = 'subtle-neutral',
+  appearance = 'neutralSubtle',
   type = 'button',
   isDisabled,
   ...props
@@ -48,11 +48,11 @@ function Button({
   return (
     <Box
       shouldForwardProps
-      hasBorderRadius
+      borderRadius="default"
       padding="medium"
-      isActive={isActive}
-      isHoverable
-      appearance={isDisabled ? 'disabled' : mappedAppearance}>
+      isPressed={isActive}
+      isInteractive
+      background={isDisabled ? 'disabled' : mappedAppearance}>
       <button
         {...buttonProps}
         {...props}

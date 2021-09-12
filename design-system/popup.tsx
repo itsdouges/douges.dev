@@ -50,7 +50,7 @@ function Popup({ children, content, isOpen }: PopupProps) {
       {children({ ref: targetRef })}
       {isOpen && position && (
         <Portal>
-          <Box shouldForwardProps appearance="overlay" padding="small">
+          <Box shouldForwardProps background="overlay" padding="small">
             <div
               style={{
                 top: position.top,

@@ -1,6 +1,8 @@
+/** @jsxImportSource @emotion/react */
 import Popup from 'design-system/popup';
 import { useEffect, useState, useRef } from 'react';
 import Button from 'design-system/button';
+import Inline from 'design-system/inline';
 
 interface SelectionActionBarProps {
   children: React.ReactNode;
@@ -17,7 +19,7 @@ function SelectionActionBar({ children }: SelectionActionBarProps) {
   };
 
   useEffect(() => {
-    document.addEventListener('selectionchange', (e) => {
+    document.addEventListener('selectionchange', () => {
       const selection = document.getSelection();
       const selectionText = selection?.toString();
 
@@ -41,10 +43,10 @@ function SelectionActionBar({ children }: SelectionActionBarProps) {
       <Popup
         isOpen={isHighlighted}
         content={() => (
-          <>
+          <Inline>
             <Button appearance="transparent">Tweet</Button>
-            <Button appearance="transparent">Share</Button>
-          </>
+            <Button appearance="transparent">Comment</Button>
+          </Inline>
         )}>
         {({ ref }) => {
           ref.current = anchorRef;

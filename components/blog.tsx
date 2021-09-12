@@ -40,7 +40,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
   return (
     <article>
       <Stack gap={6}>
-        <Box shouldForwardProps appearance="subtle-neutral" hasBorderRadius>
+        <Box shouldForwardProps background="neutralSubtle" borderRadius="default">
           <div css={styles.heroImage}>
             {heroImage && (
               <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />

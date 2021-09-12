@@ -19,7 +19,7 @@ import { getAllBlogPosts } from 'lib/blog';
 import Text from 'design-system/text';
 import Grid from 'design-system/grid';
 
-const LatestBlogContent = dynamic(() => import('./blog/the-layers-of-style-abstraction.mdx'));
+const LatestBlogContent = dynamic(() => import('./blog/taming-the-beast-that-is-css-in-js.mdx'));
 
 const styles = css({
   hero: {

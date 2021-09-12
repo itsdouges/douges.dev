@@ -7,7 +7,7 @@ interface CodeProps {
 
 function Code({ children }: CodeProps) {
   return (
-    <Box padding="small" hasBorderRadius shouldForwardProps appearance="subtle-neutral">
+    <Box padding="small" borderRadius="default" shouldForwardProps background="neutralSubtle">
       <code>{children}</code>
     </Box>
   );

@@ -24,7 +24,7 @@ interface SectionProps {
 function Section({ children, isSeparated, isSunken }: SectionProps) {
   if (isSunken) {
     return (
-      <Box appearance="sunken">
+      <Box background="sunken">
         <div css={[styles.section, isSeparated && styles.separated]}>{children}</div>
       </Box>
     );

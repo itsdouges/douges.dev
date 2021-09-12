@@ -30,7 +30,7 @@ interface CardProps {
 
 function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
-    <Box padding="large" appearance="card" isHoverable hasBorderRadius>
+    <Box padding="large" background="card" isInteractive borderRadius="default">
       <Stack gap={2}>
         <div css={styles.cardImage}>
           {heroImage && (

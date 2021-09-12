@@ -42,11 +42,11 @@ function Textfield({
   return (
     <Box
       shouldForwardProps
-      isHoverable
+      isInteractive
       hasBorder
-      hasBorderRadius
+      borderRadius="default"
       padding="medium"
-      appearance="subtle-bordered-neutral">
+      background={isDisabled ? 'disabled' : 'subtleBorderedNeutral'}>
       <input
         name={name}
         type={type}

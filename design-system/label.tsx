@@ -10,11 +10,13 @@ interface LabelProps {
 function Label({ label, htmlFor, children }: LabelProps) {
   return (
     <Stack gap={1}>
-      <label htmlFor={htmlFor}>
-        <Text size="small" color="medium">
-          <strong>{label}</strong>
-        </Text>
-      </label>
+      <div>
+        <label htmlFor={htmlFor}>
+          <Text size="small" color="medium">
+            <strong>{label}</strong>
+          </Text>
+        </label>
+      </div>
 
       {children}
     </Stack>
