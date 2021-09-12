@@ -6,7 +6,6 @@ const styles = css({
   section: {
     margin: '0 auto',
     maxWidth: 900,
-    padding: 16,
     width: '100%',
   },
   separated: {
@@ -25,12 +24,18 @@ function Section({ children, isSeparated, isSunken }: SectionProps) {
   if (isSunken) {
     return (
       <Box background="sunken">
-        <div css={[styles.section, isSeparated && styles.separated]}>{children}</div>
+        <Box padding="large" css={[styles.section, isSeparated && styles.separated]}>
+          {children}
+        </Box>
       </Box>
     );
   }
 
-  return <div css={[styles.section, isSeparated && styles.separated]}>{children}</div>;
+  return (
+    <Box padding="large" css={[styles.section, isSeparated && styles.separated]}>
+      {children}
+    </Box>
+  );
 }
 
 export default Section;

@@ -43,7 +43,8 @@ function Button({
       <Box
         shouldForwardProps
         borderRadius="default"
-        padding="medium"
+        paddingX="large"
+        paddingY="medium"
         isPressed={isActive}
         isInteractive
         background={isDisabled ? 'disabled' : mappedAppearance}>

@@ -46,7 +46,8 @@ function LinkButton({
       <Box
         shouldForwardProps
         borderRadius="default"
-        padding="medium"
+        paddingX="large"
+        paddingY="medium"
         isPressed={isActive}
         isInteractive
         background={mappedAppearance}>

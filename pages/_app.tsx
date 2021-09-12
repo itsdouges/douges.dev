@@ -11,11 +11,11 @@ import toggleTheme from 'lib/toggle-theme';
 import components from 'components/blog-mdx-components';
 import { token } from '@atlaskit/tokens';
 import LayoutBlog from 'components/layout-blog';
+import Box from 'design-system/box';
 
 const styles = css({
   navBar: {
     position: 'relative',
-    padding: '16px 16px 0',
     display: 'flex',
     '> :last-child': {
       marginLeft: 'auto',
@@ -65,22 +65,24 @@ function App({ Component, pageProps, router }: AppProps) {
       </Head>
 
       <header css={styles.header}>
-        <nav css={styles.navBar}>
-          {isBlogRoute && (
+        <Box shouldForwardProps padding="xlarge">
+          <nav css={styles.navBar}>
+            {isBlogRoute && (
+              <IconButton
+                data-splitbee-event="Go Home"
+                icon="←"
+                label="Go home"
+                onClick={() => router.push('/')}
+              />
+            )}
             <IconButton
-              data-splitbee-event="Go Home"
-              icon="←"
-              label="Go home"
-              onClick={() => router.push('/')}
+              data-splitbee-event="Switch Theme"
+              icon="☾"
+              label="Switch theme"
+              onClick={toggleTheme}
             />
-          )}
-          <IconButton
-            data-splitbee-event="Switch Theme"
-            icon="☾"
-            label="Switch theme"
-            onClick={toggleTheme}
-          />
-        </nav>
+          </nav>
+        </Box>
       </header>
 
       {isBlogRoute ? (

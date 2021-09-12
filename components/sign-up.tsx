@@ -22,7 +22,6 @@ const styles = css({
     bottom: 0,
     left: 0,
     borderRadius: 3,
-    padding: 8,
     fontSize: 28,
     color: token('color.text.onBold'),
     background: token('color.background.boldSuccess.resting'),

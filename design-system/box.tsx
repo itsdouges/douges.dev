@@ -118,16 +118,67 @@ const borderStyles = css({
   },
 });
 
-const paddingStyles = css({
+const paddingTopStyles = css({
   none: {},
   small: {
-    padding: 4,
+    paddingBlockStart: 4,
   },
   medium: {
-    padding: 8,
+    paddingBlockStart: 8,
   },
   large: {
-    padding: 16,
+    paddingBlockStart: 12,
+  },
+  xlarge: {
+    paddingBlockStart: 16,
+  },
+});
+
+const paddingBottomStyles = css({
+  none: {},
+  small: {
+    paddingBlockEnd: 4,
+  },
+  medium: {
+    paddingBlockEnd: 8,
+  },
+  large: {
+    paddingBlockEnd: 12,
+  },
+  xlarge: {
+    paddingBlockEnd: 16,
+  },
+});
+
+const paddingLeftStyles = css({
+  none: {},
+  small: {
+    paddingInlineStart: 4,
+  },
+  medium: {
+    paddingInlineStart: 8,
+  },
+  large: {
+    paddingInlineStart: 12,
+  },
+  xlarge: {
+    paddingInlineStart: 16,
+  },
+});
+
+const paddingRightStyles = css({
+  none: {},
+  small: {
+    paddingInlineEnd: 4,
+  },
+  medium: {
+    paddingInlineEnd: 8,
+  },
+  large: {
+    paddingInlineEnd: 12,
+  },
+  xlarge: {
+    paddingInlineEnd: 16,
   },
 });
 
@@ -139,38 +190,48 @@ const borderRadiusStyles = css({
 });
 
 interface BoxProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   background?: keyof typeof backgroundStyles;
-  padding?: keyof typeof paddingStyles;
+  padding?: keyof typeof paddingTopStyles;
+  paddingTop?: keyof typeof paddingTopStyles;
+  paddingRight?: keyof typeof paddingRightStyles;
+  paddingBottom?: keyof typeof paddingBottomStyles;
+  paddingLeft?: keyof typeof paddingLeftStyles;
+  paddingX?: keyof typeof paddingLeftStyles;
+  paddingY?: keyof typeof paddingTopStyles;
   borderRadius?: keyof typeof borderRadiusStyles;
   shadow?: keyof typeof shadowStyles;
   isPressed?: boolean;
   isInteractive?: boolean;
   hasBorder?: boolean;
-  style?: CSSProperties;
   shouldForwardProps?: boolean;
-  width?: number;
-  height?: number;
-  maxWidth?: number;
-  maxHeight?: number;
   className?: string;
 }
 
 function Box({
   children,
-  background = 'none',
-  padding = 'none',
-  borderRadius = 'none',
-  shadow = 'none',
+  paddingTop,
+  paddingRight,
+  paddingBottom,
+  paddingLeft,
+  paddingX,
+  paddingY,
   isPressed,
   isInteractive: isHoverable,
   shouldForwardProps,
   hasBorder,
   className,
+  background = 'none',
+  borderRadius = 'none',
+  padding = 'none',
+  shadow = 'none',
 }: BoxProps) {
   const backgroundStyle = backgroundStyles[background];
   const shadowStyle = shadowStyles[shadow];
-  const paddingStyle = paddingStyles[padding];
+  const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding];
+  const paddingRightStyle = paddingRightStyles[paddingRight || paddingX || padding];
+  const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding];
+  const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding];
   const borderRadiusStyle = borderRadiusStyles[borderRadius];
   const hoverStyle = (backgroundUniqueHoverStyles as any)[background] || styles.hover;
   const borderStyle = (borderStyles as any)[background] || borderStyles.default;
@@ -181,7 +242,10 @@ function Box({
       {({ css: cn }) => {
         const boxClass = cn([
           backgroundStyle,
-          paddingStyle,
+          paddingTopStyle,
+          paddingRightStyle,
+          paddingBottomStyle,
+          paddingLeftStyle,
           borderRadiusStyle,
           shadowStyle,
           isHoverable && !isDisabled && hoverStyle,
@@ -191,7 +255,7 @@ function Box({
         ]);
 
         if (shouldForwardProps) {
-          return cloneElement(Children.only(children), {
+          return cloneElement(Children.only(children as JSX.Element), {
             className: boxClass,
           });
         }
