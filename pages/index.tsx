@@ -2,7 +2,7 @@
 import { Fragment } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 import { token } from '@atlaskit/tokens';
 import pkg from '../package.json';
 import Card from 'design-system/card';
@@ -21,15 +21,17 @@ import Grid from 'design-system/grid';
 
 const LatestBlogContent = dynamic(() => import('./blog/the-layers-of-style-abstraction.mdx'));
 
-const heroStyles = css({
-  height: '40vh',
-  minHeight: 450,
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  textAlign: 'center',
-  borderBottom: `2px solid ${token('color.border.neutral')}`,
+const styles = css({
+  hero: {
+    height: '40vh',
+    minHeight: 450,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+    borderBottom: `2px solid ${token('color.border.neutral')}`,
+  },
 });
 
 const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, moreBlogs }) => {
@@ -58,7 +60,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
       </Head>
 
       <main>
-        <div css={heroStyles}>
+        <div css={styles.hero}>
           <Section>
             <Stack gap={1}>
               <Heading level={0}>douges&#8203;.dev</Heading>

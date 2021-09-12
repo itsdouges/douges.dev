@@ -1,25 +1,23 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import Text from 'design-system/text';
-
-const containerStyles = css({
-  paddingBottom: 8,
-});
+import Stack from 'design-system/stack';
 
 interface LabelProps {
   label: string;
   htmlFor: string;
+  children?: React.ReactNode;
 }
 
-function Label({ label, htmlFor }: LabelProps) {
+function Label({ label, htmlFor, children }: LabelProps) {
   return (
-    <div css={containerStyles}>
+    <Stack gap={1}>
       <label htmlFor={htmlFor}>
-        <Text size="small" color="low">
+        <Text size="small" color="medium">
           <strong>{label}</strong>
         </Text>
       </label>
-    </div>
+
+      {children}
+    </Stack>
   );
 }
 

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 import { useState, Fragment } from 'react';
 import Textfield from 'design-system/textfield';
 import Label from 'design-system/label';
@@ -10,29 +10,29 @@ import Stack from 'design-system/stack';
 import Text from 'design-system/text';
 import Inline from 'design-system/inline';
 
-const completeStyles = css({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  transition: 'opacity 150ms',
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  borderRadius: 3,
-  padding: 8,
-  fontSize: 28,
-  color: token('color.text.onBold'),
-  background: token('color.background.boldSuccess.resting'),
-});
-
-const hiddenStyles = css({
-  opacity: 0,
-});
-
-const visibleStyles = css({
-  opacity: 1,
+const styles = css({
+  complete: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'opacity 150ms',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: 3,
+    padding: 8,
+    fontSize: 28,
+    color: token('color.text.onBold'),
+    background: token('color.background.boldSuccess.resting'),
+  },
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
 });
 
 const sendSignUpRequest = async (email: string) => {
@@ -66,24 +66,24 @@ function SignUp() {
           await sendSignUpRequest(email);
           setIsComplete(true);
         }}>
-        <Label htmlFor={id} label="Join the mailing list today" />
-        <Inline gap={1}>
-          <Textfield
-            isRequired
-            isDisabled={isLoading}
-            type="email"
-            name={id}
-            id={id}
-            placeholder="Your email here"
-            onChange={setEmail}
-          />
-          <Button type="submit" isDisabled={isLoading} appearance="primary">
-            <Fragment>
-              <div css={[completeStyles, isComplete ? visibleStyles : hiddenStyles]}>✓</div>
-              Join
-            </Fragment>
-          </Button>
-        </Inline>
+        <Label htmlFor={id} label="Join the mailing list today">
+          <Inline gap={1}>
+            <Textfield
+              isRequired
+              isDisabled={isLoading}
+              type="email"
+              name={id}
+              id={id}
+              onChange={setEmail}
+            />
+            <Button type="submit" isDisabled={isLoading} appearance="bold-brand">
+              <Fragment>
+                <div css={[styles.complete, isComplete ? styles.visible : styles.hidden]}>✓</div>
+                Join
+              </Fragment>
+            </Button>
+          </Inline>
+        </Label>
       </form>
     </Stack>
   );

@@ -1,29 +1,23 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 
-const stackStyles = css({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
+const styles = css({
+  stack: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+  },
+  left: {
+    textAlign: 'left',
+  },
+  center: {
+    textAlign: 'center',
+  },
+  right: {
+    textAlign: 'right',
+  },
 });
 
-const textAlignLeft = css({
-  textAlign: 'left',
-});
-
-const textAlignCenter = css({
-  textAlign: 'center',
-});
-
-const textAlignRight = css({
-  textAlign: 'right',
-});
-
-const textAlignMap = {
-  left: textAlignCenter,
-  center: textAlignCenter,
-  right: textAlignRight,
-};
 interface StackProps {
   gap: number;
   children: React.ReactNode;
@@ -31,10 +25,10 @@ interface StackProps {
 }
 
 function Stack({ children, gap, textAlign }: StackProps) {
-  const textAlignStyles = textAlign && textAlignMap[textAlign];
+  const textAlignStyles = textAlign && styles[textAlign];
 
   return (
-    <div css={[stackStyles, textAlignStyles]} style={{ gap: gap * 8 }}>
+    <div css={[styles.stack, textAlignStyles]} style={{ gap: gap * 8 }}>
       {children}
     </div>
   );

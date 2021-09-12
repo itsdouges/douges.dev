@@ -1,17 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import Surface from 'design-system/surface';
+import css from 'design-system/css';
+import Box from 'design-system/box';
 
-const sectionStyles = css({
-  margin: '0 auto',
-  maxWidth: 900,
-  padding: 16,
-  width: '100%',
-});
-
-const separatedSectionStyles = css({
-  paddingTop: '128px',
-  paddingBottom: '128px',
+const styles = css({
+  section: {
+    margin: '0 auto',
+    maxWidth: 900,
+    padding: 16,
+    width: '100%',
+  },
+  separated: {
+    paddingTop: '128px',
+    paddingBottom: '128px',
+  },
 });
 
 interface SectionProps {
@@ -23,13 +24,13 @@ interface SectionProps {
 function Section({ children, isSeparated, isSunken }: SectionProps) {
   if (isSunken) {
     return (
-      <Surface appearance="sunken">
-        <div css={[sectionStyles, isSeparated && separatedSectionStyles]}>{children}</div>
-      </Surface>
+      <Box appearance="sunken">
+        <div css={[styles.section, isSeparated && styles.separated]}>{children}</div>
+      </Box>
     );
   }
 
-  return <div css={[sectionStyles, isSeparated && separatedSectionStyles]}>{children}</div>;
+  return <div css={[styles.section, isSeparated && styles.separated]}>{children}</div>;
 }
 
 export default Section;

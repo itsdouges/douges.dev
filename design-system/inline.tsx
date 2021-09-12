@@ -1,50 +1,40 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { CSSProperties } from 'react';
+import css from 'design-system/css';
 
-const inlineStyles = css({
-  display: 'flex',
-  flexDirection: 'row',
-  '> *': {
-    marginRight: 'var(--gap)',
+const styles = css({
+  inline: {
+    display: 'flex',
+    flexDirection: 'row',
+    '> *': {
+      marginRight: 'var(--gap)',
+    },
   },
 });
 
-const alignRightStyles = css({
-  justifyContent: 'right',
+const alignStyles = css({
+  right: {
+    justifyContent: 'right',
+  },
+  left: {
+    justifyContent: 'left',
+  },
+  center: {
+    justifyContent: 'center',
+  },
 });
 
-const alignLeftStyles = css({
-  justifyContent: 'left',
+const justifyStyles = css({
+  bottom: {
+    alignItems: 'left',
+  },
+  top: {
+    alignItems: 'right',
+  },
+  middle: {
+    alignItems: 'center',
+  },
 });
-
-const alignCenterStyles = css({
-  justifyContent: 'center',
-});
-
-const justifyBottomStyles = css({
-  alignItems: 'left',
-});
-
-const justifyTopStyles = css({
-  alignItems: 'right',
-});
-
-const justifyMiddleStyles = css({
-  alignItems: 'center',
-});
-
-const alignMap = {
-  left: alignLeftStyles,
-  right: alignRightStyles,
-  center: alignCenterStyles,
-};
-
-const justifyMap = {
-  top: justifyTopStyles,
-  middle: justifyMiddleStyles,
-  bottom: justifyBottomStyles,
-};
 
 interface InlineProps {
   gap?: number;
@@ -56,12 +46,12 @@ interface InlineProps {
 
 function Inline({ children, align, marginLeft, justify, gap = 0 }: InlineProps) {
   const finalGap = gap * 8;
-  const alignStyles = align && alignMap[align];
-  const justifyStyles = justify && justifyMap[justify];
+  const alignStyle = align && alignStyles[align];
+  const justifyStyle = justify && justifyStyles[justify];
 
   return (
     <div
-      css={[inlineStyles, alignStyles, justifyStyles]}
+      css={[styles.inline, alignStyle, justifyStyle]}
       style={
         {
           marginLeft,

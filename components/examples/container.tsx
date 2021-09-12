@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 import Section from 'design-system/section';
 
-const containerStyles = css({
-  margin: '0 -16px',
+const styles = css({
+  container: {
+    margin: '0 -16px',
+  },
 });
 
 interface ExampleContainerProps {
@@ -12,7 +14,7 @@ interface ExampleContainerProps {
 
 function ExampleContainer({ children }: ExampleContainerProps) {
   return (
-    <div css={containerStyles}>
+    <div css={styles.container}>
       <Section isSunken>{children}</Section>
     </div>
   );

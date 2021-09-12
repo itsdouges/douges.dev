@@ -1,31 +1,25 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 
-const gridListStyles = css({
-  display: 'grid',
-  gridTemplateColumns: '1fr',
-});
-
-const twoColumnStyles = css({
-  '@media screen and (min-width: 650px)': {
-    gridTemplateColumns: '1fr 1fr',
+const styles = css({
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+  },
+  2: {
+    '@media screen and (min-width: 650px)': {
+      gridTemplateColumns: '1fr 1fr',
+    },
+  },
+  3: {
+    '@media screen and (min-width: 650px)': {
+      gridTemplateColumns: '1fr 1fr',
+    },
+    '@media screen and (min-width: 800px)': {
+      gridTemplateColumns: '1fr 1fr 1fr',
+    },
   },
 });
-
-const threeColumnStyles = css({
-  '@media screen and (min-width: 650px)': {
-    gridTemplateColumns: '1fr 1fr',
-  },
-  '@media screen and (min-width: 800px)': {
-    gridTemplateColumns: '1fr 1fr 1fr',
-  },
-});
-
-const columnsMap = {
-  2: twoColumnStyles,
-  3: threeColumnStyles,
-};
-
 interface GridProps {
   gap: number;
   columns: 2 | 3;
@@ -33,10 +27,10 @@ interface GridProps {
 }
 
 function Grid({ columns, children, gap }: GridProps) {
-  const columnStyles = columnsMap[columns];
+  const columnStyles = styles[columns];
 
   return (
-    <div style={{ gap: gap * 8 }} css={[gridListStyles, columnStyles]}>
+    <div style={{ gap: gap * 8 }} css={[styles.grid, columnStyles]}>
       {children}
     </div>
   );

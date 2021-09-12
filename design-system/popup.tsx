@@ -1,16 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { useState, useRef, useEffect } from 'react';
-import { token } from '@atlaskit/tokens';
+import css from 'design-system/css';
+import { useState, useCallback, useRef, useEffect } from 'react';
+import Box from 'design-system/box';
 import Portal from 'design-system/portal';
 
-const popupStyles = css({
-  backgroundColor: token('color.background.overlay'),
-  boxShadow: token('shadow.overlay'),
-  borderRadius: 3,
-  display: 'inline-flex',
-  padding: 4,
-  position: 'absolute',
+const styles = css({
+  popup: {
+    display: 'inline-flex',
+    position: 'absolute',
+  },
 });
 
 interface PopupProps {
@@ -28,36 +26,41 @@ interface Position {
 function Popup({ children, content, isOpen }: PopupProps) {
   const [position, setPosition] = useState<undefined | Position>();
   const targetRef = useRef<any>(null);
+  const calculatePosition = useCallback(() => {
+    if (isOpen && targetRef.current) {
+      const element = targetRef.current as HTMLElement;
+      const elementBox = element.getBoundingClientRect();
+
+      setPosition({
+        top: element.offsetTop,
+        left: element.offsetLeft,
+        height: elementBox.height,
+      });
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      if (isOpen && targetRef.current) {
-        const element = targetRef.current as HTMLElement;
-        const elementBox = element.getBoundingClientRect();
-
-        setPosition({
-          top: element.offsetTop,
-          left: element.offsetLeft,
-          height: elementBox.height,
-        });
-      }
+      calculatePosition();
     });
-  }, [isOpen]);
+  }, [calculatePosition]);
 
   return (
     <>
       {children({ ref: targetRef })}
       {isOpen && position && (
         <Portal>
-          <div
-            style={{
-              top: position.top,
-              left: position.left,
-              transform: `translateY(calc(${Math.ceil(position.height)}px + 8px))`,
-            }}
-            css={popupStyles}>
-            {content()}
-          </div>
+          <Box shouldForwardProps appearance="overlay" padding="small">
+            <div
+              style={{
+                top: position.top,
+                left: position.left,
+                transform: `translateY(calc(${Math.ceil(position.height)}px + 8px))`,
+              }}
+              css={styles.popup}>
+              {content()}
+            </div>
+          </Box>
         </Portal>
       )}
     </>

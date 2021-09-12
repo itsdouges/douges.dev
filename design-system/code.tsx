@@ -1,19 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { token } from '@atlaskit/tokens';
+import Box from 'design-system/box';
 
 interface CodeProps {
   children: string;
 }
 
-const codeStyles = css({
-  backgroundColor: token('color.background.subtleNeutral.resting'),
-  padding: '4px 6px',
-  borderRadius: 3,
-});
-
 function Code({ children }: CodeProps) {
-  return <code css={codeStyles}>{children}</code>;
+  return (
+    <Box padding="small" hasBorderRadius shouldForwardProps appearance="subtle-neutral">
+      <code>{children}</code>
+    </Box>
+  );
 }
 
 export default Code;

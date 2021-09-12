@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 import Heading from 'design-system/heading';
-import { token } from '@atlaskit/tokens';
 import Stack from 'design-system/stack';
 import { friendlyDate } from 'lib/time';
 import Link from 'next/link';
@@ -10,18 +9,19 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Text from 'design-system/text';
 import SelectionActionBar from 'components/selection-action-bar';
+import Box from 'design-system/box';
 
-const heroImageStyles = css({
-  backgroundColor: token('color.background.subtleNeutral.resting'),
-  height: 250,
-  position: 'relative',
-  margin: '0 -16px',
-  borderRadius: 3,
-  '@media screen and (min-width: 1000px)': {
-    margin: '0 -64px',
-  },
-  '@media screen and (min-width: 1200px)': {
-    margin: '0 -128px',
+const styles = css({
+  heroImage: {
+    height: 250,
+    position: 'relative',
+    margin: '0 -16px',
+    '@media screen and (min-width: 1000px)': {
+      margin: '0 -64px',
+    },
+    '@media screen and (min-width: 1200px)': {
+      margin: '0 -128px',
+    },
   },
 });
 
@@ -40,11 +40,13 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
   return (
     <article>
       <Stack gap={6}>
-        <div css={heroImageStyles}>
-          {heroImage && (
-            <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
-          )}
-        </div>
+        <Box shouldForwardProps appearance="subtle-neutral" hasBorderRadius>
+          <div css={styles.heroImage}>
+            {heroImage && (
+              <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
+            )}
+          </div>
+        </Box>
 
         <header>
           <Heading level={1}>

@@ -1,14 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 
-const visuallyHiddenStyles = css({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  whiteSpace: 'nowrap',
-  width: 1,
+const styles = css({
+  hidden: {
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    whiteSpace: 'nowrap',
+    width: 1,
+  },
 });
 
 interface VisuallyHiddenProps {
@@ -16,7 +18,7 @@ interface VisuallyHiddenProps {
 }
 
 function VisuallyHidden({ children }: VisuallyHiddenProps) {
-  return <span css={visuallyHiddenStyles}>{children}</span>;
+  return <span css={styles.hidden}>{children}</span>;
 }
 
 export default VisuallyHidden;

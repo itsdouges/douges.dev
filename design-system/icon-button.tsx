@@ -1,13 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import css from 'design-system/css';
 import Button from './button';
 import VisuallyHidden from './visually-hidden';
 
-const iconStyles = css({
-  width: 25,
-  height: 25,
-  fontSize: 20,
-  display: 'block',
+const styles = css({
+  icon: {
+    width: 25,
+    height: 25,
+    fontSize: 20,
+    display: 'block',
+  },
 });
 
 interface IconButtonProps {
@@ -18,9 +20,9 @@ interface IconButtonProps {
 
 function IconButton({ icon, label, onClick }: IconButtonProps) {
   return (
-    <Button onClick={onClick} appearance="subtle">
+    <Button onClick={onClick} appearance="transparent">
       <VisuallyHidden>{label}</VisuallyHidden>
-      <span css={iconStyles}>{icon}</span>
+      <span css={styles.icon}>{icon}</span>
     </Button>
   );
 }

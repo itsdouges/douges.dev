@@ -1,7 +1,6 @@
 import Popup from 'design-system/popup';
 import { useEffect, useState, useRef } from 'react';
 import Button from 'design-system/button';
-import Inline from 'design-system/inline';
 
 interface SelectionActionBarProps {
   children: React.ReactNode;
@@ -43,8 +42,8 @@ function SelectionActionBar({ children }: SelectionActionBarProps) {
         isOpen={isHighlighted}
         content={() => (
           <>
-            <Button appearance="subtle">Tweet</Button>
-            <Button appearance="subtle">Share</Button>
+            <Button appearance="transparent">Tweet</Button>
+            <Button appearance="transparent">Share</Button>
           </>
         )}>
         {({ ref }) => {

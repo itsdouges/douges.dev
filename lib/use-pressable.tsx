@@ -6,6 +6,7 @@ interface UsePressable {
     onMouseOver: MouseEventHandler;
     onMouseLeave: MouseEventHandler;
     onMouseDown: MouseEventHandler;
+    onMouseUp: MouseEventHandler;
     onClick: MouseEventHandler;
   };
 }
@@ -21,6 +22,12 @@ function usePressable(opts: UsePressableOpts): UsePressable {
   const onMouseOver: MouseEventHandler = () => {
     if (isPressed.current && !isActive) {
       setIsActive(true);
+    }
+  };
+
+  const onMouseUp: MouseEventHandler = () => {
+    if (isActive) {
+      setIsActive(false);
     }
   };
 
@@ -55,6 +62,7 @@ function usePressable(opts: UsePressableOpts): UsePressable {
       onMouseLeave,
       onMouseDown,
       onClick,
+      onMouseUp,
     },
   };
 }

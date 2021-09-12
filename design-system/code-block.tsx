@@ -3,13 +3,12 @@ import { css, SerializedStyles } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 import { refractor, RefractorElement, Text } from 'refractor/lib/core';
 import jsx from 'refractor/lang/jsx';
+import Box from 'design-system/box';
 
 refractor.register(jsx);
 
 const codeBlockStyles = css({
   borderRadius: 3,
-  backgroundColor: token('color.background.default'),
-  padding: '16px',
   margin: 0,
   fontSize: 12,
   overflow: 'auto',
@@ -89,9 +88,11 @@ interface CodeBlockProps {
 function CodeBlock({ children = '' }: CodeBlockProps) {
   const root = refractor.highlight(children, 'jsx');
   return (
-    <pre css={codeBlockStyles}>
-      <code>{root.children.map(toJSX)}</code>
-    </pre>
+    <Box shouldForwardProps padding="large" appearance="default">
+      <pre css={codeBlockStyles}>
+        <code>{root.children.map(toJSX)}</code>
+      </pre>
+    </Box>
   );
 }
 
