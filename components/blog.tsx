@@ -9,6 +9,7 @@ import DSLink from 'design-system/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Text from 'design-system/text';
+import SelectionActionBar from 'components/selection-action-bar';
 
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
@@ -67,7 +68,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
           </Text>
         </header>
 
-        {children}
+        <SelectionActionBar>{children}</SelectionActionBar>
       </Stack>
     </article>
   );
