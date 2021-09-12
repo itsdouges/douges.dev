@@ -53,9 +53,9 @@ function SignUp() {
 
   return (
     <Stack gap={1}>
-      <Heading level={3}>Like it? Come hang out again soon.</Heading>
+      <Heading level={3}>Like it? Come hang again!</Heading>
       <Text as="p">
-        Join others and get notified early when new content is available, unsubscribe at any time.
+        Join others and get notified early when new content is available – unsubscribe at any time.
       </Text>
 
       <form

@@ -15,7 +15,7 @@ function Label({ label, htmlFor }: LabelProps) {
   return (
     <div css={containerStyles}>
       <label htmlFor={htmlFor}>
-        <Text size="small" color="medium">
+        <Text size="small" color="low">
           <strong>{label}</strong>
         </Text>
       </label>

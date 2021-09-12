@@ -8,6 +8,7 @@ import Link from 'next/link';
 import DSLink from 'design-system/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Text from 'design-system/text';
 
 const heroImageStyles = css({
   backgroundColor: token('color.background.subtleNeutral.resting'),
@@ -21,10 +22,6 @@ const heroImageStyles = css({
   '@media screen and (min-width: 1200px)': {
     margin: '0 -128px',
   },
-});
-
-const metaStyles = css({
-  color: token('color.text.mediumEmphasis'),
 });
 
 export interface BlogProps {
@@ -55,7 +52,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
             </Link>
           </Heading>
 
-          <div css={metaStyles}>
+          <Text color="low" size="tiny">
             <time title={publishDate} dateTime={publishDate}>
               {friendlyDate(publishDate)}
             </time>{' '}
@@ -67,7 +64,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
               Michael Dougall
             </a>{' '}
             · {minutesToRead} min read
-          </div>
+          </Text>
         </header>
 
         {children}
