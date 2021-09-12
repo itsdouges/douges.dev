@@ -153,6 +153,7 @@ interface BoxProps {
   height?: number;
   maxWidth?: number;
   maxHeight?: number;
+  className?: string;
 }
 
 function Box({
@@ -165,35 +166,37 @@ function Box({
   isInteractive: isHoverable,
   shouldForwardProps,
   hasBorder,
+  className,
 }: BoxProps) {
-  const appear = backgroundStyles[background];
-  const boxShadow = shadowStyles[shadow];
-  const pad = paddingStyles[padding];
-  const br = borderRadiusStyles[borderRadius];
-  const hover = (backgroundUniqueHoverStyles as any)[background] || styles.hover;
-  const border = (borderStyles as any)[background] || borderStyles.default;
+  const backgroundStyle = backgroundStyles[background];
+  const shadowStyle = shadowStyles[shadow];
+  const paddingStyle = paddingStyles[padding];
+  const borderRadiusStyle = borderRadiusStyles[borderRadius];
+  const hoverStyle = (backgroundUniqueHoverStyles as any)[background] || styles.hover;
+  const borderStyle = (borderStyles as any)[background] || borderStyles.default;
   const isDisabled = background === 'disabled';
 
   return (
     <ClassNames>
       {({ css: cn }) => {
-        const className = cn([
-          appear,
-          pad,
-          br,
-          boxShadow,
-          isHoverable && !isDisabled && hover,
-          hasBorder && border,
+        const boxClass = cn([
+          backgroundStyle,
+          paddingStyle,
+          borderRadiusStyle,
+          shadowStyle,
+          isHoverable && !isDisabled && hoverStyle,
+          hasBorder && borderStyle,
           isPressed && !isDisabled && styles.pressed,
+          className,
         ]);
 
         if (shouldForwardProps) {
           return cloneElement(Children.only(children), {
-            className: className,
+            className: boxClass,
           });
         }
 
-        return <div className={className}>{children}</div>;
+        return <div className={boxClass}>{children}</div>;
       }}
     </ClassNames>
   );

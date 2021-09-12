@@ -51,7 +51,7 @@ interface InlineProps {
   hasSeparator?: boolean;
 }
 
-function Inline({ children, align, marginLeft, justify, gap = 0 }: InlineProps) {
+function Inline({ children, align, hasSeparator, marginLeft, justify, gap = 0 }: InlineProps) {
   const finalGap = gap * 8;
   const alignStyle = align && alignStyles[align];
   const justifyStyle = justify && justifyStyles[justify];
@@ -68,7 +68,7 @@ function Inline({ children, align, marginLeft, justify, gap = 0 }: InlineProps) 
       }>
       {Children.map(children, (child, index) => {
         if (index + 1 < Children.count(children)) {
-          return [child, <span key={`s-${index}`} css={styles.separator} />];
+          return [child, hasSeparator && <span key={`s-${index}`} css={styles.separator} />];
         }
 
         return child;

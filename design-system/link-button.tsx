@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { token } from '@atlaskit/tokens';
 import css from 'design-system/css';
 import usePressable from 'lib/use-pressable';
 import Box from 'design-system/box';
@@ -14,27 +13,31 @@ const styles = css({
     position: 'relative',
     overflow: 'hidden',
     flexShrink: 0,
+    ':hover,:active': {
+      color: 'inherit',
+      textDecoration: 'none',
+    },
   },
 });
 
-export interface ButtonProps {
+export interface LinkButtonProps {
   appearance?: 'brandBold' | 'transparent' | 'neutralSubtle';
-  type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
-  isDisabled?: boolean;
   isSelected?: boolean;
+  href: string;
+  shouldOpenNewWindow?: boolean;
 }
 
-function Button({
+function LinkButton({
   children,
   isSelected,
   onClick,
   appearance = 'neutralSubtle',
-  type = 'button',
-  isDisabled,
+  href,
+  shouldOpenNewWindow,
   ...props
-}: ButtonProps) {
+}: LinkButtonProps) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
   const { isActive, buttonProps } = usePressable({ onClick });
 
@@ -46,13 +49,18 @@ function Button({
         padding="medium"
         isPressed={isActive}
         isInteractive
-        background={isDisabled ? 'disabled' : mappedAppearance}>
-        <button {...buttonProps} {...props} type={type} disabled={isDisabled} css={styles.reset}>
+        background={mappedAppearance}>
+        <a
+          target={shouldOpenNewWindow ? '__blank' : ''}
+          href={href}
+          {...buttonProps}
+          {...props}
+          css={styles.reset}>
           {children}
-        </button>
+        </a>
       </Box>
     </FocusRing>
   );
 }
 
-export default Button;
+export default LinkButton;

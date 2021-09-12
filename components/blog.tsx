@@ -5,6 +5,7 @@ import Stack from 'design-system/stack';
 import { friendlyDate } from 'lib/time';
 import Link from 'next/link';
 import DSLink from 'design-system/link';
+import LinkButton from 'design-system/link-button';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Text from 'design-system/text';
@@ -79,18 +80,15 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
 
         <SelectionActionBar
           actions={({ selection }) => [
-            <Button
+            <LinkButton
+              shouldOpenNewWindow
               key="tweet"
               appearance="transparent"
-              onClick={() => {
-                window.open(
-                  `https://twitter.com/intent/tweet?text="${window.encodeURIComponent(
-                    selection
-                  )}" https://douges.dev${link}`
-                );
-              }}>
+              href={`https://twitter.com/intent/tweet?text="${window.encodeURIComponent(
+                selection
+              )}" https://douges.dev${link}`}>
               Tweet
-            </Button>,
+            </LinkButton>,
             <Button key="comment" appearance="transparent">
               Comment
             </Button>,
