@@ -68,19 +68,9 @@ function App({ Component, pageProps, router }: AppProps) {
         <Box shouldForwardProps padding="xlarge">
           <nav css={styles.navBar}>
             {isBlogRoute && (
-              <IconButton
-                data-splitbee-event="Go Home"
-                icon="←"
-                label="Go home"
-                onClick={() => router.push('/')}
-              />
+              <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
             )}
-            <IconButton
-              data-splitbee-event="Switch Theme"
-              icon="☾"
-              label="Switch theme"
-              onClick={toggleTheme}
-            />
+            <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
           </nav>
         </Box>
       </header>

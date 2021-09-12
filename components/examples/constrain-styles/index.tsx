@@ -118,28 +118,17 @@ function ConstrainStyles() {
   return (
     <Stack gap={2}>
       <Inline gap={1}>
-        <Button
-          data-splitbee-event="Remove Prop"
-          data-splitbee-event-type="Constrain Example"
-          isDisabled={step === 0}
-          onClick={() => setStep((prev) => prev - 1)}>
+        <Button isDisabled={step === 0} onClick={() => setStep((prev) => prev - 1)}>
           Remove prop
         </Button>
         <TimeoutButton
-          data-splitbee-event="Add Prop"
-          data-splitbee-event-type="Constrain Example"
-          data-splitbee-event-finish={steps[step + 2] === undefined ? true : undefined}
           isDisabled={steps[step + 1] === undefined}
           onClick={() => setStep((prev) => prev + 1)}>
           Add prop
         </TimeoutButton>
 
         <Inline marginLeft="auto">
-          <Button
-            data-splitbee-event="Constrain Styles"
-            data-splitbee-event-type="Constrain Example"
-            isSelected={isConstrained}
-            onClick={() => setIsContstrained((prev) => !prev)}>
+          <Button isSelected={isConstrained} onClick={() => setIsContstrained((prev) => !prev)}>
             Constrain styles
           </Button>
         </Inline>

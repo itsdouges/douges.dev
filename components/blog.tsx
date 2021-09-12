@@ -67,14 +67,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
                 </time>
               )}
             </Tooltip>{' '}
-            ·{' '}
-            <a
-              data-splitbee-event="External Link"
-              data-splitbee-event-type="twitter"
-              href="https://twitter.com/itsdouges">
-              Michael Dougall
-            </a>{' '}
-            · {minutesToRead} min read
+            · <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min read
           </Text>
         </header>
 

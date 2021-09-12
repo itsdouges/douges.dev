@@ -61,17 +61,10 @@ function CodeAnalysis() {
   return (
     <Stack gap={2}>
       <Inline justify="middle" gap={1}>
-        <Button
-          data-splitbee-event="Previous"
-          data-splitbee-event-type="Code Analysis Example"
-          isDisabled={step === 0}
-          onClick={() => setStep((next) => next - 1)}>
+        <Button isDisabled={step === 0} onClick={() => setStep((next) => next - 1)}>
           Previous
         </Button>
         <TimeoutButton
-          data-splitbee-event="Next"
-          data-splitbee-event-type="Code Analysis Example"
-          data-splitbee-event-finish={steps[step + 2] === undefined ? 'true' : undefined}
           isDisabled={steps[step + 1] === undefined}
           onClick={() => setStep((next) => next + 1)}>
           Next

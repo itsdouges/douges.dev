@@ -45,27 +45,14 @@ function AvatarExample() {
   return (
     <Stack gap={2}>
       <Inline gap={1} align="left">
-        <Button
-          data-splitbee-event="Remove Avatar"
-          data-splitbee-event-type="Avatar Example"
-          isDisabled={count === 1}
-          onClick={() => setCount((prev) => prev - 1)}>
+        <Button isDisabled={count === 1} onClick={() => setCount((prev) => prev - 1)}>
           Remove avatar
         </Button>
-        <TimeoutButton
-          data-splitbee-event="Add Avatar"
-          data-splitbee-event-type="Avatar Example"
-          data-splitbee-event-finish={count === 6 ? true : undefined}
-          isDisabled={count >= 7}
-          onClick={() => setCount((prev) => prev + 1)}>
+        <TimeoutButton isDisabled={count >= 7} onClick={() => setCount((prev) => prev + 1)}>
           Add avatar
         </TimeoutButton>
         <Inline marginLeft="auto" align="right">
-          <Button
-            data-splitbee-event="Constrain Styles"
-            data-splitbee-event-type="Avatar Example"
-            isSelected={constrainStyles}
-            onClick={() => setConstrainStyles((prev) => !prev)}>
+          <Button isSelected={constrainStyles} onClick={() => setConstrainStyles((prev) => !prev)}>
             {styleButtonText}
           </Button>
         </Inline>
