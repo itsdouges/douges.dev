@@ -43,8 +43,8 @@ function AvatarExample() {
   const styleButtonText = constrainStyles ? 'Styles constrained' : 'Constrain styles';
 
   return (
-    <Stack gap={2}>
-      <Inline gap={1} align="left">
+    <Stack gap="regular">
+      <Inline gap="regular" align="left">
         <Button isDisabled={count === 1} onClick={() => setCount((prev) => prev - 1)}>
           Remove avatar
         </Button>
@@ -58,7 +58,7 @@ function AvatarExample() {
         </Inline>
       </Inline>
 
-      <Inline gap={-1}>
+      <Inline gap="-regular">
         {arr.map((_, index) => (
           <Avatar isConstrained={constrainStyles} url={url(index)} key={index} />
         ))}

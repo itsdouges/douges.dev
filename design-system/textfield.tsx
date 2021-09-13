@@ -47,7 +47,7 @@ function Textfield({
       shouldForwardProps
       border="neutral"
       borderRadius="default"
-      padding="medium"
+      padding="regular"
       background={isDisabled ? 'disabled' : 'subtleBorderedNeutral'}>
       <input
         name={name}

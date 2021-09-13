@@ -116,8 +116,8 @@ function ConstrainStyles() {
   const [isConstrained, setIsContstrained] = useState(false);
 
   return (
-    <Stack gap={2}>
-      <Inline gap={1}>
+    <Stack gap="regular">
+      <Inline gap="regular">
         <Button isDisabled={step === 0} onClick={() => setStep((prev) => prev - 1)}>
           Remove prop
         </Button>

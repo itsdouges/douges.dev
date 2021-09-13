@@ -24,7 +24,10 @@ function Section({ children, isSeparated, isSunken }: SectionProps) {
   if (isSunken) {
     return (
       <Box background="sunken">
-        <Box padding="large" css={[styles.section, isSeparated && styles.separated]}>
+        <Box
+          borderRadius="default"
+          padding="medium"
+          css={[styles.section, isSeparated && styles.separated]}>
           {children}
         </Box>
       </Box>
@@ -32,7 +35,10 @@ function Section({ children, isSeparated, isSunken }: SectionProps) {
   }
 
   return (
-    <Box padding="large" css={[styles.section, isSeparated && styles.separated]}>
+    <Box
+      borderRadius="default"
+      padding="medium"
+      css={[styles.section, isSeparated && styles.separated]}>
       {children}
     </Box>
   );

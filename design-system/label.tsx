@@ -9,7 +9,7 @@ interface LabelProps {
 
 function Label({ label, htmlFor, children }: LabelProps) {
   return (
-    <Stack gap={1}>
+    <Stack gap="regular">
       <div>
         <label htmlFor={htmlFor}>
           <Text size="small" color="medium">

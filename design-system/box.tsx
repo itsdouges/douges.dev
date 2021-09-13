@@ -4,6 +4,8 @@ import { ClassNames } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 import { cloneElement, Children } from 'react';
 
+export type SizeScale = keyof typeof paddingTopStyles;
+
 const backgroundStyles = css({
   none: {},
   neutralSubtle: {
@@ -97,14 +99,17 @@ const paddingTopStyles = css({
   small: {
     paddingBlockStart: 4,
   },
-  medium: {
+  regular: {
     paddingBlockStart: 8,
   },
-  large: {
+  medium: {
     paddingBlockStart: 12,
   },
-  xlarge: {
+  large: {
     paddingBlockStart: 16,
+  },
+  xlarge: {
+    paddingBlockStart: 24,
   },
 });
 
@@ -113,14 +118,17 @@ const paddingBottomStyles = css({
   small: {
     paddingBlockEnd: 4,
   },
-  medium: {
+  regular: {
     paddingBlockEnd: 8,
   },
-  large: {
+  medium: {
     paddingBlockEnd: 12,
   },
-  xlarge: {
+  large: {
     paddingBlockEnd: 16,
+  },
+  xlarge: {
+    paddingBlockEnd: 24,
   },
 });
 
@@ -129,14 +137,17 @@ const paddingLeftStyles = css({
   small: {
     paddingInlineStart: 4,
   },
-  medium: {
+  regular: {
     paddingInlineStart: 8,
   },
-  large: {
+  medium: {
     paddingInlineStart: 12,
   },
-  xlarge: {
+  large: {
     paddingInlineStart: 16,
+  },
+  xlarge: {
+    paddingInlineStart: 24,
   },
 });
 
@@ -145,14 +156,17 @@ const paddingRightStyles = css({
   small: {
     paddingInlineEnd: 4,
   },
-  medium: {
+  regular: {
     paddingInlineEnd: 8,
   },
-  large: {
+  medium: {
     paddingInlineEnd: 12,
   },
-  xlarge: {
+  large: {
     paddingInlineEnd: 16,
+  },
+  xlarge: {
+    paddingInlineEnd: 24,
   },
 });
 
@@ -173,13 +187,13 @@ const borderRadiusStyles = css({
 });
 
 export interface PaddingProps {
-  padding?: keyof typeof paddingTopStyles;
-  paddingTop?: keyof typeof paddingTopStyles;
-  paddingRight?: keyof typeof paddingRightStyles;
-  paddingBottom?: keyof typeof paddingBottomStyles;
-  paddingLeft?: keyof typeof paddingLeftStyles;
-  paddingX?: keyof typeof paddingLeftStyles;
-  paddingY?: keyof typeof paddingTopStyles;
+  padding?: SizeScale;
+  paddingTop?: SizeScale;
+  paddingRight?: SizeScale;
+  paddingBottom?: SizeScale;
+  paddingLeft?: SizeScale;
+  paddingX?: SizeScale;
+  paddingY?: SizeScale;
 }
 
 export interface BorderProps {

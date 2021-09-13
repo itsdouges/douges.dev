@@ -1,23 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import css from 'design-system/css';
 import Section from 'design-system/section';
-
-const styles = css({
-  container: {
-    margin: '0 -12px',
-  },
-});
 
 interface ExampleContainerProps {
   children: React.ReactNode;
 }
 
 function ExampleContainer({ children }: ExampleContainerProps) {
-  return (
-    <div css={styles.container}>
-      <Section isSunken>{children}</Section>
-    </div>
-  );
+  return <Section isSunken>{children}</Section>;
 }
 
 export default ExampleContainer;

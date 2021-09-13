@@ -20,9 +20,6 @@ const styles = css({
     backgroundColor: token('color.background.subtleNeutral.resting'),
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3,
-    marginTop: -16,
-    marginLeft: -16,
-    marginRight: -16,
     height: 168,
     position: 'relative',
     overflow: 'hidden',
@@ -38,8 +35,8 @@ interface CardProps {
 
 function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
-    <Box padding="xlarge" shadow="card" background="card" borderRadius="default" css={styles.card}>
-      <Stack gap={2}>
+    <Box padding="medium" shadow="card" background="card" borderRadius="default" css={styles.card}>
+      <Stack gap="large">
         <div css={styles.cardImage}>
           {heroImage && (
             <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
@@ -49,7 +46,7 @@ function Card({ title, tags = [], secondary, heroImage }: CardProps) {
         <Text color="medium" size="small">
           {secondary}
         </Text>
-        <Inline gap={0.5}>
+        <Inline gap="small">
           {tags.map((tag, index) => (
             <Tag key={index}>{tag}</Tag>
           ))}

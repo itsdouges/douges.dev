@@ -46,8 +46,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
           <Box
             shouldForwardProps
             borderRadius="default"
-            paddingX="large"
-            paddingY="medium"
+            paddingX="medium"
+            paddingY="regular"
             background={isDisabled ? 'disabled' : mappedAppearance}>
             <button
               {...props}

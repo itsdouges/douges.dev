@@ -39,8 +39,8 @@ export function MenuItem({ children, href, secondary }: MenuItemProps) {
             css={styles.block}
             shouldForwardProps
             background="transparent"
-            paddingX="xlarge"
-            paddingY="medium">
+            paddingX="medium"
+            paddingY="regular">
             <a target="_blank" rel="noreferrer" href={href} css={styles.reset} {...press}>
               {children}
               {secondary && (
@@ -65,7 +65,7 @@ function DropdownMenu({ children, trigger }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Popup paddingY="medium" isOpen={isOpen} content={() => children}>
+    <Popup paddingY="regular" isOpen={isOpen} content={() => children}>
       {(props) => (
         <Button
           {...props}

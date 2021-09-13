@@ -62,7 +62,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
       <main>
         <div css={styles.hero}>
           <Section>
-            <Stack gap={1}>
+            <Stack gap="regular">
               <Heading level={0}>douges&#8203;.dev</Heading>
               <Text color="medium">
                 <span
@@ -86,9 +86,9 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
 
         {moreBlogs.length > 0 && (
           <Section isSeparated isSunken>
-            <Stack gap={2}>
+            <Stack gap="large">
               <Heading level={2}>There&apos;s more where that came from</Heading>
-              <Grid columns={2} gap={4}>
+              <Grid columns={2} gap="xlarge">
                 {moreBlogs.map((blog, index) => (
                   <Link key={index} href={`/blog/${blog.slug}`} passHref>
                     <A>

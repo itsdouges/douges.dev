@@ -7,6 +7,10 @@ const styles = css({
     flexDirection: 'column',
     width: '100%',
   },
+});
+
+const alignStyles = css({
+  none: {},
   left: {
     textAlign: 'left',
   },
@@ -18,20 +22,36 @@ const styles = css({
   },
 });
 
+const gapStyles = css({
+  none: {},
+  small: {
+    gap: 4,
+  },
+  regular: {
+    gap: 8,
+  },
+  medium: {
+    gap: 12,
+  },
+  large: {
+    gap: 16,
+  },
+  xlarge: {
+    gap: 24,
+  },
+});
+
 interface StackProps {
-  gap: number;
   children: React.ReactNode;
-  textAlign?: 'center' | 'left' | 'right';
+  gap?: keyof typeof gapStyles;
+  textAlign?: 'center' | 'left' | 'right' | 'none';
 }
 
-function Stack({ children, gap = 0, textAlign }: StackProps) {
-  const textAlignStyles = textAlign && styles[textAlign];
+function Stack({ children, gap = 'none', textAlign = 'none' }: StackProps) {
+  const alignStyle = alignStyles[textAlign];
+  const gapStyle = gapStyles[gap];
 
-  return (
-    <div css={[styles.stack, textAlignStyles]} style={{ gap: gap !== 0 ? gap * 8 : undefined }}>
-      {children}
-    </div>
-  );
+  return <div css={[styles.stack, alignStyle, gapStyle]}>{children}</div>;
 }
 
 export default Stack;

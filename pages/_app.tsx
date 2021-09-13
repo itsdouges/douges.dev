@@ -60,13 +60,13 @@ function App({ Component, pageProps, router }: AppProps) {
       </Head>
 
       <header css={styles.header}>
-        <Box shouldForwardProps padding="xlarge">
+        <Box shouldForwardProps padding="large">
           <nav>
             <Inline>
               {isBlogRoute && (
                 <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
               )}
-              <Inline marginLeft="auto" gap={1}>
+              <Inline marginLeft="auto" gap="regular">
                 <DropdownMenu trigger="Links">
                   <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
                     Twitter

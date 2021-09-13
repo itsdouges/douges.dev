@@ -51,7 +51,7 @@ function SignUp() {
   const id = 'mailing-list';
 
   return (
-    <Stack gap={1}>
+    <Stack gap="regular">
       <Heading level={3}>Like it? Come hang again!</Heading>
       <Text as="p">
         Join others and get notified early when new content is available – unsubscribe at any time.
@@ -66,7 +66,7 @@ function SignUp() {
           setIsComplete(true);
         }}>
         <Label htmlFor={id} label="Join the mailing list today">
-          <Inline gap={1}>
+          <Inline gap="regular">
             <Textfield
               isRequired
               isDisabled={isLoading}

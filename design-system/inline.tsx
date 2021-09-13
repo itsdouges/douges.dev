@@ -2,19 +2,51 @@
 import { CSSProperties, Children } from 'react';
 import css from 'design-system/css';
 import { token } from '@atlaskit/tokens';
+import type { SizeScale } from 'design-system/box';
 
 const styles = css({
   inline: {
     display: 'flex',
     flexDirection: 'row',
-    '> *': {
-      marginRight: 'var(--gap)',
-    },
   },
   separator: {
     height: '70%',
     alignSelf: 'center',
     borderRight: `1px solid ${token('color.border.neutral')}`,
+  },
+});
+
+const gapStyles = css({
+  none: {},
+  '-small': {
+    '> *': { marginInlineEnd: -4 },
+  },
+  '-regular': {
+    '> *': { marginInlineEnd: -8 },
+  },
+  '-medium': {
+    '> *': { marginInlineEnd: -12 },
+  },
+  '-large': {
+    '> *': { marginInlineEnd: -16 },
+  },
+  '-xlarge': {
+    '> *': { marginInlineEnd: -24 },
+  },
+  small: {
+    gap: 4,
+  },
+  regular: {
+    gap: 8,
+  },
+  medium: {
+    gap: 12,
+  },
+  large: {
+    gap: 16,
+  },
+  xlarge: {
+    gap: 24,
   },
 });
 
@@ -43,7 +75,7 @@ const justifyStyles = css({
 });
 
 interface InlineProps {
-  gap?: number;
+  gap?: keyof typeof gapStyles;
   children: React.ReactNode;
   align?: 'left' | 'right' | 'center';
   justify?: 'top' | 'middle' | 'bottom';
@@ -55,26 +87,22 @@ interface InlineProps {
 function Inline({
   children,
   align,
-  as: Component = 'div',
   hasSeparator,
   marginLeft,
   justify,
-  gap = 0,
+  as: Component = 'div',
+  gap = 'none',
 }: InlineProps) {
-  const finalGap = gap * 8;
+  const gapStyle = gapStyles[gap];
   const alignStyle = align && alignStyles[align];
   const justifyStyle = justify && justifyStyles[justify];
 
   return (
     <Component
-      css={[styles.inline, alignStyle, justifyStyle]}
-      style={
-        {
-          marginLeft,
-          gap: finalGap > 0 ? finalGap : undefined,
-          '--gap': finalGap < 0 ? `${finalGap}px` : undefined,
-        } as CSSProperties
-      }>
+      css={[styles.inline, alignStyle, justifyStyle, gapStyle]}
+      style={{
+        marginLeft,
+      }}>
       {Children.map(children, (child, index) => {
         if (index + 1 < Children.count(children)) {
           return [child, hasSeparator && <span key={`s-${index}`} css={styles.separator} />];

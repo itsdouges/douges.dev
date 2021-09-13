@@ -11,12 +11,12 @@ import ConstrainStyles from 'components/examples/constrain-styles';
 import CodemodStyles from 'components/examples/codemod-styles';
 import CodeAnalysis from 'components/examples/code-analysis';
 import ExampleContainer from 'components/examples/container';
+import Stack from 'design-system/stack';
 
 const styles = css({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 30,
     fontSize: 18,
     'p,ul,ol': { margin: 0 },
     h2: { marginTop: 50 },
@@ -37,7 +37,11 @@ const components: MDXProviderComponents = {
   CodemodStyles,
   CodeAnalysis,
   wrapper({ children }) {
-    return <div css={styles.wrapper}>{children}</div>;
+    return (
+      <div css={styles.wrapper}>
+        <Stack gap="xlarge">{children}</Stack>
+      </div>
+    );
   },
   hr(props) {
     return <hr {...props} css={styles.hr} />;

@@ -44,8 +44,8 @@ function LinkButton({
           <Box
             shouldForwardProps
             borderRadius="default"
-            paddingX="large"
-            paddingY="medium"
+            paddingX="medium"
+            paddingY="regular"
             background={mappedAppearance}>
             <a
               target={shouldOpenNewWindow ? '_blank' : ''}

@@ -19,7 +19,7 @@ function Tooltip({ children, content }: TooltipProps) {
   return (
     <Popup
       paddingY="small"
-      paddingX="medium"
+      paddingX="regular"
       background="neutralBold"
       isOpen={isOpen}
       content={() => <Text size="tiny">{content}</Text>}>
