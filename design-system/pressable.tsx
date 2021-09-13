@@ -5,6 +5,9 @@ import { token } from '@atlaskit/tokens';
 import usePressable, { UsePressable } from 'lib/use-pressable';
 
 const styles = css({
+  reset: {
+    overflow: 'hidden',
+  },
   pressable: {
     position: 'relative',
     '::before': {
@@ -56,6 +59,7 @@ function Pressable({ children, onClick, isDisabled, pressedAppearance = 'push' }
       {({ css: cn }) =>
         children({
           className: cn(
+            styles.reset,
             !isDisabled && [
               styles.pressable,
               isPressed && styles.pressed,

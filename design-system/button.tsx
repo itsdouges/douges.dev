@@ -12,7 +12,6 @@ const styles = css({
     border: 0,
     fontWeight: 600,
     position: 'relative',
-    overflow: 'hidden',
     flexShrink: 0,
   },
 });

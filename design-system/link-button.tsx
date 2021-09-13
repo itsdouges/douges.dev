@@ -9,7 +9,6 @@ const styles = css({
     fontSize: 16,
     fontWeight: 600,
     position: 'relative',
-    overflow: 'hidden',
     flexShrink: 0,
     ':hover,:active': {
       color: 'inherit',

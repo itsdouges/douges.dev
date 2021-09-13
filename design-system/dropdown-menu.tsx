@@ -12,7 +12,6 @@ const styles = css({
   reset: {
     fontSize: 16,
     position: 'relative',
-    overflow: 'hidden',
     flexShrink: 0,
     ':hover,:active': {
       color: 'inherit',
@@ -21,6 +20,7 @@ const styles = css({
   },
   block: {
     display: 'block',
+    minHeight: 40,
   },
 });
 
@@ -39,7 +39,7 @@ export function MenuItem({ children, href, secondary }: MenuItemProps) {
             css={styles.block}
             shouldForwardProps
             background="transparent"
-            paddingX="large"
+            paddingX="xlarge"
             paddingY="medium">
             <a target="_blank" rel="noreferrer" href={href} css={styles.reset} {...press}>
               {children}
