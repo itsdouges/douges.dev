@@ -3,6 +3,7 @@ import css from 'design-system/css';
 import usePressable from 'lib/use-pressable';
 import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
+import Pressable from 'design-system/pressable';
 
 const styles = css({
   reset: {
@@ -37,28 +38,30 @@ function LinkButton({
   ...props
 }: LinkButtonProps) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
-  const { isActive, buttonProps } = usePressable({ onClick });
 
   return (
-    <FocusRing>
-      <Box
-        shouldForwardProps
-        borderRadius="default"
-        paddingX="large"
-        paddingY="medium"
-        isPressed={isActive}
-        isInteractive
-        background={mappedAppearance}>
-        <a
-          target={shouldOpenNewWindow ? '__blank' : ''}
-          href={href}
-          {...buttonProps}
-          {...props}
-          css={styles.reset}>
-          {children}
-        </a>
-      </Box>
-    </FocusRing>
+    <Pressable onClick={onClick}>
+      {(press) => (
+        <FocusRing>
+          <Box
+            shouldForwardProps
+            borderRadius="default"
+            paddingX="large"
+            paddingY="medium"
+            isInteractive
+            background={mappedAppearance}>
+            <a
+              target={shouldOpenNewWindow ? '__blank' : ''}
+              href={href}
+              {...props}
+              {...press}
+              css={styles.reset}>
+              {children}
+            </a>
+          </Box>
+        </FocusRing>
+      )}
+    </Pressable>
   );
 }
 

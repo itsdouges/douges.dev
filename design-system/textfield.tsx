@@ -15,6 +15,9 @@ const styles = css({
       outline: 'none',
       borderColor: token('color.border.focus'),
     },
+    ':hover,:focus': {
+      backgroundColor: 'transparent',
+    },
   },
 });
 

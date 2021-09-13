@@ -2,45 +2,7 @@
 import css from 'design-system/css';
 import { ClassNames } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
-import { CSSProperties, cloneElement, Children } from 'react';
-
-const styles = css({
-  pressed: {
-    position: 'relative',
-    transform: 'scale(0.95)',
-    '::before': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: token('color.overlay.pressed'),
-    },
-  },
-  hover: {
-    position: 'relative',
-    '::before': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: token('color.overlay.hover'),
-      opacity: 0,
-    },
-    ':hover::before': {
-      opacity: 1,
-    },
-  },
-  borderRadius: {
-    borderRadius: 3,
-    '::before,::after': {
-      borderRadius: 3,
-    },
-  },
-});
+import { cloneElement, Children } from 'react';
 
 const backgroundStyles = css({
   none: {},
@@ -95,20 +57,6 @@ const shadowStyles = css({
   },
   overlay: {
     boxShadow: token('shadow.overlay'),
-  },
-});
-
-const backgroundUniqueHoverStyles = css({
-  subtleBorderedNeutral: {
-    ':hover,:focus': {
-      backgroundColor: 'transparent',
-    },
-  },
-  card: {
-    ':hover': {
-      backgroundColor: token('color.background.overlay'),
-      boxShadow: token('shadow.overlay'),
-    },
   },
 });
 
@@ -186,11 +134,14 @@ const borderRadiusStyles = css({
   none: {},
   default: {
     borderRadius: 3,
+    '::before,::after': {
+      borderRadius: 3,
+    },
   },
 });
 
 interface BoxProps {
-  children: React.ReactNode;
+  children: JSX.Element;
   background?: keyof typeof backgroundStyles;
   padding?: keyof typeof paddingTopStyles;
   paddingTop?: keyof typeof paddingTopStyles;
@@ -216,8 +167,6 @@ function Box({
   paddingLeft,
   paddingX,
   paddingY,
-  isPressed,
-  isInteractive: isHoverable,
   shouldForwardProps,
   hasBorder,
   className,
@@ -233,13 +182,11 @@ function Box({
   const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding];
   const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding];
   const borderRadiusStyle = borderRadiusStyles[borderRadius];
-  const hoverStyle = (backgroundUniqueHoverStyles as any)[background] || styles.hover;
   const borderStyle = (borderStyles as any)[background] || borderStyles.default;
-  const isDisabled = background === 'disabled';
 
   return (
     <ClassNames>
-      {({ css: cn }) => {
+      {({ css: cn, cx }) => {
         const boxClass = cn([
           backgroundStyle,
           paddingTopStyle,
@@ -248,15 +195,13 @@ function Box({
           paddingLeftStyle,
           borderRadiusStyle,
           shadowStyle,
-          isHoverable && !isDisabled && hoverStyle,
           hasBorder && borderStyle,
-          isPressed && !isDisabled && styles.pressed,
           className,
         ]);
 
         if (shouldForwardProps) {
-          return cloneElement(Children.only(children as JSX.Element), {
-            className: boxClass,
+          return cloneElement(Children.only(children), {
+            className: cx([boxClass, children.props.className]),
           });
         }
 

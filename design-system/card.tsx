@@ -8,6 +8,12 @@ import Box from 'design-system/box';
 import Stack from 'design-system/stack';
 
 const styles = css({
+  card: {
+    ':hover': {
+      backgroundColor: token('color.background.overlay'),
+      boxShadow: token('shadow.overlay'),
+    },
+  },
   cardImage: {
     backgroundColor: token('color.background.subtleNeutral.resting'),
     borderTopLeftRadius: 3,
@@ -30,7 +36,7 @@ interface CardProps {
 
 function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
-    <Box padding="large" background="card" isInteractive borderRadius="default">
+    <Box padding="large" background="card" isInteractive borderRadius="default" css={styles.card}>
       <Stack gap={2}>
         <div css={styles.cardImage}>
           {heroImage && (

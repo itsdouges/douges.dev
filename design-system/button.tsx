@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { token } from '@atlaskit/tokens';
 import css from 'design-system/css';
-import usePressable from 'lib/use-pressable';
+import Pressable from 'design-system/pressable';
 import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
 
@@ -36,23 +35,25 @@ function Button({
   ...props
 }: ButtonProps) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
-  const { isActive, buttonProps } = usePressable({ onClick });
 
   return (
-    <FocusRing>
-      <Box
-        shouldForwardProps
-        borderRadius="default"
-        paddingX="large"
-        paddingY="medium"
-        isPressed={isActive}
-        isInteractive
-        background={isDisabled ? 'disabled' : mappedAppearance}>
-        <button {...buttonProps} {...props} type={type} disabled={isDisabled} css={styles.reset}>
-          {children}
-        </button>
-      </Box>
-    </FocusRing>
+    <Pressable isDisabled={isDisabled} onClick={onClick}>
+      {(pressable) => (
+        <FocusRing>
+          <Box
+            shouldForwardProps
+            borderRadius="default"
+            paddingX="large"
+            paddingY="medium"
+            isInteractive
+            background={isDisabled ? 'disabled' : mappedAppearance}>
+            <button {...props} {...pressable} type={type} disabled={isDisabled} css={styles.reset}>
+              {children}
+            </button>
+          </Box>
+        </FocusRing>
+      )}
+    </Pressable>
   );
 }
 
