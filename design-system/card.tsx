@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Text from 'design-system/text';
 import Box from 'design-system/box';
 import Stack from 'design-system/stack';
+import Tag from 'design-system/tag';
+import Inline from 'design-system/inline';
 
 const styles = css({
   card: {
@@ -36,7 +38,7 @@ interface CardProps {
 
 function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
-    <Box padding="large" background="card" borderRadius="default" css={styles.card}>
+    <Box padding="xlarge" shadow="card" background="card" borderRadius="default" css={styles.card}>
       <Stack gap={2}>
         <div css={styles.cardImage}>
           {heroImage && (
@@ -47,11 +49,11 @@ function Card({ title, tags = [], secondary, heroImage }: CardProps) {
         <Text color="medium" size="small">
           {secondary}
         </Text>
-        {tags.map((tag, index) => (
-          <Text color="low" size="tiny" key={index}>
-            {tag}
-          </Text>
-        ))}
+        <Inline gap={0.5}>
+          {tags.map((tag, index) => (
+            <Tag key={index}>{tag}</Tag>
+          ))}
+        </Inline>
       </Stack>
     </Box>
   );

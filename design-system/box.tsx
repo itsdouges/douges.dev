@@ -15,15 +15,19 @@ const backgroundStyles = css({
     backgroundColor: 'transparent',
   },
   body: {
+    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.default'),
   },
   sunken: {
+    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.sunken'),
   },
   card: {
+    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.card'),
   },
   overlay: {
+    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.overlay'),
   },
   disabled: {
@@ -60,10 +64,31 @@ const shadowStyles = css({
   },
 });
 
-const borderStyles = css({
+const borderTopStyles = css({
   none: {},
   neutral: {
-    border: `2px solid ${token('color.border.neutral')}`,
+    borderBlockStart: `2px solid ${token('color.border.neutral')}`,
+  },
+});
+
+const borderRightStyles = css({
+  none: {},
+  neutral: {
+    borderInlineEnd: `2px solid ${token('color.border.neutral')}`,
+  },
+});
+
+const borderBottomStyles = css({
+  none: {},
+  neutral: {
+    borderBlockEnd: `2px solid ${token('color.border.neutral')}`,
+  },
+});
+
+const borderLeftStyles = css({
+  none: {},
+  neutral: {
+    borderInlineStart: `2px solid ${token('color.border.neutral')}`,
   },
 });
 
@@ -139,6 +164,12 @@ const borderRadiusStyles = css({
       borderRadius: 3,
     },
   },
+  round: {
+    borderRadius: 8,
+    '::before,::after': {
+      borderRadius: 8,
+    },
+  },
 });
 
 export interface PaddingProps {
@@ -151,12 +182,21 @@ export interface PaddingProps {
   paddingY?: keyof typeof paddingTopStyles;
 }
 
-interface BoxProps extends PaddingProps {
+export interface BorderProps {
+  border?: keyof typeof borderTopStyles;
+  borderTop?: keyof typeof borderTopStyles;
+  borderRight?: keyof typeof borderRightStyles;
+  borderBottom?: keyof typeof borderBottomStyles;
+  borderLeft?: keyof typeof borderLeftStyles;
+  borderX?: keyof typeof borderLeftStyles;
+  borderY?: keyof typeof borderTopStyles;
+}
+
+interface BoxProps extends PaddingProps, BorderProps {
   children: React.ReactNode;
   background?: keyof typeof backgroundStyles;
   borderRadius?: keyof typeof borderRadiusStyles;
   shadow?: keyof typeof shadowStyles;
-  border?: keyof typeof borderStyles;
   shouldForwardProps?: boolean;
   className?: string;
 }
@@ -171,6 +211,12 @@ function Box({
   paddingY,
   shouldForwardProps,
   className,
+  borderBottom,
+  borderLeft,
+  borderRight,
+  borderTop,
+  borderX,
+  borderY,
   border = 'none',
   background = 'none',
   borderRadius = 'none',
@@ -184,7 +230,10 @@ function Box({
   const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding];
   const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding];
   const borderRadiusStyle = borderRadiusStyles[borderRadius];
-  const borderStyle = borderStyles[border];
+  const borderTopStyle = borderTopStyles[borderTop || borderY || border];
+  const borderRightStyle = borderRightStyles[borderRight || borderX || border];
+  const borderBottomStyle = borderBottomStyles[borderBottom || borderY || border];
+  const borderLeftStyle = borderLeftStyles[borderLeft || borderX || border];
 
   return (
     <ClassNames>
@@ -197,7 +246,10 @@ function Box({
           paddingLeftStyle,
           borderRadiusStyle,
           shadowStyle,
-          borderStyle,
+          borderTopStyle,
+          borderRightStyle,
+          borderBottomStyle,
+          borderLeftStyle,
           className,
         ]);
 
