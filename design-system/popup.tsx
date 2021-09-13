@@ -6,7 +6,6 @@ import Portal from 'design-system/portal';
 
 const styles = css({
   popup: {
-    display: 'inline-flex',
     position: 'absolute',
   },
 });

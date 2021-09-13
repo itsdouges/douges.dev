@@ -68,8 +68,12 @@ function App({ Component, pageProps, router }: AppProps) {
               )}
               <Inline marginLeft="auto" gap={1}>
                 <DropdownMenu trigger="Links">
-                  <MenuItem href="https://twitter.com/itsdouges">Twitter</MenuItem>
-                  <MenuItem href="https://github.com/madou/douges.dev">Github</MenuItem>
+                  <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
+                    Twitter
+                  </MenuItem>
+                  <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
+                    Github
+                  </MenuItem>
                 </DropdownMenu>
                 <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
               </Inline>

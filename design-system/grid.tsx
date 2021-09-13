@@ -26,11 +26,11 @@ interface GridProps {
   children: React.ReactNode;
 }
 
-function Grid({ columns, children, gap }: GridProps) {
+function Grid({ columns, children, gap = 0 }: GridProps) {
   const columnStyles = styles[columns];
 
   return (
-    <div style={{ gap: gap * 8 }} css={[styles.grid, columnStyles]}>
+    <div style={{ gap: gap !== 0 ? gap * 8 : undefined }} css={[styles.grid, columnStyles]}>
       {children}
     </div>
   );

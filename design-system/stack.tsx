@@ -24,11 +24,11 @@ interface StackProps {
   textAlign?: 'center' | 'left' | 'right';
 }
 
-function Stack({ children, gap, textAlign }: StackProps) {
+function Stack({ children, gap = 0, textAlign }: StackProps) {
   const textAlignStyles = textAlign && styles[textAlign];
 
   return (
-    <div css={[styles.stack, textAlignStyles]} style={{ gap: gap * 8 }}>
+    <div css={[styles.stack, textAlignStyles]} style={{ gap: gap !== 0 ? gap * 8 : undefined }}>
       {children}
     </div>
   );

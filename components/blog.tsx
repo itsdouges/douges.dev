@@ -18,7 +18,7 @@ const styles = css({
   heroImage: {
     height: 250,
     position: 'relative',
-    margin: '0 -16px',
+    margin: '0 -12px',
     '@media screen and (min-width: 1000px)': {
       margin: '0 -64px',
     },

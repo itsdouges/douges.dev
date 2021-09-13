@@ -4,7 +4,7 @@ import Section from 'design-system/section';
 
 const styles = css({
   container: {
-    margin: '0 -16px',
+    margin: '0 -12px',
   },
 });
 
