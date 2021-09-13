@@ -23,7 +23,6 @@ const styles = css({
   },
   pressed: {
     position: 'relative',
-    transform: 'scale(0.95)',
     '::before': {
       content: '""',
       position: 'absolute',
@@ -36,6 +35,9 @@ const styles = css({
   },
   push: {
     transform: 'scale(0.95)',
+  },
+  static: {
+    transform: 'scale(1)',
   },
 });
 
@@ -58,6 +60,7 @@ function Pressable({ children, onClick, isDisabled, pressedAppearance = 'push' }
               styles.pressable,
               isPressed && styles.pressed,
               isPressed && pressedAppearance === 'push' && styles.push,
+              isPressed && pressedAppearance === 'static' && styles.static,
             ]
           ),
           ...buttonProps,

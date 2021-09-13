@@ -3,6 +3,7 @@ import css from 'design-system/css';
 import Pressable from 'design-system/pressable';
 import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
+import { forwardRef } from 'react';
 
 const styles = css({
   reset: {
@@ -25,15 +26,18 @@ export interface ButtonProps {
   isSelected?: boolean;
 }
 
-function Button({
-  children,
-  isSelected,
-  onClick,
-  appearance = 'neutralSubtle',
-  type = 'button',
-  isDisabled,
-  ...props
-}: ButtonProps) {
+const Button = forwardRef(function Button(
+  {
+    children,
+    isSelected,
+    onClick,
+    appearance = 'neutralSubtle',
+    type = 'button',
+    isDisabled,
+    ...props
+  }: ButtonProps,
+  ref
+) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
 
   return (
@@ -47,7 +51,13 @@ function Button({
             paddingY="medium"
             isInteractive
             background={isDisabled ? 'disabled' : mappedAppearance}>
-            <button {...props} {...pressable} type={type} disabled={isDisabled} css={styles.reset}>
+            <button
+              {...props}
+              {...pressable}
+              ref={ref}
+              type={type}
+              disabled={isDisabled}
+              css={styles.reset}>
               {children}
             </button>
           </Box>
@@ -55,6 +65,6 @@ function Button({
       )}
     </Pressable>
   );
-}
+});
 
 export default Button;

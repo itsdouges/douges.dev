@@ -46,7 +46,7 @@ function Textfield({
     <Box
       shouldForwardProps
       isInteractive
-      hasBorder
+      border="neutral"
       borderRadius="default"
       padding="medium"
       background={isDisabled ? 'disabled' : 'subtleBorderedNeutral'}>

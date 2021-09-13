@@ -61,7 +61,8 @@ const shadowStyles = css({
 });
 
 const borderStyles = css({
-  default: {
+  none: {},
+  neutral: {
     border: `2px solid ${token('color.border.neutral')}`,
   },
 });
@@ -140,9 +141,7 @@ const borderRadiusStyles = css({
   },
 });
 
-interface BoxProps {
-  children: JSX.Element;
-  background?: keyof typeof backgroundStyles;
+export interface PaddingProps {
   padding?: keyof typeof paddingTopStyles;
   paddingTop?: keyof typeof paddingTopStyles;
   paddingRight?: keyof typeof paddingRightStyles;
@@ -150,11 +149,14 @@ interface BoxProps {
   paddingLeft?: keyof typeof paddingLeftStyles;
   paddingX?: keyof typeof paddingLeftStyles;
   paddingY?: keyof typeof paddingTopStyles;
+}
+
+interface BoxProps extends PaddingProps {
+  children: React.ReactNode;
+  background?: keyof typeof backgroundStyles;
   borderRadius?: keyof typeof borderRadiusStyles;
   shadow?: keyof typeof shadowStyles;
-  isPressed?: boolean;
-  isInteractive?: boolean;
-  hasBorder?: boolean;
+  border?: keyof typeof borderStyles;
   shouldForwardProps?: boolean;
   className?: string;
 }
@@ -168,8 +170,8 @@ function Box({
   paddingX,
   paddingY,
   shouldForwardProps,
-  hasBorder,
   className,
+  border = 'none',
   background = 'none',
   borderRadius = 'none',
   padding = 'none',
@@ -182,7 +184,7 @@ function Box({
   const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding];
   const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding];
   const borderRadiusStyle = borderRadiusStyles[borderRadius];
-  const borderStyle = (borderStyles as any)[background] || borderStyles.default;
+  const borderStyle = borderStyles[border];
 
   return (
     <ClassNames>
@@ -195,13 +197,19 @@ function Box({
           paddingLeftStyle,
           borderRadiusStyle,
           shadowStyle,
-          hasBorder && borderStyle,
+          borderStyle,
           className,
         ]);
 
         if (shouldForwardProps) {
-          return cloneElement(Children.only(children), {
-            className: cx([boxClass, children.props.className]),
+          if (typeof children !== 'object') {
+            throw new Error();
+          }
+
+          const element = children as JSX.Element;
+
+          return cloneElement(Children.only(element), {
+            className: cx([boxClass, element.props.className]),
           });
         }
 

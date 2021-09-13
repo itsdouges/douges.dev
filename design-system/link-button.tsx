@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import usePressable from 'lib/use-pressable';
 import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
 import Pressable from 'design-system/pressable';
@@ -48,10 +47,10 @@ function LinkButton({
             borderRadius="default"
             paddingX="large"
             paddingY="medium"
-            isInteractive
             background={mappedAppearance}>
             <a
-              target={shouldOpenNewWindow ? '__blank' : ''}
+              target={shouldOpenNewWindow ? '_blank' : ''}
+              rel="noreferrer"
               href={href}
               {...props}
               {...press}

@@ -12,15 +12,10 @@ import components from 'components/blog-mdx-components';
 import { token } from '@atlaskit/tokens';
 import LayoutBlog from 'components/layout-blog';
 import Box from 'design-system/box';
+import DropdownMenu, { MenuItem } from 'design-system/dropdown-menu';
+import Inline from 'design-system/inline';
 
 const styles = css({
-  navBar: {
-    position: 'relative',
-    display: 'flex',
-    '> :last-child': {
-      marginLeft: 'auto',
-    },
-  },
   header: {
     borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
   },
@@ -66,11 +61,19 @@ function App({ Component, pageProps, router }: AppProps) {
 
       <header css={styles.header}>
         <Box shouldForwardProps padding="xlarge">
-          <nav css={styles.navBar}>
-            {isBlogRoute && (
-              <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
-            )}
-            <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
+          <nav>
+            <Inline>
+              {isBlogRoute && (
+                <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
+              )}
+              <Inline marginLeft="auto" gap={1}>
+                <DropdownMenu trigger="Links">
+                  <MenuItem href="https://twitter.com/itsdouges">Twitter</MenuItem>
+                  <MenuItem href="https://github.com/madou/douges.dev">Github</MenuItem>
+                </DropdownMenu>
+                <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
+              </Inline>
+            </Inline>
           </nav>
         </Box>
       </header>

@@ -49,15 +49,24 @@ interface InlineProps {
   justify?: 'top' | 'middle' | 'bottom';
   marginLeft?: string;
   hasSeparator?: boolean;
+  as?: 'div' | 'nav';
 }
 
-function Inline({ children, align, hasSeparator, marginLeft, justify, gap = 0 }: InlineProps) {
+function Inline({
+  children,
+  align,
+  as: Component = 'div',
+  hasSeparator,
+  marginLeft,
+  justify,
+  gap = 0,
+}: InlineProps) {
   const finalGap = gap * 8;
   const alignStyle = align && alignStyles[align];
   const justifyStyle = justify && justifyStyles[justify];
 
   return (
-    <div
+    <Component
       css={[styles.inline, alignStyle, justifyStyle]}
       style={
         {
@@ -73,7 +82,7 @@ function Inline({ children, align, hasSeparator, marginLeft, justify, gap = 0 }:
 
         return child;
       })}
-    </div>
+    </Component>
   );
 }
 

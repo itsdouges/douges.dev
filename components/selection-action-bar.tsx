@@ -44,6 +44,7 @@ function SelectionActionBar({ children, actions }: SelectionActionBarProps) {
     <div onMouseUp={onMouseUp} ref={containerRef}>
       {children}
       <Popup
+        padding="small"
         isOpen={isHighlighted}
         content={() => (
           <Inline hasSeparator>{actions({ selection: selectedText.current.trim() })}</Inline>

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
 import { useState, useCallback, useRef, useEffect } from 'react';
-import Box from 'design-system/box';
+import Box, { PaddingProps } from 'design-system/box';
 import Portal from 'design-system/portal';
 
 const styles = css({
@@ -11,7 +11,7 @@ const styles = css({
   },
 });
 
-interface PopupProps {
+interface PopupProps extends PaddingProps {
   children: (props: { ref: React.MutableRefObject<any> }) => React.ReactNode;
   content: () => React.ReactNode;
   isOpen: boolean;
@@ -24,7 +24,7 @@ interface Position {
   height: number;
 }
 
-function Popup({ children, content, background = 'overlay', isOpen }: PopupProps) {
+function Popup({ children, content, background = 'overlay', isOpen, ...props }: PopupProps) {
   const [position, setPosition] = useState<undefined | Position>();
   const targetRef = useRef<any>(null);
   const calculatePosition = useCallback(() => {
@@ -52,11 +52,11 @@ function Popup({ children, content, background = 'overlay', isOpen }: PopupProps
       {isOpen && position && (
         <Portal>
           <Box
+            {...props}
             shadow="overlay"
             borderRadius="default"
             shouldForwardProps
-            background={background}
-            padding="small">
+            background={background}>
             <div
               style={{
                 top: position.top,
