@@ -45,7 +45,6 @@ function Textfield({
   return (
     <Box
       shouldForwardProps
-      isInteractive
       border="neutral"
       borderRadius="default"
       padding="medium"

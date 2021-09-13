@@ -26,7 +26,7 @@ export interface ButtonProps {
   isSelected?: boolean;
 }
 
-const Button = forwardRef(function Button(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     children,
     isSelected,
@@ -35,7 +35,7 @@ const Button = forwardRef(function Button(
     type = 'button',
     isDisabled,
     ...props
-  }: ButtonProps,
+  },
   ref
 ) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
@@ -49,7 +49,6 @@ const Button = forwardRef(function Button(
             borderRadius="default"
             paddingX="large"
             paddingY="medium"
-            isInteractive
             background={isDisabled ? 'disabled' : mappedAppearance}>
             <button
               {...props}
