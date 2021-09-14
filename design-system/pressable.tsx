@@ -7,6 +7,8 @@ import usePressable, { UsePressable } from 'lib/use-pressable';
 const styles = css({
   reset: {
     overflow: 'hidden',
+    border: 0,
+    margin: 0,
   },
   pressable: {
     position: 'relative',

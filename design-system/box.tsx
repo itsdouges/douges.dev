@@ -2,7 +2,7 @@
 import css from 'design-system/css';
 import { ClassNames } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
-import { cloneElement, Children } from 'react';
+import { cloneElement, Children, CSSProperties } from 'react';
 
 export type SizeScale = keyof typeof paddingTopStyles;
 
@@ -213,6 +213,7 @@ interface BoxProps extends PaddingProps, BorderProps {
   shadow?: keyof typeof shadowStyles;
   shouldForwardProps?: boolean;
   className?: string;
+  style?: CSSProperties;
 }
 
 function Box({
@@ -231,6 +232,7 @@ function Box({
   borderTop,
   borderX,
   borderY,
+  style,
   border = 'none',
   background = 'none',
   borderRadius = 'none',
@@ -279,7 +281,11 @@ function Box({
           });
         }
 
-        return <div className={boxClass}>{children}</div>;
+        return (
+          <div style={style} className={boxClass}>
+            {children}
+          </div>
+        );
       }}
     </ClassNames>
   );

@@ -2,6 +2,14 @@
 import { token } from '@atlaskit/tokens';
 import css from 'design-system/css';
 
+const styles = css({
+  truncate: {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+});
+
 const textStyles = css({
   regular: {
     fontSize: 18,
@@ -15,6 +23,9 @@ const textStyles = css({
     fontSize: 14,
     margin: 0,
   },
+  forAnts: {
+    fontSize: 11,
+  },
 });
 
 const colorStyles = css({
@@ -27,18 +38,59 @@ const colorStyles = css({
   inherit: {},
 });
 
+const weightStyles = css({
+  bold: {
+    fontWeight: 500,
+  },
+  bolder: {
+    fontWeight: 700,
+  },
+  regular: {},
+});
+
+const textTransformStyles = css({
+  none: {},
+  uppercase: {
+    textTransform: 'uppercase',
+  },
+});
+
 interface TextProps {
   children: React.ReactNode;
   as?: 'span' | 'div' | 'p';
-  color?: 'low' | 'medium' | 'high' | 'inherit' | 'warning' | 'success' | 'danger';
-  size?: 'tiny' | 'small' | 'regular';
+  color?: keyof typeof colorStyles;
+  size?: keyof typeof textStyles;
+  weight?: keyof typeof weightStyles;
+  transform?: keyof typeof textTransformStyles;
+  shouldTruncate?: boolean;
 }
 
-function Text({ children, as: Markup = 'span', color = 'inherit', size = 'regular' }: TextProps) {
+function Text({
+  children,
+  as: Markup = 'span',
+  color = 'inherit',
+  size = 'regular',
+  weight = 'regular',
+  transform = 'none',
+  shouldTruncate,
+}: TextProps) {
   const colorStyle = colorStyles[color];
   const textStyle = textStyles[size];
+  const weightStyle = weightStyles[weight];
+  const textTransformStyle = textTransformStyles[transform];
 
-  return <Markup css={[textStyle, colorStyle]}>{children}</Markup>;
+  return (
+    <Markup
+      css={[
+        textStyle,
+        shouldTruncate && styles.truncate,
+        colorStyle,
+        weightStyle,
+        textTransformStyle,
+      ]}>
+      {children}
+    </Markup>
+  );
 }
 
 export default Text;
