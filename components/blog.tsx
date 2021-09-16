@@ -43,7 +43,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
 
   return (
     <article>
-      <Stack gap="xlarge">
+      <Stack gap="xxxlarge">
         <Box shouldForwardProps background="neutralSubtle" borderRadius="default">
           <div css={styles.heroImage}>
             {heroImage && (

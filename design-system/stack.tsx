@@ -39,6 +39,12 @@ const gapStyles = css({
   xlarge: {
     gap: 24,
   },
+  xxlarge: {
+    gap: 40,
+  },
+  xxxlarge: {
+    gap: 52,
+  },
 });
 
 interface StackProps {

@@ -19,8 +19,8 @@ const styles = css({
     flexDirection: 'column',
     fontSize: 18,
     'p,ul,ol': { margin: 0 },
-    h2: { marginTop: 50 },
-    h3: { marginTop: 30 },
+    h2: { marginTop: 40 },
+    h3: { marginTop: 32 },
   },
   hr: {
     border: 0,
