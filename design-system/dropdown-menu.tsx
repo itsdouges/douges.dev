@@ -4,7 +4,7 @@ import Popup from 'design-system/popup';
 import Pressable from 'design-system/pressable';
 import Box from 'design-system/box';
 import Button from 'design-system/button';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import FocusRing from 'design-system/focus-ring';
 import Text from 'design-system/text';
 
@@ -30,31 +30,41 @@ interface MenuItemProps {
   secondary?: React.ReactNode;
 }
 
-export function MenuItem({ children, href, secondary }: MenuItemProps) {
-  return (
-    <Pressable pressedAppearance="static">
-      {(press) => (
-        <FocusRing>
-          <Box
-            css={styles.block}
-            shouldForwardProps
-            background="transparent"
-            paddingX="medium"
-            paddingY="regular">
-            <a target="_blank" rel="noreferrer" href={href} css={styles.reset} {...press}>
-              {children}
-              {secondary && (
-                <Text as="div" size="tiny" color="low">
-                  {secondary}
-                </Text>
-              )}
-            </a>
-          </Box>
-        </FocusRing>
-      )}
-    </Pressable>
-  );
-}
+export const MenuItem = forwardRef<HTMLAnchorElement, any>(
+  ({ children, href, secondary }: MenuItemProps, ref) => {
+    return (
+      <Pressable pressedAppearance="static">
+        {(press) => (
+          <FocusRing>
+            <Box
+              css={styles.block}
+              shouldForwardProps
+              background="transparent"
+              paddingX="medium"
+              paddingY="regular">
+              <a
+                ref={ref}
+                target="_blank"
+                rel="noreferrer"
+                href={href}
+                css={styles.reset}
+                {...press}>
+                {children}
+                {secondary && (
+                  <Text as="div" size="tiny" color="low">
+                    {secondary}
+                  </Text>
+                )}
+              </a>
+            </Box>
+          </FocusRing>
+        )}
+      </Pressable>
+    );
+  }
+);
+
+MenuItem.displayName = 'MenuItem';
 
 interface DropdownMenuProps {
   children: React.ReactNode;

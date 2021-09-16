@@ -1,20 +1,18 @@
 import Popup from 'design-system/popup';
 import Text from 'design-system/text';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useState, useRef } from 'react';
+import useEvent from 'lib/use-event';
+import mergeRefs from 'lib/merge-refs';
 
 interface TooltipProps {
   content: React.ReactNode;
-  children: (props: {
-    ref: React.Ref<any>;
-    onMouseEnter: MouseEventHandler;
-    onMouseOut: MouseEventHandler;
-  }) => React.ReactNode;
+  children: (props: { ref: React.Ref<any> }) => React.ReactNode;
 }
 
 function Tooltip({ children, content }: TooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const onMouseEnter: MouseEventHandler = () => setIsOpen(true);
-  const onMouseOut: MouseEventHandler = () => setIsOpen(false);
+  const refOne = useEvent('mouseenter', () => setIsOpen(true));
+  const refTwo = useEvent('mouseout', () => setIsOpen(false));
 
   return (
     <Popup
@@ -23,7 +21,7 @@ function Tooltip({ children, content }: TooltipProps) {
       background="neutralBold"
       isOpen={isOpen}
       content={() => <Text size="tiny">{content}</Text>}>
-      {({ ref }) => children({ ref, onMouseEnter, onMouseOut })}
+      {({ ref }) => children({ ref: mergeRefs(refOne, refTwo, ref) })}
     </Popup>
   );
 }
