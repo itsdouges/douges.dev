@@ -61,25 +61,23 @@ function App({ Component, pageProps, router }: AppProps) {
       </Head>
 
       <header css={styles.header}>
-        <Box shouldForwardProps padding="large">
-          <nav>
-            <Inline>
-              {isBlogRoute && (
-                <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
-              )}
-              <Inline marginLeft="auto" gap="regular">
-                <DropdownMenu trigger="Links">
-                  <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
-                    Twitter
-                  </MenuItem>
-                  <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
-                    Github
-                  </MenuItem>
-                </DropdownMenu>
-                <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
-              </Inline>
+        <Box as="nav" padding="large">
+          <Inline>
+            {isBlogRoute && (
+              <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
+            )}
+            <Inline marginLeft="auto" gap="regular">
+              <DropdownMenu trigger="Links">
+                <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
+                  Twitter
+                </MenuItem>
+                <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
+                  Github
+                </MenuItem>
+              </DropdownMenu>
+              <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
             </Inline>
-          </nav>
+          </Inline>
         </Box>
       </header>
 

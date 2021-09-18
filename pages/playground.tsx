@@ -1,29 +1,23 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import Box from 'design-system/box';
 import Text from 'design-system/text';
 import Inline from 'design-system/inline';
 import Pressable from 'design-system/pressable';
-
-const styles = css({
-  display: 'inline-flex',
-});
+import Tooltip from 'design-system/tooltip';
 
 function Lozenge({ children }: React.PropsWithChildren<{}>) {
   return (
     <Pressable pressedAppearance="static">
       {(press) => (
         <Box
-          shouldForwardProps
+          as="button"
           paddingX="small"
           borderRadius="default"
           background="neutralSubtle"
-          css={styles}>
-          <button {...press}>
-            <Text size="forAnts" weight="bolder" transform="uppercase">
-              {children}
-            </Text>
-          </button>
+          display="inline flex"
+          {...press}>
+          <Text size="smallest" weight="bolder" transform="uppercase">
+            {children}
+          </Text>
         </Box>
       )}
     </Pressable>
@@ -33,7 +27,9 @@ function Lozenge({ children }: React.PropsWithChildren<{}>) {
 function Playground() {
   return (
     <Inline gap="regular">
-      <Lozenge>Hello world</Lozenge>
+      <Tooltip content="Hello">
+        <Lozenge>Hello world</Lozenge>
+      </Tooltip>
       <Lozenge>Hello world</Lozenge>
       <Lozenge>Hello world</Lozenge>
       <Lozenge>Hello world</Lozenge>

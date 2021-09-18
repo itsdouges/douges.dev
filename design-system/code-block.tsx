@@ -88,10 +88,8 @@ interface CodeBlockProps {
 function CodeBlock({ children = '' }: CodeBlockProps) {
   const root = refractor.highlight(children, 'jsx');
   return (
-    <Box shouldForwardProps padding="medium" background="body">
-      <pre css={codeBlockStyles}>
-        <code>{root.children.map(toJSX)}</code>
-      </pre>
+    <Box css={codeBlockStyles} as="pre" padding="medium" background="body">
+      <code>{root.children.map(toJSX)}</code>
     </Box>
   );
 }

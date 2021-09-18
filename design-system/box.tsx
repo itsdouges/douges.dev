@@ -2,7 +2,7 @@
 import css from 'design-system/css';
 import { ClassNames } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
-import { cloneElement, Children, CSSProperties } from 'react';
+import { AllHTMLAttributes, ReactHTML, forwardRef, ForwardedRef, ReactElement } from 'react';
 
 export type SizeScale = keyof typeof paddingTopStyles;
 
@@ -186,6 +186,38 @@ const borderRadiusStyles = css({
   },
 });
 
+const displayStyles = css({
+  'block flow': {
+    display: 'block',
+  },
+  'block flex': {
+    display: 'flex',
+  },
+  'inline flex': {
+    display: 'inline-flex',
+  },
+  'block grid': {
+    display: 'grid',
+  },
+  'inline grid': {
+    display: 'inline-grid',
+  },
+});
+
+const localResetStyles = css({
+  div: {},
+  button: {
+    border: 0,
+    margin: 0,
+  },
+  a: {
+    ':hover,:active': {
+      color: 'inherit',
+      textDecoration: 'none',
+    },
+  },
+});
+
 export interface PaddingProps {
   padding?: SizeScale;
   paddingTop?: SizeScale;
@@ -206,39 +238,49 @@ export interface BorderProps {
   borderY?: keyof typeof borderTopStyles;
 }
 
-interface BoxProps extends PaddingProps, BorderProps {
-  children: React.ReactNode;
+interface BoxProps<TElement extends keyof ReactHTML> extends PaddingProps, BorderProps {
+  children?: React.ReactNode;
   background?: keyof typeof backgroundStyles;
   borderRadius?: keyof typeof borderRadiusStyles;
   shadow?: keyof typeof shadowStyles;
-  shouldForwardProps?: boolean;
+  display?: keyof typeof displayStyles;
   className?: string;
-  style?: CSSProperties;
+  as?: TElement;
 }
 
-function Box({
-  children,
-  paddingTop,
-  paddingRight,
-  paddingBottom,
-  paddingLeft,
-  paddingX,
-  paddingY,
-  shouldForwardProps,
-  className,
-  borderBottom,
-  borderLeft,
-  borderRight,
-  borderTop,
-  borderX,
-  borderY,
-  style,
-  border = 'none',
-  background = 'none',
-  borderRadius = 'none',
-  padding = 'none',
-  shadow = 'none',
-}: BoxProps) {
+type BoxHTMLProps = Omit<
+  AllHTMLAttributes<HTMLElement>,
+  'className' | 'width' | 'height' | 'size' | 'marginWidth' | 'marginHeight' | 'cellPadding' | 'as'
+>;
+
+function Box<TElement extends keyof ReactHTML = 'div'>(
+  {
+    children,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+    paddingX,
+    paddingY,
+    borderBottom,
+    borderLeft,
+    borderRight,
+    borderTop,
+    borderX,
+    borderY,
+    display,
+    border = 'none',
+    background = 'none',
+    borderRadius = 'none',
+    padding = 'none',
+    shadow = 'none',
+    className,
+    as: AsProp,
+    ...props
+  }: BoxProps<TElement> & BoxHTMLProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
+  const Component = (AsProp || 'div') as 'div';
   const backgroundStyle = backgroundStyles[background];
   const shadowStyle = shadowStyles[shadow];
   const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding];
@@ -250,45 +292,39 @@ function Box({
   const borderRightStyle = borderRightStyles[borderRight || borderX || border];
   const borderBottomStyle = borderBottomStyles[borderBottom || borderY || border];
   const borderLeftStyle = borderLeftStyles[borderLeft || borderX || border];
+  const displayStyle = display && displayStyles[display];
+  const resetStyle = localResetStyles[Component];
 
   return (
-    <ClassNames>
-      {({ css: cn, cx }) => {
-        const boxClass = cn([
-          backgroundStyle,
-          paddingTopStyle,
-          paddingRightStyle,
-          paddingBottomStyle,
-          paddingLeftStyle,
-          borderRadiusStyle,
-          shadowStyle,
-          borderTopStyle,
-          borderRightStyle,
-          borderBottomStyle,
-          borderLeftStyle,
-          className,
-        ]);
-
-        if (shouldForwardProps) {
-          if (typeof children !== 'object') {
-            throw new Error();
-          }
-
-          const element = children as JSX.Element;
-
-          return cloneElement(Children.only(element), {
-            className: cx([boxClass, element.props.className]),
-          });
-        }
-
-        return (
-          <div style={style} className={boxClass}>
-            {children}
-          </div>
-        );
-      }}
-    </ClassNames>
+    <Component
+      ref={ref}
+      css={[
+        resetStyle,
+        displayStyle,
+        backgroundStyle,
+        paddingTopStyle,
+        paddingRightStyle,
+        paddingBottomStyle,
+        paddingLeftStyle,
+        borderRadiusStyle,
+        shadowStyle,
+        borderTopStyle,
+        borderRightStyle,
+        borderBottomStyle,
+        borderLeftStyle,
+      ]}
+      className={className}
+      {...props}>
+      {children}
+    </Component>
   );
 }
 
-export default Box;
+const BoxForward = forwardRef(Box) as <TElement extends keyof ReactHTML = 'div'>(
+  p: BoxProps<TElement> & BoxHTMLProps & { ref?: React.Ref<HTMLElement> }
+) => ReactElement;
+
+// @ts-ignore
+BoxForward.displayName = 'Box';
+
+export default BoxForward;

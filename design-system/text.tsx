@@ -19,11 +19,11 @@ const textStyles = css({
     fontSize: 16,
     margin: 0,
   },
-  tiny: {
+  smaller: {
     fontSize: 14,
     margin: 0,
   },
-  forAnts: {
+  smallest: {
     fontSize: 11,
   },
 });

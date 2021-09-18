@@ -44,12 +44,10 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
   return (
     <article>
       <Stack gap="xxxlarge">
-        <Box shouldForwardProps background="neutralSubtle" borderRadius="default">
-          <div css={styles.heroImage}>
-            {heroImage && (
-              <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
-            )}
-          </div>
+        <Box css={styles.heroImage} background="neutralSubtle" borderRadius="default">
+          {heroImage && (
+            <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
+          )}
         </Box>
 
         <header>
@@ -59,13 +57,9 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
             </Link>
           </Heading>
 
-          <Text color="low" size="tiny">
+          <Text color="low" size="smaller">
             <Tooltip content={publishDate}>
-              {(tt) => (
-                <time {...tt} dateTime={publishDate}>
-                  {friendlyDate(publishDate)}
-                </time>
-              )}
+              <time dateTime={publishDate}>{friendlyDate(publishDate)}</time>
             </Tooltip>{' '}
             · <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min read
           </Text>

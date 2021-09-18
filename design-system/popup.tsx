@@ -54,17 +54,14 @@ function Popup({ children, content, background = 'overlay', isOpen, ...props }: 
             {...props}
             shadow="overlay"
             borderRadius="default"
-            shouldForwardProps
-            background={background}>
-            <div
-              style={{
-                top: position.top,
-                left: position.left,
-                transform: `translate3d(-50%, calc(${Math.ceil(position.height)}px + 8px), 0)`,
-              }}
-              css={styles.popup}>
-              {content()}
-            </div>
+            css={styles.popup}
+            background={background}
+            style={{
+              top: position.top,
+              left: position.left,
+              transform: `translate3d(-50%, calc(${Math.ceil(position.height)}px + 8px), 0)`,
+            }}>
+            {content()}
           </Box>
         </Portal>
       )}

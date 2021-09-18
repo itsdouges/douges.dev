@@ -42,20 +42,18 @@ function LinkButton({
       {(press) => (
         <FocusRing>
           <Box
-            shouldForwardProps
+            as="a"
             borderRadius="default"
             paddingX="medium"
             paddingY="regular"
-            background={mappedAppearance}>
-            <a
-              target={shouldOpenNewWindow ? '_blank' : ''}
-              rel="noreferrer"
-              href={href}
-              {...props}
-              {...press}
-              css={styles.reset}>
-              {children}
-            </a>
+            background={mappedAppearance}
+            target={shouldOpenNewWindow ? '_blank' : ''}
+            rel="noreferrer"
+            href={href}
+            {...props}
+            {...press}
+            css={styles.reset}>
+            {children}
           </Box>
         </FocusRing>
       )}

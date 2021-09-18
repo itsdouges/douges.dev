@@ -4,15 +4,12 @@ import Pressable from 'design-system/pressable';
 import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
 import { forwardRef } from 'react';
+import Text from 'design-system/text';
 
 const styles = css({
-  reset: {
-    margin: 0,
-    fontSize: 16,
-    border: 0,
-    fontWeight: 600,
+  button: {
     position: 'relative',
-    flexShrink: 0,
+    overflow: 'hidden',
   },
 });
 
@@ -44,20 +41,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       {(pressable) => (
         <FocusRing>
           <Box
-            shouldForwardProps
+            as="button"
             borderRadius="default"
             paddingX="medium"
             paddingY="regular"
-            background={isDisabled ? 'disabled' : mappedAppearance}>
-            <button
-              {...props}
-              {...pressable}
-              ref={ref}
-              type={type}
-              disabled={isDisabled}
-              css={styles.reset}>
+            background={isDisabled ? 'disabled' : mappedAppearance}
+            css={styles.button}
+            type={type}
+            disabled={isDisabled}
+            ref={ref}
+            {...pressable}
+            {...props}>
+            <Text size="small" weight="bold">
               {children}
-            </button>
+            </Text>
           </Box>
         </FocusRing>
       )}

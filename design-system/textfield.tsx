@@ -44,23 +44,21 @@ function Textfield({
 }: TextfieldProps) {
   return (
     <Box
-      shouldForwardProps
+      as="input"
       border="neutral"
       borderRadius="default"
       padding="regular"
-      background={isDisabled ? 'disabled' : 'subtleBorderedNeutral'}>
-      <input
-        name={name}
-        type={type}
-        required={isRequired}
-        id={id}
-        disabled={isDisabled}
-        css={styles.input}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange?.(e.target.value)}
-      />
-    </Box>
+      background={isDisabled ? 'disabled' : 'subtleBorderedNeutral'}
+      name={name}
+      type={type}
+      required={isRequired}
+      id={id}
+      disabled={isDisabled}
+      css={styles.input}
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange?.(e.target.value)}
+    />
   );
 }
 

@@ -13,10 +13,6 @@ const styles = css({
     fontSize: 16,
     position: 'relative',
     flexShrink: 0,
-    ':hover,:active': {
-      color: 'inherit',
-      textDecoration: 'none',
-    },
   },
   block: {
     display: 'block',
@@ -37,25 +33,22 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
         {(press) => (
           <FocusRing>
             <Box
-              css={styles.block}
-              shouldForwardProps
+              as="a"
+              css={[styles.block, styles.reset]}
               background="transparent"
               paddingX="medium"
-              paddingY="regular">
-              <a
-                ref={ref}
-                target="_blank"
-                rel="noreferrer"
-                href={href}
-                css={styles.reset}
-                {...press}>
-                {children}
-                {secondary && (
-                  <Text as="div" size="tiny" color="low">
-                    {secondary}
-                  </Text>
-                )}
-              </a>
+              paddingY="regular"
+              ref={ref}
+              target="_blank"
+              rel="noreferrer"
+              href={href}
+              {...press}>
+              {children}
+              {secondary && (
+                <Text as="div" size="smaller" color="low">
+                  {secondary}
+                </Text>
+              )}
             </Box>
           </FocusRing>
         )}

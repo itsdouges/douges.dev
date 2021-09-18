@@ -8,7 +8,7 @@ interface TagProps {
 function Tag({ children }: TagProps) {
   return (
     <Box background="neutralSubtle" paddingX="small" borderRadius="round">
-      <Text color="low" size="tiny">
+      <Text color="low" size="smaller">
         {children}
       </Text>
     </Box>

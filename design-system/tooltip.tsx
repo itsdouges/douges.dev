@@ -1,18 +1,24 @@
+/** @jsxImportSource @emotion/react */
+import css from 'design-system/css';
 import Popup from 'design-system/popup';
 import Text from 'design-system/text';
-import { MouseEventHandler, useState, useRef } from 'react';
-import useEvent from 'lib/use-event';
-import mergeRefs from 'lib/merge-refs';
+import { useState } from 'react';
+
+const styles = css({
+  container: {
+    display: 'contents',
+  },
+});
 
 interface TooltipProps {
   content: React.ReactNode;
-  children: (props: { ref: React.Ref<any> }) => React.ReactNode;
+  children: React.ReactNode;
 }
 
 function Tooltip({ children, content }: TooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const refOne = useEvent('mouseenter', () => setIsOpen(true));
-  const refTwo = useEvent('mouseout', () => setIsOpen(false));
+  const onMouseEnter = () => setIsOpen(true);
+  const onMouseOut = () => setIsOpen(false);
 
   return (
     <Popup
@@ -20,8 +26,22 @@ function Tooltip({ children, content }: TooltipProps) {
       paddingX="regular"
       background="neutralBold"
       isOpen={isOpen}
-      content={() => <Text size="tiny">{content}</Text>}>
-      {({ ref }) => children({ ref: mergeRefs(refOne, refTwo, ref) })}
+      content={() => <Text size="smaller">{content}</Text>}>
+      {({ ref }) => (
+        <div
+          ref={(foundRef) => {
+            if (foundRef) {
+              ref.current = foundRef.firstChild;
+            } else {
+              ref.current = null;
+            }
+          }}
+          onMouseEnter={onMouseEnter}
+          onMouseOut={onMouseOut}
+          css={styles.container}>
+          {children}
+        </div>
+      )}
     </Popup>
   );
 }

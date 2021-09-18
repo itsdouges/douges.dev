@@ -23,7 +23,9 @@ interface FocusRingProps {
 function FocusRing({ children }: FocusRingProps) {
   return (
     <ClassNames>
-      {({ css: cn }) => cloneElement(children, { className: cn(styles.focus) })}
+      {({ css: cn }) =>
+        cloneElement(children, { className: cn(styles.focus, children.props.className) })
+      }
     </ClassNames>
   );
 }
