@@ -53,6 +53,7 @@ function Popup({ children, content, background = 'overlay', isOpen, ...props }: 
           <Box
             {...props}
             shadow="overlay"
+            display="block flex"
             borderRadius="default"
             css={styles.popup}
             background={background}

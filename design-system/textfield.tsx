@@ -48,7 +48,7 @@ function Textfield({
       border="neutral"
       borderRadius="default"
       padding="regular"
-      background={isDisabled ? 'disabled' : 'subtleBorderedNeutral'}
+      background={isDisabled ? 'disabled' : 'neutralSubtle'}
       name={name}
       type={type}
       required={isRequired}

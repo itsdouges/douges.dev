@@ -8,9 +8,29 @@ export type SizeScale = keyof typeof paddingTopStyles;
 
 const backgroundStyles = css({
   none: {},
-  neutralSubtle: {
-    color: token('color.text.highEmphasis'),
-    backgroundColor: token('color.background.subtleNeutral.resting'),
+  accentBlueSubtle: {
+    backgroundColor: token('color.accent.subtleBlue'),
+  },
+  accentRedSubtle: {
+    backgroundColor: token('color.accent.subtleRed'),
+  },
+  accentGreenSubtle: {
+    backgroundColor: token('color.accent.subtleGreen'),
+  },
+  accentMagentaSubtle: {
+    backgroundColor: token('color.accent.subtleMagenta'),
+  },
+  accentOrangeSubtle: {
+    backgroundColor: token('color.accent.subtleOrange'),
+  },
+  accentPurpleSubtle: {
+    backgroundColor: token('color.accent.subtlePurple'),
+  },
+  accentTealSubtle: {
+    backgroundColor: token('color.accent.subtleTeal'),
+  },
+  blanket: {
+    backgroundColor: token('color.background.blanket'),
   },
   transparent: {
     color: token('color.text.highEmphasis'),
@@ -41,18 +61,53 @@ const backgroundStyles = css({
     color: token('color.text.selected'),
     backgroundColor: token('color.background.selected.resting'),
   },
-  brandBold: {
-    color: token('color.text.onBold'),
-    backgroundColor: token('color.background.boldBrand.resting'),
-  },
   neutralBold: {
     color: token('color.text.onBold'),
     backgroundColor: token('color.background.boldNeutral.resting'),
   },
-  subtleBorderedNeutral: {
+  brandBold: {
+    color: token('color.text.onBold'),
+    backgroundColor: token('color.background.boldBrand.resting'),
+  },
+  dangerBold: {
+    color: token('color.text.onBold'),
+    backgroundColor: token('color.background.boldDanger.resting'),
+  },
+  successBold: {
+    color: token('color.text.onBold'),
+    backgroundColor: token('color.background.boldSuccess.resting'),
+  },
+  discoveryBold: {
+    color: token('color.text.onBold'),
+    backgroundColor: token('color.background.boldDiscovery.resting'),
+  },
+  warningBold: {
+    color: token('color.text.onBold'),
+    backgroundColor: token('color.background.boldWarning.resting'),
+  },
+  neutralSubtle: {
     color: token('color.text.highEmphasis'),
-    backgroundColor: token('color.background.subtleBorderedNeutral.resting'),
-    border: `2px solid ${token('color.border.neutral')}`,
+    backgroundColor: token('color.background.subtleNeutral.resting'),
+  },
+  brandSubtle: {
+    color: token('color.text.brand'),
+    backgroundColor: token('color.background.subtleBrand.resting'),
+  },
+  dangerSubtle: {
+    color: token('color.text.danger'),
+    backgroundColor: token('color.background.subtleDanger.resting'),
+  },
+  successSubtle: {
+    color: token('color.text.success'),
+    backgroundColor: token('color.background.subtleSuccess.resting'),
+  },
+  discoverySubtle: {
+    color: token('color.text.discovery'),
+    backgroundColor: token('color.background.subtleDiscovery.resting'),
+  },
+  warningSubtle: {
+    color: token('color.text.warning'),
+    backgroundColor: token('color.background.subtleWarning.resting'),
   },
 });
 
@@ -71,12 +126,48 @@ const borderTopStyles = css({
   neutral: {
     borderBlockStart: `2px solid ${token('color.border.neutral')}`,
   },
+  focus: {
+    borderBlockStart: `2px solid ${token('color.border.focus')}`,
+  },
+  brand: {
+    borderBlockStart: `2px solid ${token('color.iconBorder.brand')}`,
+  },
+  danger: {
+    borderBlockStart: `2px solid ${token('color.iconBorder.danger')}`,
+  },
+  success: {
+    borderBlockStart: `2px solid ${token('color.iconBorder.success')}`,
+  },
+  discovery: {
+    borderBlockStart: `2px solid ${token('color.iconBorder.discovery')}`,
+  },
+  warning: {
+    borderBlockStart: `2px solid ${token('color.iconBorder.warning')}`,
+  },
 });
 
 const borderRightStyles = css({
   none: {},
   neutral: {
     borderInlineEnd: `2px solid ${token('color.border.neutral')}`,
+  },
+  focus: {
+    borderInlineEnd: `2px solid ${token('color.border.focus')}`,
+  },
+  brand: {
+    borderInlineEnd: `2px solid ${token('color.iconBorder.brand')}`,
+  },
+  danger: {
+    borderInlineEnd: `2px solid ${token('color.iconBorder.danger')}`,
+  },
+  success: {
+    borderInlineEnd: `2px solid ${token('color.iconBorder.success')}`,
+  },
+  discovery: {
+    borderInlineEnd: `2px solid ${token('color.iconBorder.discovery')}`,
+  },
+  warning: {
+    borderInlineEnd: `2px solid ${token('color.iconBorder.warning')}`,
   },
 });
 
@@ -85,12 +176,48 @@ const borderBottomStyles = css({
   neutral: {
     borderBlockEnd: `2px solid ${token('color.border.neutral')}`,
   },
+  focus: {
+    borderBlockEnd: `2px solid ${token('color.border.focus')}`,
+  },
+  brand: {
+    borderBlockEnd: `2px solid ${token('color.iconBorder.brand')}`,
+  },
+  danger: {
+    borderBlockEnd: `2px solid ${token('color.iconBorder.danger')}`,
+  },
+  success: {
+    borderBlockEnd: `2px solid ${token('color.iconBorder.success')}`,
+  },
+  discovery: {
+    borderBlockEnd: `2px solid ${token('color.iconBorder.discovery')}`,
+  },
+  warning: {
+    borderBlockEnd: `2px solid ${token('color.iconBorder.warning')}`,
+  },
 });
 
 const borderLeftStyles = css({
   none: {},
   neutral: {
     borderInlineStart: `2px solid ${token('color.border.neutral')}`,
+  },
+  focus: {
+    borderInlineStart: `2px solid ${token('color.border.focus')}`,
+  },
+  brand: {
+    borderInlineStart: `2px solid ${token('color.iconBorder.brand')}`,
+  },
+  danger: {
+    borderInlineStart: `2px solid ${token('color.iconBorder.danger')}`,
+  },
+  success: {
+    borderInlineStart: `2px solid ${token('color.iconBorder.success')}`,
+  },
+  discovery: {
+    borderInlineStart: `2px solid ${token('color.iconBorder.discovery')}`,
+  },
+  warning: {
+    borderInlineStart: `2px solid ${token('color.iconBorder.warning')}`,
   },
 });
 
@@ -192,6 +319,7 @@ const displayStyles = css({
   },
   'block flex': {
     display: 'flex',
+    flexDirection: 'column',
   },
   'inline flex': {
     display: 'inline-flex',
@@ -299,7 +427,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
 
   return (
     <Component
-      ref={ref as any}
+      ref={ref as ForwardedRef<HTMLDivElement>}
       css={[
         resetStyle,
         displayStyle,

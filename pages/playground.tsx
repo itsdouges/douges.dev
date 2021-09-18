@@ -12,7 +12,7 @@ function Lozenge({ children }: React.PropsWithChildren<{}>) {
           as="button"
           paddingX="small"
           borderRadius="default"
-          background="neutralSubtle"
+          background="discoveryBold"
           display="inline flex"
           {...press}>
           <Text size="smallest" weight="bolder" transform="uppercase">

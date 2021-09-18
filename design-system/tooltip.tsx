@@ -7,6 +7,7 @@ import { useState } from 'react';
 const styles = css({
   container: {
     display: 'contents',
+    label: 'Tooltip',
   },
 });
 
@@ -23,10 +24,14 @@ function Tooltip({ children, content }: TooltipProps) {
   return (
     <Popup
       paddingY="small"
-      paddingX="regular"
+      paddingX="small"
       background="neutralBold"
       isOpen={isOpen}
-      content={() => <Text size="smaller">{content}</Text>}>
+      content={() => (
+        <Text weight="bold" size="smallest">
+          {content}
+        </Text>
+      )}>
       {({ ref }) => (
         <div
           ref={(foundRef) => {
