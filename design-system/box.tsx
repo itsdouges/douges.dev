@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import { ClassNames } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
-import { AllHTMLAttributes, ReactHTML, forwardRef, ForwardedRef, ReactElement } from 'react';
+import { ReactHTML, ForwardedRef } from 'react';
+import { forwardRef } from 'lib/react';
 
 export type SizeScale = keyof typeof paddingTopStyles;
 
@@ -238,7 +238,9 @@ export interface BorderProps {
   borderY?: keyof typeof borderTopStyles;
 }
 
-interface BoxProps<TElement extends keyof ReactHTML> extends PaddingProps, BorderProps {
+type BoxHTMLElement = keyof ReactHTML;
+
+interface BoxProps<TElement extends BoxHTMLElement> extends PaddingProps, BorderProps {
   children?: React.ReactNode;
   background?: keyof typeof backgroundStyles;
   borderRadius?: keyof typeof borderRadiusStyles;
@@ -248,12 +250,12 @@ interface BoxProps<TElement extends keyof ReactHTML> extends PaddingProps, Borde
   as?: TElement;
 }
 
-type BoxHTMLProps = Omit<
-  AllHTMLAttributes<HTMLElement>,
+type BoxHTMLProps<TElement extends BoxHTMLElement> = Omit<
+  JSX.IntrinsicElements[TElement],
   'className' | 'width' | 'height' | 'size' | 'marginWidth' | 'marginHeight' | 'cellPadding' | 'as'
 >;
 
-function Box<TElement extends keyof ReactHTML = 'div'>(
+function Box<TElement extends BoxHTMLElement = 'div'>(
   {
     children,
     paddingTop,
@@ -277,10 +279,10 @@ function Box<TElement extends keyof ReactHTML = 'div'>(
     className,
     as: AsProp,
     ...props
-  }: BoxProps<TElement> & BoxHTMLProps,
-  ref: ForwardedRef<HTMLDivElement>
+  }: BoxProps<TElement> & BoxHTMLProps<TElement>,
+  ref: ForwardedRef<HTMLElement>
 ) {
-  const Component = (AsProp || 'div') as 'div';
+  const Component: 'div' = (AsProp || 'div') as any;
   const backgroundStyle = backgroundStyles[background];
   const shadowStyle = shadowStyles[shadow];
   const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding];
@@ -297,7 +299,7 @@ function Box<TElement extends keyof ReactHTML = 'div'>(
 
   return (
     <Component
-      ref={ref}
+      ref={ref as any}
       css={[
         resetStyle,
         displayStyle,
@@ -314,17 +316,10 @@ function Box<TElement extends keyof ReactHTML = 'div'>(
         borderLeftStyle,
       ]}
       className={className}
-      {...props}>
+      {...(props as {})}>
       {children}
     </Component>
   );
 }
 
-const BoxForward = forwardRef(Box) as <TElement extends keyof ReactHTML = 'div'>(
-  p: BoxProps<TElement> & BoxHTMLProps & { ref?: React.Ref<HTMLElement> }
-) => ReactElement;
-
-// @ts-ignore
-BoxForward.displayName = 'Box';
-
-export default BoxForward;
+export default forwardRef(Box);
