@@ -4,8 +4,6 @@ import { token } from '@atlaskit/tokens';
 import { ReactHTML, ForwardedRef } from 'react';
 import { forwardRef } from 'lib/react';
 
-export type SizeScale = keyof typeof paddingTopStyles;
-
 const backgroundStyles = css({
   none: {},
   accentBlueSubtle: {
@@ -333,12 +331,20 @@ const displayStyles = css({
 });
 
 const localResetStyles = css({
+  base: {
+    boxSizing: 'border-box',
+    margin: 0,
+    padding: 0,
+    border: 0,
+    verticalAlign: 'baseline',
+    WebkitTapHighlightColor: 'transparent',
+  },
   div: {},
   button: {
-    border: 0,
-    margin: 0,
+    lineHeight: 1,
   },
   a: {
+    lineHeight: 1,
     ':hover,:active': {
       color: 'inherit',
       textDecoration: 'none',
@@ -347,13 +353,13 @@ const localResetStyles = css({
 });
 
 export interface PaddingProps {
-  padding?: SizeScale;
-  paddingTop?: SizeScale;
-  paddingRight?: SizeScale;
-  paddingBottom?: SizeScale;
-  paddingLeft?: SizeScale;
-  paddingX?: SizeScale;
-  paddingY?: SizeScale;
+  padding?: Spacing;
+  paddingTop?: Spacing;
+  paddingRight?: Spacing;
+  paddingBottom?: Spacing;
+  paddingLeft?: Spacing;
+  paddingX?: Spacing;
+  paddingY?: Spacing;
 }
 
 export interface BorderProps {
@@ -366,9 +372,30 @@ export interface BorderProps {
   borderY?: keyof typeof borderTopStyles;
 }
 
-type BoxHTMLElement = keyof ReactHTML;
+export type Spacing = keyof typeof paddingTopStyles;
+export type Background = keyof typeof backgroundStyles;
+export type Shadow = keyof typeof shadowStyles;
+export type Border = keyof typeof borderRightStyles;
+export type BorderRadius = keyof typeof borderRadiusStyles;
 
-interface BoxProps<TElement extends BoxHTMLElement> extends PaddingProps, BorderProps {
+export type SemanticNames = {
+  default: 'neutralSubtle';
+  success: 'successSubtle';
+  removed: 'dangerSubtle';
+  inprogress: 'brandSubtle';
+  new: 'discoverySubtle';
+  moved: 'warningSubtle';
+  defaultBold: 'neutralBold';
+  successBold: 'successBold';
+  removedBold: 'dangerBold';
+  inprogressBold: 'brandBold';
+  newBold: 'discoveryBold';
+  movedBold: 'warningBold';
+};
+
+export type BoxHTMLElement = keyof ReactHTML;
+
+export interface BoxProps<TElement extends BoxHTMLElement> extends PaddingProps, BorderProps {
   children?: React.ReactNode;
   background?: keyof typeof backgroundStyles;
   borderRadius?: keyof typeof borderRadiusStyles;
@@ -429,6 +456,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
     <Component
       ref={ref as ForwardedRef<HTMLDivElement>}
       css={[
+        localResetStyles.base,
         resetStyle,
         displayStyle,
         backgroundStyle,
@@ -444,7 +472,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
         borderLeftStyle,
       ]}
       className={className}
-      {...(props as {})}>
+      {...(props as unknown)}>
       {children}
     </Component>
   );

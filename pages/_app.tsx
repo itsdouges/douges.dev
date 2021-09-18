@@ -46,7 +46,7 @@ function App({ Component, pageProps, router }: AppProps) {
           }}
         />
         <style>
-          {'*{box-sizing:border-box;scrollbar-color:var(--border-neutral) var(--background-default)}::-webkit-scrollbar{background-color:var(--background-default);width:10px}::-webkit-scrollbar-thumb{background-color:var(--border-neutral);border-radius:30px}' +
+          {'*{scrollbar-color:var(--border-neutral) var(--background-default)}::-webkit-scrollbar{background-color:var(--background-default);width:10px}::-webkit-scrollbar-thumb{background-color:var(--border-neutral);border-radius:30px}' +
             themeHacks}
         </style>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -66,7 +66,7 @@ function App({ Component, pageProps, router }: AppProps) {
             {isBlogRoute && (
               <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
             )}
-            <Inline marginLeft="auto" gap="regular">
+            <Inline justify="middle" marginLeft="auto" gap="regular">
               <DropdownMenu trigger="Links">
                 <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
                   Twitter

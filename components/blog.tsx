@@ -70,13 +70,13 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
             <LinkButton
               shouldOpenNewWindow
               key="tweet"
-              appearance="transparent"
+              appearance="subtle"
               href={`https://twitter.com/intent/tweet?text="${window.encodeURIComponent(
                 selection
               )}" https://douges.dev${link}`}>
               Tweet
             </LinkButton>,
-            <Button key="comment" appearance="transparent">
+            <Button key="comment" appearance="subtle">
               Comment
             </Button>,
           ]}>

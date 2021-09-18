@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { CSSProperties, Children } from 'react';
+import { Children } from 'react';
 import css from 'design-system/css';
 import { token } from '@atlaskit/tokens';
-import type { SizeScale } from 'design-system/box';
 
 const styles = css({
   inline: {
@@ -64,21 +63,24 @@ const alignStyles = css({
 
 const justifyStyles = css({
   bottom: {
-    alignItems: 'left',
+    alignItems: 'flex-end',
   },
   top: {
-    alignItems: 'right',
+    alignItems: 'flex-start',
   },
   middle: {
     alignItems: 'center',
   },
+  stretch: {
+    alignItems: 'stretch',
+  },
 });
 
 interface InlineProps {
-  gap?: keyof typeof gapStyles;
   children: React.ReactNode;
-  align?: 'left' | 'right' | 'center';
-  justify?: 'top' | 'middle' | 'bottom';
+  gap?: keyof typeof gapStyles;
+  align?: keyof typeof alignStyles;
+  justify?: keyof typeof justifyStyles;
   marginLeft?: string;
   hasSeparator?: boolean;
   as?: 'div' | 'nav';
@@ -89,7 +91,7 @@ function Inline({
   align,
   hasSeparator,
   marginLeft,
-  justify,
+  justify = 'top',
   as: Component = 'div',
   gap = 'none',
 }: InlineProps) {

@@ -1,24 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import css from 'design-system/css';
 import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
 import Pressable from 'design-system/pressable';
-
-const styles = css({
-  reset: {
-    fontSize: 16,
-    fontWeight: 600,
-    position: 'relative',
-    flexShrink: 0,
-    ':hover,:active': {
-      color: 'inherit',
-      textDecoration: 'none',
-    },
-  },
-});
+import Text from 'design-system/text';
+import { appearanceBgMap } from 'design-system/button';
 
 export interface LinkButtonProps {
-  appearance?: 'brandBold' | 'transparent' | 'neutralSubtle';
+  appearance?: keyof typeof appearanceBgMap;
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
   isSelected?: boolean;
@@ -30,15 +17,16 @@ function LinkButton({
   children,
   isSelected,
   onClick,
-  appearance = 'neutralSubtle',
+  appearance = 'default',
   href,
   shouldOpenNewWindow,
   ...props
 }: LinkButtonProps) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
+  const background = appearanceBgMap[mappedAppearance];
 
   return (
-    <Pressable onClick={onClick}>
+    <Pressable onClick={onClick} appearance="static">
       {(press) => (
         <FocusRing>
           <Box
@@ -46,14 +34,15 @@ function LinkButton({
             borderRadius="default"
             paddingX="medium"
             paddingY="regular"
-            background={mappedAppearance}
+            background={background}
             target={shouldOpenNewWindow ? '_blank' : ''}
             rel="noreferrer"
             href={href}
             {...props}
-            {...press}
-            css={styles.reset}>
-            {children}
+            {...press}>
+            <Text size="small" weight="bold">
+              {children}
+            </Text>
           </Box>
         </FocusRing>
       )}

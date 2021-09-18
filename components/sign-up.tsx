@@ -66,7 +66,7 @@ function SignUp() {
           setIsComplete(true);
         }}>
         <Label htmlFor={id} label="Join the mailing list today">
-          <Inline gap="regular">
+          <Inline justify="stretch" gap="regular">
             <Textfield
               isRequired
               isDisabled={isLoading}
@@ -75,7 +75,7 @@ function SignUp() {
               id={id}
               onChange={setEmail}
             />
-            <Button type="submit" isDisabled={isLoading} appearance="brandBold">
+            <Button type="submit" isDisabled={isLoading} appearance="primary">
               <Fragment>
                 <div css={[styles.complete, isComplete ? styles.visible : styles.hidden]}>✓</div>
                 Join

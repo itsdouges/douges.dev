@@ -1,39 +1,58 @@
-import Box from 'design-system/box';
-import Text from 'design-system/text';
 import Inline from 'design-system/inline';
-import Pressable from 'design-system/pressable';
-import Tooltip from 'design-system/tooltip';
-
-function Lozenge({ children }: React.PropsWithChildren<{}>) {
-  return (
-    <Pressable pressedAppearance="static">
-      {(press) => (
-        <Box
-          as="button"
-          paddingX="small"
-          borderRadius="default"
-          background="discoveryBold"
-          display="inline flex"
-          {...press}>
-          <Text size="smallest" weight="bolder" transform="uppercase">
-            {children}
-          </Text>
-        </Box>
-      )}
-    </Pressable>
-  );
-}
+import Lozenge from 'design-system/lozenge';
+import Stack from 'design-system/stack';
+import Button from 'design-system/button';
+import LinkButton from 'design-system/link-button';
 
 function Playground() {
   return (
-    <Inline gap="regular">
-      <Tooltip content="Hello">
-        <Lozenge>Hello world</Lozenge>
-      </Tooltip>
-      <Lozenge>Hello world</Lozenge>
-      <Lozenge>Hello world</Lozenge>
-      <Lozenge>Hello world</Lozenge>
-    </Inline>
+    <Stack gap="regular">
+      <Inline gap="regular">
+        <Lozenge appearance="defaultBold">Lozenge</Lozenge>
+        <Lozenge appearance="new">Lozenge</Lozenge>
+        <Lozenge appearance="success">Lozenge</Lozenge>
+        <Lozenge appearance="moved">Lozenge</Lozenge>
+        <Lozenge appearance="new">Lozenge</Lozenge>
+        <Lozenge appearance="removed">Lozenge</Lozenge>
+      </Inline>
+      <Inline gap="regular">
+        <Lozenge appearance="defaultBold">Lozenge</Lozenge>
+        <Lozenge appearance="newBold">Lozenge</Lozenge>
+        <Lozenge appearance="successBold">Lozenge</Lozenge>
+        <Lozenge appearance="movedBold">Lozenge</Lozenge>
+        <Lozenge appearance="newBold">Lozenge</Lozenge>
+        <Lozenge appearance="removedBold">Lozenge</Lozenge>
+      </Inline>
+      <Inline gap="regular">
+        <Button appearance="subtle">Button</Button>
+        <Button appearance="default">Button</Button>
+        <Button appearance="primary">Button</Button>
+        <Button appearance="warning">Button</Button>
+        <Button appearance="danger">Button</Button>
+        <Button isSelected>Button</Button>
+        <Button isDisabled>Button</Button>
+      </Inline>
+      <Inline gap="regular">
+        <LinkButton href="#" appearance="subtle">
+          Button
+        </LinkButton>
+        <LinkButton href="#" appearance="default">
+          Button
+        </LinkButton>
+        <LinkButton href="#" appearance="primary">
+          Button
+        </LinkButton>
+        <LinkButton href="#" appearance="warning">
+          Button
+        </LinkButton>
+        <LinkButton href="#" appearance="danger">
+          Button
+        </LinkButton>
+        <LinkButton href="#" isSelected>
+          Button
+        </LinkButton>
+      </Inline>
+    </Stack>
   );
 }
 

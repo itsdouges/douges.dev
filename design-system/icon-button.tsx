@@ -5,10 +5,9 @@ import VisuallyHidden from './visually-hidden';
 
 const styles = css({
   icon: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
     fontSize: 20,
-    display: 'block',
   },
 });
 
@@ -20,7 +19,7 @@ interface IconButtonProps {
 
 function IconButton({ icon, label, onClick }: IconButtonProps) {
   return (
-    <Button onClick={onClick} appearance="transparent">
+    <Button onClick={onClick} appearance="subtle">
       <VisuallyHidden>{label}</VisuallyHidden>
       <span css={styles.icon}>{icon}</span>
     </Button>

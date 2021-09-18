@@ -22,7 +22,6 @@ const styles = css({
     },
   },
   pressed: {
-    position: 'relative',
     '::before': {
       content: '""',
       position: 'absolute',
@@ -42,10 +41,10 @@ interface PressableProps {
   children: (props: { className: string } & UsePressable['buttonProps']) => JSX.Element;
   onClick?: React.MouseEventHandler;
   isDisabled?: boolean;
-  pressedAppearance?: 'push' | 'static';
+  appearance?: 'push' | 'static' | 'none';
 }
 
-function Pressable({ children, onClick, isDisabled, pressedAppearance = 'push' }: PressableProps) {
+function Pressable({ children, onClick, isDisabled, appearance = 'push' }: PressableProps) {
   const { isPressed, buttonProps } = usePressable({ onClick });
 
   return (
@@ -53,11 +52,12 @@ function Pressable({ children, onClick, isDisabled, pressedAppearance = 'push' }
       {({ css: cn }) =>
         children({
           className: cn(
-            !isDisabled && [
-              styles.pressable,
-              isPressed && styles.pressed,
-              isPressed && pressedAppearance === 'push' && styles.push,
-            ]
+            !isDisabled &&
+              appearance !== 'none' && [
+                styles.pressable,
+                isPressed && styles.pressed,
+                isPressed && appearance === 'push' && styles.push,
+              ]
           ),
           ...buttonProps,
         })

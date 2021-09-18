@@ -7,15 +7,12 @@ import Button from 'design-system/button';
 import { forwardRef, useState } from 'react';
 import FocusRing from 'design-system/focus-ring';
 import Text from 'design-system/text';
+import Stack from 'design-system/stack';
 
 const styles = css({
-  reset: {
-    fontSize: 16,
+  item: {
     position: 'relative',
     flexShrink: 0,
-  },
-  block: {
-    display: 'block',
     minHeight: 40,
   },
 });
@@ -29,12 +26,12 @@ interface MenuItemProps {
 export const MenuItem = forwardRef<HTMLAnchorElement, any>(
   ({ children, href, secondary }: MenuItemProps, ref) => {
     return (
-      <Pressable pressedAppearance="static">
+      <Pressable appearance="static">
         {(press) => (
           <FocusRing>
             <Box
               as="a"
-              css={[styles.block, styles.reset]}
+              css={styles.item}
               background="transparent"
               paddingX="medium"
               paddingY="regular"
@@ -43,12 +40,14 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
               rel="noreferrer"
               href={href}
               {...press}>
-              {children}
-              {secondary && (
-                <Text as="div" size="smaller" color="low">
-                  {secondary}
-                </Text>
-              )}
+              <Stack gap="small">
+                <Text size="small">{children}</Text>
+                {secondary && (
+                  <Text as="div" size="smaller" color="low">
+                    {secondary}
+                  </Text>
+                )}
+              </Stack>
             </Box>
           </FocusRing>
         )}
@@ -72,7 +71,7 @@ function DropdownMenu({ children, trigger }: DropdownMenuProps) {
       {(props) => (
         <Button
           {...props}
-          appearance="transparent"
+          appearance="subtle"
           isSelected={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}>
           {trigger}
