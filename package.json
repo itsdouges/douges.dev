@@ -11,9 +11,10 @@
   },
   "dependencies": {
     "@atlaskit/css-reset": "^6.1.2",
-    "@atlaskit/tokens": "^0.1.0",
+    "@atlaskit/tokens": "^0.2.1",
     "@emotion/react": "^11.4.1",
     "@mdx-js/react": "^1.6.22",
+    "@mdx-js/loader": "^1.6.22",
     "@next/mdx": "^11.1.0",
     "next": "11.1.0",
     "react": "17.0.2",

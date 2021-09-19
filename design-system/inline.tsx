@@ -7,6 +7,7 @@ const styles = css({
   inline: {
     display: 'flex',
     flexDirection: 'row',
+    overflow: 'auto',
   },
   separator: {
     height: '70%',

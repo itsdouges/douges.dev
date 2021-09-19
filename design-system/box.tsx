@@ -27,6 +27,24 @@ const backgroundStyles = css({
   accentTealSubtle: {
     backgroundColor: token('color.accent.subtleTeal'),
   },
+  accentBlueBold: {
+    backgroundColor: token('color.accent.boldBlue'),
+  },
+  accentRedBold: {
+    backgroundColor: token('color.accent.boldRed'),
+  },
+  accentGreenBold: {
+    backgroundColor: token('color.accent.boldGreen'),
+  },
+  accentOrangeBold: {
+    backgroundColor: token('color.accent.boldOrange'),
+  },
+  accentPurpleBold: {
+    backgroundColor: token('color.accent.boldPurple'),
+  },
+  accentTealBold: {
+    backgroundColor: token('color.accent.boldTeal'),
+  },
   blanket: {
     backgroundColor: token('color.background.blanket'),
   },
@@ -385,7 +403,6 @@ const displayStyles = css({
 const localResetStyles = css({
   base: {
     boxSizing: 'border-box',
-    margin: 0,
     padding: 0,
     border: 0,
     verticalAlign: 'baseline',

@@ -10,6 +10,7 @@ const styles = css({
   button: {
     overflow: 'hidden',
     lineHeight: 1,
+    flexShrink: 0,
   },
 });
 
