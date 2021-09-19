@@ -57,8 +57,18 @@ const weightStyles = css({
 
 const textTransformStyles = css({
   none: {},
+  underline: {
+    textDecoration: 'underline',
+  },
   uppercase: {
     textTransform: 'uppercase',
+  },
+});
+
+const textDecorationStyles = css({
+  none: {},
+  underline: {
+    textDecoration: 'underline',
   },
 });
 
@@ -73,6 +83,7 @@ interface TextProps {
   size?: keyof typeof textStyles;
   weight?: keyof typeof weightStyles;
   transform?: keyof typeof textTransformStyles;
+  decoration?: keyof typeof textDecorationStyles;
   shouldTruncate?: boolean;
 }
 
@@ -83,12 +94,14 @@ function Text({
   size = 'regular',
   weight = 'regular',
   transform = 'none',
+  decoration = 'none',
   shouldTruncate,
 }: TextProps) {
   const colorStyle = colorStyles[color];
   const textStyle = textStyles[size];
   const weightStyle = weightStyles[weight];
   const textTransformStyle = textTransformStyles[transform];
+  const textDecorationStyle = textDecorationStyles[decoration];
 
   return (
     <Markup
@@ -98,6 +111,7 @@ function Text({
         colorStyle,
         weightStyle,
         textTransformStyle,
+        textDecorationStyle,
       ]}>
       {children}
     </Markup>

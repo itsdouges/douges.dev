@@ -11,20 +11,32 @@ const styles = css({
     },
     ':focus-visible': {
       outline: `${token('color.border.focus')} solid 2px`,
+    },
+  },
+  outset: {
+    ':focus-visible': {
       outlineOffset: 2,
+    },
+  },
+  inset: {
+    ':focus-visible': {
+      outlineOffset: -2,
     },
   },
 });
 
 interface FocusRingProps {
   children: JSX.Element;
+  appearance?: 'outset' | 'inset';
 }
 
-function FocusRing({ children }: FocusRingProps) {
+function FocusRing({ children, appearance = 'outset' }: FocusRingProps) {
+  const offset = styles[appearance];
+
   return (
     <ClassNames>
       {({ css: cn }) =>
-        cloneElement(children, { className: cn(styles.focus, children.props.className) })
+        cloneElement(children, { className: cn(styles.focus, offset, children.props.className) })
       }
     </ClassNames>
   );

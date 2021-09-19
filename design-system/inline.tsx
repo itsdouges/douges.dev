@@ -1,18 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { Children } from 'react';
 import css from 'design-system/css';
-import { token } from '@atlaskit/tokens';
 
 const styles = css({
   inline: {
     display: 'flex',
     flexDirection: 'row',
-    overflow: 'auto',
-  },
-  separator: {
-    height: '70%',
-    alignSelf: 'center',
-    borderRight: `1px solid ${token('color.border.neutral')}`,
+    flexWrap: 'wrap',
   },
 });
 
@@ -83,14 +76,12 @@ interface InlineProps {
   align?: keyof typeof alignStyles;
   justify?: keyof typeof justifyStyles;
   marginLeft?: string;
-  hasSeparator?: boolean;
   as?: 'div' | 'nav';
 }
 
 function Inline({
   children,
   align,
-  hasSeparator,
   marginLeft,
   justify = 'top',
   as: Component = 'div',
@@ -106,13 +97,7 @@ function Inline({
       style={{
         marginLeft,
       }}>
-      {Children.map(children, (child, index) => {
-        if (index + 1 < Children.count(children)) {
-          return [child, hasSeparator && <span key={`s-${index}`} css={styles.separator} />];
-        }
-
-        return child;
-      })}
+      {children}
     </Component>
   );
 }

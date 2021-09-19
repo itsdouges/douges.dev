@@ -10,13 +10,13 @@ interface TagProps {
 }
 
 const colorBackground = {
-  green: 'accentGreenSubtle',
-  blue: 'accentBlueSubtle',
-  red: 'accentRedSubtle',
-  purple: 'accentPurpleSubtle',
+  green: 'accentGreenBold',
+  blue: 'accentBlueBold',
+  red: 'accentRedBold',
+  purple: 'accentPurpleBold',
   grey: 'neutralBold',
-  teal: 'accentTealSubtle',
-  yellow: 'accentOrangeSubtle',
+  teal: 'accentTealBold',
+  yellow: 'accentOrangeBold',
   greenLight: 'accentGreenSubtle',
   blueLight: 'accentBlueSubtle',
   redLight: 'accentRedSubtle',
@@ -55,7 +55,7 @@ export function TagLink({ children, color = 'greyLight', appearance = 'default' 
             background={background}
             paddingX="small"
             borderRadius={appearance}>
-            <Text color={textColor} size="smaller">
+            <Text decoration="underline" color={textColor} size="smaller">
               {children}
             </Text>
           </Box>

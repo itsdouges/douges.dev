@@ -77,7 +77,6 @@ function Playground() {
       </Inline>
       <Inline gap="small">
         <Tag color="greyLight">Tag</Tag>
-        <Tag color="grey">Tag</Tag>
         <Tag color="blueLight">Tag</Tag>
         <Tag color="greenLight">Tag</Tag>
         <Tag color="redLight">Tag</Tag>
@@ -86,8 +85,16 @@ function Playground() {
         <Tag color="purpleLight">Tag</Tag>
       </Inline>
       <Inline gap="small">
+        <Tag color="grey">Tag</Tag>
+        <Tag color="blue">Tag</Tag>
+        <Tag color="green">Tag</Tag>
+        <Tag color="red">Tag</Tag>
+        <Tag color="teal">Tag</Tag>
+        <Tag color="yellow">Tag</Tag>
+        <Tag color="purple">Tag</Tag>
+      </Inline>
+      <Inline gap="small">
         <TagLink color="greyLight">Tag</TagLink>
-        <TagLink color="grey">Tag</TagLink>
         <TagLink color="blueLight">Tag</TagLink>
         <TagLink color="greenLight">Tag</TagLink>
         <TagLink color="redLight">Tag</TagLink>
@@ -97,9 +104,6 @@ function Playground() {
       </Inline>
       <Inline gap="small">
         <Tag color="greyLight" appearance="rounded">
-          Tag
-        </Tag>
-        <Tag color="grey" appearance="rounded">
           Tag
         </Tag>
         <Tag color="blueLight" appearance="rounded">
