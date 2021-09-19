@@ -2,12 +2,8 @@ import Box from 'design-system/box';
 import Text from 'design-system/text';
 import Pressable from 'design-system/pressable';
 import FocusRing from 'design-system/focus-ring';
-
-interface TagProps {
-  children: React.ReactNode;
-  color?: keyof typeof colorBackground;
-  appearance?: 'default' | 'rounded';
-}
+import React from 'react';
+import Inline from 'design-system/inline';
 
 const colorBackground = {
   green: 'accentGreenBold',
@@ -30,12 +26,26 @@ const textAppearanceMap = {
   grey: 'onBold',
 } as any;
 
-function Tag({ children, color = 'greyLight', appearance = 'default' }: TagProps) {
+interface TagProps {
+  children: React.ReactNode;
+  color?: keyof typeof colorBackground;
+  appearance?: 'default' | 'rounded';
+  icon?: React.ReactNode;
+}
+
+function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
   const background = colorBackground[color];
 
   return (
-    <Box background={background} paddingX="small" borderRadius={appearance}>
-      <Text size="smaller">{children}</Text>
+    <Box
+      background={background}
+      paddingLeft={icon ? 'none' : 'small'}
+      paddingRight="small"
+      borderRadius={appearance}>
+      <Inline gap="small" justify="middle">
+        {icon}
+        <Text size="smaller">{children}</Text>
+      </Inline>
     </Box>
   );
 }

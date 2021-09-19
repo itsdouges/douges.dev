@@ -103,25 +103,46 @@ function Playground() {
         <TagLink color="purpleLight">Tag</TagLink>
       </Inline>
       <Inline gap="small">
-        <Tag color="greyLight" appearance="rounded">
+        <Tag
+          icon={<Avatar borderColor="transparent" size="xsmall" />}
+          color="grey"
+          appearance="rounded">
           Tag
         </Tag>
-        <Tag color="blueLight" appearance="rounded">
+        <Tag
+          icon={<Avatar borderColor="transparent" size="xsmall" />}
+          color="blue"
+          appearance="rounded">
           Tag
         </Tag>
-        <Tag color="greenLight" appearance="rounded">
+        <Tag
+          icon={<Avatar borderColor="transparent" size="xsmall" />}
+          color="green"
+          appearance="rounded">
           Tag
         </Tag>
-        <Tag color="redLight" appearance="rounded">
+        <Tag
+          icon={<Avatar borderColor="transparent" size="xsmall" />}
+          color="red"
+          appearance="rounded">
           Tag
         </Tag>
-        <Tag color="tealLight" appearance="rounded">
+        <Tag
+          icon={<Avatar borderColor="transparent" size="xsmall" />}
+          color="teal"
+          appearance="rounded">
           Tag
         </Tag>
-        <Tag color="yellowLight" appearance="rounded">
+        <Tag
+          icon={<Avatar borderColor="transparent" size="xsmall" />}
+          color="yellow"
+          appearance="rounded">
           Tag
         </Tag>
-        <Tag color="purpleLight" appearance="rounded">
+        <Tag
+          icon={<Avatar borderColor="transparent" size="xsmall" />}
+          color="purple"
+          appearance="rounded">
           Tag
         </Tag>
       </Inline>

@@ -6,6 +6,9 @@ import { forwardRef } from 'lib/react';
 
 const backgroundStyles = css({
   none: {},
+  transparent: {
+    backgroundColor: 'transparent',
+  },
   accentBlueSubtle: {
     backgroundColor: token('color.accent.subtleBlue'),
   },
@@ -135,6 +138,9 @@ const shadowStyles = css({
 
 const borderTopStyles = css({
   none: {},
+  transparent: {
+    borderBlockStart: `2px solid transparent`,
+  },
   default: {
     borderBlockStart: `2px solid ${token('color.background.default')}`,
   },
@@ -163,6 +169,9 @@ const borderTopStyles = css({
 
 const borderRightStyles = css({
   none: {},
+  transparent: {
+    borderInlineEnd: `2px solid transparent`,
+  },
   default: {
     borderInlineEnd: `2px solid ${token('color.background.default')}`,
   },
@@ -191,6 +200,9 @@ const borderRightStyles = css({
 
 const borderBottomStyles = css({
   none: {},
+  transparent: {
+    borderBlockEnd: `2px solid transparent`,
+  },
   default: {
     borderBlockEnd: `2px solid ${token('color.background.default')}`,
   },
@@ -219,6 +231,9 @@ const borderBottomStyles = css({
 
 const borderLeftStyles = css({
   none: {},
+  transparent: {
+    borderInlineStart: `2px solid transparent`,
+  },
   default: {
     borderInlineStart: `2px solid ${token('color.background.default')}`,
   },
@@ -248,7 +263,7 @@ const borderLeftStyles = css({
 const widthStyles = css({
   auto: {},
   xsmall: {
-    inlineSize: 16,
+    inlineSize: 20,
   },
   small: {
     inlineSize: 24,
@@ -267,7 +282,7 @@ const widthStyles = css({
 const heightStyles = css({
   auto: {},
   xsmall: {
-    blockSize: 16,
+    blockSize: 20,
   },
   small: {
     blockSize: 24,
