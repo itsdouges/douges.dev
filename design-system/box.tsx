@@ -274,6 +274,9 @@ const widthStyles = css({
   xlarge: {
     inlineSize: 48,
   },
+  full: {
+    inlineSize: '100%',
+  },
 });
 
 const heightStyles = css({
@@ -292,6 +295,9 @@ const heightStyles = css({
   },
   xlarge: {
     blockSize: 48,
+  },
+  full: {
+    blockSize: '100%',
   },
 });
 
@@ -421,9 +427,7 @@ const localResetStyles = css({
     WebkitTapHighlightColor: 'transparent',
   },
   div: {},
-  button: {
-    lineHeight: 1,
-  },
+  button: {},
   a: {
     ':hover,:active': {
       color: 'initial',

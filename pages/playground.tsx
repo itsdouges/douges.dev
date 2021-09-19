@@ -6,6 +6,9 @@ import LinkButton from 'design-system/link-button';
 import Avatar, { AvatarButton, AvatarLink } from 'design-system/avatar';
 import Tag, { TagLink } from 'design-system/tag';
 import DropdownMenu, { MenuItem } from 'design-system/dropdown-menu';
+import Tabs, { Tab, TabList, TabPanel } from 'design-system/tabs';
+import Box from 'design-system/box';
+import Text from 'design-system/text';
 
 function Playground() {
   return (
@@ -148,10 +151,25 @@ function Playground() {
         </Tag>
       </Inline>
 
-      <DropdownMenu trigger="Open">
+      <DropdownMenu trigger="Open menu">
         <MenuItem>Foo</MenuItem>
         <MenuItem>Bar</MenuItem>
       </DropdownMenu>
+
+      <Tabs>
+        <TabList>
+          <Tab isSelected>One</Tab>
+          <Tab>Two</Tab>
+          <Tab>Three</Tab>
+        </TabList>
+        <TabPanel>
+          <Box padding="medium" background="neutralSubtle">
+            <Text weight="bolder" color="low" size="regular">
+              Panel one
+            </Text>
+          </Box>
+        </TabPanel>
+      </Tabs>
     </Stack>
   );
 }
