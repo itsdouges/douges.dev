@@ -30,25 +30,21 @@ const backgroundStyles = css({
   blanket: {
     backgroundColor: token('color.background.blanket'),
   },
-  transparent: {
-    color: token('color.text.highEmphasis'),
-    backgroundColor: 'transparent',
-  },
   body: {
-    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.default'),
   },
   sunken: {
-    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.sunken'),
   },
   card: {
-    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.card'),
   },
   overlay: {
-    color: token('color.text.highEmphasis'),
     backgroundColor: token('color.background.overlay'),
+  },
+  transparent: {
+    color: token('color.text.highEmphasis'),
+    backgroundColor: 'transparent',
   },
   disabled: {
     color: token('color.text.disabled'),
@@ -80,7 +76,7 @@ const backgroundStyles = css({
     backgroundColor: token('color.background.boldDiscovery.resting'),
   },
   warningBold: {
-    color: token('color.text.onBold'),
+    color: token('color.text.onBoldWarning'),
     backgroundColor: token('color.background.boldWarning.resting'),
   },
   neutralSubtle: {
@@ -309,6 +305,12 @@ const borderRadiusStyles = css({
       borderRadius: 8,
     },
   },
+  circle: {
+    borderRadius: '50%',
+    '::before,::after': {
+      borderRadius: '50%',
+    },
+  },
 });
 
 const displayStyles = css({
@@ -346,7 +348,7 @@ const localResetStyles = css({
   a: {
     lineHeight: 1,
     ':hover,:active': {
-      color: 'inherit',
+      color: 'initial',
       textDecoration: 'none',
     },
   },

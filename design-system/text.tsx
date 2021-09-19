@@ -34,7 +34,14 @@ const colorStyles = css({
   high: { color: token('color.text.highEmphasis') },
   success: { color: token('color.text.success') },
   warning: { color: token('color.text.warning') },
+  brand: { color: token('color.text.brand') },
   danger: { color: token('color.text.danger') },
+  discovery: { color: token('color.text.discovery') },
+  selected: { color: token('color.text.selected') },
+  link: { color: token('color.text.link.resting') },
+  onBold: { color: token('color.text.onBold') },
+  onBoldWarning: { color: token('color.text.onBoldWarning') },
+  disabled: { color: token('color.text.disabled') },
   inherit: {},
 });
 
@@ -54,6 +61,10 @@ const textTransformStyles = css({
     textTransform: 'uppercase',
   },
 });
+
+export type TextColor = keyof typeof colorStyles;
+export type TextWeight = keyof typeof weightStyles;
+export type TextSize = keyof typeof textStyles;
 
 interface TextProps {
   children: React.ReactNode;
