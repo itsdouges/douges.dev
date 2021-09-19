@@ -3,6 +3,7 @@ import Lozenge from 'design-system/lozenge';
 import Stack from 'design-system/stack';
 import Button from 'design-system/button';
 import LinkButton from 'design-system/link-button';
+import Avatar, { AvatarButton, AvatarLink } from 'design-system/avatar';
 
 function Playground() {
   return (
@@ -51,6 +52,27 @@ function Playground() {
         <LinkButton href="#" isSelected>
           Button
         </LinkButton>
+      </Inline>
+      <Inline>
+        <Avatar size="xsmall" />
+        <Avatar size="small" />
+        <Avatar size="medium" />
+        <Avatar size="large" />
+        <Avatar size="xlarge" />
+      </Inline>
+      <Inline>
+        <AvatarLink size="xsmall" appearance="square" />
+        <AvatarLink size="small" appearance="square" />
+        <AvatarLink size="medium" appearance="square" />
+        <AvatarLink size="large" appearance="square" />
+        <AvatarLink size="xlarge" appearance="square" />
+      </Inline>
+      <Inline>
+        <AvatarButton size="xsmall" />
+        <AvatarButton size="small" />
+        <AvatarButton size="medium" />
+        <AvatarButton size="large" />
+        <AvatarButton size="xlarge" />
       </Inline>
     </Stack>
   );

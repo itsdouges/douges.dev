@@ -6,6 +6,7 @@ import usePressable, { UsePressable } from 'lib/use-pressable';
 
 const styles = css({
   pressable: {
+    userSelect: 'none',
     position: 'relative',
     '::before': {
       content: '""',

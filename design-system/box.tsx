@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
 import { token } from '@atlaskit/tokens';
-import { ReactHTML, ForwardedRef } from 'react';
+import { ForwardedRef } from 'react';
 import { forwardRef } from 'lib/react';
 
 const backgroundStyles = css({
@@ -117,6 +117,9 @@ const shadowStyles = css({
 
 const borderTopStyles = css({
   none: {},
+  default: {
+    borderBlockStart: `2px solid ${token('color.background.default')}`,
+  },
   neutral: {
     borderBlockStart: `2px solid ${token('color.border.neutral')}`,
   },
@@ -142,6 +145,9 @@ const borderTopStyles = css({
 
 const borderRightStyles = css({
   none: {},
+  default: {
+    borderInlineEnd: `2px solid ${token('color.background.default')}`,
+  },
   neutral: {
     borderInlineEnd: `2px solid ${token('color.border.neutral')}`,
   },
@@ -167,6 +173,9 @@ const borderRightStyles = css({
 
 const borderBottomStyles = css({
   none: {},
+  default: {
+    borderBlockEnd: `2px solid ${token('color.background.default')}`,
+  },
   neutral: {
     borderBlockEnd: `2px solid ${token('color.border.neutral')}`,
   },
@@ -192,6 +201,9 @@ const borderBottomStyles = css({
 
 const borderLeftStyles = css({
   none: {},
+  default: {
+    borderInlineStart: `2px solid ${token('color.background.default')}`,
+  },
   neutral: {
     borderInlineStart: `2px solid ${token('color.border.neutral')}`,
   },
@@ -212,6 +224,44 @@ const borderLeftStyles = css({
   },
   warning: {
     borderInlineStart: `2px solid ${token('color.iconBorder.warning')}`,
+  },
+});
+
+const widthStyles = css({
+  auto: {},
+  xsmall: {
+    inlineSize: 16,
+  },
+  small: {
+    inlineSize: 24,
+  },
+  medium: {
+    inlineSize: 32,
+  },
+  large: {
+    inlineSize: 40,
+  },
+  xlarge: {
+    inlineSize: 48,
+  },
+});
+
+const heightStyles = css({
+  auto: {},
+  xsmall: {
+    blockSize: 16,
+  },
+  small: {
+    blockSize: 24,
+  },
+  medium: {
+    blockSize: 32,
+  },
+  large: {
+    blockSize: 40,
+  },
+  xlarge: {
+    blockSize: 48,
   },
 });
 
@@ -299,7 +349,7 @@ const borderRadiusStyles = css({
       borderRadius: 3,
     },
   },
-  round: {
+  rounded: {
     borderRadius: 8,
     '::before,::after': {
       borderRadius: 8,
@@ -365,13 +415,19 @@ export interface PaddingProps {
 }
 
 export interface BorderProps {
-  border?: keyof typeof borderTopStyles;
-  borderTop?: keyof typeof borderTopStyles;
-  borderRight?: keyof typeof borderRightStyles;
-  borderBottom?: keyof typeof borderBottomStyles;
-  borderLeft?: keyof typeof borderLeftStyles;
-  borderX?: keyof typeof borderLeftStyles;
-  borderY?: keyof typeof borderTopStyles;
+  border?: Border;
+  borderTop?: Border;
+  borderRight?: Border;
+  borderBottom?: Border;
+  borderLeft?: Border;
+  borderX?: Border;
+  borderY?: Border;
+}
+
+export interface SizeProps {
+  size?: Size;
+  width?: Size;
+  height?: Size;
 }
 
 export type Spacing = keyof typeof paddingTopStyles;
@@ -379,6 +435,8 @@ export type Background = keyof typeof backgroundStyles;
 export type Shadow = keyof typeof shadowStyles;
 export type Border = keyof typeof borderRightStyles;
 export type BorderRadius = keyof typeof borderRadiusStyles;
+export type Size = keyof typeof widthStyles;
+export type Display = keyof typeof displayStyles;
 
 export type SemanticNames = {
   default: 'neutralSubtle';
@@ -395,14 +453,17 @@ export type SemanticNames = {
   movedBold: 'warningBold';
 };
 
-export type BoxHTMLElement = keyof ReactHTML;
+export type BoxHTMLElement = keyof JSX.IntrinsicElements;
 
-export interface BoxProps<TElement extends BoxHTMLElement> extends PaddingProps, BorderProps {
+export interface BoxProps<TElement extends BoxHTMLElement>
+  extends PaddingProps,
+    BorderProps,
+    SizeProps {
   children?: React.ReactNode;
-  background?: keyof typeof backgroundStyles;
-  borderRadius?: keyof typeof borderRadiusStyles;
-  shadow?: keyof typeof shadowStyles;
-  display?: keyof typeof displayStyles;
+  background?: Background;
+  borderRadius?: BorderRadius;
+  shadow?: Shadow;
+  display?: Display;
   className?: string;
   as?: TElement;
 }
@@ -428,13 +489,16 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
     borderX,
     borderY,
     display,
+    className,
+    as: AsProp,
+    width,
+    height,
     border = 'none',
     background = 'none',
     borderRadius = 'none',
     padding = 'none',
     shadow = 'none',
-    className,
-    as: AsProp,
+    size = 'auto',
     ...props
   }: BoxProps<TElement> & BoxHTMLProps<TElement>,
   ref: ForwardedRef<HTMLElement>
@@ -453,6 +517,8 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   const borderLeftStyle = borderLeftStyles[borderLeft || borderX || border];
   const displayStyle = display && displayStyles[display];
   const resetStyle = localResetStyles[Component];
+  const widthStyle = widthStyles[width || size];
+  const heightStyle = heightStyles[height || size];
 
   return (
     <Component
@@ -472,6 +538,8 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
         borderRightStyle,
         borderBottomStyle,
         borderLeftStyle,
+        widthStyle,
+        heightStyle,
       ]}
       className={className}
       {...(props as unknown)}>
