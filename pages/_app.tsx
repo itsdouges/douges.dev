@@ -36,6 +36,7 @@ html[data-theme="dark"] {
 
 function App({ Component, pageProps, router }: AppProps) {
   const isBlogRoute = router.route.startsWith('/blog');
+  const isPlayground = router.route.startsWith('/playground');
 
   return (
     <MDXProvider components={components}>
@@ -60,31 +61,33 @@ function App({ Component, pageProps, router }: AppProps) {
         <script data-respect-dnt async src="https://cdn.splitbee.io/sb.js" />
       </Head>
 
-      <header css={styles.header}>
-        <Box as="nav" padding="large">
-          <Inline>
-            {isBlogRoute && (
-              <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
-            )}
-            <Inline blockAlign="middle" marginLeft="auto" gap="regular">
-              <DropdownMenu
-                trigger={(props) => (
-                  <Button appearance="subtle" {...props}>
-                    Links
-                  </Button>
-                )}>
-                <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
-                  Twitter
-                </MenuItem>
-                <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
-                  Github
-                </MenuItem>
-              </DropdownMenu>
-              <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
+      {isPlayground || (
+        <header css={styles.header}>
+          <Box as="nav" padding="large">
+            <Inline>
+              {isBlogRoute && (
+                <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
+              )}
+              <Inline blockAlign="middle" marginLeft="auto" gap="regular">
+                <DropdownMenu
+                  trigger={(props) => (
+                    <Button appearance="subtle" {...props}>
+                      Links
+                    </Button>
+                  )}>
+                  <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
+                    Twitter
+                  </MenuItem>
+                  <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
+                    Github
+                  </MenuItem>
+                </DropdownMenu>
+                <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
+              </Inline>
             </Inline>
-          </Inline>
-        </Box>
-      </header>
+          </Box>
+        </header>
+      )}
 
       {isBlogRoute ? (
         <LayoutBlog blog={(Component as any).meta}>
