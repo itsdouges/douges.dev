@@ -43,15 +43,15 @@ function AvatarExample() {
   const styleButtonText = constrainStyles ? 'Styles constrained' : 'Constrain styles';
 
   return (
-    <Stack gap="regular">
-      <Inline gap="regular" align="left">
+    <Stack gap="regular" inlineAlign="stretch">
+      <Inline gap="regular">
         <Button isDisabled={count === 1} onClick={() => setCount((prev) => prev - 1)}>
           Remove avatar
         </Button>
         <TimeoutButton isDisabled={count >= 7} onClick={() => setCount((prev) => prev + 1)}>
           Add avatar
         </TimeoutButton>
-        <Inline marginLeft="auto" align="right">
+        <Inline marginLeft="auto" inlineAlign="end">
           <Button isSelected={constrainStyles} onClick={() => setConstrainStyles((prev) => !prev)}>
             {styleButtonText}
           </Button>

@@ -59,8 +59,8 @@ function CodeAnalysis() {
   const code = steps[step];
 
   return (
-    <Stack gap="regular">
-      <Inline justify="middle" gap="regular">
+    <Stack gap="regular" inlineAlign="stretch">
+      <Inline blockAlign="middle" gap="regular">
         <Button isDisabled={step === 0} onClick={() => setStep((next) => next - 1)}>
           Previous
         </Button>

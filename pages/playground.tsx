@@ -5,6 +5,7 @@ import Button from 'design-system/button';
 import LinkButton from 'design-system/link-button';
 import Avatar, { AvatarButton, AvatarLink } from 'design-system/avatar';
 import Tag, { TagLink } from 'design-system/tag';
+import DropdownMenu, { MenuItem } from 'design-system/dropdown-menu';
 
 function Playground() {
   return (
@@ -146,6 +147,11 @@ function Playground() {
           Tag
         </Tag>
       </Inline>
+
+      <DropdownMenu trigger="Open">
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+      </DropdownMenu>
     </Stack>
   );
 }

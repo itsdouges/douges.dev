@@ -40,14 +40,12 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
               rel="noreferrer"
               href={href}
               {...press}>
-              <Stack gap="small">
-                <Text size="small">{children}</Text>
-                {secondary && (
-                  <Text as="div" size="smaller" color="low">
-                    {secondary}
-                  </Text>
-                )}
-              </Stack>
+              <Text size="small">{children}</Text>
+              {secondary && (
+                <Text as="div" size="smaller" color="low">
+                  {secondary}
+                </Text>
+              )}
             </Box>
           </FocusRing>
         )}

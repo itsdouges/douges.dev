@@ -49,7 +49,7 @@ const avatarIcons = {
 interface AvatarProps {
   size?: Size;
   appearance?: 'square' | 'circle';
-  borderColor?: 'default' | 'transparent';
+  borderColor?: 'body' | 'transparent';
 }
 
 export default function Avatar({

@@ -9,16 +9,18 @@ const styles = css({
   },
 });
 
-const alignStyles = css({
-  none: {},
-  left: {
-    textAlign: 'left',
+const inlineAlignStyles = css({
+  end: {
+    alignItems: 'flex-end',
+  },
+  start: {
+    alignItems: 'flex-start',
   },
   center: {
-    textAlign: 'center',
+    alignItems: 'center',
   },
-  right: {
-    textAlign: 'right',
+  stretch: {
+    alignItems: 'stretch',
   },
 });
 
@@ -50,14 +52,14 @@ const gapStyles = css({
 interface StackProps {
   children: React.ReactNode;
   gap?: keyof typeof gapStyles;
-  textAlign?: 'center' | 'left' | 'right' | 'none';
+  inlineAlign?: keyof typeof inlineAlignStyles;
 }
 
-function Stack({ children, gap = 'none', textAlign = 'none' }: StackProps) {
-  const alignStyle = alignStyles[textAlign];
+function Stack({ children, gap = 'none', inlineAlign = 'start' }: StackProps) {
   const gapStyle = gapStyles[gap];
+  const inlineStyle = inlineAlignStyles[inlineAlign];
 
-  return <div css={[styles.stack, alignStyle, gapStyle]}>{children}</div>;
+  return <div css={[styles.stack, gapStyle, inlineStyle]}>{children}</div>;
 }
 
 export default Stack;

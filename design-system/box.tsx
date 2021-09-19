@@ -6,9 +6,6 @@ import { forwardRef } from 'lib/react';
 
 const backgroundStyles = css({
   none: {},
-  transparent: {
-    backgroundColor: 'transparent',
-  },
   accentBlueSubtle: {
     backgroundColor: token('color.accent.subtleBlue'),
   },

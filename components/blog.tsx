@@ -18,12 +18,13 @@ const styles = css({
   heroImage: {
     height: 250,
     position: 'relative',
-    margin: '0 -12px',
+    width: 'calc(100% + 24px)',
+    alignSelf: 'center',
     '@media screen and (min-width: 1000px)': {
-      margin: '0 -64px',
+      width: 'calc(100% + 64px)',
     },
     '@media screen and (min-width: 1200px)': {
-      margin: '0 -128px',
+      width: 'calc(100% + 128px)',
     },
   },
 });
@@ -43,7 +44,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
 
   return (
     <article>
-      <Stack gap="xxxlarge">
+      <Stack gap="xxxlarge" inlineAlign="stretch">
         <Box css={styles.heroImage} background="neutralSubtle" borderRadius="default">
           {heroImage && (
             <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />

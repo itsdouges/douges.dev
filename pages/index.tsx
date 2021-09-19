@@ -62,7 +62,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
       <main>
         <div css={styles.hero}>
           <Section>
-            <Stack gap="regular">
+            <Stack inlineAlign="center" gap="regular">
               <Heading level={0}>douges&#8203;.dev</Heading>
               <Text color="medium">
                 <span

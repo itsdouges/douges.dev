@@ -11,7 +11,6 @@ import toggleTheme from 'lib/toggle-theme';
 import components from 'components/blog-mdx-components';
 import { token } from '@atlaskit/tokens';
 import LayoutBlog from 'components/layout-blog';
-import Tooltip from 'design-system/tooltip';
 import Box from 'design-system/box';
 import DropdownMenu, { MenuItem } from 'design-system/dropdown-menu';
 import Inline from 'design-system/inline';
@@ -66,7 +65,7 @@ function App({ Component, pageProps, router }: AppProps) {
             {isBlogRoute && (
               <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
             )}
-            <Inline justify="middle" marginLeft="auto" gap="regular">
+            <Inline blockAlign="middle" marginLeft="auto" gap="regular">
               <DropdownMenu trigger="Links">
                 <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
                   Twitter

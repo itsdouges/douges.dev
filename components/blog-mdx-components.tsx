@@ -39,7 +39,9 @@ const components: MDXProviderComponents = {
   wrapper({ children }) {
     return (
       <div css={styles.wrapper}>
-        <Stack gap="xlarge">{children}</Stack>
+        <Stack gap="xlarge" inlineAlign="stretch">
+          {children}
+        </Stack>
       </div>
     );
   },

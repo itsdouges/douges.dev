@@ -66,7 +66,7 @@ function SignUp() {
           setIsComplete(true);
         }}>
         <Label htmlFor={id} label="Join the mailing list today">
-          <Inline justify="stretch" gap="regular">
+          <Inline blockAlign="stretch" gap="regular">
             <Textfield
               isRequired
               isDisabled={isLoading}

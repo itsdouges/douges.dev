@@ -105,8 +105,8 @@ function CodemodStyles() {
   const extractCode = extractSteps[step];
 
   return (
-    <Stack gap="regular">
-      <Inline justify="middle" gap="regular">
+    <Stack gap="regular" inlineAlign="stretch">
+      <Inline gap="regular" blockAlign="middle">
         <Button isDisabled={step === 0} onClick={() => setStep((next) => next - 1)}>
           Previous
         </Button>
@@ -115,9 +115,9 @@ function CodemodStyles() {
           onClick={() => setStep((next) => next + 1)}>
           Next
         </TimeoutButton>
-        <Inline marginLeft="auto">
-          <Text color="medium" size="small">
-            <strong>{stepDescription[step]}</strong>
+        <Inline inlineAlign="end" marginLeft="auto">
+          <Text weight="bolder" color="medium" size="small">
+            {stepDescription[step]}
           </Text>
         </Inline>
       </Inline>

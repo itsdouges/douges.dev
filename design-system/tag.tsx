@@ -42,7 +42,7 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
       paddingLeft={icon ? 'none' : 'small'}
       paddingRight="small"
       borderRadius={appearance}>
-      <Inline gap="small" justify="middle">
+      <Inline gap="small" blockAlign="middle">
         {icon}
         <Text size="smaller">{children}</Text>
       </Inline>

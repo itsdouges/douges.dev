@@ -5,7 +5,6 @@ const styles = css({
   inline: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
   },
 });
 
@@ -43,19 +42,22 @@ const gapStyles = css({
   },
 });
 
-const alignStyles = css({
-  right: {
+const inlineAlignStyles = css({
+  end: {
     justifyContent: 'right',
   },
-  left: {
+  start: {
     justifyContent: 'left',
   },
   center: {
     justifyContent: 'center',
   },
+  stretch: {
+    justifyContent: 'stretch',
+  },
 });
 
-const justifyStyles = css({
+const blockAlignStyles = css({
   bottom: {
     alignItems: 'flex-end',
   },
@@ -73,23 +75,23 @@ const justifyStyles = css({
 interface InlineProps {
   children: React.ReactNode;
   gap?: keyof typeof gapStyles;
-  align?: keyof typeof alignStyles;
-  justify?: keyof typeof justifyStyles;
+  inlineAlign?: keyof typeof inlineAlignStyles;
+  blockAlign?: keyof typeof blockAlignStyles;
   marginLeft?: string;
   as?: 'div' | 'nav';
 }
 
 function Inline({
   children,
-  align,
   marginLeft,
-  justify = 'top',
+  inlineAlign = 'start',
+  blockAlign = 'top',
   as: Component = 'div',
   gap = 'none',
 }: InlineProps) {
   const gapStyle = gapStyles[gap];
-  const alignStyle = align && alignStyles[align];
-  const justifyStyle = justify && justifyStyles[justify];
+  const alignStyle = inlineAlignStyles[inlineAlign];
+  const justifyStyle = blockAlignStyles[blockAlign];
 
   return (
     <Component
