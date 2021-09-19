@@ -132,7 +132,8 @@ function Playground() {
 
       <DropdownMenu trigger="Open menu">
         <MenuItem>Foo</MenuItem>
-        <MenuItem>Bar</MenuItem>
+        <MenuItem isSelected>Bar</MenuItem>
+        <MenuItem>Baz</MenuItem>
       </DropdownMenu>
 
       <Tabs>

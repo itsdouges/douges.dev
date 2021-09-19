@@ -21,10 +21,11 @@ interface MenuItemProps {
   children: React.ReactNode;
   href: string;
   secondary?: React.ReactNode;
+  isSelected?: boolean;
 }
 
 export const MenuItem = forwardRef<HTMLAnchorElement, any>(
-  ({ children, href, secondary }: MenuItemProps, ref) => {
+  ({ children, href, secondary, isSelected }: MenuItemProps, ref) => {
     return (
       <Pressable appearance="static">
         {(press) => (
@@ -32,15 +33,18 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
             <Box
               as="a"
               css={styles.item}
-              background="transparent"
+              background={isSelected ? 'selected' : 'transparent'}
               paddingX="medium"
               paddingY="regular"
+              borderLeft={isSelected ? 'brand' : undefined}
               ref={ref}
               target="_blank"
               rel="noreferrer"
               href={href}
               {...press}>
-              <Text size="small">{children}</Text>
+              <Text size="small" color={isSelected ? 'selected' : undefined}>
+                {children}
+              </Text>
               {secondary && (
                 <Text as="div" size="smaller" color="low">
                   {secondary}
@@ -58,7 +62,9 @@ MenuItem.displayName = 'MenuItem';
 
 interface DropdownMenuProps {
   children: React.ReactNode;
-  trigger: string | ((props: { onClick: () => void; isOpen: boolean }) => React.ReactNode);
+  trigger:
+    | string
+    | ((props: { ref: any; onClick: () => void; isSelected: boolean }) => React.ReactNode);
 }
 
 function DropdownMenu({ children, trigger }: DropdownMenuProps) {
@@ -67,13 +73,13 @@ function DropdownMenu({ children, trigger }: DropdownMenuProps) {
 
   return (
     <Popup paddingY="regular" isOpen={isOpen} content={() => children}>
-      {(props) =>
+      {({ ref }) =>
         typeof trigger === 'string' ? (
-          <Button {...props} appearance="default" isSelected={isOpen} onClick={toggle}>
+          <Button ref={ref} appearance="default" isSelected={isOpen} onClick={toggle}>
             {trigger}
           </Button>
         ) : (
-          trigger({ isOpen, onClick: toggle })
+          trigger({ isSelected: isOpen, onClick: toggle, ref })
         )
       }
     </Popup>

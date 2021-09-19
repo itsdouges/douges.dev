@@ -197,93 +197,93 @@ const borderTopStyles = css({
 const borderRightStyles = css({
   none: {},
   currentColor: {
-    boxShadow: `2px 0 0 0 currentColor`,
+    boxShadow: `inset -2px 0 0 0 currentColor`,
   },
   default: {
-    boxShadow: `2px 0 0 0 ${token('color.background.default')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.background.default')}`,
   },
   neutral: {
-    boxShadow: `2px 0 0 0 ${token('color.border.neutral')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.border.neutral')}`,
   },
   focus: {
-    boxShadow: `2px 0 0 0 ${token('color.border.focus')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.border.focus')}`,
   },
   brand: {
-    boxShadow: `2px 0 0 0 ${token('color.iconBorder.brand')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    boxShadow: `2px 0 0 0 ${token('color.iconBorder.danger')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.danger')}`,
   },
   success: {
-    boxShadow: `2px 0 0 0 ${token('color.iconBorder.success')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    boxShadow: `2px 0 0 0 ${token('color.iconBorder.discovery')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    boxShadow: `2px 0 0 0 ${token('color.iconBorder.warning')}`,
+    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.warning')}`,
   },
 });
 
 const borderBottomStyles = css({
   none: {},
   currentColor: {
-    boxShadow: `0 2px 0 0 currentColor`,
+    boxShadow: `inset 0 -2px 0 0 currentColor`,
   },
   default: {
-    boxShadow: `0 2px 0 0 ${token('color.background.default')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.background.default')}`,
   },
   neutral: {
-    boxShadow: `0 2px 0 0 ${token('color.border.neutral')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.border.neutral')}`,
   },
   focus: {
-    boxShadow: `0 2px 0 0 ${token('color.border.focus')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.border.focus')}`,
   },
   brand: {
-    boxShadow: `0 2px 0 0 ${token('color.iconBorder.brand')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    boxShadow: `0 2px 0 0 ${token('color.iconBorder.danger')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.danger')}`,
   },
   success: {
-    boxShadow: `0 2px 0 0 ${token('color.iconBorder.success')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    boxShadow: `0 2px 0 0 ${token('color.iconBorder.discovery')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    boxShadow: `0 2px 0 0 ${token('color.iconBorder.warning')}`,
+    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.warning')}`,
   },
 });
 
 const borderLeftStyles = css({
   none: {},
   currentColor: {
-    boxShadow: `-2px 0 0 0 currentColor`,
+    boxShadow: `inset 2px 0 0 0 currentColor`,
   },
   default: {
-    boxShadow: `-2px 0 0 0 ${token('color.background.default')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.background.default')}`,
   },
   neutral: {
-    boxShadow: `-2px 0 0 0 ${token('color.border.neutral')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.border.neutral')}`,
   },
   focus: {
-    boxShadow: `-2px 0 0 0 ${token('color.border.focus')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.border.focus')}`,
   },
   brand: {
-    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.brand')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.danger')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.danger')}`,
   },
   success: {
-    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.success')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.discovery')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.warning')}`,
+    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.warning')}`,
   },
 });
 
