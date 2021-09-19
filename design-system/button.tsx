@@ -9,6 +9,7 @@ import Text from 'design-system/text';
 const styles = css({
   button: {
     overflow: 'hidden',
+    lineHeight: 1,
   },
 });
 

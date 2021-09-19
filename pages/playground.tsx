@@ -4,6 +4,7 @@ import Stack from 'design-system/stack';
 import Button from 'design-system/button';
 import LinkButton from 'design-system/link-button';
 import Avatar, { AvatarButton, AvatarLink } from 'design-system/avatar';
+import Tag, { TagLink } from 'design-system/tag';
 
 function Playground() {
   return (
@@ -67,12 +68,58 @@ function Playground() {
         <AvatarLink size="large" appearance="square" />
         <AvatarLink size="xlarge" appearance="square" />
       </Inline>
-      <Inline>
-        <AvatarButton size="xsmall" />
-        <AvatarButton size="small" />
+      <Inline gap="-small">
         <AvatarButton size="medium" />
-        <AvatarButton size="large" />
-        <AvatarButton size="xlarge" />
+        <AvatarButton size="medium" />
+        <AvatarButton size="medium" />
+        <AvatarButton size="medium" />
+        <AvatarButton size="medium" />
+      </Inline>
+      <Inline gap="small">
+        <Tag color="greyLight">Tag</Tag>
+        <Tag color="grey">Tag</Tag>
+        <Tag color="blueLight">Tag</Tag>
+        <Tag color="greenLight">Tag</Tag>
+        <Tag color="redLight">Tag</Tag>
+        <Tag color="tealLight">Tag</Tag>
+        <Tag color="yellowLight">Tag</Tag>
+        <Tag color="purpleLight">Tag</Tag>
+      </Inline>
+      <Inline gap="small">
+        <TagLink color="greyLight">Tag</TagLink>
+        <TagLink color="grey">Tag</TagLink>
+        <TagLink color="blueLight">Tag</TagLink>
+        <TagLink color="greenLight">Tag</TagLink>
+        <TagLink color="redLight">Tag</TagLink>
+        <TagLink color="tealLight">Tag</TagLink>
+        <TagLink color="yellowLight">Tag</TagLink>
+        <TagLink color="purpleLight">Tag</TagLink>
+      </Inline>
+      <Inline gap="small">
+        <Tag color="greyLight" appearance="rounded">
+          Tag
+        </Tag>
+        <Tag color="grey" appearance="rounded">
+          Tag
+        </Tag>
+        <Tag color="blueLight" appearance="rounded">
+          Tag
+        </Tag>
+        <Tag color="greenLight" appearance="rounded">
+          Tag
+        </Tag>
+        <Tag color="redLight" appearance="rounded">
+          Tag
+        </Tag>
+        <Tag color="tealLight" appearance="rounded">
+          Tag
+        </Tag>
+        <Tag color="yellowLight" appearance="rounded">
+          Tag
+        </Tag>
+        <Tag color="purpleLight" appearance="rounded">
+          Tag
+        </Tag>
       </Inline>
     </Stack>
   );

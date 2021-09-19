@@ -1,8 +1,16 @@
+/** @jsxImportSource @emotion/react */
+import css from 'design-system/css';
 import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
 import Pressable from 'design-system/pressable';
 import Text, { TextColor } from 'design-system/text';
 import { appearanceBgMap } from 'design-system/button';
+
+const styles = css({
+  link: {
+    lineHeight: 1,
+  },
+});
 
 type Appearance = keyof typeof appearanceBgMap;
 
@@ -50,6 +58,7 @@ function LinkButton({
             target={shouldOpenNewWindow ? '_blank' : ''}
             rel="noreferrer"
             href={href}
+            css={styles.link}
             {...props}
             {...press}>
             <Text color={color} size="small" weight="bold">

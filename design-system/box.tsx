@@ -350,9 +350,9 @@ const borderRadiusStyles = css({
     },
   },
   rounded: {
-    borderRadius: 8,
+    borderRadius: 12,
     '::before,::after': {
-      borderRadius: 8,
+      borderRadius: 12,
     },
   },
   circle: {
@@ -396,7 +396,6 @@ const localResetStyles = css({
     lineHeight: 1,
   },
   a: {
-    lineHeight: 1,
     ':hover,:active': {
       color: 'initial',
       textDecoration: 'none',
