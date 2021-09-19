@@ -1,9 +1,21 @@
+/** @jsxImportSource @emotion/react */
+import css from 'design-system/css';
+import { token } from '@atlaskit/tokens';
 import Box from 'design-system/box';
 import Inline from 'design-system/inline';
 import React from 'react';
 import Text from 'design-system/text';
 import Pressable from 'design-system/pressable';
 import FocusRing from 'design-system/focus-ring';
+
+const styles = css({
+  tabBorderColor: {
+    color: 'transparent',
+    ':hover,:focus': {
+      color: token('color.border.neutral'),
+    },
+  },
+});
 
 interface TabsProps {
   children: React.ReactNode;
@@ -30,10 +42,11 @@ export function Tab({ children, isSelected }: TabProps) {
           <Box
             href="#"
             as="a"
-            borderBottom={isSelected ? 'brand' : 'neutral'}
+            borderBottom={isSelected ? 'brand' : 'currentColor'}
             paddingY="small"
+            css={!isSelected && styles.tabBorderColor}
             {...press}>
-            <Text color={isSelected ? 'selected' : 'low'} size="smaller" weight="bold">
+            <Text color={isSelected ? 'selected' : 'medium'} size="smaller" weight="bold">
               {children}
             </Text>
           </Box>

@@ -58,14 +58,14 @@ function Playground() {
           Button
         </LinkButton>
       </Inline>
-      <Inline>
+      <Inline gap="small">
         <Avatar size="xsmall" />
         <Avatar size="small" />
         <Avatar size="medium" />
         <Avatar size="large" />
         <Avatar size="xlarge" />
       </Inline>
-      <Inline>
+      <Inline gap="small">
         <AvatarLink size="xsmall" appearance="square" />
         <AvatarLink size="small" appearance="square" />
         <AvatarLink size="medium" appearance="square" />
@@ -107,46 +107,25 @@ function Playground() {
         <TagLink color="purpleLight">Tag</TagLink>
       </Inline>
       <Inline gap="small">
-        <Tag
-          icon={<Avatar borderColor="transparent" size="xsmall" />}
-          color="grey"
-          appearance="rounded">
+        <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="grey" appearance="rounded">
           Tag
         </Tag>
-        <Tag
-          icon={<Avatar borderColor="transparent" size="xsmall" />}
-          color="blue"
-          appearance="rounded">
+        <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="blue" appearance="rounded">
           Tag
         </Tag>
-        <Tag
-          icon={<Avatar borderColor="transparent" size="xsmall" />}
-          color="green"
-          appearance="rounded">
+        <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="green" appearance="rounded">
           Tag
         </Tag>
-        <Tag
-          icon={<Avatar borderColor="transparent" size="xsmall" />}
-          color="red"
-          appearance="rounded">
+        <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="red" appearance="rounded">
           Tag
         </Tag>
-        <Tag
-          icon={<Avatar borderColor="transparent" size="xsmall" />}
-          color="teal"
-          appearance="rounded">
+        <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="teal" appearance="rounded">
           Tag
         </Tag>
-        <Tag
-          icon={<Avatar borderColor="transparent" size="xsmall" />}
-          color="yellow"
-          appearance="rounded">
+        <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="yellow" appearance="rounded">
           Tag
         </Tag>
-        <Tag
-          icon={<Avatar borderColor="transparent" size="xsmall" />}
-          color="purple"
-          appearance="rounded">
+        <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="purple" appearance="rounded">
           Tag
         </Tag>
       </Inline>
@@ -158,12 +137,12 @@ function Playground() {
 
       <Tabs>
         <TabList>
-          <Tab isSelected>One</Tab>
-          <Tab>Two</Tab>
-          <Tab>Three</Tab>
+          <Tab isSelected>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
         </TabList>
         <TabPanel>
-          <Box padding="medium" background="neutralSubtle">
+          <Box paddingY="xlarge" paddingX="regular" background="neutralSubtle">
             <Text weight="bolder" color="low" size="regular">
               Panel one
             </Text>

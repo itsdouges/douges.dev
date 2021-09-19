@@ -5,7 +5,6 @@ import { ForwardedRef } from 'react';
 import { forwardRef } from 'lib/react';
 
 const backgroundStyles = css({
-  none: {},
   accentBlueSubtle: {
     backgroundColor: token('color.accent.subtleBlue'),
   },
@@ -133,134 +132,165 @@ const shadowStyles = css({
   },
 });
 
-const borderTopStyles = css({
+const borderStyles = css({
   none: {},
-  transparent: {
-    borderBlockStart: `2px solid transparent`,
+  currentColor: {
+    boxShadow: `0 0 0 2px currentColor`,
   },
   default: {
-    borderBlockStart: `2px solid ${token('color.background.default')}`,
+    boxShadow: `0 0 0 2px ${token('color.background.default')}`,
   },
   neutral: {
-    borderBlockStart: `2px solid ${token('color.border.neutral')}`,
+    boxShadow: `0 0 0 2px ${token('color.border.neutral')}`,
   },
   focus: {
-    borderBlockStart: `2px solid ${token('color.border.focus')}`,
+    boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
   },
   brand: {
-    borderBlockStart: `2px solid ${token('color.iconBorder.brand')}`,
+    boxShadow: `0 0 0 2px ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    borderBlockStart: `2px solid ${token('color.iconBorder.danger')}`,
+    boxShadow: `0 0 0 2px ${token('color.iconBorder.danger')}`,
   },
   success: {
-    borderBlockStart: `2px solid ${token('color.iconBorder.success')}`,
+    boxShadow: `0 0 0 2px ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    borderBlockStart: `2px solid ${token('color.iconBorder.discovery')}`,
+    boxShadow: `0 0 0 2px ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    borderBlockStart: `2px solid ${token('color.iconBorder.warning')}`,
+    boxShadow: `0 0 0 2px ${token('color.iconBorder.warning')}`,
+  },
+});
+
+const borderTopStyles = css({
+  none: {},
+  currentColor: {
+    boxShadow: `0 -2px 0 0 currentColor`,
+  },
+  default: {
+    boxShadow: `0 -2px 0 0 ${token('color.background.default')}`,
+  },
+  neutral: {
+    boxShadow: `0 -2px 0 0 ${token('color.border.neutral')}`,
+  },
+  focus: {
+    boxShadow: `0 -2px 0 0 ${token('color.border.focus')}`,
+  },
+  brand: {
+    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.brand')}`,
+  },
+  danger: {
+    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.danger')}`,
+  },
+  success: {
+    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.success')}`,
+  },
+  discovery: {
+    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.discovery')}`,
+  },
+  warning: {
+    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.warning')}`,
   },
 });
 
 const borderRightStyles = css({
   none: {},
-  transparent: {
-    borderInlineEnd: `2px solid transparent`,
+  currentColor: {
+    boxShadow: `2px 0 0 0 currentColor`,
   },
   default: {
-    borderInlineEnd: `2px solid ${token('color.background.default')}`,
+    boxShadow: `2px 0 0 0 ${token('color.background.default')}`,
   },
   neutral: {
-    borderInlineEnd: `2px solid ${token('color.border.neutral')}`,
+    boxShadow: `2px 0 0 0 ${token('color.border.neutral')}`,
   },
   focus: {
-    borderInlineEnd: `2px solid ${token('color.border.focus')}`,
+    boxShadow: `2px 0 0 0 ${token('color.border.focus')}`,
   },
   brand: {
-    borderInlineEnd: `2px solid ${token('color.iconBorder.brand')}`,
+    boxShadow: `2px 0 0 0 ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    borderInlineEnd: `2px solid ${token('color.iconBorder.danger')}`,
+    boxShadow: `2px 0 0 0 ${token('color.iconBorder.danger')}`,
   },
   success: {
-    borderInlineEnd: `2px solid ${token('color.iconBorder.success')}`,
+    boxShadow: `2px 0 0 0 ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    borderInlineEnd: `2px solid ${token('color.iconBorder.discovery')}`,
+    boxShadow: `2px 0 0 0 ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    borderInlineEnd: `2px solid ${token('color.iconBorder.warning')}`,
+    boxShadow: `2px 0 0 0 ${token('color.iconBorder.warning')}`,
   },
 });
 
 const borderBottomStyles = css({
   none: {},
-  transparent: {
-    borderBlockEnd: `2px solid transparent`,
+  currentColor: {
+    boxShadow: `0 2px 0 0 currentColor`,
   },
   default: {
-    borderBlockEnd: `2px solid ${token('color.background.default')}`,
+    boxShadow: `0 2px 0 0 ${token('color.background.default')}`,
   },
   neutral: {
-    borderBlockEnd: `2px solid ${token('color.border.neutral')}`,
+    boxShadow: `0 2px 0 0 ${token('color.border.neutral')}`,
   },
   focus: {
-    borderBlockEnd: `2px solid ${token('color.border.focus')}`,
+    boxShadow: `0 2px 0 0 ${token('color.border.focus')}`,
   },
   brand: {
-    borderBlockEnd: `2px solid ${token('color.iconBorder.brand')}`,
+    boxShadow: `0 2px 0 0 ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    borderBlockEnd: `2px solid ${token('color.iconBorder.danger')}`,
+    boxShadow: `0 2px 0 0 ${token('color.iconBorder.danger')}`,
   },
   success: {
-    borderBlockEnd: `2px solid ${token('color.iconBorder.success')}`,
+    boxShadow: `0 2px 0 0 ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    borderBlockEnd: `2px solid ${token('color.iconBorder.discovery')}`,
+    boxShadow: `0 2px 0 0 ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    borderBlockEnd: `2px solid ${token('color.iconBorder.warning')}`,
+    boxShadow: `0 2px 0 0 ${token('color.iconBorder.warning')}`,
   },
 });
 
 const borderLeftStyles = css({
   none: {},
-  transparent: {
-    borderInlineStart: `2px solid transparent`,
+  currentColor: {
+    boxShadow: `-2px 0 0 0 currentColor`,
   },
   default: {
-    borderInlineStart: `2px solid ${token('color.background.default')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.background.default')}`,
   },
   neutral: {
-    borderInlineStart: `2px solid ${token('color.border.neutral')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.border.neutral')}`,
   },
   focus: {
-    borderInlineStart: `2px solid ${token('color.border.focus')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.border.focus')}`,
   },
   brand: {
-    borderInlineStart: `2px solid ${token('color.iconBorder.brand')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    borderInlineStart: `2px solid ${token('color.iconBorder.danger')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.danger')}`,
   },
   success: {
-    borderInlineStart: `2px solid ${token('color.iconBorder.success')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    borderInlineStart: `2px solid ${token('color.iconBorder.discovery')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    borderInlineStart: `2px solid ${token('color.iconBorder.warning')}`,
+    boxShadow: `-2px 0 0 0 ${token('color.iconBorder.warning')}`,
   },
 });
 
 const widthStyles = css({
   auto: {},
   xsmall: {
-    inlineSize: 20,
+    inlineSize: 16,
   },
   small: {
     inlineSize: 24,
@@ -282,7 +312,7 @@ const widthStyles = css({
 const heightStyles = css({
   auto: {},
   xsmall: {
-    blockSize: 20,
+    blockSize: 16,
   },
   small: {
     blockSize: 24,
@@ -452,8 +482,6 @@ export interface BorderProps {
   borderRight?: Border;
   borderBottom?: Border;
   borderLeft?: Border;
-  borderX?: Border;
-  borderY?: Border;
 }
 
 export interface SizeProps {
@@ -514,39 +542,38 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
     paddingLeft,
     paddingX,
     paddingY,
-    borderBottom,
-    borderLeft,
-    borderRight,
-    borderTop,
-    borderX,
-    borderY,
     display,
     className,
     as: AsProp,
     width,
     height,
-    border = 'none',
-    background = 'none',
+    borderBottom,
+    borderLeft,
+    borderRight,
+    borderTop,
+    border,
+    shadow,
+    background,
     borderRadius = 'none',
     padding = 'none',
-    shadow = 'none',
     size = 'auto',
     ...props
   }: BoxProps<TElement> & BoxHTMLProps<TElement>,
   ref: ForwardedRef<HTMLElement>
 ) {
   const Component: 'div' = (AsProp || 'div') as any;
-  const backgroundStyle = backgroundStyles[background];
-  const shadowStyle = shadowStyles[shadow];
+  const backgroundStyle = background && backgroundStyles[background];
+  const shadowStyle = shadow && shadowStyles[shadow];
   const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding];
   const paddingRightStyle = paddingRightStyles[paddingRight || paddingX || padding];
   const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding];
   const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding];
   const borderRadiusStyle = borderRadiusStyles[borderRadius];
-  const borderTopStyle = borderTopStyles[borderTop || borderY || border];
-  const borderRightStyle = borderRightStyles[borderRight || borderX || border];
-  const borderBottomStyle = borderBottomStyles[borderBottom || borderY || border];
-  const borderLeftStyle = borderLeftStyles[borderLeft || borderX || border];
+  const borderStyle = border && borderStyles[border];
+  const borderTopStyle = borderTop && borderTopStyles[borderTop];
+  const borderRightStyle = borderRight && borderRightStyles[borderRight];
+  const borderBottomStyle = borderBottom && borderBottomStyles[borderBottom];
+  const borderLeftStyle = borderLeft && borderLeftStyles[borderLeft];
   const displayStyle = display && displayStyles[display];
   const resetStyle = localResetStyles[Component];
   const widthStyle = widthStyles[width || size];
@@ -565,11 +592,12 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
         paddingBottomStyle,
         paddingLeftStyle,
         borderRadiusStyle,
-        shadowStyle,
-        borderTopStyle,
-        borderRightStyle,
-        borderBottomStyle,
-        borderLeftStyle,
+        shadowStyle ||
+          borderStyle ||
+          borderTopStyle ||
+          borderRightStyle ||
+          borderBottomStyle ||
+          borderLeftStyle,
         widthStyle,
         heightStyle,
       ]}

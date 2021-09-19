@@ -10,13 +10,7 @@ const appearanceBorderRadius = {
 
 const avatarIcons = {
   square: (
-    <Box
-      background="neutralBold"
-      borderRadius="default"
-      display="block flow"
-      as="svg"
-      viewBox="0 0 24 24"
-      role="presentation">
+    <Box display="block flow" as="svg" viewBox="0 0 24 24" role="presentation">
       <g fill="currentColor" fillRule="evenodd">
         <path
           d="M6 12h8v-2H6v2zM4 8.99C4 8.445 4.456 8 5.002 8h9.996C15.55 8 16 8.451 16 8.99V14H4V8.99z"
@@ -31,13 +25,7 @@ const avatarIcons = {
     </Box>
   ),
   circle: (
-    <Box
-      background="neutralBold"
-      borderRadius="circle"
-      display="block flow"
-      as="svg"
-      viewBox="0 0 24 24"
-      role="presentation">
+    <Box display="block flow" as="svg" viewBox="0 0 24 24" role="presentation">
       <g fill="currentColor" fillRule="evenodd">
         <path d="M6 14c0-1.105.902-2 2.009-2h7.982c1.11 0 2.009.894 2.009 2.006v4.44c0 3.405-12 3.405-12 0V14z" />
         <circle cx="12" cy="7" r="4" />
@@ -49,19 +37,19 @@ const avatarIcons = {
 interface AvatarProps {
   size?: Size;
   appearance?: 'square' | 'circle';
-  borderColor?: 'body' | 'transparent';
+  borderColor?: 'default' | 'none';
 }
 
 export default function Avatar({
   size = 'medium',
-  borderColor = 'body',
+  borderColor = 'default',
   appearance = 'circle',
 }: AvatarProps) {
   const borderRadius = appearanceBorderRadius[appearance];
   const icon = avatarIcons[appearance];
 
   return (
-    <Box borderRadius={borderRadius} background={borderColor} size={size} border="transparent">
+    <Box borderRadius={borderRadius} background="neutralBold" size={size} border={borderColor}>
       {icon}
     </Box>
   );
@@ -69,7 +57,7 @@ export default function Avatar({
 
 export function AvatarButton({
   size = 'medium',
-  borderColor = 'body',
+  borderColor = 'default',
   appearance = 'circle',
 }: AvatarProps) {
   const borderRadius = appearanceBorderRadius[appearance];
@@ -83,9 +71,9 @@ export function AvatarButton({
             {...press}
             as="button"
             borderRadius={borderRadius}
-            background={borderColor}
+            background="neutralBold"
             size={size}
-            border="transparent">
+            border={borderColor}>
             {icon}
           </Box>
         </FocusRing>
@@ -96,7 +84,7 @@ export function AvatarButton({
 
 export function AvatarLink({
   size = 'medium',
-  borderColor = 'body',
+  borderColor = 'default',
   appearance = 'circle',
 }: AvatarProps) {
   const borderRadius = appearanceBorderRadius[appearance];
@@ -111,9 +99,9 @@ export function AvatarLink({
             as="a"
             href="#"
             borderRadius={borderRadius}
-            background={borderColor}
+            background="neutralBold"
             size={size}
-            border="transparent">
+            border={borderColor}>
             <Text color="onBold">{icon}</Text>
           </Box>
         </FocusRing>

@@ -9,6 +9,7 @@ import { MDXProvider } from '@mdx-js/react';
 import IconButton from 'design-system/icon-button';
 import toggleTheme from 'lib/toggle-theme';
 import components from 'components/blog-mdx-components';
+import Button from 'design-system/button';
 import { token } from '@atlaskit/tokens';
 import LayoutBlog from 'components/layout-blog';
 import Box from 'design-system/box';
@@ -45,7 +46,7 @@ function App({ Component, pageProps, router }: AppProps) {
           }}
         />
         <style>
-          {'*{scrollbar-color:var(--border-neutral) var(--background-default)}::-webkit-scrollbar{background-color:var(--background-default);width:10px}::-webkit-scrollbar-thumb{background-color:var(--border-neutral);border-radius:30px}' +
+          {'*{margin:0;scrollbar-color:var(--border-neutral) var(--background-default)}::-webkit-scrollbar{background-color:var(--background-default);width:10px}::-webkit-scrollbar-thumb{background-color:var(--border-neutral);border-radius:30px}' +
             themeHacks}
         </style>
         <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -66,7 +67,12 @@ function App({ Component, pageProps, router }: AppProps) {
               <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
             )}
             <Inline blockAlign="middle" marginLeft="auto" gap="regular">
-              <DropdownMenu trigger="Links">
+              <DropdownMenu
+                trigger={(props) => (
+                  <Button appearance="subtle" {...props}>
+                    Links
+                  </Button>
+                )}>
                 <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
                   Twitter
                 </MenuItem>

@@ -4,7 +4,7 @@ import Popup from 'design-system/popup';
 import Pressable from 'design-system/pressable';
 import Box from 'design-system/box';
 import Button from 'design-system/button';
-import { forwardRef, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import FocusRing from 'design-system/focus-ring';
 import Text from 'design-system/text';
 import Stack from 'design-system/stack';
@@ -58,23 +58,24 @@ MenuItem.displayName = 'MenuItem';
 
 interface DropdownMenuProps {
   children: React.ReactNode;
-  trigger: string;
+  trigger: string | ((props: { onClick: () => void; isOpen: boolean }) => React.ReactNode);
 }
 
 function DropdownMenu({ children, trigger }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen((prev) => !prev);
 
   return (
     <Popup paddingY="regular" isOpen={isOpen} content={() => children}>
-      {(props) => (
-        <Button
-          {...props}
-          appearance="subtle"
-          isSelected={isOpen}
-          onClick={() => setIsOpen((prev) => !prev)}>
-          {trigger}
-        </Button>
-      )}
+      {(props) =>
+        typeof trigger === 'string' ? (
+          <Button {...props} appearance="default" isSelected={isOpen} onClick={toggle}>
+            {trigger}
+          </Button>
+        ) : (
+          trigger({ isOpen, onClick: toggle })
+        )
+      }
     </Popup>
   );
 }
