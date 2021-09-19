@@ -12,7 +12,7 @@ const avatarIcons = {
   square: (
     <Box
       background="neutralBold"
-      borderRadius="circle"
+      borderRadius="default"
       display="block flow"
       as="svg"
       viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ const avatarIcons = {
 interface AvatarProps {
   size?: Size;
   appearance?: 'square' | 'circle';
-  borderColor?: 'body' | 'transparent';
+  borderColor?: 'default' | 'transparent';
 }
 
 export default function Avatar({
