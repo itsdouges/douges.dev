@@ -2,6 +2,7 @@
 import css from 'design-system/css';
 import { token } from '@atlaskit/tokens';
 import Box from 'design-system/box';
+import FocusRing from 'design-system/focus-ring';
 
 const styles = css({
   input: {
@@ -10,10 +11,6 @@ const styles = css({
     maxWidth: 500,
     '::placeholder': {
       color: token('color.text.lowEmphasis'),
-    },
-    ':focus': {
-      outline: 'none',
-      borderColor: token('color.border.focus'),
     },
     ':hover,:focus': {
       backgroundColor: 'transparent',
@@ -43,23 +40,25 @@ function Textfield({
   onChange,
 }: TextfieldProps) {
   return (
-    <Box
-      as="input"
-      border="neutral"
-      borderRadius="default"
-      paddingY="medium"
-      paddingX="regular"
-      background={isDisabled ? 'disabled' : 'neutralSubtle'}
-      name={name}
-      type={type}
-      required={isRequired}
-      id={id}
-      disabled={isDisabled}
-      css={styles.input}
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange?.(e.target.value)}
-    />
+    <FocusRing appearance="inset">
+      <Box
+        as="input"
+        border="neutral"
+        borderRadius="default"
+        paddingY="medium"
+        paddingX="regular"
+        background={isDisabled ? 'disabled' : 'neutralSubtle'}
+        name={name}
+        type={type}
+        required={isRequired}
+        id={id}
+        disabled={isDisabled}
+        css={styles.input}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
+      />
+    </FocusRing>
   );
 }
 

@@ -41,7 +41,7 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
               rel="noreferrer"
               href={href}
               {...press}>
-              <Text size="smaller" color={isSelected ? 'selected' : undefined}>
+              <Text size="smaller" color={isSelected ? 'selected' : 'high'}>
                 {children}
               </Text>
               {secondary && (
