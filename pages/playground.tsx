@@ -9,25 +9,27 @@ import DropdownMenu, { MenuItem } from 'design-system/dropdown-menu';
 import Tabs, { Tab, TabList, TabPanel } from 'design-system/tabs';
 import Box from 'design-system/box';
 import Text from 'design-system/text';
+import Textfield from 'design-system/textfield';
+import Label from 'design-system/label';
 
 function Playground() {
   return (
     <Box padding="xlarge">
       <Stack gap="regular">
         <Inline gap="regular">
-          <Lozenge appearance="defaultBold">Lozenge</Lozenge>
+          <Lozenge appearance="default">Lozenge</Lozenge>
           <Lozenge appearance="new">Lozenge</Lozenge>
-          <Lozenge appearance="success">Lozenge</Lozenge>
+          <Lozenge appearance="inprogress">Lozenge</Lozenge>
           <Lozenge appearance="moved">Lozenge</Lozenge>
-          <Lozenge appearance="new">Lozenge</Lozenge>
+          <Lozenge appearance="success">Lozenge</Lozenge>
           <Lozenge appearance="removed">Lozenge</Lozenge>
         </Inline>
         <Inline gap="regular">
           <Lozenge appearance="defaultBold">Lozenge</Lozenge>
           <Lozenge appearance="newBold">Lozenge</Lozenge>
-          <Lozenge appearance="successBold">Lozenge</Lozenge>
+          <Lozenge appearance="inprogressBold">Lozenge</Lozenge>
           <Lozenge appearance="movedBold">Lozenge</Lozenge>
-          <Lozenge appearance="newBold">Lozenge</Lozenge>
+          <Lozenge appearance="successBold">Lozenge</Lozenge>
           <Lozenge appearance="removedBold">Lozenge</Lozenge>
         </Inline>
         <Inline gap="regular">
@@ -60,11 +62,11 @@ function Playground() {
           </LinkButton>
         </Inline>
         <Inline gap="small">
-          <Avatar size="xsmall" />
-          <Avatar size="small" />
-          <Avatar size="medium" />
-          <Avatar size="large" />
-          <Avatar size="xlarge" />
+          <Avatar size="xsmall" borderColor="brand" />
+          <Avatar size="small" borderColor="success" />
+          <Avatar size="medium" borderColor="warning" />
+          <Avatar size="large" borderColor="discovery" />
+          <Avatar size="xlarge" borderColor="danger" />
         </Inline>
         <Inline gap="small">
           <AvatarLink size="xsmall" appearance="square" />
@@ -195,6 +197,10 @@ function Playground() {
             </Box>
           </TabPanel>
         </Tabs>
+
+        <Label htmlFor="tf" label="Textfield">
+          <Textfield id="tf" placeholder="This is a textfield" />
+        </Label>
       </Stack>
     </Box>
   );

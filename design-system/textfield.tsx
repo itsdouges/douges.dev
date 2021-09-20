@@ -5,7 +5,7 @@ import Box from 'design-system/box';
 
 const styles = css({
   input: {
-    fontSize: 26,
+    fontSize: 14,
     width: '100%',
     maxWidth: 500,
     '::placeholder': {
@@ -47,7 +47,8 @@ function Textfield({
       as="input"
       border="neutral"
       borderRadius="default"
-      padding="regular"
+      paddingY="medium"
+      paddingX="regular"
       background={isDisabled ? 'disabled' : 'neutralSubtle'}
       name={name}
       type={type}

@@ -1,17 +1,9 @@
-/** @jsxImportSource @emotion/react */
-import css from 'design-system/css';
 import Box from 'design-system/box';
 import Text from 'design-system/text';
 import Pressable from 'design-system/pressable';
 import FocusRing from 'design-system/focus-ring';
 import React from 'react';
 import Inline from 'design-system/inline';
-
-const styles = css({
-  iconPaddingHack: {
-    paddingLeft: 2,
-  },
-});
 
 const colorBackground = {
   green: 'accentGreenBold',
@@ -46,8 +38,6 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
 
   return (
     <Box
-      // Hack not great goes against BOX
-      css={icon && styles.iconPaddingHack}
       background={background}
       paddingLeft={icon ? undefined : 'small'}
       paddingRight="small"
@@ -71,7 +61,6 @@ export function TagLink({ children, icon, color = 'greyLight', appearance = 'def
           <Box
             {...press}
             // Hack not great goes against BOX
-            css={icon && styles.iconPaddingHack}
             as="a"
             href="#"
             background={background}

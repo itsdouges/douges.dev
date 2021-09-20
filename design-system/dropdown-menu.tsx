@@ -7,7 +7,6 @@ import Button from 'design-system/button';
 import React, { forwardRef, useState } from 'react';
 import FocusRing from 'design-system/focus-ring';
 import Text from 'design-system/text';
-import Stack from 'design-system/stack';
 
 const styles = css({
   item: {
@@ -42,11 +41,11 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
               rel="noreferrer"
               href={href}
               {...press}>
-              <Text size="small" color={isSelected ? 'selected' : undefined}>
+              <Text size="smaller" color={isSelected ? 'selected' : undefined}>
                 {children}
               </Text>
               {secondary && (
-                <Text as="div" size="smaller" color="low">
+                <Text as="div" size="smallest" color="low">
                   {secondary}
                 </Text>
               )}

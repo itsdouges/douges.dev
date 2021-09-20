@@ -1,7 +1,16 @@
-import Box, { Size } from 'design-system/box';
+/** @jsxImportSource @emotion/react */
+import css from 'design-system/css';
+import Box, { Size, Border } from 'design-system/box';
 import Pressable from 'design-system/pressable';
-import Text from 'design-system/text';
 import FocusRing from 'design-system/focus-ring';
+import { token } from '@atlaskit/tokens';
+
+const styles = css({
+  container: {
+    backgroundColor: token('color.text.lowEmphasis'),
+    color: token('color.text.onBold'),
+  },
+});
 
 const appearanceBorderRadius = {
   square: 'default',
@@ -37,7 +46,7 @@ const avatarIcons = {
 interface AvatarProps {
   size?: Size;
   appearance?: 'square' | 'circle';
-  borderColor?: 'default' | 'none';
+  borderColor?: Border;
 }
 
 export default function Avatar({
@@ -49,8 +58,10 @@ export default function Avatar({
   const icon = avatarIcons[appearance];
 
   return (
-    <Box borderRadius={borderRadius} background="neutralBold" size={size} border={borderColor}>
-      {icon}
+    <Box padding="xsmall" borderRadius={borderRadius} size={size} border={borderColor}>
+      <Box borderRadius={borderRadius} css={styles.container}>
+        {icon}
+      </Box>
     </Box>
   );
 }
@@ -69,12 +80,13 @@ export function AvatarButton({
         <FocusRing>
           <Box
             {...press}
-            as="button"
+            padding="xsmall"
             borderRadius={borderRadius}
-            background="neutralBold"
             size={size}
             border={borderColor}>
-            {icon}
+            <Box borderRadius={borderRadius} css={styles.container}>
+              {icon}
+            </Box>
           </Box>
         </FocusRing>
       )}
@@ -96,13 +108,13 @@ export function AvatarLink({
         <FocusRing>
           <Box
             {...press}
-            as="a"
-            href="#"
+            padding="xsmall"
             borderRadius={borderRadius}
-            background="neutralBold"
             size={size}
             border={borderColor}>
-            <Text color="onBold">{icon}</Text>
+            <Box borderRadius={borderRadius} css={styles.container}>
+              {icon}
+            </Box>
           </Box>
         </FocusRing>
       )}

@@ -135,31 +135,31 @@ const shadowStyles = css({
 const borderStyles = css({
   none: {},
   currentColor: {
-    boxShadow: `0 0 0 2px currentColor`,
+    boxShadow: `inset 0 0 0 2px currentColor`,
   },
   default: {
-    boxShadow: `0 0 0 2px ${token('color.background.default')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.background.default')}`,
   },
   neutral: {
-    boxShadow: `0 0 0 2px ${token('color.border.neutral')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.border.neutral')}`,
   },
   focus: {
-    boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.border.focus')}`,
   },
   brand: {
-    boxShadow: `0 0 0 2px ${token('color.iconBorder.brand')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.brand')}`,
   },
   danger: {
-    boxShadow: `0 0 0 2px ${token('color.iconBorder.danger')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.danger')}`,
   },
   success: {
-    boxShadow: `0 0 0 2px ${token('color.iconBorder.success')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.success')}`,
   },
   discovery: {
-    boxShadow: `0 0 0 2px ${token('color.iconBorder.discovery')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.discovery')}`,
   },
   warning: {
-    boxShadow: `0 0 0 2px ${token('color.iconBorder.warning')}`,
+    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.warning')}`,
   },
 });
 
@@ -290,7 +290,7 @@ const borderLeftStyles = css({
 const widthStyles = css({
   auto: {},
   xsmall: {
-    inlineSize: 16,
+    inlineSize: 20,
   },
   small: {
     inlineSize: 24,
@@ -312,7 +312,7 @@ const widthStyles = css({
 const heightStyles = css({
   auto: {},
   xsmall: {
-    blockSize: 16,
+    blockSize: 20,
   },
   small: {
     blockSize: 24,
@@ -333,6 +333,9 @@ const heightStyles = css({
 
 const paddingTopStyles = css({
   none: {},
+  xsmall: {
+    paddingBlockStart: 2,
+  },
   small: {
     paddingBlockStart: 4,
   },
@@ -352,6 +355,9 @@ const paddingTopStyles = css({
 
 const paddingBottomStyles = css({
   none: {},
+  xsmall: {
+    paddingBlockEnd: 2,
+  },
   small: {
     paddingBlockEnd: 4,
   },
@@ -371,6 +377,9 @@ const paddingBottomStyles = css({
 
 const paddingLeftStyles = css({
   none: {},
+  xsmall: {
+    paddingInlineStart: 2,
+  },
   small: {
     paddingInlineStart: 4,
   },
@@ -390,6 +399,9 @@ const paddingLeftStyles = css({
 
 const paddingRightStyles = css({
   none: {},
+  xsmall: {
+    paddingInlineEnd: 2,
+  },
   small: {
     paddingInlineEnd: 4,
   },
