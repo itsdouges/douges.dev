@@ -66,7 +66,7 @@ export function AvatarButton({
   return (
     <Pressable appearance="push">
       {(press) => (
-        <FocusRing appearance="inset">
+        <FocusRing>
           <Box
             {...press}
             as="button"
@@ -93,7 +93,7 @@ export function AvatarLink({
   return (
     <Pressable appearance="push">
       {(press) => (
-        <FocusRing appearance="inset">
+        <FocusRing>
           <Box
             {...press}
             as="a"

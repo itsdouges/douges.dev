@@ -11,7 +11,7 @@ import FocusRing from 'design-system/focus-ring';
 const styles = css({
   tabBorderColor: {
     color: 'transparent',
-    ':hover': {
+    ':hover,:active': {
       color: token('color.border.neutral'),
     },
   },
@@ -43,7 +43,7 @@ export function Tab({ children, isSelected }: TabProps) {
             href="#"
             as="a"
             borderBottom={isSelected ? 'brand' : 'currentColor'}
-            paddingY="regular"
+            paddingBottom="regular"
             css={!isSelected && styles.tabBorderColor}
             {...press}>
             <Text color={isSelected ? 'selected' : 'medium'} size="smaller" weight="bold">
@@ -57,7 +57,7 @@ export function Tab({ children, isSelected }: TabProps) {
 }
 
 export function TabPanel({ children }: TabsProps) {
-  return <Box paddingY="medium">{children}</Box>;
+  return <Box paddingTop="medium">{children}</Box>;
 }
 
 function Tabs({ children }: TabsProps) {

@@ -60,7 +60,7 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
   );
 }
 
-export function TagLink({ children, color = 'greyLight', appearance = 'default' }: TagProps) {
+export function TagLink({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
   const background = colorBackground[color];
   const textColor = textAppearanceMap[color] || 'high';
 
@@ -70,14 +70,20 @@ export function TagLink({ children, color = 'greyLight', appearance = 'default' 
         <FocusRing>
           <Box
             {...press}
+            // Hack not great goes against BOX
+            css={icon && styles.iconPaddingHack}
             as="a"
             href="#"
             background={background}
-            paddingX="small"
+            paddingLeft={icon ? undefined : 'small'}
+            paddingRight="small"
             borderRadius={appearance}>
-            <Text decoration="underline" color={textColor} size="smaller">
-              {children}
-            </Text>
+            <Inline gap="small" blockAlign="middle">
+              {icon}
+              <Text decoration="underline" color={textColor} size="smaller">
+                {children}
+              </Text>
+            </Inline>
           </Box>
         </FocusRing>
       )}

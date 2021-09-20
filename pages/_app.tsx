@@ -61,15 +61,14 @@ function App({ Component, pageProps, router }: AppProps) {
         <script data-respect-dnt async src="https://cdn.splitbee.io/sb.js" />
       </Head>
 
-      {isPlayground || (
-        <header css={styles.header}>
+        <header css={isPlayground || styles.header}>
           <Box as="nav" padding="large">
             <Inline>
               {isBlogRoute && (
                 <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
               )}
               <Inline blockAlign="middle" marginLeft="auto" gap="regular">
-                <DropdownMenu
+                {isPlayground || <DropdownMenu
                   trigger={(props) => (
                     <Button appearance="subtle" {...props}>
                       Links
@@ -81,13 +80,12 @@ function App({ Component, pageProps, router }: AppProps) {
                   <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
                     Github
                   </MenuItem>
-                </DropdownMenu>
+                </DropdownMenu>}
                 <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
               </Inline>
             </Inline>
           </Box>
         </header>
-      )}
 
       {isBlogRoute ? (
         <LayoutBlog blog={(Component as any).meta}>
