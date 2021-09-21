@@ -44,10 +44,10 @@ const gapStyles = css({
 
 const inlineAlignStyles = css({
   end: {
-    justifyContent: 'right',
+    justifyContent: 'flex-end',
   },
   start: {
-    justifyContent: 'left',
+    justifyContent: 'flex-start',
   },
   center: {
     justifyContent: 'center',
