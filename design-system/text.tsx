@@ -24,7 +24,7 @@ const textStyles = css({
     margin: 0,
   },
   smallest: {
-    fontSize: 11,
+    fontSize: 12,
   },
 });
 

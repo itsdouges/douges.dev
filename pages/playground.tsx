@@ -11,6 +11,7 @@ import Box from 'design-system/box';
 import Text from 'design-system/text';
 import Textfield from 'design-system/textfield';
 import Label from 'design-system/label';
+import Badge from 'design-system/badge';
 
 function Playground() {
   return (
@@ -197,6 +198,15 @@ function Playground() {
             </Box>
           </TabPanel>
         </Tabs>
+
+        <Inline gap="small">
+          <Badge>100</Badge>
+          <Badge appearance="added">+100</Badge>
+          <Badge appearance="important">100</Badge>
+          <Badge appearance="primary">100</Badge>
+          <Badge appearance="primaryInverted">100</Badge>
+          <Badge appearance="removed">-100</Badge>
+        </Inline>
 
         <Label htmlFor="tf" label="Textfield">
           <Textfield id="tf" placeholder="This is a textfield" />
