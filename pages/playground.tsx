@@ -12,13 +12,22 @@ import Text from 'design-system/text';
 import Textfield from 'design-system/textfield';
 import Label from 'design-system/label';
 import Badge from 'design-system/badge';
+import CodeBlock from 'design-system/code-block';
+import Tooltip from 'design-system/tooltip';
+import Heading from 'design-system/heading';
 
 function Playground() {
   return (
     <Box padding="xlarge">
       <Stack gap="regular">
+        <Heading level={1}>Heading one</Heading>
+        <Heading level={2}>Heading two</Heading>
+        <Heading level={3}>Heading three</Heading>
+
         <Inline gap="regular">
-          <Lozenge appearance="default">Lozenge</Lozenge>
+          <Tooltip content="Tooltip">
+            <Lozenge appearance="default">Tooltip</Lozenge>
+          </Tooltip>
           <Lozenge appearance="new">Lozenge</Lozenge>
           <Lozenge appearance="inprogress">Lozenge</Lozenge>
           <Lozenge appearance="moved">Lozenge</Lozenge>
@@ -211,6 +220,8 @@ function Playground() {
         <Label htmlFor="tf" label="Textfield">
           <Textfield id="tf" placeholder="This is a textfield" />
         </Label>
+
+        <CodeBlock>{'function foo() {}'}</CodeBlock>
       </Stack>
     </Box>
   );
