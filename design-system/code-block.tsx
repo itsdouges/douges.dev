@@ -8,11 +8,8 @@ import Box from 'design-system/box';
 refractor.register(jsx);
 
 const codeBlockStyles = css({
-  borderRadius: 3,
-  margin: 0,
   fontSize: 12,
   overflow: 'auto',
-  width: '100%',
 });
 
 const keywordStyles = css({
@@ -88,7 +85,13 @@ interface CodeBlockProps {
 function CodeBlock({ children = '' }: CodeBlockProps) {
   const root = refractor.highlight(children, 'jsx');
   return (
-    <Box css={codeBlockStyles} as="pre" padding="medium" background="body">
+    <Box
+      width="full"
+      background="sunken"
+      css={codeBlockStyles}
+      borderRadius="default"
+      as="pre"
+      padding="medium">
       <code>{root.children.map(toJSX)}</code>
     </Box>
   );

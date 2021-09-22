@@ -468,6 +468,9 @@ const localResetStyles = css({
     verticalAlign: 'baseline',
     WebkitTapHighlightColor: 'transparent',
   },
+  pre: {
+    margin: 0,
+  },
   div: {},
   button: {},
   a: {
