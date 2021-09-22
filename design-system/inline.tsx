@@ -72,11 +72,19 @@ const blockAlignStyles = css({
   },
 });
 
+const widthStyles = css({
+  auto: {},
+  full: {
+    inlineSize: '100%',
+  },
+});
+
 interface InlineProps {
   children: React.ReactNode;
   gap?: keyof typeof gapStyles;
   inlineAlign?: keyof typeof inlineAlignStyles;
   blockAlign?: keyof typeof blockAlignStyles;
+  width?: keyof typeof widthStyles;
   marginLeft?: string;
   as?: 'div' | 'nav';
 }
@@ -88,14 +96,16 @@ function Inline({
   blockAlign = 'top',
   as: Component = 'div',
   gap = 'none',
+  width = 'auto',
 }: InlineProps) {
   const gapStyle = gapStyles[gap];
   const alignStyle = inlineAlignStyles[inlineAlign];
   const justifyStyle = blockAlignStyles[blockAlign];
+  const widthStyle = widthStyles[width];
 
   return (
     <Component
-      css={[styles.inline, alignStyle, justifyStyle, gapStyle]}
+      css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle]}
       style={{
         marginLeft,
       }}>

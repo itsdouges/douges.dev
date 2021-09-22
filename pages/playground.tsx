@@ -15,6 +15,7 @@ import Badge from 'design-system/badge';
 import CodeBlock from 'design-system/code-block';
 import Tooltip from 'design-system/tooltip';
 import Heading from 'design-system/heading';
+import ProgressIndicator from 'design-system/progress-indicator';
 
 function Playground() {
   return (
@@ -185,6 +186,22 @@ function Playground() {
             appearance="rounded">
             Tag
           </Tag>
+        </Inline>
+
+        <Inline gap="small" inlineAlign="center" width="full">
+          <ProgressIndicator isSelected />
+          <ProgressIndicator />
+          <ProgressIndicator />
+        </Inline>
+        <Inline gap="small" inlineAlign="center" width="full">
+          <ProgressIndicator appearance="primary" isSelected />
+          <ProgressIndicator appearance="primary" />
+          <ProgressIndicator appearance="primary" />
+        </Inline>
+        <Inline gap="small" inlineAlign="center" width="full">
+          <ProgressIndicator appearance="discovery" isSelected />
+          <ProgressIndicator appearance="discovery" />
+          <ProgressIndicator appearance="discovery" />
         </Inline>
 
         <DropdownMenu trigger="Open menu">
