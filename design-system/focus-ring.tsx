@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { token } from '@atlaskit/tokens';
-import { cloneElement, useRef } from 'react';
+import { cloneElement } from 'react';
 import { ClassNames } from '@emotion/react';
 import css from 'design-system/css';
 
