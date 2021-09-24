@@ -5,9 +5,9 @@ import token from 'design-system/token';
 import { ForwardedRef, useContext } from 'react';
 import { forwardRef } from 'lib/react';
 
-const BoxContext = createContext<string>('');
+const BoxContext = createContext<Background>('body');
 
-export const useBoxBackground = () => {
+export const useBoxBackground = (): Background => {
   const context = useContext(BoxContext);
   return context;
 };
@@ -612,7 +612,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   const heightStyle = heightStyles[height || size];
 
   return (
-    <BoxContext.Provider value={background || ''}>
+    <BoxContext.Provider value={background || 'body'}>
       <Component
         ref={ref as ForwardedRef<HTMLDivElement>}
         css={[

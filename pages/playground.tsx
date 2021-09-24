@@ -231,13 +231,50 @@ function Playground() {
           <ProgressIndicator appearance="discovery" />
         </Inline>
 
-        <Box background="brandBold" paddingY="large" width="full">
-          <Inline gap="regular" inlineAlign="center" width="full">
-            <ProgressIndicator appearance="invert" isSelected />
-            <ProgressIndicator appearance="invert" />
-            <ProgressIndicator appearance="invert" />
-          </Inline>
-        </Box>
+        <Inline>
+          <Box background="discoveryBold" padding="large">
+            <Inline gap="regular" inlineAlign="center">
+              <ProgressIndicator appearance="invert" isSelected />
+              <ProgressIndicator appearance="invert" />
+              <ProgressIndicator appearance="invert" />
+            </Inline>
+          </Box>
+          <Box background="brandBold" padding="large">
+            <Inline gap="regular" inlineAlign="center">
+              <ProgressIndicator appearance="invert" isSelected />
+              <ProgressIndicator appearance="invert" />
+              <ProgressIndicator appearance="invert" />
+            </Inline>
+          </Box>
+          <Box background="dangerBold" padding="large">
+            <Inline gap="regular" inlineAlign="center">
+              <ProgressIndicator appearance="invert" isSelected />
+              <ProgressIndicator appearance="invert" />
+              <ProgressIndicator appearance="invert" />
+            </Inline>
+          </Box>
+          <Box background="warningBold" padding="large">
+            <Inline gap="regular" inlineAlign="center">
+              <ProgressIndicator appearance="invert" isSelected />
+              <ProgressIndicator appearance="invert" />
+              <ProgressIndicator appearance="invert" />
+            </Inline>
+          </Box>
+          <Box background="neutralBold" padding="large">
+            <Inline gap="regular" inlineAlign="center">
+              <ProgressIndicator appearance="invert" isSelected />
+              <ProgressIndicator appearance="invert" />
+              <ProgressIndicator appearance="invert" />
+            </Inline>
+          </Box>
+          <Box background="successBold" padding="large">
+            <Inline gap="regular" inlineAlign="center">
+              <ProgressIndicator appearance="invert" isSelected />
+              <ProgressIndicator appearance="invert" />
+              <ProgressIndicator appearance="invert" />
+            </Inline>
+          </Box>
+        </Inline>
 
         <DropdownMenu trigger="Open menu">
           <MenuItem>Foo</MenuItem>
