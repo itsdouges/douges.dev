@@ -46,6 +46,7 @@ const colorStyles = css({
   onBold: { color: token('color.text.onBold') },
   onBoldWarning: { color: token('color.text.onBoldWarning') },
   disabled: { color: token('color.text.disabled') },
+  currentColor: { color: 'currentColor' },
   inherit: {},
 });
 

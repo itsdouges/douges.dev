@@ -7,6 +7,7 @@ import Portal from 'design-system/portal';
 const styles = css({
   popup: {
     position: 'absolute',
+    zIndex: 90,
   },
 });
 

@@ -30,6 +30,7 @@ const textAppearanceMap: Record<Appearance, TextColor> = {
   warning: 'onBoldWarning',
   danger: 'onBold',
   selected: 'selected',
+  inverted: 'currentColor',
 };
 
 function LinkButton({
