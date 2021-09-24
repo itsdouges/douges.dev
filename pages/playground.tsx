@@ -74,21 +74,27 @@ function Playground() {
         </Inline>
         <Inline>
           <Box background="discoveryBold" padding="large">
+            <Button appearance="subtle">Button</Button>
             <Button appearance="inverted">Button</Button>
           </Box>
           <Box background="brandBold" padding="large">
+            <Button appearance="subtle">Button</Button>
             <Button appearance="inverted">Button</Button>
           </Box>
           <Box background="dangerBold" padding="large">
+            <Button appearance="subtle">Button</Button>
             <Button appearance="inverted">Button</Button>
           </Box>
           <Box background="warningBold" padding="large">
+            <Button appearance="subtle">Button</Button>
             <Button appearance="inverted">Button</Button>
           </Box>
           <Box background="neutralBold" padding="large">
+            <Button appearance="subtle">Button</Button>
             <Button appearance="inverted">Button</Button>
           </Box>
           <Box background="successBold" padding="large">
+            <Button appearance="subtle">Button</Button>
             <Button appearance="inverted">Button</Button>
           </Box>
         </Inline>

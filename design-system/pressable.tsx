@@ -8,6 +8,7 @@ const styles = css({
   pressable: {
     userSelect: 'none',
     position: 'relative',
+    cursor: 'pointer',
     '::before': {
       content: '""',
       position: 'absolute',

@@ -38,12 +38,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
 ) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
   const parentBackground = useBoxBackground();
-  const shouldUseWarningInverseBackground =
-    parentBackground?.startsWith('warning') && appearance === 'inverted';
-  const background = shouldUseWarningInverseBackground
-    ? 'warningInverse'
-    : appearanceBgMap[mappedAppearance];
-  const pressableAppearance = shouldUseWarningInverseBackground ? 'inverse' : 'default';
+  const isDescendentOfWarningBox = parentBackground?.startsWith('warning');
+  const background =
+    isDescendentOfWarningBox && appearance === 'inverted'
+      ? 'warningInverse'
+      : appearanceBgMap[mappedAppearance];
+  const pressableAppearance = isDescendentOfWarningBox ? 'inverse' : 'default';
 
   return (
     <Pressable
