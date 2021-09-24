@@ -1,10 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import { token } from '@atlaskit/tokens';
+import token from 'design-system/token';
 import { ForwardedRef } from 'react';
 import { forwardRef } from 'lib/react';
 
 const backgroundStyles = css({
+  inverseNeutralSubtle: {
+    color: 'currentColor',
+    backgroundColor: token('color.background.inverse.subtleNeutral'),
+  },
   accentBlueSubtle: {
     backgroundColor: token('color.accent.subtleBlue'),
   },
@@ -60,7 +64,7 @@ const backgroundStyles = css({
     backgroundColor: token('color.background.overlay'),
   },
   transparent: {
-    color: token('color.text.highEmphasis'),
+    color: 'currentColor',
     backgroundColor: 'transparent',
   },
   disabled: {
@@ -97,7 +101,7 @@ const backgroundStyles = css({
     backgroundColor: token('color.background.boldWarning.resting'),
   },
   neutralSubtle: {
-    color: token('color.text.highEmphasis'),
+    color: 'currentColor',
     backgroundColor: token('color.background.subtleNeutral.resting'),
   },
   brandSubtle: {

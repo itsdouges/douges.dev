@@ -24,13 +24,19 @@ const styles = css({
 
 const themeHacks = `
 :root, html[data-theme="light"] {
-  --overlay-hover: rgba(0, 0, 0, 0.05) !important;
-  --overlay-pressed: rgba(0, 0, 0, 0.1) !important;
+  --overlay-hover: rgba(0, 0, 0, 0.16) !important;
+  --overlay-pressed: rgba(0, 0, 0, 0.32) !important;
+  --overlay-inverse-hover: rgba(255, 255, 255, 0.20);
+  --overlay-inverse-pressed: rgba(255, 255, 255, 0.36);
+  --background-inverse-subtleNeutral: #A1BDD914;
 }
 
 html[data-theme="dark"] {
-  --overlay-hover: rgba(255, 255, 255, 0.05) !important;
-  --overlay-pressed: rgba(255, 255, 255, 0.1) !important;
+  --overlay-hover: rgba(255, 255, 255, 0.20) !important;
+  --overlay-pressed: rgba(255, 255, 255, 0.36) !important;
+  --overlay-inverse-hover: rgba(0, 0, 0, 0.16);
+  --overlay-inverse-pressed: rgba(0, 0, 0, 0.32);
+  --background-inverse-subtleNeutral: #091E420F;
 }
 `;
 
@@ -61,14 +67,15 @@ function App({ Component, pageProps, router }: AppProps) {
         <script data-respect-dnt async src="https://cdn.splitbee.io/sb.js" />
       </Head>
 
-        <header css={isPlayground || styles.header}>
-          <Box as="nav" padding="large">
-            <Inline>
-              {isBlogRoute && (
-                <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
-              )}
-              <Inline blockAlign="middle" marginLeft="auto" gap="regular">
-                {isPlayground || <DropdownMenu
+      <header css={isPlayground || styles.header}>
+        <Box as="nav" padding="large">
+          <Inline>
+            {isBlogRoute && (
+              <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
+            )}
+            <Inline blockAlign="middle" marginLeft="auto" gap="regular">
+              {isPlayground || (
+                <DropdownMenu
                   trigger={(props) => (
                     <Button appearance="subtle" {...props}>
                       Links
@@ -80,12 +87,13 @@ function App({ Component, pageProps, router }: AppProps) {
                   <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
                     Github
                   </MenuItem>
-                </DropdownMenu>}
-                <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
-              </Inline>
+                </DropdownMenu>
+              )}
+              <IconButton icon="☾" label="Switch theme" onClick={toggleTheme} />
             </Inline>
-          </Box>
-        </header>
+          </Inline>
+        </Box>
+      </header>
 
       {isBlogRoute ? (
         <LayoutBlog blog={(Component as any).meta}>

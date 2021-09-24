@@ -36,7 +36,7 @@ interface TabProps {
 
 export function Tab({ children, isSelected }: TabProps) {
   return (
-    <Pressable appearance="none">
+    <Pressable pressedAppearance="none">
       {(press) => (
         <FocusRing>
           <Box

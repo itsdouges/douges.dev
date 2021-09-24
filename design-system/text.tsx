@@ -106,6 +106,7 @@ function Text({
   return (
     <Markup
       css={[
+        { zIndex: 1 },
         textStyle,
         shouldTruncate && styles.truncate,
         colorStyle,

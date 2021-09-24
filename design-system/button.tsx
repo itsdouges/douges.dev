@@ -21,10 +21,11 @@ export const appearanceBgMap = {
   warning: 'warningBold',
   danger: 'dangerBold',
   selected: 'selected',
+  inverted: 'inverseNeutralSubtle',
 } as const;
 
 export interface ButtonProps {
-  appearance?: 'default' | 'primary' | 'subtle' | 'warning' | 'danger';
+  appearance?: keyof typeof appearanceBgMap;
   type?: 'submit' | 'button';
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
@@ -40,7 +41,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   const background = appearanceBgMap[mappedAppearance];
 
   return (
-    <Pressable isDisabled={isDisabled} onClick={onClick} appearance="static">
+    <Pressable
+      appearance={appearance === 'inverted' ? 'inverse' : 'default'}
+      isDisabled={isDisabled}
+      onClick={onClick}
+      pressedAppearance="static">
       {(pressable) => (
         <FocusRing>
           <Box

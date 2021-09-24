@@ -55,7 +55,7 @@ export function TagLink({ children, icon, color = 'greyLight', appearance = 'def
   const textColor = textAppearanceMap[color] || 'high';
 
   return (
-    <Pressable appearance="static">
+    <Pressable pressedAppearance="static">
       {(press) => (
         <FocusRing>
           <Box

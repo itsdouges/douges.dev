@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
 import { ClassNames } from '@emotion/react';
-import { token } from '@atlaskit/tokens';
+import token from 'design-system/token';
 import usePressable, { UsePressable } from 'lib/use-pressable';
 
 const styles = css({
@@ -15,26 +15,40 @@ const styles = css({
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: token('color.overlay.hover'),
       opacity: 0,
     },
     ':hover::before': {
       opacity: 1,
     },
   },
-  pressed: {
+  push: {
+    transform: 'scale(0.9)',
+  },
+});
+
+const hoverStyles = css({
+  default: {
     '::before': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
+      backgroundColor: token('color.overlay.hover'),
+    },
+  },
+  inverse: {
+    '::before': {
+      backgroundColor: token('color.overlay.inverse.hover'),
+    },
+  },
+});
+
+const pressedStyles = css({
+  default: {
+    '::before': {
       backgroundColor: token('color.overlay.pressed'),
     },
   },
-  push: {
-    transform: 'scale(0.95)',
+  inverse: {
+    '::before': {
+      backgroundColor: token('color.overlay.inverse.pressed'),
+    },
   },
 });
 
@@ -42,11 +56,20 @@ interface PressableProps {
   children: (props: { className: string } & UsePressable['buttonProps']) => JSX.Element;
   onClick?: React.MouseEventHandler;
   isDisabled?: boolean;
-  appearance?: 'push' | 'static' | 'none';
+  appearance?: 'default' | 'inverse';
+  pressedAppearance?: 'push' | 'static' | 'none';
 }
 
-function Pressable({ children, onClick, isDisabled, appearance = 'push' }: PressableProps) {
+function Pressable({
+  children,
+  onClick,
+  isDisabled,
+  appearance = 'default',
+  pressedAppearance = 'push',
+}: PressableProps) {
   const { isPressed, buttonProps } = usePressable({ onClick });
+  const hoverStyle = hoverStyles[appearance];
+  const pressedStyle = pressedStyles[appearance];
 
   return (
     <ClassNames>
@@ -54,10 +77,10 @@ function Pressable({ children, onClick, isDisabled, appearance = 'push' }: Press
         children({
           className: cn(
             !isDisabled &&
-              appearance !== 'none' && [
+              pressedAppearance !== 'none' && [
                 styles.pressable,
-                isPressed && styles.pressed,
-                isPressed && appearance === 'push' && styles.push,
+                hoverStyle,
+                isPressed && [pressedStyle, pressedAppearance === 'push' && styles.push],
               ]
           ),
           ...buttonProps,

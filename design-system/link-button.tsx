@@ -46,7 +46,7 @@ function LinkButton({
   const color = textAppearanceMap[mappedAppearance];
 
   return (
-    <Pressable onClick={onClick} appearance="static">
+    <Pressable onClick={onClick} pressedAppearance="static">
       {(press) => (
         <FocusRing>
           <Box

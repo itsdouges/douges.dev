@@ -52,6 +52,26 @@ function Playground() {
           <Button isSelected>Button</Button>
           <Button isDisabled>Button</Button>
         </Inline>
+        <Inline>
+          <Box background="discoveryBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="brandBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="dangerBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="warningBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="neutralBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="successBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+        </Inline>
         <Inline gap="regular">
           <LinkButton href="#" appearance="subtle">
             Button
@@ -188,21 +208,29 @@ function Playground() {
           </Tag>
         </Inline>
 
-        <Inline gap="small" inlineAlign="center" width="full">
+        <Inline gap="regular" inlineAlign="center" width="full">
           <ProgressIndicator isSelected />
           <ProgressIndicator />
           <ProgressIndicator />
         </Inline>
-        <Inline gap="small" inlineAlign="center" width="full">
+        <Inline gap="regular" inlineAlign="center" width="full">
           <ProgressIndicator appearance="primary" isSelected />
           <ProgressIndicator appearance="primary" />
           <ProgressIndicator appearance="primary" />
         </Inline>
-        <Inline gap="small" inlineAlign="center" width="full">
+        <Inline gap="regular" inlineAlign="center" width="full">
           <ProgressIndicator appearance="discovery" isSelected />
           <ProgressIndicator appearance="discovery" />
           <ProgressIndicator appearance="discovery" />
         </Inline>
+
+        <Box background="brandBold" paddingY="large" width="full">
+          <Inline gap="regular" inlineAlign="center" width="full">
+            <ProgressIndicator appearance="invert" isSelected />
+            <ProgressIndicator appearance="invert" />
+            <ProgressIndicator appearance="invert" />
+          </Inline>
+        </Box>
 
         <DropdownMenu trigger="Open menu">
           <MenuItem>Foo</MenuItem>

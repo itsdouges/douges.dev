@@ -75,7 +75,7 @@ export function AvatarButton({
   const icon = avatarIcons[appearance];
 
   return (
-    <Pressable appearance="push">
+    <Pressable pressedAppearance="push">
       {(press) => (
         <FocusRing>
           <Box
@@ -103,7 +103,7 @@ export function AvatarLink({
   const icon = avatarIcons[appearance];
 
   return (
-    <Pressable appearance="push">
+    <Pressable pressedAppearance="push">
       {(press) => (
         <FocusRing>
           <Box

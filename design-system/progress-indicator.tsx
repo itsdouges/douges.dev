@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
 import Box from 'design-system/box';
+import Pressable from 'design-system/pressable';
+import FocusRing from 'design-system/focus-ring';
 
 const sizeStyles = css({
   small: {
@@ -21,6 +23,7 @@ const backgroundMap = {
   default: ['neutralSubtle', 'neutralBold'],
   primary: ['brandSubtle', 'brandBold'],
   discovery: ['discoverySubtle', 'discoveryBold'],
+  invert: ['inverseNeutralSubtle', 'body'],
 } as const;
 
 interface ProgressIndicatorProps {
@@ -37,8 +40,23 @@ function ProgressIndicator({
   const sizeStyle = sizeStyles[size];
   const backgroundIndex = isSelected ? 1 : 0;
   const background = backgroundMap[appearance][backgroundIndex];
+  const pressableAppearance = appearance === 'invert' ? 'inverse' : 'default';
 
-  return <Box css={[sizeStyle]} borderRadius="circle" background={background} />;
+  return (
+    <Pressable appearance={pressableAppearance} pressedAppearance="static">
+      {(press) => (
+        <FocusRing>
+          <Box
+            as="button"
+            {...press}
+            css={[sizeStyle]}
+            borderRadius="circle"
+            background={background}
+          />
+        </FocusRing>
+      )}
+    </Pressable>
+  );
 }
 
 export default ProgressIndicator;

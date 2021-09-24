@@ -26,7 +26,7 @@ interface MenuItemProps {
 export const MenuItem = forwardRef<HTMLAnchorElement, any>(
   ({ children, href, secondary, isSelected }: MenuItemProps, ref) => {
     return (
-      <Pressable appearance="static">
+      <Pressable pressedAppearance="static">
         {(press) => (
           <FocusRing>
             <Box
