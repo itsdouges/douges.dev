@@ -16,15 +16,33 @@ const styles = css({
       boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
       content: '""',
     },
+    '@supports not selector(*:focus-visible)': {
+      ':focus::after': {
+        outline: 0,
+        position: 'absolute',
+        boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
+        content: '""',
+      },
+    },
   },
   outset: {
     ':focus-visible::after': {
       inset: -2,
     },
+    '@supports not selector(*:focus-visible)': {
+      ':focus::after': {
+        inset: -2,
+      },
+    },
   },
   inset: {
     ':focus-visible::after': {
       inset: 2,
+    },
+    '@supports not selector(*:focus-visible)': {
+      ':focus::after': {
+        inset: 2,
+      },
     },
   },
 });

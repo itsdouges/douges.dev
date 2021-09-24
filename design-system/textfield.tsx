@@ -5,15 +5,19 @@ import Box from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
 
 const styles = css({
+  container: {
+    maxWidth: 500,
+    width: '100%',
+    ':hover,:focus-within': {
+      backgroundColor: 'transparent',
+    },
+  },
   input: {
     fontSize: 14,
     width: '100%',
-    maxWidth: 500,
+    fontFamily: 'inherit',
     '::placeholder': {
       color: token('color.text.lowEmphasis'),
-    },
-    ':hover,:focus': {
-      backgroundColor: 'transparent',
     },
   },
 });
@@ -42,22 +46,27 @@ function Textfield({
   return (
     <FocusRing appearance="inset">
       <Box
-        as="input"
-        border="neutral"
-        borderRadius="default"
-        paddingY="medium"
-        paddingX="regular"
+        display="block flex"
         background={isDisabled ? 'disabled' : 'neutralSubtle'}
-        name={name}
-        type={type}
-        required={isRequired}
-        id={id}
-        disabled={isDisabled}
-        css={styles.input}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange?.(e.target.value)}
-      />
+        css={styles.container}
+        border="neutral"
+        borderRadius="default">
+        <Box
+          as="input"
+          paddingY="medium"
+          paddingX="regular"
+          name={name}
+          type={type}
+          background="transparent"
+          required={isRequired}
+          id={id}
+          disabled={isDisabled}
+          css={styles.input}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange?.(e.target.value)}
+        />
+      </Box>
     </FocusRing>
   );
 }

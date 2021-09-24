@@ -121,22 +121,22 @@ function Playground() {
           <AvatarButton size="medium" />
         </Inline>
         <Inline gap="small">
-          <TagLink color="greyLight">Tag</TagLink>
-          <TagLink color="blueLight">Tag</TagLink>
-          <TagLink color="greenLight">Tag</TagLink>
-          <TagLink color="redLight">Tag</TagLink>
-          <TagLink color="tealLight">Tag</TagLink>
-          <TagLink color="yellowLight">Tag</TagLink>
-          <TagLink color="purpleLight">Tag</TagLink>
+          <Tag color="greyLight">Tag</Tag>
+          <Tag color="blueLight">Tag</Tag>
+          <Tag color="greenLight">Tag</Tag>
+          <Tag color="redLight">Tag</Tag>
+          <Tag color="tealLight">Tag</Tag>
+          <Tag color="yellowLight">Tag</Tag>
+          <Tag color="purpleLight">Tag</Tag>
         </Inline>
         <Inline gap="small">
-          <Tag color="grey">Tag</Tag>
-          <Tag color="blue">Tag</Tag>
-          <Tag color="green">Tag</Tag>
-          <Tag color="red">Tag</Tag>
-          <Tag color="teal">Tag</Tag>
-          <Tag color="yellow">Tag</Tag>
-          <Tag color="purple">Tag</Tag>
+          <TagLink color="grey">Tag</TagLink>
+          <TagLink color="blue">Tag</TagLink>
+          <TagLink color="green">Tag</TagLink>
+          <TagLink color="red">Tag</TagLink>
+          <TagLink color="teal">Tag</TagLink>
+          <TagLink color="yellow">Tag</TagLink>
+          <TagLink color="purple">Tag</TagLink>
         </Inline>
         <Inline gap="small">
           <TagLink
