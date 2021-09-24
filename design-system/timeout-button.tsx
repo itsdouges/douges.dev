@@ -9,10 +9,7 @@ const TIMEOUT = 300;
 const styles = css({
   timeout: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    inset: 0,
     backgroundColor: token('color.background.subtleNeutral.resting'),
     transition: `transform ${TIMEOUT}ms`,
     transform: 'translateX(-100%)',

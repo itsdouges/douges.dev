@@ -77,9 +77,11 @@ export function AvatarButton({
   return (
     <Pressable pressedAppearance="push">
       {(press) => (
-        <FocusRing>
+        <FocusRing appearance="inset">
           <Box
             {...press}
+            as="a"
+            href="#"
             padding="xsmall"
             borderRadius={borderRadius}
             size={size}
@@ -105,9 +107,11 @@ export function AvatarLink({
   return (
     <Pressable pressedAppearance="push">
       {(press) => (
-        <FocusRing>
+        <FocusRing appearance="inset">
           <Box
             {...press}
+            as="a"
+            href="#"
             padding="xsmall"
             borderRadius={borderRadius}
             size={size}

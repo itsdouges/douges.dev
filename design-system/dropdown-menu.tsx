@@ -28,7 +28,7 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
     return (
       <Pressable pressedAppearance="static">
         {(press) => (
-          <FocusRing>
+          <FocusRing appearance="inset">
             <Box
               as="a"
               css={styles.item}

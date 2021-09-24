@@ -481,6 +481,7 @@ const localResetStyles = css({
     boxSizing: 'border-box',
     padding: 0,
     border: 0,
+    outline: 0,
     verticalAlign: 'baseline',
     WebkitTapHighlightColor: 'transparent',
   },
