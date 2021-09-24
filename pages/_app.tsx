@@ -24,19 +24,21 @@ const styles = css({
 
 const themeHacks = `
 :root, html[data-theme="light"] {
-  --overlay-hover: rgba(0, 0, 0, 0.16) !important;
-  --overlay-pressed: rgba(0, 0, 0, 0.32) !important;
-  --overlay-inverse-hover: rgba(255, 255, 255, 0.20);
-  --overlay-inverse-pressed: rgba(255, 255, 255, 0.36);
-  --background-inverse-subtleNeutral: #A1BDD914;
+  --background-inverse: rgba(0, 0, 0, 0.16);
+  --background-warning-inverse: rgba(255, 255, 255, 0.20);
+  --background-interaction-hovered: rgba(0, 0, 0, 0.16);
+  --background-interaction-pressed: rgba(0, 0, 0, 0.32);
+  --background-interaction-inverse-hovered: rgba(255, 255, 255, 0.20);
+  --background-interaction-inverse-pressed: rgba(255, 255, 255, 0.36);
 }
 
 html[data-theme="dark"] {
-  --overlay-hover: rgba(255, 255, 255, 0.20) !important;
-  --overlay-pressed: rgba(255, 255, 255, 0.36) !important;
-  --overlay-inverse-hover: rgba(0, 0, 0, 0.16);
-  --overlay-inverse-pressed: rgba(0, 0, 0, 0.32);
-  --background-inverse-subtleNeutral: #091E420F;
+  --background-inverse: rgba(255, 255, 255, 0.20);
+  --background-warning-inverse: rgba(255, 255, 255, 0.20);
+  --background-interaction-hovered: rgba(255, 255, 255, 0.20);
+  --background-interaction-pressed: rgba(255, 255, 255, 0.36);
+  --background-interaction-inverse-hovered: rgba(255, 255, 255, 0.20);
+  --background-interaction-inverse-pressed: rgba(255, 255, 255, 0.36);
 }
 `;
 

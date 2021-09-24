@@ -8,9 +8,13 @@ const styles = css({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
   },
+  textAbovePressable: {
+    zIndex: 1,
+    position: 'relative',
+  },
 });
 
-const textStyles = css({
+const textSizes = css({
   regular: {
     fontSize: 18,
     margin: 0,
@@ -74,13 +78,13 @@ const textDecorationStyles = css({
 
 export type TextColor = keyof typeof colorStyles;
 export type TextWeight = keyof typeof weightStyles;
-export type TextSize = keyof typeof textStyles;
+export type TextSize = keyof typeof textSizes;
 
 interface TextProps {
   children: React.ReactNode;
   as?: 'span' | 'div' | 'p';
   color?: keyof typeof colorStyles;
-  size?: keyof typeof textStyles;
+  size?: keyof typeof textSizes;
   weight?: keyof typeof weightStyles;
   transform?: keyof typeof textTransformStyles;
   decoration?: keyof typeof textDecorationStyles;
@@ -98,7 +102,7 @@ function Text({
   shouldTruncate,
 }: TextProps) {
   const colorStyle = colorStyles[color];
-  const textStyle = textStyles[size];
+  const textSize = textSizes[size];
   const weightStyle = weightStyles[weight];
   const textTransformStyle = textTransformStyles[transform];
   const textDecorationStyle = textDecorationStyles[decoration];
@@ -106,8 +110,8 @@ function Text({
   return (
     <Markup
       css={[
-        { zIndex: 1 },
-        textStyle,
+        styles.textAbovePressable,
+        textSize,
         shouldTruncate && styles.truncate,
         colorStyle,
         weightStyle,

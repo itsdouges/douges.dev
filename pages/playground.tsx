@@ -52,26 +52,6 @@ function Playground() {
           <Button isSelected>Button</Button>
           <Button isDisabled>Button</Button>
         </Inline>
-        <Inline>
-          <Box background="discoveryBold" padding="large">
-            <Button appearance="inverted">Button</Button>
-          </Box>
-          <Box background="brandBold" padding="large">
-            <Button appearance="inverted">Button</Button>
-          </Box>
-          <Box background="dangerBold" padding="large">
-            <Button appearance="inverted">Button</Button>
-          </Box>
-          <Box background="warningBold" padding="large">
-            <Button appearance="inverted">Button</Button>
-          </Box>
-          <Box background="neutralBold" padding="large">
-            <Button appearance="inverted">Button</Button>
-          </Box>
-          <Box background="successBold" padding="large">
-            <Button appearance="inverted">Button</Button>
-          </Box>
-        </Inline>
         <Inline gap="regular">
           <LinkButton href="#" appearance="subtle">
             Button
@@ -92,6 +72,27 @@ function Playground() {
             Button
           </LinkButton>
         </Inline>
+        <Inline>
+          <Box background="discoveryBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="brandBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="dangerBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="warningBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="neutralBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+          <Box background="successBold" padding="large">
+            <Button appearance="inverted">Button</Button>
+          </Box>
+        </Inline>
+
         <Inline gap="small">
           <Avatar size="xsmall" borderColor="brand" />
           <Avatar size="small" borderColor="success" />

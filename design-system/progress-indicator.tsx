@@ -5,25 +5,17 @@ import Pressable from 'design-system/pressable';
 import FocusRing from 'design-system/focus-ring';
 
 const sizeStyles = css({
-  small: {
-    width: 4,
-    height: 4,
-  },
   medium: {
     width: 8,
     height: 8,
   },
-  large: {
-    width: 12,
-    height: 12,
-  },
 });
 
 const backgroundMap = {
-  default: ['neutralSubtle', 'neutralBold'],
-  primary: ['brandSubtle', 'brandBold'],
-  discovery: ['discoverySubtle', 'discoveryBold'],
-  invert: ['inverseNeutralSubtle', 'body'],
+  default: ['inverse', 'neutralBold'],
+  primary: ['inverse', 'brandBold'],
+  discovery: ['inverse', 'discoveryBold'],
+  invert: ['warningInverse', 'body'],
 } as const;
 
 interface ProgressIndicatorProps {

@@ -1,13 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
+import { createContext } from 'react';
 import token from 'design-system/token';
-import { ForwardedRef } from 'react';
+import { ForwardedRef, useContext } from 'react';
 import { forwardRef } from 'lib/react';
 
+const BoxContext = createContext<string>('');
+
+export const useBoxBackground = () => {
+  const context = useContext(BoxContext);
+  return context;
+};
+
 const backgroundStyles = css({
-  inverseNeutralSubtle: {
+  inverse: {
     color: 'currentColor',
-    backgroundColor: token('color.background.inverse.subtleNeutral'),
+    backgroundColor: token('color.background.inverse'),
+  },
+  warningInverse: {
+    color: 'currentColor',
+    backgroundColor: token('color.background.warning.inverse'),
   },
   accentBlueSubtle: {
     backgroundColor: token('color.accent.subtleBlue'),
@@ -599,31 +611,33 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   const heightStyle = heightStyles[height || size];
 
   return (
-    <Component
-      ref={ref as ForwardedRef<HTMLDivElement>}
-      css={[
-        localResetStyles.base,
-        resetStyle,
-        displayStyle,
-        backgroundStyle,
-        paddingTopStyle,
-        paddingRightStyle,
-        paddingBottomStyle,
-        paddingLeftStyle,
-        borderRadiusStyle,
-        shadowStyle ||
-          borderStyle ||
-          borderTopStyle ||
-          borderRightStyle ||
-          borderBottomStyle ||
-          borderLeftStyle,
-        widthStyle,
-        heightStyle,
-      ]}
-      className={className}
-      {...(props as unknown)}>
-      {children}
-    </Component>
+    <BoxContext.Provider value={background || ''}>
+      <Component
+        ref={ref as ForwardedRef<HTMLDivElement>}
+        css={[
+          localResetStyles.base,
+          resetStyle,
+          displayStyle,
+          backgroundStyle,
+          paddingTopStyle,
+          paddingRightStyle,
+          paddingBottomStyle,
+          paddingLeftStyle,
+          borderRadiusStyle,
+          shadowStyle ||
+            borderStyle ||
+            borderTopStyle ||
+            borderRightStyle ||
+            borderBottomStyle ||
+            borderLeftStyle,
+          widthStyle,
+          heightStyle,
+        ]}
+        className={className}
+        {...(props as unknown)}>
+        {children}
+      </Component>
+    </BoxContext.Provider>
   );
 }
 

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
 import Pressable from 'design-system/pressable';
-import Box from 'design-system/box';
+import Box, { useBoxBackground } from 'design-system/box';
 import FocusRing from 'design-system/focus-ring';
 import { forwardRef } from 'react';
 import Text from 'design-system/text';
@@ -21,7 +21,7 @@ export const appearanceBgMap = {
   warning: 'warningBold',
   danger: 'dangerBold',
   selected: 'selected',
-  inverted: 'inverseNeutralSubtle',
+  inverted: 'inverse',
 } as const;
 
 export interface ButtonProps {
@@ -38,11 +38,17 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   ref
 ) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
-  const background = appearanceBgMap[mappedAppearance];
+  const parentBackground = useBoxBackground();
+  const shouldUseWarningInverseBackground =
+    parentBackground?.startsWith('warning') && appearance === 'inverted';
+  const background = shouldUseWarningInverseBackground
+    ? 'warningInverse'
+    : appearanceBgMap[mappedAppearance];
+  const pressableAppearance = shouldUseWarningInverseBackground ? 'inverse' : 'default';
 
   return (
     <Pressable
-      appearance={appearance === 'inverted' ? 'inverse' : 'default'}
+      appearance={pressableAppearance}
       isDisabled={isDisabled}
       onClick={onClick}
       pressedAppearance="static">

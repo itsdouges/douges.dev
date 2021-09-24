@@ -29,12 +29,12 @@ const styles = css({
 const hoverStyles = css({
   default: {
     '::before': {
-      backgroundColor: token('color.overlay.hover'),
+      backgroundColor: token('color.background.interaction.hovered'),
     },
   },
   inverse: {
     '::before': {
-      backgroundColor: token('color.overlay.inverse.hover'),
+      backgroundColor: token('color.background.interaction.inverse.hovered'),
     },
   },
 });
@@ -42,12 +42,12 @@ const hoverStyles = css({
 const pressedStyles = css({
   default: {
     '::before': {
-      backgroundColor: token('color.overlay.pressed'),
+      backgroundColor: token('color.background.interaction.pressed'),
     },
   },
   inverse: {
     '::before': {
-      backgroundColor: token('color.overlay.inverse.pressed'),
+      backgroundColor: token('color.background.interaction.inverse.pressed'),
     },
   },
 });
