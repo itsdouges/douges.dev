@@ -13,17 +13,18 @@ const styles = css({
     position: 'relative',
     flexShrink: 0,
     minHeight: 40,
+    justifyContent: 'center',
   },
 });
 
 interface MenuItemProps {
   children: React.ReactNode;
-  href: string;
+  href?: string;
   secondary?: React.ReactNode;
   isSelected?: boolean;
 }
 
-export const MenuItem = forwardRef<HTMLAnchorElement, any>(
+export const MenuItem = forwardRef<HTMLAnchorElement, MenuItemProps>(
   ({ children, href, secondary, isSelected }: MenuItemProps, ref) => {
     return (
       <Pressable pressedAppearance="static">
@@ -35,6 +36,7 @@ export const MenuItem = forwardRef<HTMLAnchorElement, any>(
               background={isSelected ? 'selected' : 'transparent'}
               paddingX="medium"
               paddingY="regular"
+              display="block flex"
               borderLeft={isSelected ? 'brand' : undefined}
               ref={ref}
               target="_blank"

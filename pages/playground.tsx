@@ -277,7 +277,7 @@ function Playground() {
         </Inline>
 
         <DropdownMenu trigger="Open menu">
-          <MenuItem>Foo</MenuItem>
+          <MenuItem secondary="Bar">Foo</MenuItem>
           <MenuItem isSelected>Bar</MenuItem>
           <MenuItem>Baz</MenuItem>
         </DropdownMenu>
