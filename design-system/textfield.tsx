@@ -44,7 +44,7 @@ function Textfield({
   onChange,
 }: TextfieldProps) {
   return (
-    <FocusRing appearance="inset">
+    <FocusRing focus="within" appearance="inset">
       <Box
         display="block flex"
         background={isDisabled ? 'disabled' : 'neutralSubtle'}

@@ -4,12 +4,14 @@ import { cloneElement } from 'react';
 import { ClassNames } from '@emotion/react';
 import css from 'design-system/css';
 
-const styles = css({
-  focus: {
+const focusStyles = css({
+  base: {
     position: 'relative',
     ':focus': {
       outline: 0,
     },
+  },
+  on: {
     ':focus-visible::after': {
       outline: 0,
       position: 'absolute',
@@ -25,22 +27,33 @@ const styles = css({
       },
     },
   },
+  within: {
+    ':focus-within::after': {
+      outline: 0,
+      position: 'absolute',
+      boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
+      content: '""',
+    },
+  },
+});
+
+const appearanceStyles = css({
   outset: {
-    ':focus-visible::after': {
+    ':focus-visible::after,:focus-within::after': {
       inset: -2,
     },
     '@supports not selector(*:focus-visible)': {
-      ':focus::after': {
+      ':focus::after,:focus-within::after': {
         inset: -2,
       },
     },
   },
   inset: {
-    ':focus-visible::after': {
+    ':focus-visible::after,:focus-within::after': {
       inset: 2,
     },
     '@supports not selector(*:focus-visible)': {
-      ':focus::after': {
+      ':focus::after,:focus-within::after': {
         inset: 2,
       },
     },
@@ -50,15 +63,19 @@ const styles = css({
 interface FocusRingProps {
   children: JSX.Element;
   appearance?: 'outset' | 'inset';
+  focus?: 'on' | 'within';
 }
 
-function FocusRing({ children, appearance = 'outset' }: FocusRingProps) {
-  const offset = styles[appearance];
+function FocusRing({ children, appearance = 'outset', focus = 'on' }: FocusRingProps) {
+  const offset = appearanceStyles[appearance];
+  const focusStyle = focusStyles[focus];
 
   return (
     <ClassNames>
       {({ css: cn }) =>
-        cloneElement(children, { className: cn(styles.focus, offset, children.props.className) })
+        cloneElement(children, {
+          className: cn(focusStyles.base, focusStyle, offset, children.props.className),
+        })
       }
     </ClassNames>
   );
