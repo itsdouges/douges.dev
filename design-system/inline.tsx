@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
+import Box, { PaddingProps } from 'design-system/box';
 
 const styles = css({
   inline: {
@@ -79,14 +80,13 @@ const widthStyles = css({
   },
 });
 
-interface InlineProps {
+interface InlineProps extends PaddingProps {
   children: React.ReactNode;
   gap?: keyof typeof gapStyles;
   inlineAlign?: keyof typeof inlineAlignStyles;
   blockAlign?: keyof typeof blockAlignStyles;
   width?: keyof typeof widthStyles;
   marginLeft?: string;
-  as?: 'div' | 'nav';
 }
 
 function Inline({
@@ -94,9 +94,9 @@ function Inline({
   marginLeft,
   inlineAlign = 'start',
   blockAlign = 'top',
-  as: Component = 'div',
   gap = 'none',
   width = 'auto',
+  ...props
 }: InlineProps) {
   const gapStyle = gapStyles[gap];
   const alignStyle = inlineAlignStyles[inlineAlign];
@@ -104,13 +104,14 @@ function Inline({
   const widthStyle = widthStyles[width];
 
   return (
-    <Component
+    <Box
+      {...props}
       css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle]}
       style={{
         marginLeft,
       }}>
       {children}
-    </Component>
+    </Box>
   );
 }
 

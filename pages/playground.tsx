@@ -215,21 +215,25 @@ function Playground() {
           </Tag>
         </Inline>
 
-        <Inline gap="regular" inlineAlign="center" width="full">
-          <ProgressIndicator isSelected />
-          <ProgressIndicator />
-          <ProgressIndicator />
-        </Inline>
-        <Inline gap="regular" inlineAlign="center" width="full">
-          <ProgressIndicator appearance="primary" isSelected />
-          <ProgressIndicator appearance="primary" />
-          <ProgressIndicator appearance="primary" />
-        </Inline>
-        <Inline gap="regular" inlineAlign="center" width="full">
-          <ProgressIndicator appearance="discovery" isSelected />
-          <ProgressIndicator appearance="discovery" />
-          <ProgressIndicator appearance="discovery" />
-        </Inline>
+        <Box background="neutralSubtle">
+          <Inline>
+            <Inline gap="regular" inlineAlign="center" padding="large">
+              <ProgressIndicator isSelected />
+              <ProgressIndicator />
+              <ProgressIndicator />
+            </Inline>
+            <Inline gap="regular" inlineAlign="center" padding="large">
+              <ProgressIndicator appearance="primary" isSelected />
+              <ProgressIndicator appearance="primary" />
+              <ProgressIndicator appearance="primary" />
+            </Inline>
+            <Inline gap="regular" inlineAlign="center" padding="large">
+              <ProgressIndicator appearance="discovery" isSelected />
+              <ProgressIndicator appearance="discovery" />
+              <ProgressIndicator appearance="discovery" />
+            </Inline>
+          </Inline>
+        </Box>
 
         <Inline>
           <Box background="discoveryBold" padding="large">
