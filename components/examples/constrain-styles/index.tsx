@@ -117,7 +117,7 @@ function ConstrainStyles() {
 
   return (
     <Stack gap="regular">
-      <Inline gap="regular">
+      <Inline gap="regular" width="full">
         <Button isDisabled={step === 0} onClick={() => setStep((prev) => prev - 1)}>
           Remove prop
         </Button>
@@ -127,7 +127,7 @@ function ConstrainStyles() {
           Add prop
         </TimeoutButton>
 
-        <Inline marginLeft="auto">
+        <Inline width="full" inlineAlign="end">
           <Button isSelected={isConstrained} onClick={() => setIsContstrained((prev) => !prev)}>
             Constrain styles
           </Button>

@@ -69,7 +69,7 @@ function CodeAnalysis() {
           onClick={() => setStep((next) => next + 1)}>
           Next
         </TimeoutButton>
-        <Inline marginLeft="auto">
+        <Inline width="full" inlineAlign="end">
           <strong>{stepDescription[step]}</strong>
         </Inline>
       </Inline>

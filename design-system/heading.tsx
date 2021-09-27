@@ -31,7 +31,7 @@ const styles = css({
   2: {
     fontSize: 40,
     lineHeight: 1.16,
-    color: token('color.text.highEmphasis'),
+    color: token('color.text.mediumEmphasis'),
     fontWeight: 700,
   },
   3: {

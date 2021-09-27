@@ -75,7 +75,7 @@ function App({ Component, pageProps, router }: AppProps) {
             {isBlogRoute && (
               <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
             )}
-            <Inline blockAlign="middle" marginLeft="auto" gap="regular">
+            <Inline blockAlign="middle" width="full" inlineAlign="end" gap="regular">
               {isPlayground || (
                 <DropdownMenu
                   trigger={(props) => (

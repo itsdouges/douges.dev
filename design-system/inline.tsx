@@ -86,12 +86,10 @@ interface InlineProps extends PaddingProps {
   inlineAlign?: keyof typeof inlineAlignStyles;
   blockAlign?: keyof typeof blockAlignStyles;
   width?: keyof typeof widthStyles;
-  marginLeft?: string;
 }
 
 function Inline({
   children,
-  marginLeft,
   inlineAlign = 'start',
   blockAlign = 'top',
   gap = 'none',
@@ -107,9 +105,7 @@ function Inline({
     <Box
       {...props}
       css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle]}
-      style={{
-        marginLeft,
-      }}>
+      >
       {children}
     </Box>
   );

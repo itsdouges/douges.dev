@@ -35,6 +35,7 @@ interface TagProps {
 
 function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
   const background = colorBackground[color];
+  const textColor = textAppearanceMap[color] || 'high';
 
   return (
     <Box
@@ -44,7 +45,7 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
       borderRadius={appearance}>
       <Inline gap="small" blockAlign="middle">
         {icon}
-        <Text size="smaller">{children}</Text>
+        <Text color={textColor} size="smaller">{children}</Text>
       </Inline>
     </Box>
   );

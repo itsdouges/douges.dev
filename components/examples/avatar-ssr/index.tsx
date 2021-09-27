@@ -51,7 +51,7 @@ function AvatarExample() {
         <TimeoutButton isDisabled={count >= 7} onClick={() => setCount((prev) => prev + 1)}>
           Add avatar
         </TimeoutButton>
-        <Inline marginLeft="auto" inlineAlign="end">
+        <Inline width="full" inlineAlign="end">
           <Button isSelected={constrainStyles} onClick={() => setConstrainStyles((prev) => !prev)}>
             {styleButtonText}
           </Button>
