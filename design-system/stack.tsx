@@ -56,11 +56,15 @@ const widthStyles = css({
   },
 });
 
+type Gap = keyof typeof gapStyles;
+type InlineAlign = keyof typeof inlineAlignStyles;
+type Width = keyof typeof widthStyles;
+
 interface StackProps {
   children: React.ReactNode;
-  gap?: keyof typeof gapStyles;
-  inlineAlign?: keyof typeof inlineAlignStyles;
-  width?: keyof typeof widthStyles;
+  gap?: Gap;
+  inlineAlign?: InlineAlign;
+  width?: Width;
 }
 
 function Stack({ children, gap = 'none', inlineAlign = 'start', width = 'auto' }: StackProps) {

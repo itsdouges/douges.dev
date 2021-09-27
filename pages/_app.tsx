@@ -51,7 +51,7 @@ function App({ Component, pageProps, router }: AppProps) {
       <Head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(()=>{try{var p=/theme=(.+;?)/.exec(document.cookie);if(p) document.documentElement.setAttribute('data-theme',p[1])}catch(e){}})()`,
+            __html: `(()=>{try{var p=/theme=(.+;?)/.exec(document.cookie);if(p) document.documentElement.setAttribute('data-theme',p[1].split(';')[0])}catch(e){}})()`,
           }}
         />
         <style>

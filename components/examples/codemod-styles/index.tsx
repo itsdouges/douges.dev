@@ -115,7 +115,7 @@ function CodemodStyles() {
           onClick={() => setStep((next) => next + 1)}>
           Next
         </TimeoutButton>
-        <Inline inlineAlign="end" marginLeft="auto">
+        <Inline inlineAlign="end" width="full">
           <Text weight="bolder" color="medium" size="small">
             {stepDescription[step]}
           </Text>

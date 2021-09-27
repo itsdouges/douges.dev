@@ -4,25 +4,12 @@ import { useState, Fragment } from 'react';
 import Textfield from 'design-system/textfield';
 import Label from 'design-system/label';
 import Button from 'design-system/button';
-import { token } from '@atlaskit/tokens';
 import Heading from 'design-system/heading';
 import Stack from 'design-system/stack';
 import Text from 'design-system/text';
 import Inline from 'design-system/inline';
 
 const styles = css({
-  complete: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'opacity 150ms',
-    position: 'absolute',
-    inset: 0,
-    borderRadius: 3,
-    fontSize: 28,
-    color: token('color.text.onBold'),
-    background: token('color.background.boldSuccess.resting'),
-  },
   hidden: {
     opacity: 0,
   },
@@ -73,10 +60,7 @@ function SignUp() {
               onChange={setEmail}
             />
             <Button type="submit" isDisabled={isLoading} appearance="primary">
-              <Fragment>
-                <div css={[styles.complete, isComplete ? styles.visible : styles.hidden]}>✓</div>
-                Join
-              </Fragment>
+              {isComplete ? <Text color="success">✓</Text> : 'Join'}
             </Button>
           </Inline>
         </Label>

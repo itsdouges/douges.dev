@@ -8,6 +8,11 @@ const styles = css({
   container: {
     maxWidth: 500,
     width: '100%',
+  },
+  disabled: {
+    cursor: 'not-allowed',
+  },
+  interactive: {
     ':hover,:focus-within': {
       backgroundColor: 'transparent',
     },
@@ -48,7 +53,7 @@ function Textfield({
       <Box
         display="block flex"
         background={isDisabled ? 'disabled' : 'neutralSubtle'}
-        css={styles.container}
+        css={[styles.container, !isDisabled && styles.interactive]}
         border="neutral"
         borderRadius="default">
         <Box
@@ -61,7 +66,7 @@ function Textfield({
           required={isRequired}
           id={id}
           disabled={isDisabled}
-          css={styles.input}
+          css={[styles.input, isDisabled && styles.disabled]}
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange?.(e.target.value)}

@@ -6,3 +6,11 @@ export interface BlogMeta {
   slug: string;
   heroImage?: StaticImageData;
 }
+
+export interface ResponsiveObject<TProp> {
+  s?: TProp;
+  m?: TProp;
+  l?: TProp;
+}
+
+export type ResponsiveProp<TProp> = TProp | ResponsiveObject<TProp>;
