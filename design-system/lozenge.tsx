@@ -1,13 +1,13 @@
-import Box, { SemanticNames } from 'design-system/box';
+import Box from 'design-system/box';
 import Text from 'design-system/text';
 import React from 'react';
 
 interface LozengeProps {
-  appearance?: keyof SemanticNames;
+  appearance?: keyof typeof appearanceBgMap;
   children?: React.ReactNode;
 }
 
-const appearanceBgMap: SemanticNames = {
+const appearanceBgMap = {
   default: 'neutralSubtle',
   success: 'successSubtle',
   removed: 'dangerSubtle',
@@ -20,7 +20,7 @@ const appearanceBgMap: SemanticNames = {
   inprogressBold: 'brandBold',
   newBold: 'discoveryBold',
   movedBold: 'warningBold',
-};
+} as const;
 
 function Lozenge({ children, appearance = 'default' }: LozengeProps) {
   const background = appearanceBgMap[appearance];

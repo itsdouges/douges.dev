@@ -5,11 +5,11 @@ import token from 'design-system/token';
 import { ForwardedRef, useContext } from 'react';
 import { forwardRef } from 'lib/react';
 
-const BoxContext = createContext<Background>('body');
+const BoxContext = createContext<Background | undefined>(undefined);
 
 export const useBoxBackground = (): Background => {
   const context = useContext(BoxContext);
-  return context;
+  return context || 'body';
 };
 
 const backgroundStyles = css({
@@ -82,7 +82,6 @@ const backgroundStyles = css({
   disabled: {
     color: token('color.text.disabled'),
     backgroundColor: token('color.background.disabled'),
-    cursor: 'not-allowed',
   },
   selected: {
     color: token('color.text.selected'),
@@ -199,7 +198,6 @@ const borderStyles = css({
 });
 
 const widthStyles = css({
-  auto: {},
   xsmall: {
     inlineSize: 20,
   },
@@ -221,7 +219,6 @@ const widthStyles = css({
 });
 
 const heightStyles = css({
-  auto: {},
   xsmall: {
     blockSize: 20,
   },
@@ -328,19 +325,19 @@ const paddingRightStyles = css({
 
 const borderRadiusStyles = css({
   declaration: {
-    borderRadius: 'var(--ds-box-br)',
+    borderRadius: 'var(--ds-box-border-radius)',
     '::before,::after': {
-      borderRadius: 'var(--ds-box-br)',
+      borderRadius: 'var(--ds-box-border-radius)',
     },
   },
   default: {
-    '--ds-box-br': '3px',
+    '--ds-box-border-radius': '3px',
   },
   rounded: {
-    '--ds-box-br': '12px',
+    '--ds-box-border-radius': '12px',
   },
   circle: {
-    '--ds-box-br': '50%',
+    '--ds-box-border-radius': '50%',
   },
 });
 
@@ -363,8 +360,8 @@ const displayStyles = css({
   },
 });
 
-const localResetStyles = css({
-  base: {
+const elementResetStyles = css({
+  everyElement: {
     boxSizing: 'border-box',
     padding: 0,
     border: 0,
@@ -375,8 +372,6 @@ const localResetStyles = css({
   pre: {
     margin: 0,
   },
-  div: {},
-  button: {},
   a: {
     ':hover,:active': {
       color: 'initial',
@@ -414,22 +409,6 @@ export type BorderColor = keyof typeof borderColorStyles;
 export type BorderRadius = keyof Omit<typeof borderRadiusStyles, 'declaration'>;
 export type Size = keyof typeof widthStyles;
 export type Display = keyof typeof displayStyles;
-
-export type SemanticNames = {
-  default: 'neutralSubtle';
-  success: 'successSubtle';
-  removed: 'dangerSubtle';
-  inprogress: 'brandSubtle';
-  new: 'discoverySubtle';
-  moved: 'warningSubtle';
-  defaultBold: 'neutralBold';
-  successBold: 'successBold';
-  removedBold: 'dangerBold';
-  inprogressBold: 'brandBold';
-  newBold: 'discoveryBold';
-  movedBold: 'warningBold';
-};
-
 export type BoxHTMLElement = keyof JSX.IntrinsicElements;
 
 export interface BoxProps<TElement extends BoxHTMLElement>
@@ -452,6 +431,7 @@ type BoxHTMLProps<TElement extends BoxHTMLElement> = Omit<
 
 function Box<TElement extends BoxHTMLElement = 'div'>(
   {
+    as = 'div' as TElement,
     children,
     paddingTop,
     paddingRight,
@@ -461,7 +441,6 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
     paddingY,
     display,
     className,
-    as: AsProp,
     width,
     height,
     borderColor,
@@ -470,14 +449,14 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
     background,
     borderRadius,
     padding,
-    size = 'auto',
+    size,
     ...props
   }: BoxProps<TElement> & BoxHTMLProps<TElement>,
   ref: ForwardedRef<HTMLElement>
 ) {
-  const Component: 'div' = (AsProp || 'div') as any;
-  const backgroundStyle = background && backgroundStyles[background];
-  const shadowStyle = shadow && shadowStyles[shadow];
+  const BoxElement = as as 'a';
+  const backgroundStyle = backgroundStyles[background!];
+  const shadowStyle = shadowStyles[shadow!];
   const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding!];
   const paddingRightStyle = paddingRightStyles[paddingRight || paddingX || padding!];
   const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding!];
@@ -485,17 +464,17 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   const borderRadiusStyle = borderRadiusStyles[borderRadius!];
   const borderStyle = borderStyles[border!];
   const borderColorStyle = borderColorStyles[borderColor!];
-  const displayStyle = display && displayStyles[display];
-  const resetStyle = localResetStyles[Component];
-  const widthStyle = widthStyles[width || size];
-  const heightStyle = heightStyles[height || size];
+  const displayStyle = displayStyles[display!];
+  const resetStyle = elementResetStyles[BoxElement];
+  const widthStyle = widthStyles[width || size!];
+  const heightStyle = heightStyles[height || size!];
 
   return (
-    <BoxContext.Provider value={background || 'body'}>
-      <Component
-        ref={ref as ForwardedRef<HTMLDivElement>}
+    <BoxContext.Provider value={background}>
+      <BoxElement
+        ref={ref as ForwardedRef<any>}
         css={[
-          localResetStyles.base,
+          elementResetStyles.everyElement,
           resetStyle,
           displayStyle,
           backgroundStyle,
@@ -513,7 +492,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
         className={className}
         {...(props as unknown)}>
         {children}
-      </Component>
+      </BoxElement>
     </BoxContext.Provider>
   );
 }
