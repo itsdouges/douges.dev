@@ -139,7 +139,6 @@ const backgroundStyles = css({
 });
 
 const shadowStyles = css({
-  none: {},
   card: {
     boxShadow: token('shadow.card'),
   },
@@ -179,7 +178,6 @@ const borderColorStyles = css({
 });
 
 const borderStyles = css({
-  none: {},
   full: {
     boxShadow: `inset 0 0 0 2px var(--ds-box-border-color)`,
   },
@@ -242,7 +240,6 @@ const heightStyles = css({
 });
 
 const paddingTopStyles = css({
-  none: {},
   xsmall: {
     paddingBlockStart: 2,
   },
@@ -264,7 +261,6 @@ const paddingTopStyles = css({
 });
 
 const paddingBottomStyles = css({
-  none: {},
   xsmall: {
     paddingBlockEnd: 2,
   },
@@ -286,7 +282,6 @@ const paddingBottomStyles = css({
 });
 
 const paddingLeftStyles = css({
-  none: {},
   xsmall: {
     paddingInlineStart: 2,
   },
@@ -308,7 +303,6 @@ const paddingLeftStyles = css({
 });
 
 const paddingRightStyles = css({
-  none: {},
   xsmall: {
     paddingInlineEnd: 2,
   },
@@ -335,9 +329,6 @@ const borderRadiusStyles = css({
     '::before,::after': {
       borderRadius: 'var(--ds-box-br)',
     },
-  },
-  none: {
-    '--ds-box-br': ' ',
   },
   default: {
     '--ds-box-br': '3px',
@@ -474,8 +465,8 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
     border,
     shadow,
     background,
-    borderRadius = 'none',
-    padding = 'none',
+    borderRadius,
+    padding,
     size = 'auto',
     ...props
   }: BoxProps<TElement> & BoxHTMLProps<TElement>,
@@ -484,13 +475,13 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   const Component: 'div' = (AsProp || 'div') as any;
   const backgroundStyle = background && backgroundStyles[background];
   const shadowStyle = shadow && shadowStyles[shadow];
-  const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding];
-  const paddingRightStyle = paddingRightStyles[paddingRight || paddingX || padding];
-  const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding];
-  const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding];
-  const borderRadiusStyle = borderRadiusStyles[borderRadius];
-  const borderStyle = border && borderStyles[border];
-  const borderColorStyle = borderColor && borderColorStyles[borderColor];
+  const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding!];
+  const paddingRightStyle = paddingRightStyles[paddingRight || paddingX || padding!];
+  const paddingBottomStyle = paddingBottomStyles[paddingBottom || paddingY || padding!];
+  const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding!];
+  const borderRadiusStyle = borderRadiusStyles[borderRadius!];
+  const borderStyle = borderStyles[border!];
+  const borderColorStyle = borderColorStyles[borderColor!];
   const displayStyle = display && displayStyles[display];
   const resetStyle = localResetStyles[Component];
   const widthStyle = widthStyles[width || size];
@@ -509,7 +500,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
           paddingRightStyle,
           paddingBottomStyle,
           paddingLeftStyle,
-          borderRadiusStyles.declaration,
+          borderRadiusStyle && borderRadiusStyles.declaration,
           borderRadiusStyle,
           borderStyle && borderColorStyle,
           shadowStyle || borderStyle,
