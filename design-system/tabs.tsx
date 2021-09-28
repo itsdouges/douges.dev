@@ -23,7 +23,7 @@ interface TabsProps {
 
 export function TabList({ children }: TabsProps) {
   return (
-    <Box border="borderBottom" borderColor="neutral">
+    <Box border="bottom" borderColor="neutral">
       <Inline gap="large">{children}</Inline>
     </Box>
   );
