@@ -23,7 +23,7 @@ interface TabsProps {
 
 export function TabList({ children }: TabsProps) {
   return (
-    <Box borderBottom="neutral">
+    <Box border="borderBottom" borderColor="neutral">
       <Inline gap="large">{children}</Inline>
     </Box>
   );
@@ -42,7 +42,8 @@ export function Tab({ children, isSelected }: TabProps) {
           <Box
             href="#"
             as="a"
-            borderBottom={isSelected ? 'brand' : 'currentColor'}
+            border="bottom"
+            borderColor={isSelected ? 'brand' : 'currentColor'}
             paddingBottom="regular"
             css={!isSelected && styles.tabBorderColor}
             {...press}>

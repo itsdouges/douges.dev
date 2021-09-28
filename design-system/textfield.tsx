@@ -54,7 +54,8 @@ function Textfield({
         display="block flex"
         background={isDisabled ? 'disabled' : 'neutralSubtle'}
         css={[styles.container, !isDisabled && styles.interactive]}
-        border="neutral"
+        border="full"
+        borderColor="neutral"
         borderRadius="default">
         <Box
           as="input"

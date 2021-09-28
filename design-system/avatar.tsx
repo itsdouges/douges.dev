@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import Box, { Size, Border } from 'design-system/box';
+import Box, { Size, BorderColor } from 'design-system/box';
 import Pressable from 'design-system/pressable';
 import FocusRing from 'design-system/focus-ring';
 import { token } from '@atlaskit/tokens';
@@ -46,7 +46,7 @@ const avatarIcons = {
 interface AvatarProps {
   size?: Size;
   appearance?: 'square' | 'circle';
-  borderColor?: Border;
+  borderColor?: BorderColor;
 }
 
 export default function Avatar({
@@ -58,7 +58,12 @@ export default function Avatar({
   const icon = avatarIcons[appearance];
 
   return (
-    <Box padding="xsmall" borderRadius={borderRadius} size={size} border={borderColor}>
+    <Box
+      padding="xsmall"
+      borderRadius={borderRadius}
+      size={size}
+      border="full"
+      borderColor={borderColor}>
       <Box borderRadius={borderRadius} css={styles.container}>
         {icon}
       </Box>
@@ -85,7 +90,8 @@ export function AvatarButton({
             padding="xsmall"
             borderRadius={borderRadius}
             size={size}
-            border={borderColor}>
+            border="full"
+            borderColor={borderColor}>
             <Box borderRadius={borderRadius} css={styles.container}>
               {icon}
             </Box>
@@ -115,7 +121,8 @@ export function AvatarLink({
             padding="xsmall"
             borderRadius={borderRadius}
             size={size}
-            border={borderColor}>
+            border="full"
+            borderColor={borderColor}>
             <Box borderRadius={borderRadius} css={styles.container}>
               {icon}
             </Box>

@@ -148,158 +148,52 @@ const shadowStyles = css({
   },
 });
 
+const borderColorStyles = css({
+  currentColor: {
+    '--ds-box-border-color': 'currentColor',
+  },
+  default: {
+    '--ds-box-border-color': token('color.background.default'),
+  },
+  neutral: {
+    '--ds-box-border-color': token('color.border.neutral'),
+  },
+  focus: {
+    '--ds-box-border-color': token('color.border.focus'),
+  },
+  brand: {
+    '--ds-box-border-color': token('color.iconBorder.brand'),
+  },
+  danger: {
+    '--ds-box-border-color': token('color.iconBorder.danger'),
+  },
+  success: {
+    '--ds-box-border-color': token('color.iconBorder.success'),
+  },
+  discovery: {
+    '--ds-box-border-color': token('color.iconBorder.discovery'),
+  },
+  warning: {
+    '--ds-box-border-color': token('color.iconBorder.warning'),
+  },
+});
+
 const borderStyles = css({
   none: {},
-  currentColor: {
-    boxShadow: `inset 0 0 0 2px currentColor`,
+  full: {
+    boxShadow: `inset 0 0 0 2px var(--ds-box-border-color)`,
   },
-  default: {
-    boxShadow: `inset 0 0 0 2px ${token('color.background.default')}`,
+  top: {
+    boxShadow: `0 -2px 0 0 var(--ds-box-border-color)`,
   },
-  neutral: {
-    boxShadow: `inset 0 0 0 2px ${token('color.border.neutral')}`,
+  right: {
+    boxShadow: `inset -2px 0 0 0 var(--ds-box-border-color)`,
   },
-  focus: {
-    boxShadow: `inset 0 0 0 2px ${token('color.border.focus')}`,
+  bottom: {
+    boxShadow: `inset 0 -2px 0 0 var(--ds-box-border-color)`,
   },
-  brand: {
-    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.brand')}`,
-  },
-  danger: {
-    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.danger')}`,
-  },
-  success: {
-    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.success')}`,
-  },
-  discovery: {
-    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.discovery')}`,
-  },
-  warning: {
-    boxShadow: `inset 0 0 0 2px ${token('color.iconBorder.warning')}`,
-  },
-});
-
-const borderTopStyles = css({
-  none: {},
-  currentColor: {
-    boxShadow: `0 -2px 0 0 currentColor`,
-  },
-  default: {
-    boxShadow: `0 -2px 0 0 ${token('color.background.default')}`,
-  },
-  neutral: {
-    boxShadow: `0 -2px 0 0 ${token('color.border.neutral')}`,
-  },
-  focus: {
-    boxShadow: `0 -2px 0 0 ${token('color.border.focus')}`,
-  },
-  brand: {
-    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.brand')}`,
-  },
-  danger: {
-    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.danger')}`,
-  },
-  success: {
-    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.success')}`,
-  },
-  discovery: {
-    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.discovery')}`,
-  },
-  warning: {
-    boxShadow: `0 -2px 0 0 ${token('color.iconBorder.warning')}`,
-  },
-});
-
-const borderRightStyles = css({
-  none: {},
-  currentColor: {
-    boxShadow: `inset -2px 0 0 0 currentColor`,
-  },
-  default: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.background.default')}`,
-  },
-  neutral: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.border.neutral')}`,
-  },
-  focus: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.border.focus')}`,
-  },
-  brand: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.brand')}`,
-  },
-  danger: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.danger')}`,
-  },
-  success: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.success')}`,
-  },
-  discovery: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.discovery')}`,
-  },
-  warning: {
-    boxShadow: `inset -2px 0 0 0 ${token('color.iconBorder.warning')}`,
-  },
-});
-
-const borderBottomStyles = css({
-  none: {},
-  currentColor: {
-    boxShadow: `inset 0 -2px 0 0 currentColor`,
-  },
-  default: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.background.default')}`,
-  },
-  neutral: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.border.neutral')}`,
-  },
-  focus: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.border.focus')}`,
-  },
-  brand: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.brand')}`,
-  },
-  danger: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.danger')}`,
-  },
-  success: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.success')}`,
-  },
-  discovery: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.discovery')}`,
-  },
-  warning: {
-    boxShadow: `inset 0 -2px 0 0 ${token('color.iconBorder.warning')}`,
-  },
-});
-
-const borderLeftStyles = css({
-  none: {},
-  currentColor: {
-    boxShadow: `inset 2px 0 0 0 currentColor`,
-  },
-  default: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.background.default')}`,
-  },
-  neutral: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.border.neutral')}`,
-  },
-  focus: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.border.focus')}`,
-  },
-  brand: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.brand')}`,
-  },
-  danger: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.danger')}`,
-  },
-  success: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.success')}`,
-  },
-  discovery: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.discovery')}`,
-  },
-  warning: {
-    boxShadow: `inset 2px 0 0 0 ${token('color.iconBorder.warning')}`,
+  left: {
+    boxShadow: `inset 2px 0 0 0 var(--ds-box-border-color)`,
   },
 });
 
@@ -436,24 +330,23 @@ const paddingRightStyles = css({
 });
 
 const borderRadiusStyles = css({
-  none: {},
-  default: {
-    borderRadius: 3,
+  declaration: {
+    borderRadius: 'var(--ds-box-br)',
     '::before,::after': {
-      borderRadius: 3,
+      borderRadius: 'var(--ds-box-br)',
     },
+  },
+  none: {
+    '--ds-box-br': ' ',
+  },
+  default: {
+    '--ds-box-br': '3px',
   },
   rounded: {
-    borderRadius: 12,
-    '::before,::after': {
-      borderRadius: 12,
-    },
+    '--ds-box-br': '12px',
   },
   circle: {
-    borderRadius: '50%',
-    '::before,::after': {
-      borderRadius: '50%',
-    },
+    '--ds-box-br': '50%',
   },
 });
 
@@ -510,10 +403,7 @@ export interface PaddingProps {
 
 export interface BorderProps {
   border?: Border;
-  borderTop?: Border;
-  borderRight?: Border;
-  borderBottom?: Border;
-  borderLeft?: Border;
+  borderColor?: BorderColor;
 }
 
 export interface SizeProps {
@@ -525,8 +415,9 @@ export interface SizeProps {
 export type Spacing = keyof typeof paddingTopStyles;
 export type Background = keyof typeof backgroundStyles;
 export type Shadow = keyof typeof shadowStyles;
-export type Border = keyof typeof borderRightStyles;
-export type BorderRadius = keyof typeof borderRadiusStyles;
+export type Border = keyof typeof borderStyles;
+export type BorderColor = keyof typeof borderColorStyles;
+export type BorderRadius = keyof Omit<typeof borderRadiusStyles, 'declaration'>;
 export type Size = keyof typeof widthStyles;
 export type Display = keyof typeof displayStyles;
 
@@ -579,10 +470,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
     as: AsProp,
     width,
     height,
-    borderBottom,
-    borderLeft,
-    borderRight,
-    borderTop,
+    borderColor,
     border,
     shadow,
     background,
@@ -602,10 +490,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   const paddingLeftStyle = paddingLeftStyles[paddingLeft || paddingX || padding];
   const borderRadiusStyle = borderRadiusStyles[borderRadius];
   const borderStyle = border && borderStyles[border];
-  const borderTopStyle = borderTop && borderTopStyles[borderTop];
-  const borderRightStyle = borderRight && borderRightStyles[borderRight];
-  const borderBottomStyle = borderBottom && borderBottomStyles[borderBottom];
-  const borderLeftStyle = borderLeft && borderLeftStyles[borderLeft];
+  const borderColorStyle = borderColor && borderColorStyles[borderColor];
   const displayStyle = display && displayStyles[display];
   const resetStyle = localResetStyles[Component];
   const widthStyle = widthStyles[width || size];
@@ -624,13 +509,10 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
           paddingRightStyle,
           paddingBottomStyle,
           paddingLeftStyle,
+          borderRadiusStyles.declaration,
           borderRadiusStyle,
-          shadowStyle ||
-            borderStyle ||
-            borderTopStyle ||
-            borderRightStyle ||
-            borderBottomStyle ||
-            borderLeftStyle,
+          borderStyle && borderColorStyle,
+          shadowStyle || borderStyle,
           widthStyle,
           heightStyle,
         ]}
