@@ -140,75 +140,87 @@ function Playground() {
         </Inline>
         <Inline gap="small">
           <TagLink
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="greyLight"
             appearance="rounded">
             Tag
           </TagLink>
           <TagLink
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="blueLight"
             appearance="rounded">
             Tag
           </TagLink>
           <TagLink
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="green"
             appearance="rounded">
             Tag
           </TagLink>
           <TagLink
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="redLight"
             appearance="rounded">
             Tag
           </TagLink>
           <TagLink
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="tealLight"
             appearance="rounded">
             Tag
           </TagLink>
           <TagLink
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="yellowLight"
             appearance="rounded">
             Tag
           </TagLink>
           <TagLink
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="purpleLight"
             appearance="rounded">
             Tag
           </TagLink>
         </Inline>
         <Inline gap="small">
-          <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="grey" appearance="rounded">
-            Tag
-          </Tag>
-          <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="blue" appearance="rounded">
+          <Tag
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
+            color="grey"
+            appearance="rounded">
             Tag
           </Tag>
           <Tag
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
+            color="blue"
+            appearance="rounded">
+            Tag
+          </Tag>
+          <Tag
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="green"
             appearance="rounded">
             Tag
           </Tag>
-          <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="red" appearance="rounded">
-            Tag
-          </Tag>
-          <Tag icon={<Avatar borderColor="none" size="xsmall" />} color="teal" appearance="rounded">
+          <Tag
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
+            color="red"
+            appearance="rounded">
             Tag
           </Tag>
           <Tag
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
+            color="teal"
+            appearance="rounded">
+            Tag
+          </Tag>
+          <Tag
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="yellow"
             appearance="rounded">
             Tag
           </Tag>
           <Tag
-            icon={<Avatar borderColor="none" size="xsmall" />}
+            icon={<Avatar borderColor="transparent" size="xsmall" />}
             color="purple"
             appearance="rounded">
             Tag

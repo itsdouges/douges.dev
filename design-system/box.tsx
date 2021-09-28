@@ -148,6 +148,9 @@ const shadowStyles = css({
 });
 
 const borderColorStyles = css({
+  transparent: {
+    '--ds-box-border-color': 'transparent',
+  },
   currentColor: {
     '--ds-box-border-color': 'currentColor',
   },
