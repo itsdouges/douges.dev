@@ -5,11 +5,11 @@ import Heading from 'design-system/heading';
 import CodeBlock from 'design-system/code-block';
 import Code from 'design-system/code';
 import { token } from '@atlaskit/tokens';
-import AvatarExample from 'components/examples/avatar-ssr';
-import DynamicStyles from 'components/examples/dynamic-styles';
-import ConstrainStyles from 'components/examples/constrain-styles';
-import CodemodStyles from 'components/examples/codemod-styles';
-import CodeAnalysis from 'components/examples/code-analysis';
+import AvatarExample from 'components/examples/taming-the-beast-that-is-css-in-js/avatar-ssr';
+import DynamicStyles from 'components/examples/taming-the-beast-that-is-css-in-js/dynamic-styles';
+import ConstrainStyles from 'components/examples/taming-the-beast-that-is-css-in-js/constrain-styles';
+import CodemodStyles from 'components/examples/taming-the-beast-that-is-css-in-js/codemod-styles';
+import CodeAnalysis from 'components/examples/taming-the-beast-that-is-css-in-js/code-analysis';
 import ExampleContainer from 'components/examples/container';
 import Stack from 'design-system/stack';
 
