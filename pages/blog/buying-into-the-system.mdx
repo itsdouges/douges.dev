@@ -1,8 +1,7 @@
 export const meta = {
-  title: 'Buying into a system FOR THE TEAM',
+  title: 'Defining systems and buying into them',
   blurb: 'What if we could make UI simple?',
   publishDate: '2021-10-07',
-  draft: true,
 };
 
 Believe it or not I play ice hockey for fun in Sydney,
@@ -20,52 +19,81 @@ teams in software development aren't all that different,
 truly.
 We all want to be aligned so we can execute with precision and speed.
 
-What systems could we define to make UI development easy?
-Let's dig into detractors that limit us from getting to that pro level of systems and some thoughts about what we can do with them.
+What systems could we define to make UI development easier?
 
-# Boxes, borders, and focus
+# Boxes and borders
 
-Today most web developers use `box-sizing: border-box` enabling [the alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) to simplify how you think about the size of an element rendered in the viewport.
+Today most web developers use `box-sizing: border-box` to enable [the alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
 Set an elements width to `100px` and it does exactly what you think it would.
 But even with the alternative box model things can still be harder than we'd like them to be.
-Borders can be pretty easy to get started with,
-but use them with multiple elements and they start behaving a little nefarious.
-Let me show you.
+Borders for example are pretty easy to get started with,
+but use them with multiple elements in different scenarios and they start behaving quite nefariously.
+Let's dig in.
 
 ```
 // example here showing a menu with left border for selected
 ```
 
 You might be thinking,
-"Douges, this is easy mate!
-You can work around this by ..." and honestly you're not wrong.
-But let's look at another example first.
+"_Douges_,
+mate,
+this is easy!
+You can work around this by …" and honestly?
+You're not wrong.
+But let's look at another example first where we need multiple borders working with each other.
 
 ```
 // tabs border example needing to overlay
 ```
 
+More troubles.
+More potential workarounds.
+We need to think bigger past a single example and towards how it works with the entire system.
+What if borders just worked well together so we could throw away our workarounds?
 
+What if our system had borders applied using box shadow?
 
-1. Example of border complexity with padding
-1. UI can work with or against itself
-1. Example of border complexity with multiple borders
-1. Outline for focus state is better than box shadow because of the change of box shadow and focus, less likely for border
+```
+// side by side example of tabs and menu with box shadow
+```
 
-# Interaction states and backgrounds
+# Interactions and backgrounds
 
-1. Interaction state explosion
-1. Example of interaction state simplification
-1. Moving towards O(1) decision making
+Interactive UI elements like borders are simple to get started.
+Pick a few different background colors,
+maybe even a little transform,
+and you're done.
+But what would it look like when we're at 𝓌𝑒𝒷 𝓈𝒸𝒶𝓁𝑒?
+Let's visualize it.
 
-# System interfaces and unintentional bleeds
+```
+// interaction state explosion
+```
+
+I hope you agree with me that given enough use cases things are getting pretty wild,
+and we haven't even touched on UI elements that don't work with backgrounds,
+such as avatars!
+
+Given the need for varying use cases and enough scale there are a load of decisions that are vectors for mistakes,
+each one slowing us down.
+If we were to add a new use case what would the appropriate interaction states be?
+More decisions!
+What if we could reduce the decisions we need to make for interaction states down to one?
+
+What if our system had all interaction states applied as overlays?
+
+```
+// example of pressable
+```
+
+# APIs and unintentional bleeds
 
 1. APIs bleeding through the system (for consumers, for maintainers)
 1. Take a simple tooltip and apply it to your system
 1. Zindex wars
 
 
-# Layouts, text, and alignment
+# Layouts and text
 
 1. Simplifying layout concerns with primitives and simply API (do things one way instead of multiple ways)
 1. Abstraction CSS layout with powerful defaults to make it easy for everyone
