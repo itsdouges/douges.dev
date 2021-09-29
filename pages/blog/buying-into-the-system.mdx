@@ -1,0 +1,83 @@
+export const meta = {
+  title: 'Buying into a system FOR THE TEAM',
+  blurb: 'What if we could make UI simple?',
+  publishDate: '2021-10-07',
+  draft: true,
+};
+
+Believe it or not I play ice hockey for fun in Sydney,
+Australia.
+The higher the competitive ladder you climb the more common it is to have your coach define and apply systems to the way the team plays.
+Whether you're attacking or defending there are systems in place ready to execute at any given moment.
+In some ways this is a pretty fitting analogy for software development,
+except we replace the competitive ladder with scale,
+the coach with an engineering manager or architect,
+and systems,
+well,
+systems still work.
+When you're a prospect and being scouted the coach will always push for you to ["buy into their system"](https://www.ncsasports.org/blog/2014/07/28/buy-program/),
+teams in software development aren't all that different,
+truly.
+We all want to be aligned so we can execute with precision and speed.
+
+What systems could we define to make UI development easy?
+Let's dig into detractors that limit us from getting to that pro level of systems and some thoughts about what we can do with them.
+
+# Boxes, borders, and focus
+
+Today most web developers use `box-sizing: border-box` enabling [the alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) to simplify how you think about the size of an element rendered in the viewport.
+Set an elements width to `100px` and it does exactly what you think it would.
+But even with the alternative box model things can still be harder than we'd like them to be.
+Borders can be pretty easy to get started with,
+but use them with multiple elements and they start behaving a little nefarious.
+Let me show you.
+
+```
+// example here showing a menu with left border for selected
+```
+
+You might be thinking,
+"Douges, this is easy mate!
+You can work around this by ..." and honestly you're not wrong.
+But let's look at another example first.
+
+```
+// tabs border example needing to overlay
+```
+
+
+
+1. Example of border complexity with padding
+1. UI can work with or against itself
+1. Example of border complexity with multiple borders
+1. Outline for focus state is better than box shadow because of the change of box shadow and focus, less likely for border
+
+# Interaction states and backgrounds
+
+1. Interaction state explosion
+1. Example of interaction state simplification
+1. Moving towards O(1) decision making
+
+# System interfaces and unintentional bleeds
+
+1. APIs bleeding through the system (for consumers, for maintainers)
+1. Take a simple tooltip and apply it to your system
+1. Zindex wars
+
+
+# Layouts, text, and alignment
+
+1. Simplifying layout concerns with primitives and simply API (do things one way instead of multiple ways)
+1. Abstraction CSS layout with powerful defaults to make it easy for everyone
+1. Capsize to cut down text and make 2px padding mean 2px
+1. Responsibility and concerns
+1. Margins shouldn't be used anymore outside a set of specific scenarios
+1. Gap is perfect for layout
+1. Nested styles affect entropy of the system
+
+# More than just systems
+
+1. It's about bringing everyone on the journey
+1. Make UI simple and focus on the hard problems
+1. The best systems in the world mean nothing if everyone doesn't buy in
+1. Need supporting tooling and abstractions
