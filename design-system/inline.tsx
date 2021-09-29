@@ -10,7 +10,6 @@ const styles = css({
 });
 
 const gapStyles = css({
-  none: {},
   '-small': {
     '> *': { marginInlineEnd: -4 },
   },
@@ -74,7 +73,6 @@ const blockAlignStyles = css({
 });
 
 const widthStyles = css({
-  auto: {},
   full: {
     inlineSize: '100%',
   },
@@ -90,22 +88,19 @@ interface InlineProps extends PaddingProps {
 
 function Inline({
   children,
+  gap,
+  width,
   inlineAlign = 'start',
   blockAlign = 'top',
-  gap = 'none',
-  width = 'auto',
   ...props
 }: InlineProps) {
-  const gapStyle = gapStyles[gap];
+  const gapStyle = gapStyles[gap!];
   const alignStyle = inlineAlignStyles[inlineAlign];
   const justifyStyle = blockAlignStyles[blockAlign];
-  const widthStyle = widthStyles[width];
+  const widthStyle = widthStyles[width!];
 
   return (
-    <Box
-      {...props}
-      css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle]}
-      >
+    <Box {...props} css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle]}>
       {children}
     </Box>
   );

@@ -25,7 +25,6 @@ const inlineAlignStyles = css({
 });
 
 const gapStyles = css({
-  none: {},
   small: {
     gap: 4,
   },
@@ -50,7 +49,6 @@ const gapStyles = css({
 });
 
 const widthStyles = css({
-  auto: {},
   full: {
     inlineSize: '100%',
   },
@@ -67,10 +65,10 @@ interface StackProps {
   width?: Width;
 }
 
-function Stack({ children, gap = 'none', inlineAlign = 'start', width = 'auto' }: StackProps) {
-  const gapStyle = gapStyles[gap];
+function Stack({ children, gap, inlineAlign = 'start', width }: StackProps) {
+  const gapStyle = gapStyles[gap!];
   const inlineStyle = inlineAlignStyles[inlineAlign];
-  const widthStyle = widthStyles[width];
+  const widthStyle = widthStyles[width!];
 
   return <div css={[styles.stack, gapStyle, inlineStyle, widthStyle]}>{children}</div>;
 }
