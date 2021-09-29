@@ -12,49 +12,40 @@ const focusStyles = css({
     },
   },
   on: {
-    ':focus-visible::after': {
-      outline: 0,
-      position: 'absolute',
-      boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
-      content: '""',
+    ':focus-visible': {
+      outline: `2px solid ${token('color.border.focus')}`,
     },
     '@supports not selector(*:focus-visible)': {
-      ':focus::after': {
-        outline: 0,
-        position: 'absolute',
-        boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
-        content: '""',
+      ':focus': {
+        outline: `2px solid ${token('color.border.focus')}`,
       },
     },
   },
   within: {
-    ':focus-within::after': {
-      outline: 0,
-      position: 'absolute',
-      boxShadow: `0 0 0 2px ${token('color.border.focus')}`,
-      content: '""',
+    ':focus-within': {
+      outline: `2px solid ${token('color.border.focus')}`,
     },
   },
 });
 
 const appearanceStyles = css({
   outset: {
-    ':focus-visible::after,:focus-within::after': {
-      inset: -2,
+    ':focus-visible,:focus-within': {
+      outlineOffset: 2,
     },
     '@supports not selector(*:focus-visible)': {
-      ':focus::after,:focus-within::after': {
-        inset: -2,
+      ':focus,:focus-within': {
+        outlineOffset: 2,
       },
     },
   },
   inset: {
-    ':focus-visible::after,:focus-within::after': {
-      inset: 2,
+    ':focus-visible,:focus-within': {
+      outlineOffset: -2,
     },
     '@supports not selector(*:focus-visible)': {
-      ':focus::after,:focus-within::after': {
-        inset: 2,
+      ':focus,:focus-within': {
+        outlineOffset: -2,
       },
     },
   },
