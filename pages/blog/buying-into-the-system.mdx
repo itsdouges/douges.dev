@@ -19,7 +19,7 @@ teams in software development aren't all that different,
 truly.
 We all want to be aligned so we can execute with precision and speed.
 
-What systems could we define to make UI development easier?
+What systems could we define to _make UI development easier_?
 
 # Boxes and borders
 
@@ -88,10 +88,23 @@ What if our system had all interaction states applied as overlays?
 
 # APIs and unintentional bleeds
 
+The [not so] simple tooltip,
+like borders and interaction states can seem simple to get started.
+But dig in and you'll find layering and accessibility issues that you'll need to fix.
+For accessibility it generally includes needing to wire up the tooltip to the target element so the tooltip can _describe_ the target element to a screen reader.
+Let's make it.
+
+```
+// tooltip example basic to advanced
+```
+
+Now what we've made works I'm sure you can agree.
+But there's something nefarious in the works that you might not realize!
+Now for any experience needing a tooltip in our system they need to be able to take these props!
+
 1. APIs bleeding through the system (for consumers, for maintainers)
 1. Take a simple tooltip and apply it to your system
 1. Zindex wars
-
 
 # Layouts and text
 
