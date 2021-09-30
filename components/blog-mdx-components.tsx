@@ -12,6 +12,7 @@ import CodemodStyles from 'components/examples/taming-the-beast-that-is-css-in-j
 import CodeAnalysis from 'components/examples/taming-the-beast-that-is-css-in-js/code-analysis';
 import ExampleContainer from 'components/examples/container';
 import Stack from 'design-system/stack';
+import Anchor from 'components/anchor';
 
 const styles = css({
   wrapper: {
@@ -49,13 +50,25 @@ const components: MDXProviderComponents = {
     return <hr {...props} css={styles.hr} />;
   },
   h1(props) {
-    return <Heading {...props} level={2} />;
+    return (
+      <Anchor title={props.children}>
+        <Heading {...props} level={2} />
+      </Anchor>
+    );
   },
   h2(props) {
-    return <Heading {...props} level={3} />;
+    return (
+      <Anchor title={props.children}>
+        <Heading {...props} level={3} />
+      </Anchor>
+    );
   },
   h3(props) {
-    return <Heading {...props} level={3} />;
+    return (
+      <Anchor title={props.children}>
+        <Heading {...props} level={3} />
+      </Anchor>
+    );
   },
   pre(props) {
     return props.children;

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import Box from 'design-system/box';
+import Text from 'design-system/text';
 
 interface CodeProps {
   children: string;
@@ -8,7 +9,7 @@ interface CodeProps {
 function Code({ children }: CodeProps) {
   return (
     <Box as="code" padding="small" borderRadius="default" background="neutralSubtle">
-      {children}
+      <Text size="small">{children}</Text>
     </Box>
   );
 }
