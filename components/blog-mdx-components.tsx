@@ -4,7 +4,9 @@ import css from 'design-system/css';
 import Heading from 'design-system/heading';
 import CodeBlock from 'design-system/code-block';
 import Code from 'design-system/code';
+import Text from 'design-system/text';
 import { token } from '@atlaskit/tokens';
+import Box from 'design-system/box';
 import AvatarExample from 'components/examples/taming-the-beast-that-is-css-in-js/avatar-ssr';
 import DynamicStyles from 'components/examples/taming-the-beast-that-is-css-in-js/dynamic-styles';
 import ConstrainStyles from 'components/examples/taming-the-beast-that-is-css-in-js/constrain-styles';
@@ -28,6 +30,14 @@ const styles = css({
     borderTop: `4px solid ${token('color.border.neutral')}`,
     width: '100%',
   },
+  blockquote: {
+    ':before': {
+      content: '""',
+    },
+    ':after': {
+      content: '""',
+    },
+  },
 });
 
 const components: MDXProviderComponents = {
@@ -44,6 +54,25 @@ const components: MDXProviderComponents = {
           {children}
         </Stack>
       </div>
+    );
+  },
+  blockquote({ children, ...props }) {
+    return (
+      <Box
+        as="blockquote"
+        border="left"
+        background="neutralSubtle"
+        borderColor="brand"
+        paddingLeft="xlarge"
+        paddingY="xlarge"
+        {...props}
+        css={styles.blockquote}>
+        <i>
+          <Text color="medium" weight="bold" size="large">
+            {children}
+          </Text>
+        </i>
+      </Box>
     );
   },
   hr(props) {

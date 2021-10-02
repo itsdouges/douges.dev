@@ -65,7 +65,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
             {tags && (
               <Inline gap="small">
                 {tags.map((tag) => (
-                  <Tag color="content" key={tag}>
+                  <Tag appearance="rounded" color="content" key={tag}>
                     {tag}
                   </Tag>
                 ))}

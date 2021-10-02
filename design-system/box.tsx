@@ -372,6 +372,9 @@ const elementResetStyles = css({
   pre: {
     margin: 0,
   },
+  blockquote: {
+    margin: 0,
+  },
   a: {
     ':hover,:active': {
       color: 'initial',

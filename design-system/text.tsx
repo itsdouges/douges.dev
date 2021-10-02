@@ -15,17 +15,17 @@ const styles = css({
 });
 
 const textSizes = css({
+  large: {
+    fontSize: 22,
+  },
   regular: {
     fontSize: 18,
-    margin: 0,
   },
   small: {
     fontSize: 16,
-    margin: 0,
   },
   smaller: {
     fontSize: 14,
-    margin: 0,
   },
   smallest: {
     fontSize: 12,
