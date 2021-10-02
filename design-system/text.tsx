@@ -47,7 +47,6 @@ const colorStyles = css({
   onBoldWarning: { color: token('color.text.onBoldWarning') },
   disabled: { color: token('color.text.disabled') },
   currentColor: { color: 'currentColor' },
-  inherit: {},
 });
 
 const weightStyles = css({
@@ -57,11 +56,9 @@ const weightStyles = css({
   bolder: {
     fontWeight: 700,
   },
-  regular: {},
 });
 
 const textTransformStyles = css({
-  none: {},
   underline: {
     textDecoration: 'underline',
   },
@@ -71,7 +68,6 @@ const textTransformStyles = css({
 });
 
 const textDecorationStyles = css({
-  none: {},
   underline: {
     textDecoration: 'underline',
   },
@@ -95,18 +91,18 @@ interface TextProps {
 function Text({
   children,
   as: Markup = 'span',
-  color = 'inherit',
+  color,
   size = 'regular',
-  weight = 'regular',
-  transform = 'none',
-  decoration = 'none',
+  weight,
+  transform,
+  decoration,
   shouldTruncate,
 }: TextProps) {
-  const colorStyle = colorStyles[color];
+  const colorStyle = colorStyles[color!];
   const textSize = textSizes[size];
-  const weightStyle = weightStyles[weight];
-  const textTransformStyle = textTransformStyles[transform];
-  const textDecorationStyle = textDecorationStyles[decoration];
+  const weightStyle = weightStyles[weight!];
+  const textTransformStyle = textTransformStyles[transform!];
+  const textDecorationStyle = textDecorationStyles[decoration!];
 
   return (
     <Markup

@@ -64,11 +64,12 @@ const components: MDXProviderComponents = {
         background="neutralSubtle"
         borderColor="brand"
         paddingLeft="xlarge"
+        paddingRight="regular"
         paddingY="xlarge"
         {...props}
         css={styles.blockquote}>
         <i>
-          <Text color="medium" weight="bold" size="large">
+          <Text color="medium" weight="bolder" size="large">
             {children}
           </Text>
         </i>

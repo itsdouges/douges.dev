@@ -22,7 +22,6 @@ const styles = css({
 });
 
 const gapStyles = css({
-  none: {},
   small: {
     gap: 4,
   },
@@ -41,14 +40,14 @@ const gapStyles = css({
 });
 
 interface GridProps {
-  gap: keyof typeof gapStyles;
+  gap?: keyof typeof gapStyles;
   columns: 2 | 3;
   children: React.ReactNode;
 }
 
-function Grid({ columns, children, gap = 'none' }: GridProps) {
+function Grid({ columns, children, gap }: GridProps) {
   const columnStyles = styles[columns];
-  const gapStyle = gapStyles[gap];
+  const gapStyle = gapStyles[gap!];
 
   return <div css={[styles.grid, columnStyles, gapStyle]}>{children}</div>;
 }
