@@ -22,19 +22,38 @@ const colorBackground = {
   yellowLight: 'accentOrangeSubtle',
 } as const;
 
+const colorKeys: Array<keyof typeof colorBackground> = Object.keys(colorBackground).sort() as any;
+
+const colorToBackground = (
+  color: TagProps['color'],
+  children: TagProps['children']
+): keyof typeof colorBackground => {
+  if (color === 'content') {
+    if (typeof children !== 'string') {
+      return 'greyLight';
+    }
+
+    const index = children.length;
+    return colorKeys[index % colorKeys.length];
+  }
+
+  return color!;
+};
+
 const textAppearanceMap = {
   grey: 'onBold',
 } as any;
 
 interface TagProps {
   children: React.ReactNode;
-  color?: keyof typeof colorBackground;
+  color?: 'content' | keyof typeof colorBackground;
   appearance?: 'default' | 'rounded';
   icon?: React.ReactNode;
 }
 
 function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
-  const background = colorBackground[color];
+  const mappedColor = colorToBackground(color, children);
+  const background = colorBackground[mappedColor];
   const textColor = textAppearanceMap[color] || 'high';
 
   return (
@@ -45,14 +64,17 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
       borderRadius={appearance}>
       <Inline gap="small" blockAlign="middle">
         {icon}
-        <Text color={textColor} size="smaller">{children}</Text>
+        <Text color={textColor} size="smaller">
+          {children}
+        </Text>
       </Inline>
     </Box>
   );
 }
 
 export function TagLink({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
-  const background = colorBackground[color];
+  const mappedColor = colorToBackground(color, children);
+  const background = colorBackground[mappedColor];
   const textColor = textAppearanceMap[color] || 'high';
 
   return (
@@ -61,7 +83,6 @@ export function TagLink({ children, icon, color = 'greyLight', appearance = 'def
         <FocusRing>
           <Box
             {...press}
-            // Hack not great goes against BOX
             as="a"
             href="#"
             background={background}
