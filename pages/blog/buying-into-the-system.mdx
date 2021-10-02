@@ -1,11 +1,12 @@
 export const meta = {
-  title: 'Trying defining and buying into systems',
+  title: 'Defining and buying into systems',
   blurb: 'What if we could make UI simple?',
   publishDate: '2021-10-07',
+  tags: ['design systems', 'reactjs', 'css'],
 };
 
 Believe it or not I play ice hockey for fun in Sydney,
-Australia.
+Australia [harder now because of the global pandemic though, ahem].
 The higher the competitive ladder you climb the more common it is to have your coach define and apply systems to the way the team plays.
 Whether you're attacking or defending there are systems in place ready to execute at any given moment.
 In some ways this is a pretty fitting analogy for software development,
@@ -23,7 +24,7 @@ What systems could we define to make UI development easier?
 
 # Boxes and borders
 
-Today most web developers use `box-sizing: border-box` to enable [the alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
+Today most web developers use `box-sizing: border-box` to enable the [alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
 Set an elements width to `100px` and it does exactly what you think it would.
 But even with the alternative box model things can still be harder than we'd like them to be.
 Borders for example are pretty easy to get started with,
@@ -48,7 +49,8 @@ But let's look at another example first where we need multiple borders working w
 
 More troubles.
 More potential workarounds.
-We need to think bigger past a single example and towards how it works with the entire system.
+We need to think bigger,
+past a single example and towards how it works with the entire system.
 
 What if our system had borders applied using box shadow [removing the need for workarounds]?
 
@@ -62,23 +64,23 @@ Interactive UI elements like borders are simple to get started.
 Pick a few different background colors,
 maybe even a little transform,
 and you're done.
-But what would it look like when we're at 𝓌𝑒𝒷 𝓈𝒸𝒶𝓁𝑒?
+But what would it look like when we're at _web scale_?
 Let's visualize it.
 
 ```
 // interaction state explosion
 ```
 
-I hope you agree with me that given enough use cases things are getting pretty wild,
+I hope you agree that given enough use cases things get wild,
 and we haven't even touched on UI elements that don't work with backgrounds,
-such as avatars!
+such as avatars [with images]!
 
 Given the need for varying use cases and enough scale there are a load of decisions that are vectors for mistakes,
 each one slowing us down.
 If we were to add a new use case what would the appropriate interaction states be?
 More decisions!
 
-What if our system had all interaction states applied as overlays [reducing decisions down to one]?
+What if our system had all interaction states applied as overlays [reducing decisions to one]?
 
 ```
 // example of pressable
@@ -88,21 +90,21 @@ What if our system had all interaction states applied as overlays [reducing deci
 
 The [not so] simple tooltip,
 like borders and interaction states can seem simple to get started.
-But dig in and you'll find layering and accessibility issues that you'll need to fix.
-For accessibility it generally includes needing to wire up the tooltip to the target element so the tooltip can _describe_ the target element to a screen reader.
-Let's wire it up.
+But dig in and you'll find accessibility and layering behaviours that you'll need to support.
+For accessibility it means wiring the tooltip to the target element so the tooltip can _describe_ the target element to a screen reader.
+Let's see what that looks like.
 
 ```
 // tooltip example basic to advanced
 ```
 
-Now what we've made works I'm sure you can agree.
+Now what we've made works I'm sure you agree.
 But there's something nefarious in the works that you might not realize,
-any experience needing a tooltip in our system now needs to be able to take these props,
+any component also needing a tooltip in our system now needs to be able to take these props,
 lest they suffer from an incomplete experience.
 If you haven't defined this system early enough you will find friction for every unintended use,
 or worse,
-all of your components allowing [spread props](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) enabling infinite APIs risking the [evolution of your system](/blog/taming-the-beast-that-is-css-in-js#code-evolution).
+all of your components allowing [spread props](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) enabling infinite APIs and risking the [evolution of your system](/blog/taming-the-beast-that-is-css-in-js#code-evolution).
 
 What if our system had a standardized API for all accessibility attributes [and disallowed spread props]?
 
@@ -134,27 +136,33 @@ What if our system handled layering concerns [removing the need for escape hatch
 # Margin and layouts
 
 Using margins is simple enough for a single experience,
-used in a single area of your application.
+used in a single area of your app.
 But things get nefarious when that single experience now needs to scale to fit other use cases,
-in other areas.
+in different areas of your app.
 
 ```
 // example of using margin and then trying to use use it elsewhere and getting burned
 ```
 
-Words about moving this to parents but then also using flex box directly and its dumb.
+The logical next step is to move layout concerns to parent components instead.
+These days thanks to flex box and grid it's very easy to accomplish...
+but it's also very fiddly by default.
 
 ```
 // example of defaults being dumb
 ```
 
-What if our system had sensible layout abstractions [and disallowed margins]?
+At _web scale_ we want to ensure developers are productive and have a pit of success,
+that when they use something its _obvious_ how to do it properly,
+with no foot guns.
+
+What if our system had sensible layout abstractions with baked in design decisions [and disallowed margins]?
 
 ```
 // example of a sensible abstraction
 ```
 
-# More than just systems
+# Bringing it altogether
 
 1. It's about bringing everyone on the journey
 1. Make UI simple and focus on the hard problems
