@@ -5,24 +5,22 @@ interface AudioProps {
   isMuted?: boolean;
 }
 
-let audioContext: AudioContext;
-
 function Audio({ src, isMuted }: AudioProps) {
   const ref = useRef<HTMLAudioElement>(null);
-
-  if (!audioContext) {
-    audioContext = new AudioContext();
-  }
 
   useEffect(() => {
     if (!ref.current) {
       return;
     }
 
-    ref.current.play();
-  }, []);
+    if (isMuted) {
+      ref.current.pause();
+    } else {
+      ref.current.play();
+    }
+  }, [src, isMuted]);
 
-  return <audio muted={isMuted} preload="metadata" ref={ref} src={src} />;
+  return <audio key={src} muted={isMuted} preload="metadata" ref={ref} src={src} />;
 }
 
 export default Audio;
