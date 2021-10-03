@@ -44,7 +44,7 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
   return (
     <Stack padding="medium" background="sunken" gap="regular">
       <Inline gap="small">
-        <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step === -1}>
+        <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step <= 0}>
           Previous
         </Button>
         <TimeoutButton

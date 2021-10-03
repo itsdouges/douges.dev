@@ -78,12 +78,19 @@ const widthStyles = css({
   },
 });
 
+const wrapStyles = css({
+  nowrap: {
+    flexWrap: 'nowrap',
+  },
+});
+
 interface InlineProps extends PaddingProps {
   children: React.ReactNode;
   gap?: keyof typeof gapStyles;
   inlineAlign?: keyof typeof inlineAlignStyles;
   blockAlign?: keyof typeof blockAlignStyles;
   width?: keyof typeof widthStyles;
+  wrap?: keyof typeof wrapStyles;
   background?: Background;
 }
 
@@ -93,15 +100,19 @@ function Inline({
   width = 'full',
   inlineAlign = 'start',
   blockAlign = 'top',
+  wrap,
   ...props
 }: InlineProps) {
   const gapStyle = gapStyles[gap!];
   const alignStyle = inlineAlignStyles[inlineAlign];
   const justifyStyle = blockAlignStyles[blockAlign];
   const widthStyle = widthStyles[width!];
+  const wrapStyle = wrapStyles[wrap!];
 
   return (
-    <Box {...props} css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle]}>
+    <Box
+      {...props}
+      css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle, wrapStyle]}>
       {children}
     </Box>
   );
