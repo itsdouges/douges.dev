@@ -89,7 +89,7 @@ interface InlineProps extends PaddingProps {
 function Inline({
   children,
   gap,
-  width,
+  width = 'full',
   inlineAlign = 'start',
   blockAlign = 'top',
   ...props

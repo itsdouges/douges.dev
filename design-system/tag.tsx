@@ -22,39 +22,20 @@ const colorBackground = {
   yellowLight: 'accentOrangeSubtle',
 } as const;
 
-const colorKeys: Array<keyof typeof colorBackground> = Object.keys(colorBackground).sort() as any;
-
-const colorToBackground = (
-  color: TagProps['color'],
-  children: TagProps['children']
-): keyof typeof colorBackground => {
-  if (color === 'content') {
-    if (typeof children !== 'string') {
-      return 'greyLight';
-    }
-
-    const index = children.length;
-    return colorKeys[index % colorKeys.length];
-  }
-
-  return color!;
-};
-
 const textAppearanceMap = {
   grey: 'onBold',
 } as any;
 
 interface TagProps {
   children: React.ReactNode;
-  color?: 'content' | keyof typeof colorBackground;
+  color?: keyof typeof colorBackground;
   appearance?: 'default' | 'rounded';
   icon?: React.ReactNode;
 }
 
 function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
-  const mappedColor = colorToBackground(color, children);
-  const background = colorBackground[mappedColor];
-  const textColor = textAppearanceMap[color] || 'high';
+  const background = colorBackground[color];
+  const textColor = textAppearanceMap[color] || 'medium';
 
   return (
     <Box
@@ -73,8 +54,7 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
 }
 
 export function TagLink({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
-  const mappedColor = colorToBackground(color, children);
-  const background = colorBackground[mappedColor];
+  const background = colorBackground[color];
   const textColor = textAppearanceMap[color] || 'high';
 
   return (

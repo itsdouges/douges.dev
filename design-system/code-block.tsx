@@ -3,9 +3,11 @@ import { css, SerializedStyles } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 import { refractor, RefractorElement, Text } from 'refractor/lib/core';
 import jsx from 'refractor/lang/jsx';
+import diff from 'refractor/lang/diff';
 import Box from 'design-system/box';
 
 refractor.register(jsx);
+refractor.register(diff);
 
 const codeBlockStyles = css({
   fontSize: 12,
@@ -36,6 +38,16 @@ const defaultStyles = css({
   color: token('color.text.highEmphasis'),
 });
 
+const insertedStyles = css({
+  backgroundColor: token('color.background.subtleSuccess.hover'),
+  color: token('color.text.success'),
+});
+
+const deletedStyles = css({
+  backgroundColor: token('color.background.subtleDanger.hover'),
+  color: token('color.text.danger'),
+});
+
 const elementStyles: Record<string, SerializedStyles> = {
   keyword: keywordStyles,
   function: functionStyles,
@@ -48,6 +60,8 @@ const elementStyles: Record<string, SerializedStyles> = {
   script: defaultStyles,
   operator: defaultStyles,
   parameter: defaultStyles,
+  'inserted-sign': insertedStyles,
+  'deleted-sign': deletedStyles,
 };
 
 const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode => {
@@ -79,11 +93,12 @@ const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode =>
 toJSX.displayName = 'CodeBlock';
 
 interface CodeBlockProps {
+  lang?: 'jsx' | 'diff';
   children: string;
 }
 
-function CodeBlock({ children = '' }: CodeBlockProps) {
-  const root = refractor.highlight(children, 'jsx');
+function CodeBlock({ children = '', lang = 'jsx' }: CodeBlockProps) {
+  const root = refractor.highlight(children, lang);
   return (
     <Box
       width="full"

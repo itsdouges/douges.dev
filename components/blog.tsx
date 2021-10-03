@@ -56,21 +56,20 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
 
         <header>
           <Stack gap="regular">
+            {tags && (
+              <Inline gap="small">
+                {tags.map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </Inline>
+            )}
+
             <Heading level={1}>
               <Link passHref href={link}>
                 <DSLink>{title}</DSLink>
               </Link>
             </Heading>
 
-            {tags && (
-              <Inline gap="small">
-                {tags.map((tag) => (
-                  <Tag appearance="rounded" color="content" key={tag}>
-                    {tag}
-                  </Tag>
-                ))}
-              </Inline>
-            )}
             <Text color="low" size="smaller">
               <Tooltip content={publishDate}>
                 <time dateTime={publishDate}>{friendlyDate(publishDate)}</time>

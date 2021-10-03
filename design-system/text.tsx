@@ -14,6 +14,18 @@ const styles = css({
   },
 });
 
+const alignStyles = css({
+  start: {
+    textAlign: 'start',
+  },
+  center: {
+    textAlign: 'center',
+  },
+  end: {
+    textAlign: 'end',
+  },
+});
+
 const textSizes = css({
   large: {
     fontSize: 22,
@@ -59,9 +71,6 @@ const weightStyles = css({
 });
 
 const textTransformStyles = css({
-  underline: {
-    textDecoration: 'underline',
-  },
   uppercase: {
     textTransform: 'uppercase',
   },
@@ -86,6 +95,7 @@ interface TextProps {
   transform?: keyof typeof textTransformStyles;
   decoration?: keyof typeof textDecorationStyles;
   shouldTruncate?: boolean;
+  align?: keyof typeof alignStyles;
 }
 
 function Text({
@@ -96,6 +106,7 @@ function Text({
   weight,
   transform,
   decoration,
+  align,
   shouldTruncate,
 }: TextProps) {
   const colorStyle = colorStyles[color!];
@@ -103,10 +114,12 @@ function Text({
   const weightStyle = weightStyles[weight!];
   const textTransformStyle = textTransformStyles[transform!];
   const textDecorationStyle = textDecorationStyles[decoration!];
+  const alignStyle = alignStyles[align!];
 
   return (
     <Markup
       css={[
+        alignStyle,
         styles.textAbovePressable,
         textSize,
         shouldTruncate && styles.truncate,
