@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
+import Box, { Background, PaddingProps } from 'design-system/box';
 
 const styles = css({
   stack: {
@@ -58,19 +59,24 @@ type Gap = keyof typeof gapStyles;
 type InlineAlign = keyof typeof inlineAlignStyles;
 type Width = keyof typeof widthStyles;
 
-interface StackProps {
+interface StackProps extends PaddingProps {
   children: React.ReactNode;
   gap?: Gap;
   inlineAlign?: InlineAlign;
   width?: Width;
+  background?: Background;
 }
 
-function Stack({ children, gap, inlineAlign = 'start', width }: StackProps) {
+function Stack({ children, gap, inlineAlign = 'start', width, ...props }: StackProps) {
   const gapStyle = gapStyles[gap!];
   const inlineStyle = inlineAlignStyles[inlineAlign];
   const widthStyle = widthStyles[width!];
 
-  return <div css={[styles.stack, gapStyle, inlineStyle, widthStyle]}>{children}</div>;
+  return (
+    <Box {...props} css={[styles.stack, gapStyle, inlineStyle, widthStyle]}>
+      {children}
+    </Box>
+  );
 }
 
 export default Stack;

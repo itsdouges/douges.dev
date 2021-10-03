@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { token } from '@atlaskit/tokens';
 import css from 'design-system/css';
+import Box, { Background } from 'design-system/box';
 
 const styles = css({
   truncate: {
@@ -96,11 +97,12 @@ interface TextProps {
   decoration?: keyof typeof textDecorationStyles;
   shouldTruncate?: boolean;
   align?: keyof typeof alignStyles;
+  background?: Background;
 }
 
 function Text({
   children,
-  as: Markup = 'span',
+  as: element = 'span',
   color,
   size = 'regular',
   weight,
@@ -108,6 +110,7 @@ function Text({
   decoration,
   align,
   shouldTruncate,
+  background,
 }: TextProps) {
   const colorStyle = colorStyles[color!];
   const textSize = textSizes[size];
@@ -117,7 +120,9 @@ function Text({
   const alignStyle = alignStyles[align!];
 
   return (
-    <Markup
+    <Box
+      as={element}
+      background={background}
       css={[
         alignStyle,
         styles.textAbovePressable,
@@ -129,7 +134,7 @@ function Text({
         textDecorationStyle,
       ]}>
       {children}
-    </Markup>
+    </Box>
   );
 }
 

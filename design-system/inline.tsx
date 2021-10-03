@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import Box, { PaddingProps } from 'design-system/box';
+import Box, { PaddingProps, Background } from 'design-system/box';
 
 const styles = css({
   inline: {
@@ -84,6 +84,7 @@ interface InlineProps extends PaddingProps {
   inlineAlign?: keyof typeof inlineAlignStyles;
   blockAlign?: keyof typeof blockAlignStyles;
   width?: keyof typeof widthStyles;
+  background?: Background;
 }
 
 function Inline({

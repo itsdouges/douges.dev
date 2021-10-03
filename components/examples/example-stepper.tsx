@@ -77,7 +77,7 @@ export function Step({ children, code, description }: StepProps) {
         </Box>
       </Inline>
       <Inline inlineAlign="center">
-        <Text align="center" size="small" weight="bolder">
+        <Text background="neutralBold" align="center" size="small" weight="bolder">
           {description}
         </Text>
       </Inline>
