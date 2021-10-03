@@ -5,6 +5,7 @@ import CodeBlock from 'design-system/code-block';
 import Inline from 'design-system/inline';
 import Box from 'design-system/box';
 import Button from 'design-system/button';
+import TimeoutButton from 'design-system/timeout-button';
 import Stack from 'design-system/stack';
 import dedent from 'dedent';
 import Text from 'design-system/text';
@@ -46,12 +47,12 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
         <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step === -1}>
           Previous
         </Button>
-        <Button
+        <TimeoutButton
           appearance={isSplash ? 'primary' : undefined}
           onClick={() => setStep((prev) => prev + 1)}
           isDisabled={step === steps - 1}>
           {isSplash ? 'Start' : 'Next'}
-        </Button>
+        </TimeoutButton>
 
         {isSplash || (
           <Inline gap="regular" width="full" inlineAlign="end">
