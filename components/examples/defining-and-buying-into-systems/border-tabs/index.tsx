@@ -24,7 +24,7 @@ const styles = css({
     transformOrigin: 'left 20%',
   },
   focused: {
-    transform: 'scale(2)',
+    transform: 'scale(1.5)',
     transformOrigin: 'left 20%',
   },
   line: {
@@ -50,24 +50,34 @@ function BorderMenu() {
 
         }
       `}>
-        <Box css={styles.noBorder}>
-          <Inline gap="large">
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                Favourites
+        <Box css={styles.unfocused}>
+          <Box css={styles.noBorder}>
+            <Inline gap="large">
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  Favourites
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  Latest
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  All items
+                </Text>
+              </Box>
+            </Inline>
+          </Box>
+
+          <Box>
+            <Box background="neutralSubtle" padding="xlarge">
+              <Text color="low" weight="bolder">
+                Content
               </Text>
             </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                Latest
-              </Text>
-            </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                All items
-              </Text>
-            </Box>
-          </Inline>
+          </Box>
         </Box>
       </Step>
       <Step
@@ -81,24 +91,34 @@ function BorderMenu() {
 
         }
       `}>
-        <Box css={styles.border}>
-          <Inline gap="large">
-            <Box css={styles.noBorderSelected} paddingY="regular">
-              <Text weight="bold" color="medium">
-                Favourites
+        <Box css={styles.unfocused}>
+          <Box css={styles.border}>
+            <Inline gap="large">
+              <Box css={styles.noBorderSelected} paddingY="regular">
+                <Text weight="bold" color="medium">
+                  Favourites
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  Latest
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  All items
+                </Text>
+              </Box>
+            </Inline>
+          </Box>
+
+          <Box paddingTop="medium">
+            <Box background="neutralSubtle" padding="xlarge">
+              <Text color="low" weight="bolder">
+                Content
               </Text>
             </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                Latest
-              </Text>
-            </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                All items
-              </Text>
-            </Box>
-          </Inline>
+          </Box>
         </Box>
       </Step>
       <Step
@@ -112,24 +132,34 @@ function BorderMenu() {
         +  borderBottom: 4px solid blue;
         }
       `}>
-        <Box css={[styles.border, styles.unfocused]}>
-          <Inline gap="large">
-            <Box css={styles.borderSelected} paddingY="regular">
-              <Text weight="bold" color="selected">
-                Favourites
+        <Box css={styles.unfocused}>
+          <Box css={styles.border}>
+            <Inline gap="large">
+              <Box css={styles.borderSelected} paddingY="regular">
+                <Text weight="bold" color="selected">
+                  Favourites
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  Latest
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  All items
+                </Text>
+              </Box>
+            </Inline>
+          </Box>
+
+          <Box paddingTop="medium">
+            <Box background="neutralSubtle" padding="xlarge">
+              <Text color="low" weight="bolder">
+                Content
               </Text>
             </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                Latest
-              </Text>
-            </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                All items
-              </Text>
-            </Box>
-          </Inline>
+          </Box>
         </Box>
       </Step>
       <Step
@@ -143,24 +173,34 @@ function BorderMenu() {
         +  borderBottom: 4px solid blue;
         }
       `}>
-        <Box css={[styles.border, styles.focused]}>
-          <Inline gap="large">
-            <Box css={styles.borderSelected} paddingY="regular">
-              <Text weight="bold" color="selected">
-                Favourites
+        <Box css={styles.focused}>
+          <Box css={styles.border}>
+            <Inline gap="large">
+              <Box css={styles.borderSelected} paddingY="regular">
+                <Text weight="bold" color="selected">
+                  Favourites
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  Latest
+                </Text>
+              </Box>
+              <Box paddingY="regular">
+                <Text weight="bold" color="medium">
+                  All items
+                </Text>
+              </Box>
+            </Inline>
+          </Box>
+
+          <Box paddingTop="medium">
+            <Box background="neutralSubtle" padding="xlarge">
+              <Text color="low" weight="bolder">
+                Content
               </Text>
             </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                Latest
-              </Text>
-            </Box>
-            <Box paddingY="regular">
-              <Text weight="bold" color="medium">
-                All items
-              </Text>
-            </Box>
-          </Inline>
+          </Box>
         </Box>
       </Step>
     </ExampleStepper>
