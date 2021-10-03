@@ -4,10 +4,12 @@ import { token } from '@atlaskit/tokens';
 import { refractor, RefractorElement, Text } from 'refractor/lib/core';
 import jsx from 'refractor/lang/jsx';
 import diff from 'refractor/lang/diff';
+import csss from 'refractor/lang/css';
 import Box from 'design-system/box';
 
 refractor.register(jsx);
 refractor.register(diff);
+refractor.register(csss);
 
 const codeBlockStyles = css({
   fontSize: 12,
@@ -50,7 +52,9 @@ const deletedStyles = css({
 
 const elementStyles: Record<string, SerializedStyles> = {
   keyword: keywordStyles,
+  selector: functionStyles,
   function: functionStyles,
+  property: attrNameStyles,
   string: stringNumberStyles,
   number: stringNumberStyles,
   'attr-name': attrNameStyles,
@@ -93,12 +97,18 @@ const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode =>
 toJSX.displayName = 'CodeBlock';
 
 interface CodeBlockProps {
-  lang?: 'jsx' | 'diff';
+  lang?: 'jsx' | 'diff' | 'auto' | 'css';
   children: string;
 }
 
+type Lang = 'jsx' | 'diff' | 'css' | undefined;
+
 function CodeBlock({ children = '', lang = 'jsx' }: CodeBlockProps) {
-  const root = refractor.highlight(children, lang);
+  const actualLang: Lang =
+    lang === 'auto' ? (children.match(/^(jsx|diff|css)/)?.[0] as Lang) || 'jsx' : lang;
+  const codeNoLang = lang === 'auto' ? children.replace(/^(jsx|diff|css)\n/, '') : children;
+  const root = refractor.highlight(codeNoLang, actualLang);
+
   return (
     <Box
       width="full"

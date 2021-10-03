@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import { useState, useContext, createContext, useRef, useEffect } from 'react';
+import { useState, useContext, createContext } from 'react';
 import CodeBlock from 'design-system/code-block';
 import Inline from 'design-system/inline';
 import Box from 'design-system/box';
@@ -12,9 +12,9 @@ import Audio from 'components/audio';
 
 const styles = css({
   transition: {
-    transition: 'all 1s',
+    transition: 'all 0.8s cubic-bezier(0.8, 0, 0, 0.8)',
     '*': {
-      transition: 'all 1s',
+      transition: 'all 0.8s cubic-bezier(0.8, 0, 0, 0.8)',
     },
   },
   noOverflow: {
@@ -28,7 +28,7 @@ const styles = css({
   },
 });
 
-const Context = createContext<{ isSplash?: boolean; isMuted?: boolean; isListened?: boolean }>({});
+const Context = createContext<{ isSplash?: boolean; isMuted?: boolean }>({});
 
 interface ExampleStepperProps {
   children: React.ReactNode[];
@@ -36,19 +36,13 @@ interface ExampleStepperProps {
 
 export default function ExampleStepper({ children }: ExampleStepperProps) {
   const [step, setStep] = useState(-1);
-  const [isMuted, setIsMuted] = useState(false);
-  const [, forceUpdate] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const steps = children.length;
   const isSplash = step === -1;
-  const listened = useRef<Record<number, boolean>>({});
-
-  useEffect(() => {
-    listened.current[step] = true;
-  }, [step]);
 
   return (
     <Stack padding="medium" background="sunken" gap="regular">
-      <Inline gap="regular">
+      <Inline gap="small">
         <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step === -1}>
           Previous
         </Button>
@@ -58,15 +52,10 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
 
         <Inline gap="regular" width="full" inlineAlign="end">
           <Button
-            isDisabled={isSplash || !listened.current[step]}
-            onClick={() => {
-              listened.current[step] = false;
-              forceUpdate((prev) => !prev);
-            }}>
-            Replay
-          </Button>
-          <Button isSelected={isMuted} onClick={() => setIsMuted((prev) => !prev)}>
-            {isMuted ? 'Muted' : 'Mute'}
+            appearance="primary"
+            isSelected={!isMuted}
+            onClick={() => setIsMuted((prev) => !prev)}>
+            {isMuted ? 'Listen' : 'Listening…'}
           </Button>
         </Inline>
       </Inline>
@@ -75,7 +64,6 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
         value={{
           isSplash: isSplash,
           isMuted: isMuted || isSplash,
-          isListened: listened.current[step],
         }}>
         {isSplash ? children[0] : children.find((_, index) => index === step)}
       </Context.Provider>
@@ -91,19 +79,14 @@ interface StepProps {
   isAudioMuted?: boolean;
 }
 
-type Lang = 'jsx' | 'diff' | undefined;
-
 export function Step({ children, code, description, audioSrc }: StepProps) {
-  const lang: Lang = code.match(/^(jsx|diff)/)?.[0] as Lang;
-  const codeNoLang = lang ? code.replace(/^(jsx|diff)/, '') : code;
-  const ctx = useContext(Context);
-  const canListenAudio = audioSrc && !ctx.isListened;
+  const { isMuted, isSplash } = useContext(Context);
 
   return (
     <>
-      {canListenAudio && <Audio src={audioSrc} isMuted={ctx.isMuted} />}
+      {audioSrc && <Audio src={audioSrc} isMuted={isMuted} />}
       <Inline gap="regular" blockAlign="stretch">
-        <CodeBlock lang={lang}>{dedent`${codeNoLang}`}</CodeBlock>
+        <CodeBlock lang="auto">{dedent`${code}`}</CodeBlock>
         <Box
           padding="xlarge"
           css={[styles.transition, styles.noOverflow, styles.noSelect]}
@@ -112,10 +95,12 @@ export function Step({ children, code, description, audioSrc }: StepProps) {
           {children}
         </Box>
       </Inline>
-      {!ctx.isSplash && (
-        <Inline inlineAlign="center">
-          <Text background="neutralBold" align="center" size="small" weight="bolder">
-            {description}
+      {!isSplash && (
+        <Inline gap="small" blockAlign="middle" inlineAlign="center">
+          <Text align="center">
+            <Text background="neutralBold" size="small" weight="bold">
+              {description}
+            </Text>
           </Text>
         </Inline>
       )}

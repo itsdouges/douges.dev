@@ -60,11 +60,13 @@ function BorderMenu() {
       <Step
         audioSrc={one}
         description="First, let's add some padding to these menu items"
-        code={`
+        code={`css
         .menu-item {
+
         }
 
         .menu-item-selected {
+
         }
       `}>
         <MenuGroup>
@@ -82,6 +84,7 @@ function BorderMenu() {
         }
 
         .menu-item-selected {
+
         }
       `}>
         <MenuGroup>
@@ -179,7 +182,7 @@ function BorderMenu() {
       </Step>
       <Step
         description="Perfection"
-        code={`diff
+        code={`css
         .menu-item {
           padding: 8px 16px;
         }
