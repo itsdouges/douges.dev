@@ -46,18 +46,23 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
         <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step === -1}>
           Previous
         </Button>
-        <Button onClick={() => setStep((prev) => prev + 1)} isDisabled={step === steps - 1}>
-          {step === -1 ? 'Start' : 'Next'}
+        <Button
+          appearance={isSplash ? 'primary' : undefined}
+          onClick={() => setStep((prev) => prev + 1)}
+          isDisabled={step === steps - 1}>
+          {isSplash ? 'Start' : 'Next'}
         </Button>
 
-        <Inline gap="regular" width="full" inlineAlign="end">
-          <Button
-            appearance="primary"
-            isSelected={!isMuted}
-            onClick={() => setIsMuted((prev) => !prev)}>
-            {isMuted ? 'Listen' : 'Listening…'}
-          </Button>
-        </Inline>
+        {isSplash || (
+          <Inline gap="regular" width="full" inlineAlign="end">
+            <Button
+              appearance="primary"
+              isSelected={!isMuted}
+              onClick={() => setIsMuted((prev) => !prev)}>
+              {isMuted ? 'Listen' : 'Listening…'}
+            </Button>
+          </Inline>
+        )}
       </Inline>
 
       <Context.Provider

@@ -70,9 +70,9 @@ function BorderMenu() {
         }
       `}>
         <MenuGroup>
-          <Box>Item one</Box>
-          <Box css={styles.noBorder}>Item two</Box>
-          <Box>Item three</Box>
+          <Box>Profile</Box>
+          <Box css={styles.noBorder}>Settings</Box>
+          <Box>Help</Box>
         </MenuGroup>
       </Step>
       <Step
@@ -89,13 +89,13 @@ function BorderMenu() {
       `}>
         <MenuGroup>
           <Box paddingY="regular" paddingX="large">
-            Item one
+            Profile
           </Box>
           <Box css={styles.noBorder} paddingY="regular" paddingX="large">
-            Item two
+            Settings
           </Box>
           <Box paddingY="regular" paddingX="large">
-            Item three
+            Help
           </Box>
         </MenuGroup>
       </Step>
@@ -113,13 +113,13 @@ function BorderMenu() {
       `}>
         <MenuGroup>
           <Box paddingY="regular" paddingX="large">
-            Item one
+            Profile
           </Box>
           <Box css={styles.borderLeft} background="selected" paddingY="regular" paddingX="large">
-            Item two
+            Settings
           </Box>
           <Box paddingY="regular" paddingX="large">
-            Item three
+            Help
           </Box>
         </MenuGroup>
       </Step>
@@ -139,13 +139,13 @@ function BorderMenu() {
           <div css={styles.line} />
 
           <Box paddingY="regular" paddingX="large">
-            Item one
+            Profile
           </Box>
           <Box css={styles.borderLeft} background="selected" paddingY="regular" paddingX="large">
-            Item two
+            Settings
           </Box>
           <Box paddingY="regular" paddingX="large">
-            Item three
+            Help
           </Box>
         </MenuGroup>
       </Step>
@@ -166,22 +166,22 @@ function BorderMenu() {
           <div css={styles.line} />
 
           <Box paddingY="regular" paddingX="large">
-            Item one
+            Profile
           </Box>
           <Box
             css={[styles.borderLeft, styles.offsetBorder]}
             background="selected"
             paddingY="regular"
             paddingX="large">
-            Item two
+            Settings
           </Box>
           <Box paddingY="regular" paddingX="large">
-            Item three
+            Help
           </Box>
         </MenuGroup>
       </Step>
       <Step
-        description="Perfection"
+        description="Perfection?"
         code={`css
         .menu-item {
           padding: 8px 16px;
@@ -194,17 +194,17 @@ function BorderMenu() {
       `}>
         <MenuGroup>
           <Box paddingY="regular" paddingX="large">
-            Item one
+            Profile
           </Box>
           <Box
             css={[styles.borderLeft, styles.offsetBorder]}
             background="selected"
             paddingY="regular"
             paddingX="large">
-            Item two
+            Settings
           </Box>
           <Box paddingY="regular" paddingX="large">
-            Item three
+            Help
           </Box>
         </MenuGroup>
       </Step>
