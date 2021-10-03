@@ -9,4 +9,25 @@ module.exports = withMDX({
   images: {
     domains: ['i.pravatar.cc'],
   },
+
+  webpack(config, options) {
+    const { isServer } = options;
+    config.module.rules.push({
+      test: /\.(ogg|mp3|wav|m4a|mpe?g)$/i,
+      exclude: config.exclude,
+      use: [
+        {
+          loader: require.resolve('file-loader'),
+          options: {
+            publicPath: '/_next/static/audio/',
+            outputPath: `${isServer ? '../' : ''}static/audio/`,
+            name: '[name]-[hash].[ext]',
+            esModule: !!config.esModule,
+          },
+        },
+      ],
+    });
+
+    return config;
+  },
 });

@@ -8,7 +8,8 @@ import Button from 'design-system/button';
 import Stack from 'design-system/stack';
 import dedent from 'dedent';
 import Text from 'design-system/text';
-import Container from './container';
+import Container from 'components/examples/container';
+import Audio from 'components/audio';
 
 const styles = css({
   transition: {
@@ -28,6 +29,7 @@ interface ExampleStepperProps {
 
 export default function ExampleStepper({ children }: ExampleStepperProps) {
   const [step, setStep] = useState(-1);
+  const [isMuted, setIsMuted] = useState(false);
   const steps = children.length;
 
   return (
@@ -42,13 +44,17 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
           </Button>
 
           <Inline gap="regular" width="full" inlineAlign="end">
-            <Button>Mute</Button>
+            <Button isSelected={isMuted} onClick={() => setIsMuted((prev) => !prev)}>
+              Mute
+            </Button>
           </Inline>
         </Inline>
 
         {step === -1
-          ? cloneElement(children[0] as JSX.Element, { description: null, audio: null })
-          : children.find((_, index) => index === step)}
+          ? cloneElement(children[0] as JSX.Element, { description: null, audioSrc: null })
+          : cloneElement(children.find((_, index) => index === step) as JSX.Element, {
+              isAudioMuted: isMuted,
+            })}
       </Stack>
     </Container>
   );
@@ -58,16 +64,19 @@ interface StepProps {
   code: string;
   children: React.ReactNode;
   description?: string;
+  audioSrc?: string;
+  isAudioMuted?: boolean;
 }
 
 type Lang = 'jsx' | 'diff' | undefined;
 
-export function Step({ children, code, description }: StepProps) {
+export function Step({ children, code, description, audioSrc, isAudioMuted }: StepProps) {
   const lang: Lang = code.match(/^(jsx|diff)/)?.[0] as Lang;
   const codeNoLang = lang ? code.replace(/^(jsx|diff)/, '') : code;
 
   return (
     <>
+      {audioSrc && <Audio src={audioSrc} isMuted={isAudioMuted} />}
       <Inline gap="regular" blockAlign="stretch">
         <CodeBlock lang={lang}>{dedent`${codeNoLang}`}</CodeBlock>
         <Box

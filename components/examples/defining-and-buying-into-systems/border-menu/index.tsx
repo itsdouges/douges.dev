@@ -53,6 +53,7 @@ function BorderMenu() {
   return (
     <ExampleStepper>
       <Step
+        audioSrc={audioOne}
         description="First, let's add some padding to these menu items."
         code={`
         .menu-item {
