@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import { useState } from 'react';
+import { useState, cloneElement } from 'react';
 import CodeBlock from 'design-system/code-block';
 import Inline from 'design-system/inline';
 import Box from 'design-system/box';
@@ -27,14 +27,14 @@ interface ExampleStepperProps {
 }
 
 export default function ExampleStepper({ children }: ExampleStepperProps) {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(-1);
   const steps = children.length;
 
   return (
     <Container>
       <Stack gap="regular">
         <Inline gap="regular">
-          <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step === 0}>
+          <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step === -1}>
             Back
           </Button>
           <Button onClick={() => setStep((prev) => prev + 1)} isDisabled={step === steps - 1}>
@@ -46,7 +46,9 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
           </Inline>
         </Inline>
 
-        {children.find((_, index) => index === step)}
+        {step === -1
+          ? cloneElement(children[0] as JSX.Element, { description: null, audio: null })
+          : children.find((_, index) => index === step)}
       </Stack>
     </Container>
   );

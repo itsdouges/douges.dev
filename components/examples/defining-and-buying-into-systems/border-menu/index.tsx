@@ -53,20 +53,6 @@ function BorderMenu() {
   return (
     <ExampleStepper>
       <Step
-        code={`
-        .menu-item {
-        }
-
-        .menu-item-selected {
-        }
-      `}>
-        <MenuGroup>
-          <Box>Item one</Box>
-          <Box css={styles.noBorder}>Item two</Box>
-          <Box>Item three</Box>
-        </MenuGroup>
-      </Step>
-      <Step
         description="First, let's add some padding to these menu items."
         code={`
         .menu-item {
