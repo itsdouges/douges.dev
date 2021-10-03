@@ -39,6 +39,7 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
   const [step, setStep] = useState(-1);
   const [isMuted, setIsMuted] = useState(true);
   const steps = children.length;
+  const isComplete = step === steps - 1;
   const isSplash = step === -1;
 
   return (
@@ -51,7 +52,7 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
           appearance={isSplash ? 'primary' : undefined}
           onClick={() => setStep((prev) => prev + 1)}
           isDisabled={step === steps - 1}>
-          {isSplash ? 'Start' : 'Next'}
+          {isSplash ? 'Start' : isComplete ? 'Complete' : 'Next'}
         </TimeoutButton>
 
         {isSplash || (
