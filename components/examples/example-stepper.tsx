@@ -121,7 +121,7 @@ export function Step({ children, code, description, audioSrc }: StepProps) {
       {!isSplash && (
         <Inline gap="small" blockAlign="middle" inlineAlign="center">
           <Text align="center">
-            <Text background="neutralBold" size="small" weight="bold">
+            <Text background="neutralBold" size="regular" weight="bold">
               {description}
             </Text>
           </Text>

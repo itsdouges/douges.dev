@@ -15,6 +15,7 @@ import Button from 'design-system/button';
 import Tooltip from 'design-system/tooltip';
 import Inline from 'design-system/inline';
 import Tag from 'design-system/tag';
+import Separator from 'design-system/separator';
 
 const styles = css({
   heroImage: {
@@ -91,6 +92,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
               )}" https://douges.dev${link}`}>
               Tweet
             </LinkButton>,
+            <Separator key="separator" />,
             <Button key="comment" appearance="subtle">
               Comment
             </Button>,

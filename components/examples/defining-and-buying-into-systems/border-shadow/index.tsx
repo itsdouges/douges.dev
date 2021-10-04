@@ -12,7 +12,7 @@ const styles = css({
     transformOrigin: 'left 20%',
   },
   focused: {
-    transform: 'scale(2.5)',
+    transform: 'scale(1.9)',
     transformOrigin: 'left 20%',
   },
   hline: {
@@ -228,27 +228,6 @@ function BorderShadow() {
         }
       `}>
         <Tabs isFocused isItemSelected isTabSelected hasBottomBorder hasMenuItemPadding />
-      </Step>
-      <Step
-        description="You beaut!"
-        code={`css
-        .menu-item {
-          padding: 8px 16px;
-        }
-
-        .tab-group {
-          boxShadow: inset 0 -2px 0 0 gray;
-        }
-
-        .menu-item-selected {
-          boxShadow: inset 2px 0 0 0 blue;
-        }
-
-        .tab-selected {
-          boxShadow: inset 0 -2px 0 0 blue;
-        }
-      `}>
-        <Tabs isItemSelected isTabSelected hasBottomBorder hasMenuItemPadding />
       </Step>
     </ExampleStepper>
   );
