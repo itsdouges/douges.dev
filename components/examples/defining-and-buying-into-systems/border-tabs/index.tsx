@@ -6,7 +6,7 @@ import { token } from '@atlaskit/tokens';
 import Inline from 'design-system/inline';
 import Text from 'design-system/text';
 
-const borderSize = '3px';
+const borderSize = '2px';
 
 const styles = css({
   noBorder: {
@@ -26,11 +26,18 @@ const styles = css({
     transformOrigin: 'left top',
   },
   focused: {
-    transform: 'scale(2)',
+    transform: 'scale(2.5)',
     transformOrigin: 'left top',
   },
   borderSelectedWorkaround: {
     marginBottom: `-${borderSize}`,
+  },
+  line: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 32,
+    borderBottom: `1px dashed ${token('color.iconBorder.danger')}`,
   },
 });
 
@@ -44,6 +51,8 @@ interface TabsProps {
 function Tabs({ isFocused, isSelected, hasBottomBorder, hasSelectedWorkaround }: TabsProps) {
   return (
     <Box css={isFocused ? styles.focused : styles.unfocused}>
+      {isFocused && <div css={styles.line} />}
+
       <Box css={hasBottomBorder ? styles.border : styles.noBorder}>
         <Inline gap="large">
           <Box
@@ -52,18 +61,18 @@ function Tabs({ isFocused, isSelected, hasBottomBorder, hasSelectedWorkaround }:
                 ? [styles.borderSelected, hasSelectedWorkaround && styles.borderSelectedWorkaround]
                 : styles.noBorderSelected
             }
-            paddingY="regular">
-            <Text weight="bold" color={isSelected ? 'selected' : 'medium'}>
+            paddingBottom="regular">
+            <Text weight="bold" size="smaller" color={isSelected ? 'selected' : 'medium'}>
               Favourites
             </Text>
           </Box>
-          <Box paddingY="regular">
-            <Text weight="bold" color="medium">
+          <Box paddingBottom="regular">
+            <Text weight="bold" size="smaller" color="medium">
               Latest
             </Text>
           </Box>
-          <Box paddingY="regular">
-            <Text weight="bold" color="medium">
+          <Box paddingBottom="regular">
+            <Text weight="bold" size="smaller" color="medium">
               All items
             </Text>
           </Box>
@@ -85,7 +94,7 @@ function BorderMenu() {
   return (
     <ExampleStepper>
       <Step
-        description="Let's add a bottom border for the tabs"
+        description="We start with some basic tabs"
         code={`css
         .tab-group {
 
@@ -98,7 +107,7 @@ function BorderMenu() {
         <Tabs />
       </Step>
       <Step
-        description="Nice! Now let's mark a tab as selected"
+        description="Let's add a bottom border for the tabs"
         code={`diff
         .tab-group {
         +  borderBottom: ${borderSize} solid gray;
@@ -111,7 +120,7 @@ function BorderMenu() {
         <Tabs hasBottomBorder />
       </Step>
       <Step
-        description="That's looking pretty selected"
+        description="Nice! Now let's mark the first tab as selected"
         code={`diff
         .tab-group {
           borderBottom: ${borderSize} solid gray;
@@ -151,7 +160,7 @@ function BorderMenu() {
         <Tabs hasBottomBorder isSelected isFocused hasSelectedWorkaround />
       </Step>
       <Step
-        description="Perfection?"
+        description="That works!"
         code={`css
         .tab-group {
           borderBottom: ${borderSize} solid gray;

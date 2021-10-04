@@ -1,5 +1,6 @@
 import BorderMenu from 'components/examples/defining-and-buying-into-systems/border-menu';
 import BorderTabs from 'components/examples/defining-and-buying-into-systems/border-tabs';
+import BorderShadow from 'components/examples/defining-and-buying-into-systems/border-shadow';
 
 export const meta = {
   title: 'Defining and buying into systems',
@@ -54,9 +55,12 @@ past a single example and towards how it works with the entire system.
 
 What if our system had borders applied using box shadow [removing the need for workarounds]?
 
-```
-// side by side example of tabs and menu with box shadow
-```
+<BorderShadow />
+
+Is this perfect?
+Definitely not.
+It's a tradeoff,
+optimizing for cohesion over perfection enabling faster development without needing to think about multiple moving parts.
 
 # Interactions and backgrounds
 

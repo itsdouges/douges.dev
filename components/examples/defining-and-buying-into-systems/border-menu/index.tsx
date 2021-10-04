@@ -3,11 +3,6 @@ import css from 'design-system/css';
 import Box from 'design-system/box';
 import ExampleStepper, { Step } from 'components/examples/example-stepper';
 import { token } from '@atlaskit/tokens';
-import one from './1.m4a';
-import two from './2.m4a';
-import three from './3.m4a';
-import four from './4.m4a';
-import five from './5.m4a';
 
 const styles = css({
   noBorder: {
@@ -58,8 +53,7 @@ function BorderMenu() {
   return (
     <ExampleStepper>
       <Step
-        audioSrc={one}
-        description="First, let's add some padding to these menu items"
+        description="We start with some menu items with no padding"
         code={`css
         .menu-item {
 
@@ -76,8 +70,7 @@ function BorderMenu() {
         </MenuGroup>
       </Step>
       <Step
-        audioSrc={two}
-        description="Nice! Now let's make one appear selected with a left border"
+        description="First, let's add some padding to these menu items"
         code={`diff
         .menu-item {
         +  padding: 8px 16px;
@@ -100,8 +93,7 @@ function BorderMenu() {
         </MenuGroup>
       </Step>
       <Step
-        audioSrc={three}
-        description="Using the left border property gets the job done easy enough"
+        description="Now let's make one appear selected with a left border"
         code={`diff
         .menu-item {
           padding: 8px 16px;
@@ -124,8 +116,7 @@ function BorderMenu() {
         </MenuGroup>
       </Step>
       <Step
-        audioSrc={four}
-        description="Ah... But now the items aren't aligned..."
+        description="Ah... but now the items aren't aligned"
         code={`diff
         .menu-item {
           padding: 8px 16px;
@@ -150,8 +141,7 @@ function BorderMenu() {
         </MenuGroup>
       </Step>
       <Step
-        audioSrc={five}
-        description="Well... let's work around it by changing the left padding... I guess?"
+        description="Let's work around it by tweaking the left padding when selected"
         code={`diff
         .menu-item {
           padding: 8px 16px;
@@ -181,7 +171,7 @@ function BorderMenu() {
         </MenuGroup>
       </Step>
       <Step
-        description="Perfection?"
+        description="That works!"
         code={`css
         .menu-item {
           padding: 8px 16px;

@@ -19,6 +19,7 @@ const styles = css({
     },
   },
   noOverflow: {
+    position: 'relative',
     overflow: 'hidden',
   },
   noSelect: {
@@ -48,23 +49,28 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
         <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step <= 0}>
           Previous
         </Button>
-        <TimeoutButton
-          appearance={isSplash ? 'primary' : undefined}
-          onClick={() => setStep((prev) => prev + 1)}
-          isDisabled={step === steps - 1}>
-          {isSplash ? 'Start' : isComplete ? 'Complete' : 'Next'}
-        </TimeoutButton>
-
-        {isSplash || (
-          <Inline gap="regular" width="full" inlineAlign="end">
-            <Button
-              appearance="primary"
-              isSelected={!isMuted}
-              onClick={() => setIsMuted((prev) => !prev)}>
-              {isMuted ? 'Listen' : 'Listening…'}
-            </Button>
-          </Inline>
+        {isSplash && (
+          <Button appearance="primary" onClick={() => setStep((prev) => prev + 1)}>
+            Start
+          </Button>
         )}
+        {!isSplash && (
+          <TimeoutButton
+            onClick={() => setStep((prev) => prev + 1)}
+            isDisabled={step === steps - 1}>
+            {isComplete ? 'Complete' : 'Next'}
+          </TimeoutButton>
+        )}
+
+        <Inline gap="regular" width="full" inlineAlign="end">
+          <Button
+            isDisabled={isSplash}
+            appearance="primary"
+            isSelected={!isMuted}
+            onClick={() => setIsMuted((prev) => !prev)}>
+            {isMuted ? 'Listen' : 'Listening…'}
+          </Button>
+        </Inline>
       </Inline>
 
       <Context.Provider
