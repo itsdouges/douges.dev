@@ -79,6 +79,9 @@ const widthStyles = css({
 });
 
 const wrapStyles = css({
+  wrap: {
+    flexWrap: 'wrap',
+  },
   nowrap: {
     flexWrap: 'nowrap',
   },

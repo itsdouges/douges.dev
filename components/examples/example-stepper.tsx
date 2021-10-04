@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import { useState, useContext, createContext } from 'react';
+import { useState, useContext, useRef, createContext, useEffect } from 'react';
 import CodeBlock from 'design-system/code-block';
 import Inline from 'design-system/inline';
 import Box from 'design-system/box';
@@ -94,12 +94,22 @@ interface StepProps {
 
 export function Step({ children, code, description, audioSrc }: StepProps) {
   const { isMuted, isSplash } = useContext(Context);
+  const codeRef = useRef<HTMLPreElement>(null);
+
+  useEffect(() => {
+    if (codeRef.current) {
+      codeRef.current.scroll({
+        top: 99999,
+        behavior: 'smooth',
+      });
+    }
+  }, [code]);
 
   return (
     <>
       {audioSrc && <Audio src={audioSrc} isMuted={isMuted} />}
       <Inline gap="regular" blockAlign="stretch">
-        <CodeBlock lang="auto">{dedent`${code}`}</CodeBlock>
+        <CodeBlock ref={codeRef} lang="auto">{dedent`${code}`}</CodeBlock>
         <Box
           padding="xlarge"
           css={[styles.transition, styles.noOverflow, styles.noSelect]}

@@ -6,6 +6,8 @@ import jsx from 'refractor/lang/jsx';
 import diff from 'refractor/lang/diff';
 import csss from 'refractor/lang/css';
 import Box from 'design-system/box';
+import type { ForwardedRef } from 'react';
+import { forwardRef } from 'lib/react';
 
 refractor.register(jsx);
 refractor.register(diff);
@@ -48,6 +50,10 @@ const insertedStyles = css({
 const deletedStyles = css({
   backgroundColor: token('color.background.subtleDanger.hover'),
   color: token('color.text.danger'),
+});
+
+const maxHeight = css({
+  maxHeight: 500,
 });
 
 const elementStyles: Record<string, SerializedStyles> = {
@@ -103,7 +109,10 @@ interface CodeBlockProps {
 
 type Lang = 'jsx' | 'diff' | 'css' | undefined;
 
-function CodeBlock({ children = '', lang = 'jsx' }: CodeBlockProps) {
+function CodeBlock(
+  { children = '', lang = 'jsx' }: CodeBlockProps,
+  ref: ForwardedRef<HTMLPreElement>
+) {
   const actualLang: Lang =
     lang === 'auto' ? (children.match(/^(jsx|diff|css)/)?.[0] as Lang) || 'jsx' : lang;
   const codeNoLang = lang === 'auto' ? children.replace(/^(jsx|diff|css)\n/, '') : children;
@@ -111,9 +120,10 @@ function CodeBlock({ children = '', lang = 'jsx' }: CodeBlockProps) {
 
   return (
     <Box
+      ref={ref}
       width="full"
-      background="sunken"
-      css={codeBlockStyles}
+      background="body"
+      css={[codeBlockStyles, maxHeight]}
       borderRadius="default"
       as="pre"
       padding="medium">
@@ -122,4 +132,4 @@ function CodeBlock({ children = '', lang = 'jsx' }: CodeBlockProps) {
   );
 }
 
-export default CodeBlock;
+export default forwardRef(CodeBlock);

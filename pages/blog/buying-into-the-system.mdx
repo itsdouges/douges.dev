@@ -1,6 +1,7 @@
 import BorderMenu from 'components/examples/defining-and-buying-into-systems/border-menu';
 import BorderTabs from 'components/examples/defining-and-buying-into-systems/border-tabs';
 import BorderShadow from 'components/examples/defining-and-buying-into-systems/border-shadow';
+import InteractionsExplosion from 'components/examples/defining-and-buying-into-systems/interactions-explosion';
 
 export const meta = {
   title: 'Defining and buying into systems',
@@ -9,9 +10,9 @@ export const meta = {
   tags: ['UI', 'DESIGN SYSTEMS', 'REACT', 'CSS', 'SCALE'],
 };
 
-Believe it or not I [play ice hockey for fun](https://twitter.com/itsdouges/status/1371743285903912960) in Sydney,
-Australia [harder now because of the global pandemic though, ahem].
-The higher the competitive ladder you climb the more common it is to have your coach define and apply systems to the way the team plays.
+Believe it or not I [play ice hockey](https://twitter.com/itsdouges/status/1444889172410449925?s=20) [for fun](https://twitter.com/itsdouges/status/1371743285903912960) in Sydney,
+Australia.
+The higher the competitive ladder you climb [in sport] the more common it is to have your coach define and apply systems to the way the team plays.
 Whether you're attacking or defending there are systems in place ready to execute at any given moment.
 In some ways this is a pretty fitting analogy for software development,
 except we replace the competitive ladder with scale,
@@ -53,14 +54,14 @@ More workarounds.
 We need to think bigger,
 past a single example and towards how it works with the entire system.
 
-What if our system had borders applied using box shadow [removing the need for workarounds]?
+What if our system had borders applied using box shadow?
 
 <BorderShadow />
 
-Is this perfect?
+Is this perfect in all scenarios?
 Definitely not.
 It's a tradeoff,
-optimizing for cohesion over perfection enabling faster development without needing to think about multiple moving parts.
+optimizing for cohesion over perfection desiring faster development without needing to think about multiple moving parts and workarounds.
 
 # Interactions and backgrounds
 
@@ -71,13 +72,12 @@ and you're done.
 But what would it look like when we're at _web scale_?
 Let's visualize it.
 
-```
-// interaction state explosion
-```
+<InteractionsExplosion />
 
-I hope you agree that given enough use cases things get wild,
+Given enough use cases the need to define all interaction states individually get pretty wild,
 and we haven't even touched on UI elements that don't work with backgrounds,
 such as avatars [with images]!
+Each needing decisions to move forward effectively from both design and engineering.
 
 > Buying in to the [system] means that you are someone who knows how to stay in the moment.
 
@@ -86,7 +86,7 @@ each one slowing us down.
 If we were to add a new use case what would the appropriate interaction states be?
 More decisions!
 
-What if our system had all interaction states applied as overlays [reducing decisions to one]?
+What if our system had all interaction states applied as overlays?
 
 ```
 // example of pressable
@@ -117,7 +117,7 @@ all of your components allowing [spread props](https://reactjs.org/docs/jsx-in-d
 > and always leave everything on the field so that no matter the result,
 > you can go home with your head high and no regrets.
 
-What if our system had a standardized API for all accessibility attributes [and disallowed spread props]?
+What if our system had a standardized API for all accessibility attributes?
 
 ```
 // example of accessibility apis
@@ -138,7 +138,7 @@ especially when you need portalled elements on top of portalled elements.
 If you don't have a good system in place if you're not careful you'll see the `zIndex` prop bleeding into all corners of your layered components as escape hatches...
 and unhappy consumers needing to figure out how to workaround it.
 
-What if our system handled layering concerns [removing the need for escape hatches]?
+What if our system handled layering concerns holistically?
 
 ```
 // example of layering but not painful
@@ -169,7 +169,7 @@ At _web scale_ we want to ensure developers are productive and have a pit of suc
 that when they use something its _obvious_ how to do it properly,
 with no foot guns.
 
-What if our system had sensible layout abstractions with baked in design decisions [and disallowed margins]?
+What if our system had sensible layout abstractions with baked in design decisions?
 
 ```
 // example of a sensible abstraction

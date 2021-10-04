@@ -78,7 +78,10 @@ function Pressable({
               pressedAppearance !== 'none' && [
                 styles.pressable,
                 hoverStyle,
-                isPressed && [pressedStyle, pressedAppearance === 'push' && styles.push],
+                isPressed && [
+                  pressedStyle,
+                  pressedAppearance === 'push' ? styles.push : styles.static,
+                ],
               ]
           ),
           ...buttonProps,
