@@ -36,7 +36,7 @@ const styles = css({
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 32,
+    top: 33,
     borderBottom: `1px dashed ${token('color.iconBorder.danger')}`,
   },
 });

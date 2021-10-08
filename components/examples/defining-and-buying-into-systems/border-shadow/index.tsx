@@ -19,7 +19,7 @@ const styles = css({
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 30,
+    top: 31,
     borderBottom: `1px dashed ${token('color.iconBorder.danger')}`,
   },
   vline: {
@@ -77,6 +77,7 @@ function Tabs({
       <Box paddingTop={hasBottomBorder ? 'medium' : undefined}>
         <Box background="neutralSubtle" paddingY="regular">
           <Box
+            css={styles.hack}
             border="left"
             borderColor={isItemSelected ? 'brand' : undefined}
             background={isItemSelected ? 'selected' : undefined}

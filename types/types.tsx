@@ -14,3 +14,7 @@ export interface ResponsiveObject<TProp> {
 }
 
 export type ResponsiveProp<TProp> = TProp | ResponsiveObject<TProp>;
+
+export interface SafeInlineStyles {
+  opacity?: number;
+}

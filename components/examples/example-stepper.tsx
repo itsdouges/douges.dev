@@ -12,6 +12,9 @@ import Text from 'design-system/text';
 import Audio from 'components/audio';
 
 const styles = css({
+  disabled: {
+    opacity: 0.5,
+  },
   transition: {
     transition: 'all 0.8s cubic-bezier(0.8, 0, 0, 0.8)',
     '*': {
@@ -108,7 +111,7 @@ export function Step({ children, code, description, audioSrc }: StepProps) {
   return (
     <>
       {audioSrc && <Audio src={audioSrc} isMuted={isMuted} />}
-      <Inline gap="regular" blockAlign="stretch">
+      <Inline style={{ opacity: isSplash ? 0.5 : undefined }} gap="regular" blockAlign="stretch">
         <CodeBlock ref={codeRef} lang="auto">{dedent`${code}`}</CodeBlock>
         <Box
           padding="xlarge"

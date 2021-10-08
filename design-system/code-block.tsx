@@ -105,12 +105,13 @@ toJSX.displayName = 'CodeBlock';
 interface CodeBlockProps {
   lang?: 'jsx' | 'diff' | 'auto' | 'css';
   children: string;
+  background?: 'body' | 'transparent' | 'subtleNeutral' | 'sunken';
 }
 
 type Lang = 'jsx' | 'diff' | 'css' | undefined;
 
 function CodeBlock(
-  { children = '', lang = 'jsx' }: CodeBlockProps,
+  { children = '', lang = 'jsx', background = 'body' }: CodeBlockProps,
   ref: ForwardedRef<HTMLPreElement>
 ) {
   const actualLang: Lang =
@@ -122,7 +123,7 @@ function CodeBlock(
     <Box
       ref={ref}
       width="full"
-      background="body"
+      background={background}
       css={[codeBlockStyles, maxHeight]}
       borderRadius="default"
       as="pre"
