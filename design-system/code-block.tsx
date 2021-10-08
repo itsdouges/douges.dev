@@ -105,7 +105,7 @@ toJSX.displayName = 'CodeBlock';
 interface CodeBlockProps {
   lang?: 'jsx' | 'diff' | 'auto' | 'css';
   children: string;
-  background?: 'body' | 'transparent' | 'subtleNeutral' | 'sunken';
+  background?: 'body' | 'transparent' | 'neutralSubtle' | 'sunken';
 }
 
 type Lang = 'jsx' | 'diff' | 'css' | undefined;

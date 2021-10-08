@@ -61,6 +61,60 @@ const styles = css({
       backgroundColor: token('color.background.boldDiscovery.pressed'),
     },
   },
+  defaultBold: {
+    transition: 'none',
+    ':hover': {
+      backgroundColor: token('color.background.boldNeutral.hover'),
+    },
+    ':active': {
+      backgroundColor: token('color.background.boldNeutral.pressed'),
+    },
+  },
+  brandSubtle: {
+    transition: 'none',
+    ':hover': {
+      backgroundColor: token('color.background.subtleBrand.hover'),
+    },
+    ':active': {
+      backgroundColor: token('color.background.subtleBrand.pressed'),
+    },
+  },
+  successSubtle: {
+    transition: 'none',
+    ':hover': {
+      backgroundColor: token('color.background.subtleSuccess.hover'),
+    },
+    ':active': {
+      backgroundColor: token('color.background.subtleSuccess.pressed'),
+    },
+  },
+  dangerSubtle: {
+    transition: 'none',
+    ':hover': {
+      backgroundColor: token('color.background.subtleDanger.hover'),
+    },
+    ':active': {
+      backgroundColor: token('color.background.subtleDanger.pressed'),
+    },
+  },
+  warningSubtle: {
+    transition: 'none',
+    ':hover': {
+      backgroundColor: token('color.background.subtleWarning.hover'),
+    },
+    ':active': {
+      backgroundColor: token('color.background.subtleWarning.pressed'),
+    },
+  },
+  discoverySubtle: {
+    transition: 'none',
+    ':hover': {
+      backgroundColor: token('color.background.subtleDiscovery.hover'),
+    },
+    ':active': {
+      backgroundColor: token('color.background.subtleDiscovery.pressed'),
+    },
+  },
   transparent: {
     transition: 'none',
     ':hover': {
@@ -107,7 +161,7 @@ function BorderMenu() {
         </Inline>
       </Step>
       <Step
-        description="And then let's make it interactive [button press intensifies]"
+        description="And then let's make it interactive [press it]"
         code={`diff
           .button-default {
             background-color: lightgray;
@@ -434,10 +488,222 @@ function BorderMenu() {
              background-color: slategray;
            }
          }
-
-        +.despair {
-        +  mood: "(ﾟ´Д｀ﾟ)ﾟ";
-        +}
++.lozenge-danger-subtle {
++  background-color: lightred;
++  :hover {
++    background-color: red;
++  }
++  :active {
++    background-color: darkred;
++  }
++}
++.lozenge-success-subtle {
++  background-color: lightgreen;
++  :hover {
++    background-color: green;
++  }
++  :active {
++    background-color: darkgreen;
++  }
++}
++.lozenge-information-subtle {
++  background-color: lightblue;
++  :hover {
++    background-color: blue;
++  }
++  :active {
++    background-color: darkblue;
++  }
++}
++.lozenge-default-subtle {
++  background-color: lightgray;
++  :hover {
++    background-color: gray;
++  }
++  :active {
++    background-color: darkgray;
++  }
++}
++.lozenge-warning-subtle {
++  background-color: lightyellow;
++  :hover {
++    background-color: yellow;
++  }
++  :active {
++    background-color: darkyellow;
++  }
++}
++.lozenge-warning-subtle {
++  background-color: lightpurple;
++  :hover {
++    background-color: purple;
++  }
++  :active {
++    background-color: darkpurple;
++  }
++}
++.lozenge-danger-bold {
++  background-color: red;
++  :hover {
++    background-color: darkred;
++  }
++  :active {
++    background-color: darkerred;
++  }
++}
++.lozenge-success-bold {
++  background-color: green;
++  :hover {
++    background-color: darkgreen;
++  }
++  :active {
++    background-color: darkergreen;
++  }
++}
++.lozenge-information-bold {
++  background-color: blue;
++  :hover {
++    background-color: darkblue;
++  }
++  :active {
++    background-color: darkerblue;
++  }
++}
++.lozenge-default-bold {
++  background-color: gray;
++  :hover {
++    background-color: darkgray;
++  }
++  :active {
++    background-color: darkergray;
++  }
++}
++.lozenge-warning-bold {
++  background-color: yellow;
++  :hover {
++    background-color: darkyellow;
++  }
++  :active {
++    background-color: darkeryellow;
++  }
++}
++.lozenge-warning-bold {
++  background-color: purple;
++  :hover {
++    background-color: darkpurple;
++  }
++  :active {
++    background-color: darkerpurple;
++  }
++}
++.tag-neutral-subtle {
++  background-color: lightgray;
++  :hover {
++    background-color: gray;
++  }
++  :active {
++    background-color: darkgray;
++  }
++}
++.tag-blue-subtle {
++  background-color: lightblue;
++  :hover {
++    background-color: blue;
++  }
++  :active {
++    background-color: darkblue;
++  }
++}
++.tag-green-subtle {
++  background-color: lightgreen;
++  :hover {
++    background-color: green;
++  }
++  :active {
++    background-color: darkgreen;
++  }
++}
++.tag-pink-subtle {
++  background-color: lightpink;
++  :hover {
++    background-color: pink;
++  }
++  :active {
++    background-color: darkpink;
++  }
++}
++.tag-yellow-subtle {
++  background-color: lightyellow;
++  :hover {
++    background-color: yellow;
++  }
++  :active {
++    background-color: darkyellow;
++  }
++}
++.tag-purple-subtle {
++  background-color: lightpurple;
++  :hover {
++    background-color: purple;
++  }
++  :active {
++    background-color: darkpurple;
++  }
++}
++.tag-teal-subtle {
++  background-color: lightteal;
++  :hover {
++    background-color: teal;
++  }
++  :active {
++    background-color: darkteal;
++  }
++}
++.tag-neutral-bold {
++  background-color: gray;
++  :hover {
++    background-color: darkgray;
++  }
++  :active {
++    background-color: darkergray;
++  }
++}
++.tag-blue-bold {
++  background-color: blue;
++  :hover {
++    background-color: darkblue;
++  }
++  :active {
++    background-color: darkerblue;
++  }
++}
++.tag-green-bold {
++  background-color: green;
++  :hover {
++    background-color: darkgreen;
++  }
++  :active {
++    background-color: darkergreen;
++  }
++}
++.tag-pink-bold {
++  background-color: pink;
++  :hover {
++    background-color: darkpink;
++  }
++  :active {
++    background-color: darkerpink;
++  }
++}
++.tag-yellow-bold {
++  background-color: yellow;
++}
++.tag-purple-bold {
++  background-color: darkyellow;
++}
++.tag-teal-bold {
++  background-color: darkeryellow;
++}
         `}>
         <Inline gap="small" wrap="wrap">
           <Box
@@ -504,6 +770,7 @@ function BorderMenu() {
             Subtle
           </Box>
           <Box
+            css={styles.dangerSubtle}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -513,6 +780,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.successSubtle}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -522,6 +790,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.brandSubtle}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -531,6 +800,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.default}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -540,6 +810,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.warningSubtle}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -549,6 +820,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.discoverySubtle}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -558,6 +830,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.danger}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -567,6 +840,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.success}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -575,12 +849,18 @@ function BorderMenu() {
               Lozenge
             </Text>
           </Box>
-          <Box paddingX="small" borderRadius="default" display="inline flex" background="brandBold">
+          <Box
+            css={styles.brand}
+            paddingX="small"
+            borderRadius="default"
+            display="inline flex"
+            background="brandBold">
             <Text size="smallest" weight="bold">
               Lozenge
             </Text>
           </Box>
           <Box
+            css={styles.defaultBold}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -590,6 +870,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.warning}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -599,6 +880,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.discovery}
             paddingX="small"
             borderRadius="default"
             display="inline flex"
@@ -608,6 +890,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.default}
             display="inline flex"
             background="neutralSubtle"
             paddingX="small"
@@ -680,6 +963,7 @@ function BorderMenu() {
             </Text>
           </Box>
           <Box
+            css={styles.defaultBold}
             display="inline flex"
             background="neutralBold"
             paddingX="small"
