@@ -93,9 +93,16 @@ interface StepProps {
   description?: string;
   audioSrc?: string;
   isAudioMuted?: boolean;
+  shouldDisableTransitions?: boolean;
 }
 
-export function Step({ children, code, description, audioSrc }: StepProps) {
+export function Step({
+  children,
+  shouldDisableTransitions,
+  code,
+  description,
+  audioSrc,
+}: StepProps) {
   const { isMuted, isSplash } = useContext(Context);
   const codeRef = useRef<HTMLPreElement>(null);
 
@@ -115,7 +122,7 @@ export function Step({ children, code, description, audioSrc }: StepProps) {
         <CodeBlock ref={codeRef} lang="auto">{dedent`${code}`}</CodeBlock>
         <Box
           padding="xlarge"
-          css={[styles.transition, styles.noOverflow, styles.noSelect]}
+          css={[shouldDisableTransitions || styles.transition, styles.noOverflow, styles.noSelect]}
           width="full"
           background="body">
           {children}
