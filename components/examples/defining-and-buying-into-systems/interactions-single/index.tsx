@@ -1,339 +1,222 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import Box, { BoxProps } from 'design-system/box';
+import Box from 'design-system/box';
 import ExampleStepper, { Step } from 'components/examples/example-stepper';
 import Inline from 'design-system/inline';
 import Text from 'design-system/text';
-import Pressable from 'design-system/pressable';
+import token from 'design-system/token';
 
-function PressableBox(props: BoxProps<'div'>) {
-  return (
-    <Pressable pressedAppearance="static">
-      {(press) => (
-        <Box {...press} {...props}>
-          {props.children}
-        </Box>
-      )}
-    </Pressable>
-  );
-}
+const styles = css({
+  overlay: {
+    position: 'relative',
+    '::before': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      backgroundColor: token('color.background.interaction.hovered'),
+    },
+  },
+  text: {
+    zIndex: 1,
+  },
+  unfocused: {
+    transform: 'none',
+    transformOrigin: 'left top',
+  },
+  focused: {
+    transform: 'scale(2)',
+    transformOrigin: 'left top',
+  },
+  hidden: {
+    '::before': {
+      opacity: 0,
+    },
+  },
+  shift: {
+    '::before': {
+      transform: 'translateX(calc(100% + 4px))',
+    },
+  },
+  unshift: {
+    '::before': {
+      transform: 'none',
+    },
+  },
+  pressed: {
+    '::before': {
+      backgroundColor: token('color.background.interaction.pressed'),
+    },
+  },
+});
 
 function BorderMenu() {
   return (
     <ExampleStepper>
       <Step
-        shouldDisableTransitions
-        description=""
-        code={`diff
-
+        description="We start with a call to action button"
+        code={`
+          .button-brand {
+            background-color: blue;
+          }
         `}>
         <Inline gap="small" wrap="wrap">
-          <PressableBox
-            paddingX="medium"
-            paddingY="small"
-            borderRadius="default"
-            display="inline flex"
-            background="neutralSubtle">
-            <Text>Button</Text>
-          </PressableBox>
-          <PressableBox
+          <Box
+            css={[styles.overlay, styles.shift, styles.hidden]}
             paddingX="medium"
             paddingY="small"
             borderRadius="default"
             display="inline flex"
             background="brandBold">
-            <Text>Button</Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="medium"
-            paddingY="small"
-            borderRadius="default"
-            display="inline flex"
-            background="successBold">
-            <Text>Button</Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="medium"
-            paddingY="small"
-            borderRadius="default"
-            display="inline flex"
-            background="dangerBold">
-            <Text>Button</Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="medium"
-            paddingY="small"
-            borderRadius="default"
-            display="inline flex"
-            background="warningBold">
-            <Text>Button</Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="medium"
-            paddingY="small"
-            borderRadius="default"
-            display="inline flex"
-            background="discoveryBold">
-            <Text>Button</Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="medium"
-            paddingY="small"
-            borderRadius="default"
-            display="inline flex"
-            background="transparent">
-            <Text>Button</Text>
-          </PressableBox>
-        </Inline>
-        <Inline paddingY="regular" gap="small" wrap="wrap">
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="dangerSubtle">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="successSubtle">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="brandSubtle">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="neutralSubtle">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="warningSubtle">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="discoverySubtle">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="dangerBold">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="successBold">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="brandBold">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="neutralBold">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="warningBold">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-          <PressableBox
-            paddingX="small"
-            borderRadius="default"
-            display="inline flex"
-            background="discoveryBold">
-            <Text size="smallest" weight="bold">
-              Lozenge
-            </Text>
-          </PressableBox>
-        </Inline>
-        <Inline gap="small" wrap="wrap">
-          <PressableBox
-            display="inline flex"
-            background="neutralSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentBlueSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentGreenSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentMagentaSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentOrangeSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentPurpleSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentRedSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentTealSubtle"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="neutralBold"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentBlueBold"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentGreenBold"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentOrangeBold"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentPurpleBold"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentRedBold"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
-          <PressableBox
-            display="inline flex"
-            background="accentTealBold"
-            paddingX="small"
-            borderRadius="default">
-            <Text size="smaller" decoration="underline">
-              Tag
-            </Text>
-          </PressableBox>
+            <span>Button</span>
+          </Box>
         </Inline>
       </Step>
-      <Step />
+      <Step
+        description="We create a before pseudo element to be used for interaction states"
+        code={`
+        .button-brand {
+          background-color: blue;
+        }
+
+        .pressable {
+          ::before {
+            content: '""',
+            background-color: rgba(0, 0, 0, 0.15);
+          }
+        }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.overlay, styles.shift]}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="brandBold">
+            <span>Button</span>
+          </Box>
+        </Inline>
+      </Step>
+      <Step
+        description="We then overlay it on top of the interactive element"
+        code={`
+        .button-brand {
+          background-color: blue;
+        }
+
+        .pressable {
+          position: relative;
+          ::before {
+            content: '""',
+            background-color: rgba(0, 0, 0, 0.15);
+            position: 'absolute',
+            inset: 0,
+          }
+        }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.overlay, styles.unshift]}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="brandBold">
+            <span>Button</span>
+          </Box>
+        </Inline>
+      </Step>
+      <Step
+        description="When pressing we make the background color more opaque"
+        code={`diff
+        .button-brand {
+          background-color: blue;
+        }
+
+        .pressable {
+          position: relative;
+          ::before {
+            content: '""',
+            background-color: rgba(0, 0, 0, 0.30);
+            position: 'absolute',
+            inset: 0,
+          }
+        }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.overlay, styles.unshift, styles.pressed, styles.unfocused]}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="brandBold">
+            <span>Button</span>
+          </Box>
+        </Inline>
+      </Step>
+      <Step
+        description="But we have a problem, the text is being washed out!"
+        code={`diff
+        .button-brand {
+          background-color: blue;
+        }
+
+        .pressable {
+          position: relative;
+          ::before {
+            content: '""',
+            background-color: rgba(0, 0, 0, 0.30);
+            position: 'absolute',
+            inset: 0,
+          }
+        }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.overlay, styles.unshift, styles.pressed, styles.focused]}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="brandBold">
+            <span>Button</span>
+          </Box>
+        </Inline>
+      </Step>
+      <Step
+        description="We enable a stacking context for text to have it appear above the overlay"
+        code={`diff
+        .button-brand {
+          background-color: blue;
+        }
+
+        .pressable {
+          position: relative;
+          ::before {
+            content: '""',
+            background-color: rgba(0, 0, 0, 0.30);
+            position: 'absolute',
+            inset: 0,
+          }
+        }
+
+        .text {
+          isolation: isolate;
+        }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.overlay, styles.unshift, styles.pressed, styles.focused]}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="brandBold">
+            <span css={styles.text}>Button</span>
+          </Box>
+        </Inline>
+      </Step>
     </ExampleStepper>
   );
 }

@@ -10,8 +10,7 @@ const styles = css({
     overflow: 'hidden',
   },
   textAbovePressable: {
-    zIndex: 1,
-    position: 'relative',
+    isolation: 'isolate',
   },
 });
 

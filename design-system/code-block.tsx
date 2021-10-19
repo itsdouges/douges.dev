@@ -6,7 +6,7 @@ import jsx from 'refractor/lang/jsx';
 import diff from 'refractor/lang/diff';
 import csss from 'refractor/lang/css';
 import Box from 'design-system/box';
-import type { ForwardedRef } from 'react';
+import { ForwardedRef } from 'react';
 import { forwardRef } from 'lib/react';
 
 refractor.register(jsx);
@@ -118,6 +118,7 @@ function CodeBlock(
     lang === 'auto' ? (children.match(/^(jsx|diff|css)/)?.[0] as Lang) || 'jsx' : lang;
   const codeNoLang = lang === 'auto' ? children.replace(/^(jsx|diff|css)\n/, '') : children;
   const root = refractor.highlight(codeNoLang, actualLang);
+
 
   return (
     <Box

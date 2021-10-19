@@ -5,6 +5,16 @@ import ExampleStepper, { Step } from 'components/examples/example-stepper';
 import { token } from '@atlaskit/tokens';
 import Inline from 'design-system/inline';
 import Text from 'design-system/text';
+import { keyframes } from '@emotion/react';
+
+const intenseClicking = keyframes({
+  from: {
+    background: token('color.background.subtleNeutral.hover'),
+  },
+  to: {
+    background: token('color.background.subtleNeutral.pressed'),
+  },
+});
 
 const styles = css({
   default: {
@@ -15,6 +25,11 @@ const styles = css({
     ':active': {
       backgroundColor: token('color.background.subtleNeutral.pressed'),
     },
+  },
+  intense: {
+    animationName: intenseClicking,
+    animationDuration: '0.15s',
+    animationIterationCount: 'infinite',
   },
   brand: {
     transition: 'none',
@@ -161,7 +176,7 @@ function BorderMenu() {
         </Inline>
       </Step>
       <Step
-        description="And then let's make it interactive [press it]"
+        description="And then let's make it appear interactive"
         code={`diff
           .button-default {
             background-color: lightgray;
@@ -176,6 +191,31 @@ function BorderMenu() {
         <Inline gap="small" wrap="wrap">
           <Box
             css={styles.default}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="neutralSubtle">
+            Default
+          </Box>
+        </Inline>
+      </Step>
+      <Step
+        description="[button pressing intensifies]"
+        code={`diff
+          .button-default {
+            background-color: lightgray;
+          +  :hover {
+          +    background-color: slategray;
+          +  }
+          +  :active {
+          +    background-color: darkslategray;
+          +  }
+          }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.default, styles.intense]}
             paddingX="medium"
             paddingY="small"
             borderRadius="default"
@@ -697,12 +737,30 @@ function BorderMenu() {
 +}
 +.tag-yellow-bold {
 +  background-color: yellow;
++  :hover {
++    background-color: darkyellow;
++  }
++  :active {
++    background-color: darkeryellow;
++  }
 +}
 +.tag-purple-bold {
-+  background-color: darkyellow;
++  background-color: purple;
++  :hover {
++    background-color: darkpurple;
++  }
++  :active {
++    background-color: darkerpurple;
++  }
 +}
 +.tag-teal-bold {
-+  background-color: darkeryellow;
++  background-color: teal;
++  :hover {
++    background-color: darkteal;
++  }
++  :active {
++    background-color: darkerteal;
++  }
 +}
         `}>
         <Inline gap="small" wrap="wrap">

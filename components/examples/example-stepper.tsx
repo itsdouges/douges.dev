@@ -17,7 +17,7 @@ const styles = css({
   },
   transition: {
     transition: 'all 0.8s cubic-bezier(0.8, 0, 0, 0.8)',
-    '*': {
+    '*,*::before,*::after': {
       transition: 'all 0.8s cubic-bezier(0.8, 0, 0, 0.8)',
     },
   },

@@ -62,7 +62,6 @@ What if our system applied borders using box shadows?
 Is this perfect in all scenarios?
 Definitely not.
 If you're a keen observer you'll notice when we "zoom" into the example using `transform` the box shadow bleeds around the element.
-
 It's a tradeoff optimizing for cohesion over perfection throwing away the need to think through multiple moving parts and workarounds.
 
 # Interactions and backgrounds
@@ -86,7 +85,7 @@ Given the need for varying use cases and enough scale each decision is a vector 
 If we were to add a new use case what would the appropriate interaction states be?
 More decisions!
 
-What if our system had only a single method for adding interaction states?
+What if our system had a single method for adding interaction states that can be used for all use cases?
 
 <InteractionsSingle />
 
@@ -191,3 +190,5 @@ team last.
 Trust the system,
 the tooling,
 and keep moving.
+
+What would be in your system?
