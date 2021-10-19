@@ -3,7 +3,7 @@ import css from 'design-system/css';
 import Box from 'design-system/box';
 import ExampleStepper, { Step } from 'components/examples/example-stepper';
 import Inline from 'design-system/inline';
-import Text from 'design-system/text';
+import Button from 'design-system/button';
 import token from 'design-system/token';
 
 const styles = css({
@@ -208,6 +208,39 @@ function BorderMenu() {
         <Inline gap="small" wrap="wrap">
           <Box
             css={[styles.overlay, styles.unshift, styles.pressed, styles.focused]}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="brandBold">
+            <span css={styles.text}>Button</span>
+          </Box>
+        </Inline>
+      </Step>
+      <Step
+        description="And we're done, press that button!"
+        code={`diff
+        .button-brand {
+          background-color: blue;
+        }
+
+        .pressable {
+          position: relative;
+          ::before {
+            content: '""',
+            background-color: rgba(0, 0, 0, 0.30);
+            position: 'absolute',
+            inset: 0,
+          }
+        }
+
+        .text {
+          isolation: isolate;
+        }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.overlay, styles.unshift, styles.pressed, styles.unfocused]}
             paddingX="medium"
             paddingY="small"
             borderRadius="default"
