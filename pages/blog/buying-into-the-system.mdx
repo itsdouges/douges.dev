@@ -59,10 +59,13 @@ What if our system applied borders using box shadows?
 
 <BorderShadow />
 
-Is this perfect in all scenarios?
+Well,
+that's something!
+Is it perfect in all scenarios?
 Definitely not.
 If you're a keen observer you'll notice when we "zoom" into the example using `transform` the box shadow bleeds around the element.
-It's a tradeoff optimizing for cohesion over perfection throwing away the need to think through multiple moving parts and workarounds.
+It's a tradeoff optimizing for cohesion over perfection throwing away the need to think through multiple moving parts and workarounds,
+and one to be honest that I wouldn't pay until it's fixed.
 
 # Interactions and backgrounds
 
@@ -85,61 +88,9 @@ Given the need for varying use cases and enough scale each decision is a vector 
 If we were to add a new use case what would the appropriate interaction states be?
 More decisions!
 
-What if our system had a single method for adding interaction states that can be used for all use cases?
+What if our system had only one way to add interaction states to our elements?
 
 <InteractionsSingle />
-
-# APIs and unintentional bleeds
-
-The [not so] simple tooltip,
-like borders and interaction states can seem simple to get started.
-But dig in and you'll find accessibility and layering behaviours that you'll need to support.
-For accessibility it means wiring the tooltip to the target element so the tooltip can _describe_ the target element to a screen reader.
-Let's see what that looks like.
-
-```
-// tooltip example basic to advanced
-```
-
-Now what we've made works I'm sure you agree.
-But there's something nefarious in the works that you might not realize,
-any component also needing a tooltip in our system now needs to be able to take these props,
-lest they suffer from an incomplete experience.
-If you haven't defined this system early enough you will find friction for every unintended use,
-or worse,
-all of your components allowing [spread props](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) enabling infinite APIs and risking the [evolution of your system](/blog/taming-the-beast-that-is-css-in-js#code-evolution).
-
-> Buying in to the [system] means that your coach trusts that you will never back down,
-> never be intimidated,
-> and always leave everything on the field so that no matter the result,
-> you can go home with your head high and no regrets.
-
-What if our system had a standardized API for all accessibility attributes?
-
-```
-// example of accessibility apis
-```
-
-## Layering
-
-Layering elements on top of each other is pretty simple.
-Set a few `z-index` properties and you're done!
-...But not really.
-It can get complex,
-especially when you need portalled elements on top of portalled elements.
-
-```
-// example of annoying layering
-```
-
-If you don't have a good system in place if you're not careful you'll see the `zIndex` prop bleeding into all corners of your layered components as escape hatches...
-and unhappy consumers needing to figure out how to workaround it.
-
-What if our system handled layering concerns holistically?
-
-```
-// example of layering but not painful
-```
 
 # Margin and layouts
 
