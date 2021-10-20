@@ -86,7 +86,6 @@ export function AvatarButton({
           <Box
             {...press}
             as="a"
-            href="#"
             padding="xsmall"
             borderRadius={borderRadius}
             size={size}

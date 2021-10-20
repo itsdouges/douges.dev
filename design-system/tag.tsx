@@ -64,7 +64,6 @@ export function TagLink({ children, icon, color = 'greyLight', appearance = 'def
           <Box
             {...press}
             as="a"
-            href="#"
             background={background}
             paddingLeft={icon ? undefined : 'small'}
             paddingRight="small"

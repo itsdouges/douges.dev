@@ -15,6 +15,9 @@ const styles = css({
   disabled: {
     opacity: 0.5,
   },
+  hidden: {
+    opacity: 0,
+  },
   transition: {
     transition: 'all 0.8s cubic-bezier(0.8, 0, 0, 0.8)',
     '*,*::before,*::after': {
@@ -93,7 +96,7 @@ interface StepProps {
   description?: string;
   audioSrc?: string;
   isAudioMuted?: boolean;
-  shouldDisableTransitions?: boolean;
+  shouldDisableTransitions?: boolean | 'enter';
 }
 
 export function Step({
@@ -118,14 +121,14 @@ export function Step({
   return (
     <>
       {audioSrc && <Audio src={audioSrc} isMuted={isMuted} />}
-      <Inline style={{ opacity: isSplash ? 0.5 : undefined }} gap="regular" blockAlign="stretch">
+      <Inline style={{ opacity: isSplash ? 0.8 : undefined }} gap="regular" blockAlign="stretch">
         <CodeBlock ref={codeRef} lang="auto">{dedent`${code}`}</CodeBlock>
         <Box
           padding="xlarge"
-          css={[shouldDisableTransitions || styles.transition, styles.noOverflow, styles.noSelect]}
+          css={[!shouldDisableTransitions && styles.transition, styles.noOverflow, styles.noSelect]}
           width="full"
           background="body">
-          {children}
+          <span css={isSplash && styles.hidden}>{children}</span>
         </Box>
       </Inline>
       {!isSplash && (
