@@ -28,7 +28,6 @@ const styles = css({
   },
   overlay: {
     position: 'relative',
-    cursor: 'pointer',
     '::before': {
       content: '""',
       position: 'absolute',
@@ -72,6 +71,7 @@ const styles = css({
     },
   },
   interactive: {
+    cursor: 'pointer',
     '::before': {
       transition: 'none',
     },
@@ -93,7 +93,7 @@ function BorderMenu() {
     <ExampleStepper>
       <Step
         description="We start with a call to action button"
-        code={`
+        code={`css
           .button-brand {
             background-color: blue;
           }
@@ -112,17 +112,17 @@ function BorderMenu() {
       </Step>
       <Step
         description="We create a before pseudo element to be used for interaction states"
-        code={`
+        code={`diff
         .button-brand {
           background-color: blue;
         }
 
-        .pressable {
-          ::before {
-            content: '""',
-            background-color: rgba(0, 0, 0, 0.15);
-          }
-        }
+        +.pressable {
+        +  ::before {
+        +    content: "";
+        +    background-color: rgba(0, 0, 0, 0.15);
+        +  }
+        +}
         `}>
         <Inline gap="small" wrap="wrap">
           <Box
@@ -138,18 +138,18 @@ function BorderMenu() {
       </Step>
       <Step
         description="We then overlay it on top of the interactive element"
-        code={`
+        code={`diff
         .button-brand {
           background-color: blue;
         }
 
         .pressable {
-          position: relative;
+        +  position: relative;
           ::before {
-            content: '""',
+            content: "";
             background-color: rgba(0, 0, 0, 0.15);
-            position: 'absolute',
-            inset: 0,
+        +    position: absolute;
+        +    inset: 0;
           }
         }
         `}>
@@ -175,10 +175,11 @@ function BorderMenu() {
         .pressable {
           position: relative;
           ::before {
-            content: '""',
-            background-color: rgba(0, 0, 0, 0.30);
-            position: 'absolute',
-            inset: 0,
+            content: "";
+        -    background-color: rgba(0, 0, 0, 0.15);
+        +    background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            inset: 0;
           }
         }
         `}>
@@ -196,7 +197,7 @@ function BorderMenu() {
       </Step>
       <Step
         description="But we have a problem, the text is underneath the overlay"
-        code={`diff
+        code={`css
         .button-brand {
           background-color: blue;
         }
@@ -204,10 +205,10 @@ function BorderMenu() {
         .pressable {
           position: relative;
           ::before {
-            content: '""',
-            background-color: rgba(0, 0, 0, 0.30);
-            position: 'absolute',
-            inset: 0,
+            content: "";
+            background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            inset: 0;
           }
         }
         `}>
@@ -233,16 +234,16 @@ function BorderMenu() {
         .pressable {
           position: relative;
           ::before {
-            content: '""',
-            background-color: rgba(0, 0, 0, 0.30);
-            position: 'absolute',
-            inset: 0,
+            content: "";
+            background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            inset: 0;
           }
         }
 
-        .text {
-          isolation: isolate;
-        }
+        +.text {
+        +  isolation: isolate;
+        +}
         `}>
         <Inline gap="small" wrap="wrap">
           <Box
@@ -258,7 +259,7 @@ function BorderMenu() {
       </Step>
       <Step
         description="And we're done, press that button!"
-        code={`diff
+        code={`css
         .button-brand {
           background-color: blue;
         }
@@ -266,10 +267,15 @@ function BorderMenu() {
         .pressable {
           position: relative;
           ::before {
-            content: '""',
-            background-color: rgba(0, 0, 0, 0.30);
-            position: 'absolute',
-            inset: 0,
+            content: "";
+            position: absolute;
+            inset: 0;
+          }
+          :hover::before {
+            background-color: rgba(0, 0, 0, 0.15);
+          }
+          :active::before {
+            background-color: rgba(0, 0, 0, 0.3);
           }
         }
 
@@ -291,8 +297,8 @@ function BorderMenu() {
       </Step>
       <Step
         shouldDisableTransitions
-        description="The great thing is this can work for all use cases, including avatars, images, and more!"
-        code={`diff
+        description="This works for all use cases, including avatars, images, and more! The missing piece however is sometimes the overlay color may need to be inverted to meet contrast requirements."
+        code={`css
         .button-brand {
           background-color: blue;
         }
@@ -300,10 +306,15 @@ function BorderMenu() {
         .pressable {
           position: relative;
           ::before {
-            content: '""',
-            background-color: rgba(0, 0, 0, 0.30);
-            position: 'absolute',
-            inset: 0,
+            content: "";
+            position: absolute;
+            inset: 0;
+          }
+          :hover::before {
+            background-color: rgba(0, 0, 0, 0.15);
+          }
+          :active::before {
+            background-color: rgba(0, 0, 0, 0.3);
           }
         }
 
@@ -334,7 +345,7 @@ function BorderMenu() {
 
           <AvatarButton />
 
-          <TagLink>Tag</TagLink>
+          <TagLink color="green">Tag</TagLink>
         </Inline>
       </Step>
     </ExampleStepper>

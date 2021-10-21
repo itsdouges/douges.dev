@@ -77,7 +77,6 @@ function Tabs({
       <Box paddingTop={hasBottomBorder ? 'medium' : undefined}>
         <Box background="neutralSubtle" paddingY="regular">
           <Box
-            css={styles.hack}
             border="left"
             borderColor={isItemSelected ? 'brand' : undefined}
             background={isItemSelected ? 'selected' : undefined}
@@ -110,18 +109,6 @@ function BorderShadow() {
         .menu-item {
 
         }
-
-        .tab-group {
-
-        }
-
-        .menu-item-selected {
-
-        }
-
-        .tab-selected {
-
-        }
       `}>
         <Tabs />
       </Step>
@@ -130,18 +117,6 @@ function BorderShadow() {
         code={`diff
         .menu-item {
         +  padding: 8px 16px;
-        }
-
-        .tab-group {
-
-        }
-
-        .menu-item-selected {
-
-        }
-
-        .tab-selected {
-
         }
       `}>
         <Tabs hasMenuItemPadding />
@@ -155,14 +130,6 @@ function BorderShadow() {
 
         .tab-group {
         +  boxShadow: inset 0 -2px 0 0 gray;
-        }
-
-        .menu-item-selected {
-
-        }
-
-        .tab-selected {
-
         }
       `}>
         <Tabs hasBottomBorder hasMenuItemPadding />
@@ -180,10 +147,6 @@ function BorderShadow() {
 
         .menu-item-selected {
         +  boxShadow: inset 2px 0 0 0 blue;
-        }
-
-        .tab-selected {
-
         }
       `}>
         <Tabs isItemSelected hasBottomBorder hasMenuItemPadding />

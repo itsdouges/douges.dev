@@ -99,10 +99,6 @@ function BorderMenu() {
         .tab-group {
 
         }
-
-        .tab-selected {
-
-        }
       `}>
         <Tabs />
       </Step>
@@ -111,10 +107,6 @@ function BorderMenu() {
         code={`diff
         .tab-group {
         +  borderBottom: ${borderSize} solid gray;
-        }
-
-        .tab-selected {
-
         }
       `}>
         <Tabs hasBottomBorder />

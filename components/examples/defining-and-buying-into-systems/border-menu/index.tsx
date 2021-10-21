@@ -58,10 +58,6 @@ function BorderMenu() {
         .menu-item {
 
         }
-
-        .menu-item-selected {
-
-        }
       `}>
         <MenuGroup>
           <Box>Profile</Box>
@@ -74,10 +70,6 @@ function BorderMenu() {
         code={`diff
         .menu-item {
         +  padding: 8px 16px;
-        }
-
-        .menu-item-selected {
-
         }
       `}>
         <MenuGroup>
