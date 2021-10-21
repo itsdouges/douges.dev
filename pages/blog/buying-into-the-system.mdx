@@ -3,6 +3,9 @@ import BorderTabs from 'components/examples/defining-and-buying-into-systems/bor
 import BorderShadow from 'components/examples/defining-and-buying-into-systems/border-shadow';
 import InteractionsExplosion from 'components/examples/defining-and-buying-into-systems/interactions-explosion';
 import InteractionsSingle from 'components/examples/defining-and-buying-into-systems/interactions-single';
+import MarginChild from 'components/examples/defining-and-buying-into-systems/margin-child';
+import MarginParent from 'components/examples/defining-and-buying-into-systems/margin-parent';
+import MarginAbstraction from 'components/examples/defining-and-buying-into-systems/margin-abstraction';
 
 export const meta = {
   title: 'Defining and buying into systems',
@@ -99,17 +102,13 @@ used in a single area of your app.
 But things get nefarious when that single experience now needs to scale to fit other use cases,
 in different areas of your app.
 
-```
-// example of using margin and then trying to use use it elsewhere and getting burned
-```
+<MarginChild />
 
 The logical next step is to move layout concerns to parent components instead.
 These days thanks to flex box and grid it's very easy to accomplish...
 but it's also very fiddly by default.
 
-```
-// example of defaults being dumb
-```
+<MarginParent />
 
 > Buying in to the [system] means that you are willing to hold yourself to the standard of what is expected of anyone who wears that uniform.
 
@@ -119,9 +118,7 @@ with no foot guns.
 
 What if our system had sensible layout abstractions with baked in design decisions?
 
-```
-// example of a sensible abstraction
-```
+<MarginAbstraction />
 
 # Bringing it altogether
 
