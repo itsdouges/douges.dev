@@ -7,24 +7,29 @@ const styles = css({
   tag: {
     margin: 4,
   },
+  card: {
+    width: 100,
+    height: 50,
+  },
 });
 
 function MarginChild() {
   return (
     <ExampleStepper>
       <Step
-        description="hmm"
+        description="We begin with a group of tags"
         code={`
-      .tag {
+      .avatar {
 
       }
       `}>
         <Box
-          css={[]}
+          css={[styles.card]}
           paddingX="regular"
           display="inline flex"
           borderRadius="rounded"
-          background="neutralSubtle">
+          shadow="card"
+          background="card">
           Tag
         </Box>
         <Box
@@ -32,7 +37,8 @@ function MarginChild() {
           paddingX="regular"
           display="inline flex"
           borderRadius="rounded"
-          background="neutralSubtle">
+          shadow="card"
+          background="card">
           Tag
         </Box>
         <Box
@@ -40,12 +46,13 @@ function MarginChild() {
           paddingX="regular"
           display="inline flex"
           borderRadius="rounded"
-          background="neutralSubtle">
+          shadow="card"
+          background="card">
           Tag
         </Box>
       </Step>
       <Step
-        description="hmm"
+        description="Time to slap some margins on them"
         code={`
         .tag {
           margin: 4px;
@@ -56,7 +63,8 @@ function MarginChild() {
           paddingX="regular"
           display="inline flex"
           borderRadius="rounded"
-          background="neutralSubtle">
+          shadow="card"
+          background="card">
           Tag
         </Box>
         <Box
@@ -64,7 +72,8 @@ function MarginChild() {
           paddingX="regular"
           display="inline flex"
           borderRadius="rounded"
-          background="neutralSubtle">
+          shadow="card"
+          background="card">
           Tag
         </Box>
         <Box
@@ -72,7 +81,8 @@ function MarginChild() {
           paddingX="regular"
           display="inline flex"
           borderRadius="rounded"
-          background="neutralSubtle">
+          shadow="card"
+          background="card">
           Tag
         </Box>
       </Step>
