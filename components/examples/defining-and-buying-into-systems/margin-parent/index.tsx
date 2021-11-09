@@ -2,11 +2,51 @@
 import css from 'design-system/css';
 import Box from 'design-system/box';
 import ExampleStepper, { Step } from 'components/examples/example-stepper';
-import { token } from '@atlaskit/tokens';
-import Inline from 'design-system/inline';
-import Text from 'design-system/text';
 
-const styles = css({});
+const styles = css({
+  card: {
+    padding: 4,
+    width: 100,
+    fontSize: 12,
+  },
+  flex: {
+    display: 'flex',
+  },
+});
+
+function Children() {
+  return (
+    <>
+      <Box
+        css={[styles.card]}
+        paddingX="regular"
+        display="inline flex"
+        borderRadius="default"
+        shadow="card"
+        background="card">
+        A card
+      </Box>
+      <Box
+        css={[styles.card]}
+        paddingX="regular"
+        display="inline flex"
+        borderRadius="default"
+        shadow="card"
+        background="card">
+        A card with a bit more content
+      </Box>
+      <Box
+        css={[styles.card]}
+        paddingX="regular"
+        display="inline flex"
+        borderRadius="default"
+        shadow="card"
+        background="card">
+        A card with a pretty decent amount of content in it
+      </Box>
+    </>
+  );
+}
 
 function MarginParent() {
   return (
@@ -14,14 +54,20 @@ function MarginParent() {
       <Step
         description="hmm"
         code={`css
+        .card {}
       `}>
-        Hey
+        <div>
+          <Children />
+        </div>
       </Step>
       <Step
         description="hmm"
         code={`css
+        .card {}
       `}>
-        There
+        <div css={styles.flex}>
+          <Children />
+        </div>
       </Step>
     </ExampleStepper>
   );

@@ -28,13 +28,15 @@ When you're a prospect and being scouted the coach will always push for you to "
 truly.
 We all want to be aligned so we can execute with precision and speed.
 
-What systems could we define to make UI development easier?
+What systems could we define to make UI development more sensible?
 
 # Boxes and borders
 
 Today most web developers use `box-sizing: border-box` to enable the [alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
 Set an elements width to `100px` and it does exactly what you think it would.
-But even with the alternative box model things can still be harder than we'd like them to be.
+
+BUT,
+even with the alternative box model things can still be harder than we'd like them to be.
 Borders for example are pretty easy to get started with,
 but use them with multiple elements in different scenarios and they start behaving quite nefariously.
 Let's dig in.
@@ -104,8 +106,8 @@ in different areas of your app.
 
 <MarginChild />
 
-The logical next step is to move layout concerns to parent components instead.
-These days thanks to flex box and grid it's very easy to accomplish...
+The logical next step is to move layout concerns to parent elements instead.
+Thanks to flex box and grid both supporting the gap property in all major browsers it's very easy to accomplish...
 but it's also very fiddly by default.
 
 <MarginParent />
