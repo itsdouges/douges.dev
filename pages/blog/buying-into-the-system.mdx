@@ -14,7 +14,7 @@ export const meta = {
   tags: ['UI', 'DESIGN SYSTEMS', 'WEB DEV', 'CSS', 'SCALE'],
 };
 
-Believe it or not I [play ice hockey](https://twitter.com/itsdouges/status/1444889172410449925?s=20) [for fun](https://twitter.com/itsdouges/status/1371743285903912960) in Sydney,
+Believe it or not I [play ice](https://twitter.com/itsdouges/status/1455417512707837953?s=20) [hockey](https://twitter.com/itsdouges/status/1444889172410449925?s=20) [for fun](https://twitter.com/itsdouges/status/1371743285903912960) in Sydney,
 Australia.
 The higher the competitive ladder you climb [in sport] the more common it is to have your coach define and apply systems to the way the team plays.
 Whether you're attacking or defending there are systems in place ready to execute at any given moment.
@@ -23,7 +23,7 @@ except we replace the competitive ladder with scale,
 the coach with an engineering manager or architect,
 and systems,
 well,
-systems still work.
+systems work perfectly.
 When you're a prospect and being scouted the coach will always push for you to "[buy into their system](https://www.ncsasports.org/blog/2014/07/28/buy-program/)" and teams in software development aren't all that different,
 truly.
 We all want to be aligned so we can execute with precision and speed.
@@ -32,14 +32,14 @@ What systems could we define to make UI development more sensible?
 
 # Boxes and borders
 
-Today most web developers use `box-sizing: border-box` to enable the [alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
+Today most web developers use the box sizing property to enable the [alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
 Set an elements width to `100px` and it does exactly what you think it would.
 
-BUT,
-even with the alternative box model things can still be harder than we'd like them to be.
+But even with the alternative box model things can still be harder than we'd like them to be.
 Borders for example are pretty easy to get started with,
-but use them with multiple elements in different scenarios and they start behaving quite nefariously.
-Let's dig in.
+but use them with multiple elements in different use cases and they start behaving quite nefariously.
+
+Let's go over a few examples with some of these use cases.
 
 <BorderMenu />
 
@@ -55,8 +55,7 @@ But let's look at another example first.
 
 <BorderTabs />
 
-More troubles.
-More workarounds.
+More trouble and workarounds.
 We need to think bigger,
 past a single example and towards how it works with the entire system.
 
@@ -69,8 +68,7 @@ that's something!
 Is it perfect in all scenarios?
 Definitely not.
 If you're a keen observer you'll notice when we "zoom" into the example using `transform` the box shadow bleeds around the element.
-It's a tradeoff optimizing for cohesion over perfection throwing away the need to think through multiple moving parts and workarounds,
-and one to be honest that I wouldn't pay until it's fixed.
+It's a tradeoff optimizing for cohesion over perfection throwing away the need to think through multiple moving parts and workarounds.
 
 # Interactions and backgrounds
 

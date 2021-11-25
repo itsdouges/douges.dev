@@ -12,6 +12,12 @@ const styles = css({
   flex: {
     display: 'flex',
   },
+  start: {
+    alignItems: 'flex-start',
+  },
+  gap: {
+    gap: 8,
+  },
 });
 
 function Children() {
@@ -52,20 +58,47 @@ function MarginParent() {
   return (
     <ExampleStepper>
       <Step
-        description="hmm"
+        description="We start with our cards again"
         code={`css
-        .card {}
+        .parent {}
       `}>
         <div>
           <Children />
         </div>
       </Step>
       <Step
-        description="hmm"
-        code={`css
-        .card {}
+        description="Make the parent a flex container"
+        code={`diff
+        .parent {
+        +  display: flex;
+        }
       `}>
         <div css={styles.flex}>
+          <Children />
+        </div>
+      </Step>
+      <Step
+        description="Fix it by changing to align start"
+        code={`diff
+        .parent {
+          display: flex;
+        +  align-items: flex-start;
+        }
+      `}>
+        <div css={[styles.flex, styles.start]}>
+          <Children />
+        </div>
+      </Step>
+      <Step
+        description="And then add in a gap"
+        code={`css
+        .parent {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      `}>
+        <div css={[styles.flex, styles.start, styles.gap]}>
           <Children />
         </div>
       </Step>
