@@ -11,6 +11,7 @@ const styles = css({
   },
   flex: {
     display: 'flex',
+    gap: 0,
   },
   start: {
     alignItems: 'flex-start',
@@ -78,7 +79,20 @@ function MarginParent() {
         </div>
       </Step>
       <Step
-        description="Fix it by changing to align start"
+        description="Ah but the size of our children have gone all whack"
+        code={`css
+        .parent {
+          display: flex;
+          align-items: flex-start;
+        }
+      `}>
+        <div css={[styles.flex]}>
+          <Children />
+        </div>
+      </Step>
+
+      <Step
+        description="Make items align to the start of the flex container"
         code={`diff
         .parent {
           display: flex;
@@ -90,12 +104,12 @@ function MarginParent() {
         </div>
       </Step>
       <Step
-        description="And then add in a gap"
-        code={`css
+        description="And add some gap"
+        code={`diff
         .parent {
           display: flex;
           align-items: flex-start;
-          gap: 8px;
+        +  gap: 8px;
         }
       `}>
         <div css={[styles.flex, styles.start, styles.gap]}>

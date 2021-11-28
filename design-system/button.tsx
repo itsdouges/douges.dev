@@ -53,7 +53,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     isDescendentOfWarningBox && appearance === 'inverted'
       ? 'warningInverse'
       : appearanceBgMap[mappedAppearance];
-  const pressableAppearance = isDescendentOfWarningBox ? 'inverse' : 'default';
+  const pressableAppearance = isDescendentOfWarningBox
+    ? 'inverse'
+    : isSelected
+    ? 'selected'
+    : 'default';
 
   return (
     <Pressable

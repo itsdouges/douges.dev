@@ -95,7 +95,25 @@ function BorderMenu() {
         description="We start with a call to action button"
         code={`css
           .button-brand {
-            background-color: blue;
+          }
+        `}>
+        <Inline gap="small" wrap="wrap">
+          <Box
+            css={[styles.overlay, styles.shift, styles.hidden]}
+            paddingX="medium"
+            paddingY="small"
+            borderRadius="default"
+            display="inline flex"
+            background="transparent">
+            <span>Button</span>
+          </Box>
+        </Inline>
+      </Step>
+      <Step
+        description="Give it that blue background we all know and love"
+        code={`diff
+          .button-brand {
+          +  background-color: blue;
           }
         `}>
         <Inline gap="small" wrap="wrap">
@@ -297,7 +315,7 @@ function BorderMenu() {
       </Step>
       <Step
         shouldDisableTransitions
-        description="This works for all use cases, including avatars, images, and more! The missing piece however is sometimes the overlay color may need to be inverted to meet contrast requirements."
+        description="This works for all use cases, including avatars, image cards, and more! The missing piece however is sometimes the overlay color may need to be inverted to meet contrast requirements."
         code={`css
         .button-brand {
           background-color: blue;

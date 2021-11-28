@@ -12,16 +12,57 @@ function MarginAbstraction() {
   return (
     <ExampleStepper>
       <Step
-        description="hmm"
-        code={`css
+        description="We start with our items again"
+        code={`jsx
+        <div class="card" />
+        <div class="card" />
+        <div class="card" />
       `}>
         Hey
       </Step>
       <Step
-        description="hmm"
-        code={`css
+        description="We wrap them with an inline component - note their sizes remain intact"
+        code={`jsx
+        <Inline>
+          <div class="card" />
+          <div class="card" />
+          <div class="card" />
+        </Inline>
       `}>
-        There
+        Hey
+      </Step>
+      <Step
+        description="We set a gap between the elements"
+        code={`jsx
+        <Inline gap="small">
+          <div class="card" />
+          <div class="card" />
+          <div class="card" />
+        </Inline>
+      `}>
+        Hey
+      </Step>
+      <Step
+        description="We can even change their alignment"
+        code={`jsx
+        <Inline gap="small" inlineAlign="middle>
+          <div class="card" />
+          <div class="card" />
+          <div class="card" />
+        </Inline>
+      `}>
+        Hey
+      </Step>
+      <Step
+        description="And on the bottom as well"
+        code={`jsx
+        <Inline gap="small" inlineAlign="bottom>
+          <div class="card" />
+          <div class="card" />
+          <div class="card" />
+        </Inline>
+      `}>
+        Hey
       </Step>
     </ExampleStepper>
   );

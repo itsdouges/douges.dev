@@ -358,6 +358,9 @@ const displayStyles = css({
   'inline grid': {
     display: 'inline-grid',
   },
+  'inline flow': {
+    display: 'inline-block',
+  },
 });
 
 const elementResetStyles = css({

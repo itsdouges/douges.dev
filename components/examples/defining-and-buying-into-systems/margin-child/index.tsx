@@ -2,15 +2,32 @@
 import css from 'design-system/css';
 import Box from 'design-system/box';
 import ExampleStepper, { Step } from 'components/examples/example-stepper';
+import Text from 'design-system/text';
+import Image from 'next/image';
+import yuki1 from 'public/yuki-1.jpg';
+import yuki2 from 'public/yuki-2.jpg';
+import yuki3 from 'public/yuki-3.jpg';
+import Stack from 'design-system/stack';
 
 const styles = css({
+  noWrap: { whiteSpace: 'nowrap', overflow: 'auto', transformOrigin: 'left top' },
+  align: { flexDirection: 'column' },
   gap: {
-    margin: 4,
+    margin: 3,
+  },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   card: {
-    padding: 4,
-    width: 100,
-    fontSize: 12,
+    whiteSpace: 'nowrap',
+    width: 125,
+    height: 75,
+    position: 'relative',
+  },
+  zoom: {
+    transformOrigin: 'left top',
+    transform: 'scale(2)',
   },
 });
 
@@ -18,200 +35,203 @@ function MarginChild() {
   return (
     <ExampleStepper>
       <Step
-        description="We begin with a group of cards"
+        description="We begin with a group of thumbnails"
         code={`
-      .card {
+      .thumb {
 
       }
       `}>
-        <Box borderRadius="default">
+        <Box css={styles.noWrap} borderRadius="default">
           <Box
             css={[styles.card]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki1} />
           </Box>
           <Box
             css={[styles.card]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a bit more content
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki2} />
           </Box>
           <Box
             css={[styles.card]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a pretty decent amount of content in it
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki3} />
           </Box>
         </Box>
       </Step>
+
       <Step
-        description="Time to slap some margins on them"
-        code={`
-        .card {
-          margin: 4px;
-        }
+        description="Then add some space between them"
+        code={`diff
+      .thumb {
+      +  margin: 3px;
+      }
       `}>
-        <Box borderRadius="default">
+        <Box css={styles.noWrap} borderRadius="default">
           <Box
             css={[styles.card, styles.gap]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki1} />
           </Box>
           <Box
             css={[styles.card, styles.gap]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a bit more content
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki2} />
           </Box>
           <Box
             css={[styles.card, styles.gap]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a pretty decent amount of content in it
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki3} />
           </Box>
         </Box>
       </Step>
+
       <Step
-        description="Let's reuse the card in a different area"
-        code={`
-        .card {
-          margin: 4px;
-        }
+        description="We then reuse the thumb in another place in our app"
+        code={`css
+      .thumb {
+        margin: 3px;
+      }
       `}>
-        <Box background="sunken" borderRadius="default">
+        <Box
+          key="asd"
+          background="overlay"
+          shadow="overlay"
+          css={[styles.noWrap, styles.align]}
+          display="inline flex"
+          borderRadius="default">
           <Box
             css={[styles.card, styles.gap]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki3} />
           </Box>
-          <Box
-            css={[styles.card, styles.gap]}
-            paddingX="regular"
-            display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a bit more content
-          </Box>
-          <Box
-            css={[styles.card, styles.gap]}
-            paddingX="regular"
-            display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a pretty decent amount of content in it
-          </Box>
+
+          <Stack padding="medium">
+            <Text weight="bold" color="success" size="smallest">
+              98% match
+            </Text>
+            <Text size="smallest" color="medium">
+              Cute · Fluffy
+            </Text>
+          </Stack>
         </Box>
       </Step>
       <Step
-        description="Uh oh! The margin doesn't make sense in this context. Let's hack it."
-        code={`
-        .card {
-          margin: 4px;
+        description="But the margin we used on it previously is causing problems"
+        code={`css
+      .thumb {
+        margin: 3px;
+      }
+      `}>
+        <Box
+          key="asd"
+          background="overlay"
+          shadow="overlay"
+          css={[styles.noWrap, styles.align, styles.zoom]}
+          display="inline flex"
+          borderRadius="default">
+          <Box
+            css={[styles.card, styles.gap]}
+            paddingX="regular"
+            display="inline flex"
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki3} />
+          </Box>
+
+          <Stack padding="medium">
+            <Text weight="bold" color="success" size="smallest">
+              98% match
+            </Text>
+            <Text size="smallest" color="medium">
+              Cute · Fluffy
+            </Text>
+          </Stack>
+        </Box>
+      </Step>
+      <Step
+        description="We fight to make it look correct but it just doesn't feel right"
+        code={`diff
+      .thumb {
+        margin: 3px;
+      }
+
+      +.preview.thumb {
+      +  margin: 0;
+      +}
+      `}>
+        <Box
+          key="asd"
+          background="overlay"
+          shadow="overlay"
+          css={[styles.noWrap, styles.align, styles.zoom]}
+          display="inline flex"
+          borderRadius="default">
+          <Box
+            css={[styles.card]}
+            paddingX="regular"
+            display="inline flex"
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki3} />
+          </Box>
+
+          <Stack padding="medium">
+            <Text weight="bold" color="success" size="smallest">
+              98% match
+            </Text>
+            <Text size="smallest" color="medium">
+              Cute · Fluffy
+            </Text>
+          </Stack>
+        </Box>
+      </Step>
+      <Step
+        description="But it works so we ship and move on"
+        code={`css
+        .thumb {
+          margin: 3px;
         }
 
-        .parent {
-          .card {
-            margin: 0;
-          }
+        .preview.thumb {
+          margin: 0;
         }
       `}>
-        <Box background="sunken" borderRadius="default">
+        <Box
+          key="asd"
+          background="overlay"
+          shadow="overlay"
+          css={[styles.noWrap, styles.align]}
+          display="inline flex"
+          borderRadius="default">
           <Box
-            css={[styles.card, styles.gap]}
+            css={[styles.card]}
             paddingX="regular"
             display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card
+            background="neutralSubtle">
+            <Image alt="Cute cat" placeholder="blur" objectFit="cover" layout="fill" src={yuki3} />
           </Box>
-          <Box
-            css={[styles.card, styles.gap]}
-            paddingX="regular"
-            display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a bit more content
-          </Box>
-          <Box
-            css={[styles.card, styles.gap]}
-            paddingX="regular"
-            display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a pretty decent amount of content in it
-          </Box>
-        </Box>
-      </Step>
-      <Step
-        description="Hey stop that! That's illegal!"
-        code={`
-        .card {
-          margin: 4px;
-        }
 
-        .parent {
-          .card {
-            margin: 0;
-          }
-        }
-      `}>
-        <Box background="sunken" borderRadius="default">
-          <Box
-            css={[styles.card, styles.gap]}
-            paddingX="regular"
-            display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card
-          </Box>
-          <Box
-            css={[styles.card, styles.gap]}
-            paddingX="regular"
-            display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a bit more content
-          </Box>
-          <Box
-            css={[styles.card, styles.gap]}
-            paddingX="regular"
-            display="inline flex"
-            borderRadius="default"
-            shadow="card"
-            background="card">
-            A card with a pretty decent amount of content in it
-          </Box>
+          <Stack padding="medium">
+            <Text weight="bold" color="success" size="smallest">
+              98% match
+            </Text>
+            <Text size="smallest" color="medium">
+              Cute · Fluffy
+            </Text>
+          </Stack>
         </Box>
       </Step>
     </ExampleStepper>
