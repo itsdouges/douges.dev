@@ -327,7 +327,7 @@ const borderRadiusStyles = css({
   declaration: {
     borderRadius: 'var(--ds-box-border-radius)',
     '::before,::after': {
-      borderRadius: 'var(--ds-box-border-radius)',
+      borderRadius: 'inherit',
     },
   },
   default: {

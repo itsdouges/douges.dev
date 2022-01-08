@@ -214,7 +214,7 @@ function BorderMenu() {
         </Inline>
       </Step>
       <Step
-        description="But we have a problem, the text is underneath the overlay"
+        description="But we have a problem, the text is underneath the overlay!"
         code={`css
         .button-brand {
           background-color: blue;
@@ -315,7 +315,7 @@ function BorderMenu() {
       </Step>
       <Step
         shouldDisableTransitions
-        description="This works for all use cases, including avatars, image cards, and more! The missing piece however is sometimes the overlay color may need to be inverted to meet contrast requirements."
+        description="This works for all use cases, including avatars, image cards, and more!"
         code={`css
         .button-brand {
           background-color: blue;

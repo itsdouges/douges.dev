@@ -19,6 +19,13 @@ const styles = css({
   gap: {
     gap: 8,
   },
+  unzoom: {
+    transformOrigin: 'left 50%',
+  },
+  zoom: {
+    transformOrigin: 'left 50%',
+    transform: 'scale(1.4)',
+  },
 });
 
 function Children() {
@@ -59,7 +66,7 @@ function MarginParent() {
   return (
     <ExampleStepper>
       <Step
-        description="We start with our cards again"
+        description="We start with some cards"
         code={`css
         .parent {}
       `}>
@@ -74,37 +81,36 @@ function MarginParent() {
         +  display: flex;
         }
       `}>
-        <div css={styles.flex}>
+        <div css={[styles.flex, styles.unzoom]}>
           <Children />
         </div>
       </Step>
       <Step
-        description="Ah but the size of our children have gone all whack"
+        description="Ah... the height of our children are all stretched now"
         code={`css
         .parent {
           display: flex;
-          align-items: flex-start;
         }
       `}>
-        <div css={[styles.flex]}>
+        <div css={[styles.flex, styles.zoom]}>
           <Children />
         </div>
       </Step>
 
       <Step
-        description="Make items align to the start of the flex container"
+        description="Let's fix that by settings align items start"
         code={`diff
         .parent {
           display: flex;
         +  align-items: flex-start;
         }
       `}>
-        <div css={[styles.flex, styles.start]}>
+        <div css={[styles.flex, styles.start, styles.zoom]}>
           <Children />
         </div>
       </Step>
       <Step
-        description="And add some gap"
+        description="And space it nicely with some gap"
         code={`diff
         .parent {
           display: flex;
@@ -112,7 +118,20 @@ function MarginParent() {
         +  gap: 8px;
         }
       `}>
-        <div css={[styles.flex, styles.start, styles.gap]}>
+        <div css={[styles.flex, styles.start, styles.gap, styles.zoom]}>
+          <Children />
+        </div>
+      </Step>
+      <Step
+        description="That works!"
+        code={`diff
+        .parent {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      `}>
+        <div css={[styles.flex, styles.start, styles.gap, styles.unzoom]}>
           <Children />
         </div>
       </Step>

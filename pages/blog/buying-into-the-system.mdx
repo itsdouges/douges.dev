@@ -10,7 +10,7 @@ import MarginAbstraction from 'components/examples/defining-and-buying-into-syst
 export const meta = {
   title: 'Defining and buying into systems',
   blurb: 'What if we could make UI simple?',
-  publishDate: '2021-10-21',
+  publishDate: '2022-01-9',
   tags: ['UI', 'DESIGN SYSTEMS', 'WEB DEV', 'CSS', 'SCALE'],
 };
 
@@ -23,16 +23,16 @@ except we replace the competitive ladder with scale,
 the coach with an engineering manager or architect,
 and systems,
 well,
-systems work perfectly.
+systems still work <abbr title="In my opinion">IMO</abbr>.
 When you're a prospect and being scouted the coach will always push for you to "[buy into their system](https://www.ncsasports.org/blog/2014/07/28/buy-program/)" and teams in software development aren't all that different,
 truly.
 We all want to be aligned so we can execute with precision and speed.
 
-What systems could we define to make UI development more sensible?
+What systems could we define to make <abbr title="User interface">UI</abbr> development more sensible?
 
 # Boxes and borders
 
-Today most web developers use the box sizing property to enable the [alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
+Today most sites use the box sizing property to enable the [alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
 Set an elements width to `100px` and it does exactly what you think it would.
 
 But even with the alternative box model things can still be harder than we'd like them to be.
@@ -44,6 +44,10 @@ Let's go over a few examples with some of these use cases.
 <BorderMenu />
 
 > Buying in to the [system] means that you love what you are a part of and your joy is infectious to everyone [on the team].
+>
+> <sub>
+>   <sub>Passion</sub>
+> </sub>
 
 You might be thinking,
 "_Douges_,
@@ -55,9 +59,9 @@ But let's look at another example first.
 
 <BorderTabs />
 
-More trouble and workarounds.
+More friction and workarounds.
 We need to think bigger,
-past a single example and towards how it works with the entire system.
+past a single example and towards how friction can be reduced and how it would work with the entire system.
 
 What if our system applied borders using box shadows?
 
@@ -67,73 +71,92 @@ Well,
 that's something!
 Is it perfect in all scenarios?
 Definitely not.
-If you're a keen observer you'll notice when we "zoom" into the example using `transform` the box shadow bleeds around the element.
+If you're a keen observer you'll notice when we "zoom" into the example [using `transform`] the box shadow bleeds around the element.
 It's a tradeoff optimizing for cohesion over perfection throwing away the need to think through multiple moving parts and workarounds.
 
 # Interactions and backgrounds
 
-Interactive UI elements like borders are simple to get started.
+Interactive <abbr title="User interface">UI</abbr> elements like borders are simple to get started.
 Pick a few different background colors,
 maybe even a little transform,
 and you're done.
-But what would it look like when we're at _web scale_?
+But what would it look like when we're at scale?
 Let's visualize it.
 
 <InteractionsExplosion />
 
 Given enough use cases the need to define all interaction states get pretty wild,
-and we haven't even touched on UI elements that don't work with backgrounds such as avatars!
+and we haven't even touched on <abbr title="User interface">UI</abbr> elements that don't work with backgrounds such as avatars!
 Each needing decisions to move forward effectively from both design and engineering.
 
 > Buying in to the [system] means that you are someone who knows how to stay in the moment.
+>
+> <sub>
+>   <sub>W.I.N</sub>
+> </sub>
 
-Given the need for varying use cases and enough scale each decision is a vector for slowdowns and mistakes.
+Given the need for varying use cases and enough scale each decision is a vector for friction and potential mistakes.
 If we were to add a new use case what would the appropriate interaction states be?
 More decisions!
 
-What if our system had only one way to add interaction states to our elements?
+What if our system had only a single method to add interaction states for any button like element?
 
 <InteractionsSingle />
+
+Reducing avenues of decisions goes a long way to help reduce friction.
+When there is only one choice just imagine how fast you can move!
+The rub though is if there is only one choice it needs to be damn well good.
+
+This missing piece from this abstraction is setting the appropriate color direction (darker or lighter) depending on the background color to ensure it passes accessibility contrast requirements.
+Getting it correct means the entire system has been built around it,
+else you end up with friction which we're trying to eliminate.
 
 # Margin and layouts
 
 Using margins is simple enough for a single experience,
 used in a single area of your app.
-But things get nefarious when that experience now needs to scale to fit other use cases,
-in different areas of your app.
+But things get nefarious when that experience now needs to scale to fit other use cases in different areas of your app.
 
 <MarginChild />
 
 A logical next step could be to move layout concerns to parent elements instead.
-Thanks to flex box and grid both supporting the gap property [in all major browsers](https://caniuse.com/flexbox-gap) it's very easy to accomplish...
+Thanks to flex box and grid both supporting the gap property [in all major browsers](https://caniuse.com/flexbox-gap) it's simple enough to accomplish...
 but also a bit fiddly by default.
 
 <MarginParent />
 
 > Buying in to the [system] means that you are willing to hold yourself to the standard of what is expected of anyone who [is on the team].
+>
+> <sub>
+>   <sub>Excellence</sub>
+> </sub>
 
-At _web scale_ we want to ensure developers are productive and have a pit of success,
-that when they use something its _obvious_ how to do it properly,
-with no foot guns.
+At scale we want our team mates to be productive with minimal friction,
+this includes massaging away behaviour that might have less than ideal defaults.
 
-What if our system had sensible layout abstractions with baked in design decisions?
+What if our system had layout abstractions with sensible defaults and baked in design decisions?
 
 <MarginAbstraction />
 
 # Bringing it altogether
 
-These are a few examples of things we can define in our system,
-but they definitely aren't exhaustive.
-Others could include accessibility attributes that should be available to all areas of your system and handling layering holistically to avoid z-index fights.
-
-We should position ourselves with well defined boundaries and have room to grow,
-BUT if that's all we did,
-well,
-our system would fall apart very easily.
-We need sensible abstractions and tooling to scale it and keep everyone on the path.
+These are a few examples of areas we can define in our system that aim to reduce friction and improve cohesion but they aren't exhaustive.
+Others that are in my mind include accessibility attributes that should be available to all areas of your system,
+handling layering holistically to avoid z-index fights,
+and the creation of a button abstraction using a `div` instead of a `button` element so they can be nested without it being invalid.
 
 > Buying in to the [system] means accepting your role,
 > doing your job,
 > and trusting [leadership] and your teammates.
+>
+> <sub>
+>   <sub>Team first, team last</sub>
+> </sub>
 
-What abstractions would you build?
+Every gotcha in a system is potential for inaccessible experiences,
+code workarounds and hacks,
+and misunderstanding when coming back to the area 6 months from now.
+What would you define in your system to help alleviate these problems and make your team mates more productive?
+
+[Let me know on Twitter](https://twitter.com/itsdouges) what you thought of this blog!
+More to come.

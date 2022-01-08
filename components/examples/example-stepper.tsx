@@ -12,6 +12,9 @@ import Text from 'design-system/text';
 import Audio from 'components/audio';
 
 const styles = css({
+  overflow: {
+    overflow: 'auto',
+  },
   disabled: {
     opacity: 0.5,
   },
@@ -25,7 +28,6 @@ const styles = css({
     },
   },
   noOverflow: {
-    position: 'relative',
     overflow: 'hidden',
   },
   noSelect: {
@@ -40,9 +42,10 @@ const Context = createContext<{ isSplash?: boolean; isMuted?: boolean }>({});
 
 interface ExampleStepperProps {
   children: React.ReactNode[];
+  hasAudio?: boolean;
 }
 
-export default function ExampleStepper({ children }: ExampleStepperProps) {
+export default function ExampleStepper({ children, hasAudio }: ExampleStepperProps) {
   const [step, setStep] = useState(-1);
   const [isMuted, setIsMuted] = useState(true);
   const steps = children.length;
@@ -68,15 +71,17 @@ export default function ExampleStepper({ children }: ExampleStepperProps) {
           </TimeoutButton>
         )}
 
-        <Inline gap="regular" width="full" inlineAlign="end">
-          <Button
-            isDisabled={isSplash}
-            appearance="primary"
-            isSelected={!isMuted}
-            onClick={() => setIsMuted((prev) => !prev)}>
-            {isMuted ? 'Listen' : 'Listening…'}
-          </Button>
-        </Inline>
+        {hasAudio && (
+          <Inline gap="regular" width="full" inlineAlign="end">
+            <Button
+              isDisabled={isSplash}
+              appearance="primary"
+              isSelected={!isMuted}
+              onClick={() => setIsMuted((prev) => !prev)}>
+              {isMuted ? 'Listen' : 'Listening…'}
+            </Button>
+          </Inline>
+        )}
       </Inline>
 
       <Context.Provider
@@ -97,6 +102,7 @@ interface StepProps {
   audioSrc?: string;
   isAudioMuted?: boolean;
   shouldDisableTransitions?: boolean | 'enter';
+  shouldOverflow?: boolean;
 }
 
 export function Step({
@@ -105,6 +111,7 @@ export function Step({
   code,
   description,
   audioSrc,
+  shouldOverflow,
 }: StepProps) {
   const { isMuted, isSplash } = useContext(Context);
   const codeRef = useRef<HTMLPreElement>(null);
@@ -124,11 +131,16 @@ export function Step({
       <Inline style={{ opacity: isSplash ? 0.8 : undefined }} gap="regular" blockAlign="stretch">
         <CodeBlock ref={codeRef} lang="auto">{dedent`${code}`}</CodeBlock>
         <Box
-          padding="xlarge"
-          css={[!shouldDisableTransitions && styles.transition, styles.noOverflow, styles.noSelect]}
+          background="body"
           width="full"
-          background="body">
-          <span css={isSplash && styles.hidden}>{children}</span>
+          css={[
+            shouldOverflow ? styles.overflow : styles.noOverflow,
+            !shouldDisableTransitions && styles.transition,
+            styles.noSelect,
+          ]}>
+          <Box padding="xlarge">
+            <span css={isSplash && styles.hidden}>{children}</span>
+          </Box>
         </Box>
       </Inline>
       {!isSplash && (

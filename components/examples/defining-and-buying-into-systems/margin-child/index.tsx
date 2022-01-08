@@ -10,7 +10,7 @@ import yuki3 from 'public/yuki-3.jpg';
 import Stack from 'design-system/stack';
 
 const styles = css({
-  noWrap: { whiteSpace: 'nowrap', overflow: 'auto', transformOrigin: 'left top' },
+  noWrap: { whiteSpace: 'nowrap', transformOrigin: 'left top' },
   align: { flexDirection: 'column' },
   gap: {
     margin: 3,
@@ -20,6 +20,7 @@ const styles = css({
     justifyContent: 'center',
   },
   card: {
+    overflow: 'hidden',
     whiteSpace: 'nowrap',
     width: 125,
     height: 75,
@@ -35,6 +36,7 @@ function MarginChild() {
   return (
     <ExampleStepper>
       <Step
+        shouldOverflow
         description="We begin with a group of thumbnails"
         code={`
       .thumb {
@@ -67,6 +69,7 @@ function MarginChild() {
       </Step>
 
       <Step
+        shouldOverflow
         description="Then add some space between them"
         code={`diff
       .thumb {
@@ -169,7 +172,7 @@ function MarginChild() {
         margin: 3px;
       }
 
-      +.preview.thumb {
+      +.preview .thumb {
       +  margin: 0;
       +}
       `}>
@@ -205,7 +208,7 @@ function MarginChild() {
           margin: 3px;
         }
 
-        .preview.thumb {
+        .preview .thumb {
           margin: 0;
         }
       `}>

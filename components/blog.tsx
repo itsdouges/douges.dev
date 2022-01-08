@@ -92,10 +92,10 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
               )}" https://douges.dev${link}`}>
               Tweet
             </LinkButton>,
-            <Separator key="separator" />,
-            <Button key="comment" appearance="subtle">
-              Comment
-            </Button>,
+            // <Separator key="separator" />,
+            // <Button key="comment" appearance="subtle">
+            //   Comment
+            // </Button>,
           ]}>
           {children}
         </SelectionActionBar>
