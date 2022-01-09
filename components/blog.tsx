@@ -13,6 +13,9 @@ import SelectionActionBar from 'components/selection-action-bar';
 import Box from 'design-system/box';
 import Button from 'design-system/button';
 import Tooltip from 'design-system/tooltip';
+import Inline from 'design-system/inline';
+import Tag from 'design-system/tag';
+import Separator from 'design-system/separator';
 
 const styles = css({
   heroImage: {
@@ -36,9 +39,10 @@ export interface BlogProps {
   slug: string;
   children: React.ReactNode;
   heroImage?: StaticImageData;
+  tags?: string[];
 }
 
-function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: BlogProps) {
+function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, tags }: BlogProps) {
   const { route } = useRouter();
   const link = slug ? `/blog/${slug}` : route;
 
@@ -52,18 +56,29 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
         </Box>
 
         <header>
-          <Heading level={1}>
-            <Link passHref href={link}>
-              <DSLink>{title}</DSLink>
-            </Link>
-          </Heading>
+          <Stack gap="regular">
+            {tags && (
+              <Inline gap="small">
+                {tags.map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </Inline>
+            )}
 
-          <Text color="low" size="smaller">
-            <Tooltip content={publishDate}>
-              <time dateTime={publishDate}>{friendlyDate(publishDate)}</time>
-            </Tooltip>{' '}
-            · <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min read
-          </Text>
+            <Heading level={1}>
+              <Link passHref href={link}>
+                <DSLink>{title}</DSLink>
+              </Link>
+            </Heading>
+
+            <Text color="low" size="smaller">
+              <Tooltip content={publishDate}>
+                <time dateTime={publishDate}>{friendlyDate(publishDate)}</time>
+              </Tooltip>{' '}
+              · <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min
+              read
+            </Text>
+          </Stack>
         </header>
 
         <SelectionActionBar
@@ -77,9 +92,10 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage }: 
               )}" https://douges.dev${link}`}>
               Tweet
             </LinkButton>,
-            <Button key="comment" appearance="subtle">
-              Comment
-            </Button>,
+            // <Separator key="separator" />,
+            // <Button key="comment" appearance="subtle">
+            //   Comment
+            // </Button>,
           ]}>
           {children}
         </SelectionActionBar>

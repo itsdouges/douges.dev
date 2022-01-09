@@ -27,14 +27,15 @@ interface Position {
 function Popup({ children, content, background = 'overlay', isOpen, ...props }: PopupProps) {
   const [position, setPosition] = useState<undefined | Position>();
   const targetRef = useRef<any>(null);
+
   const calculatePosition = useCallback(() => {
     if (isOpen && targetRef.current) {
       const element = targetRef.current as HTMLElement;
       const elementBox = element.getBoundingClientRect();
 
       setPosition({
-        top: element.offsetTop,
-        left: element.offsetLeft + elementBox.width / 2,
+        top: elementBox.top + window.scrollY,
+        left: elementBox.left + elementBox.width / 2,
         height: elementBox.height,
       });
     }

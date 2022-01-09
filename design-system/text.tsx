@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { token } from '@atlaskit/tokens';
 import css from 'design-system/css';
+import Box, { Background } from 'design-system/box';
 
 const styles = css({
   truncate: {
@@ -9,23 +10,34 @@ const styles = css({
     overflow: 'hidden',
   },
   textAbovePressable: {
-    zIndex: 1,
-    position: 'relative',
+    isolation: 'isolate',
+  },
+});
+
+const alignStyles = css({
+  start: {
+    textAlign: 'start',
+  },
+  center: {
+    textAlign: 'center',
+  },
+  end: {
+    textAlign: 'end',
   },
 });
 
 const textSizes = css({
+  large: {
+    fontSize: 22,
+  },
   regular: {
     fontSize: 18,
-    margin: 0,
   },
   small: {
     fontSize: 16,
-    margin: 0,
   },
   smaller: {
     fontSize: 14,
-    margin: 0,
   },
   smallest: {
     fontSize: 12,
@@ -47,7 +59,6 @@ const colorStyles = css({
   onBoldWarning: { color: token('color.text.onBoldWarning') },
   disabled: { color: token('color.text.disabled') },
   currentColor: { color: 'currentColor' },
-  inherit: {},
 });
 
 const weightStyles = css({
@@ -57,21 +68,15 @@ const weightStyles = css({
   bolder: {
     fontWeight: 700,
   },
-  regular: {},
 });
 
 const textTransformStyles = css({
-  none: {},
-  underline: {
-    textDecoration: 'underline',
-  },
   uppercase: {
     textTransform: 'uppercase',
   },
 });
 
 const textDecorationStyles = css({
-  none: {},
   underline: {
     textDecoration: 'underline',
   },
@@ -90,27 +95,35 @@ interface TextProps {
   transform?: keyof typeof textTransformStyles;
   decoration?: keyof typeof textDecorationStyles;
   shouldTruncate?: boolean;
+  align?: keyof typeof alignStyles;
+  background?: Background;
 }
 
 function Text({
   children,
-  as: Markup = 'span',
-  color = 'inherit',
+  as: element = 'span',
+  color,
   size = 'regular',
-  weight = 'regular',
-  transform = 'none',
-  decoration = 'none',
+  weight,
+  transform,
+  decoration,
+  align,
   shouldTruncate,
+  background,
 }: TextProps) {
-  const colorStyle = colorStyles[color];
+  const colorStyle = colorStyles[color!];
   const textSize = textSizes[size];
-  const weightStyle = weightStyles[weight];
-  const textTransformStyle = textTransformStyles[transform];
-  const textDecorationStyle = textDecorationStyles[decoration];
+  const weightStyle = weightStyles[weight!];
+  const textTransformStyle = textTransformStyles[transform!];
+  const textDecorationStyle = textDecorationStyles[decoration!];
+  const alignStyle = alignStyles[align!];
 
   return (
-    <Markup
+    <Box
+      as={element}
+      background={background}
       css={[
+        alignStyle,
         styles.textAbovePressable,
         textSize,
         shouldTruncate && styles.truncate,
@@ -120,7 +133,7 @@ function Text({
         textDecorationStyle,
       ]}>
       {children}
-    </Markup>
+    </Box>
   );
 }
 

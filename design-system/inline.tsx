@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import css from 'design-system/css';
-import Box, { PaddingProps } from 'design-system/box';
+import Box, { PaddingProps, Background } from 'design-system/box';
+import { SafeInlineStyles } from 'types/types';
 
 const styles = css({
   inline: {
@@ -10,7 +11,6 @@ const styles = css({
 });
 
 const gapStyles = css({
-  none: {},
   '-small': {
     '> *': { marginInlineEnd: -4 },
   },
@@ -74,9 +74,17 @@ const blockAlignStyles = css({
 });
 
 const widthStyles = css({
-  auto: {},
   full: {
     inlineSize: '100%',
+  },
+});
+
+const wrapStyles = css({
+  wrap: {
+    flexWrap: 'wrap',
+  },
+  nowrap: {
+    flexWrap: 'nowrap',
   },
 });
 
@@ -86,26 +94,30 @@ interface InlineProps extends PaddingProps {
   inlineAlign?: keyof typeof inlineAlignStyles;
   blockAlign?: keyof typeof blockAlignStyles;
   width?: keyof typeof widthStyles;
+  wrap?: keyof typeof wrapStyles;
+  background?: Background;
+  style?: SafeInlineStyles;
 }
 
 function Inline({
   children,
+  gap,
+  width = 'full',
   inlineAlign = 'start',
   blockAlign = 'top',
-  gap = 'none',
-  width = 'auto',
+  wrap,
   ...props
 }: InlineProps) {
-  const gapStyle = gapStyles[gap];
+  const gapStyle = gapStyles[gap!];
   const alignStyle = inlineAlignStyles[inlineAlign];
   const justifyStyle = blockAlignStyles[blockAlign];
-  const widthStyle = widthStyles[width];
+  const widthStyle = widthStyles[width!];
+  const wrapStyle = wrapStyles[wrap!];
 
   return (
     <Box
       {...props}
-      css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle]}
-      >
+      css={[styles.inline, alignStyle, justifyStyle, gapStyle, widthStyle, wrapStyle]}>
       {children}
     </Box>
   );

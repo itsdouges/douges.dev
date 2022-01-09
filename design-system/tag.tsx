@@ -35,7 +35,7 @@ interface TagProps {
 
 function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
   const background = colorBackground[color];
-  const textColor = textAppearanceMap[color] || 'high';
+  const textColor = textAppearanceMap[color] || 'medium';
 
   return (
     <Box
@@ -45,7 +45,9 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
       borderRadius={appearance}>
       <Inline gap="small" blockAlign="middle">
         {icon}
-        <Text color={textColor} size="smaller">{children}</Text>
+        <Text color={textColor} size="smaller">
+          {children}
+        </Text>
       </Inline>
     </Box>
   );
@@ -61,9 +63,7 @@ export function TagLink({ children, icon, color = 'greyLight', appearance = 'def
         <FocusRing>
           <Box
             {...press}
-            // Hack not great goes against BOX
             as="a"
-            href="#"
             background={background}
             paddingLeft={icon ? undefined : 'small'}
             paddingRight="small"

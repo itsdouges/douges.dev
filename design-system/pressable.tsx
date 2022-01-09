@@ -30,6 +30,11 @@ const hoverStyles = css({
       backgroundColor: token('color.background.interaction.hovered'),
     },
   },
+  selected: {
+    '::before': {
+      backgroundColor: token('color.background.selected.hover'),
+    },
+  },
   inverse: {
     '::before': {
       backgroundColor: token('color.background.interaction.inverse.hovered'),
@@ -43,6 +48,11 @@ const pressedStyles = css({
       backgroundColor: token('color.background.interaction.pressed'),
     },
   },
+  selected: {
+    '::before': {
+      backgroundColor: token('color.background.selected.pressed'),
+    },
+  },
   inverse: {
     '::before': {
       backgroundColor: token('color.background.interaction.inverse.pressed'),
@@ -54,7 +64,7 @@ interface PressableProps {
   children: (props: { className: string } & UsePressable['buttonProps']) => JSX.Element;
   onClick?: React.MouseEventHandler;
   isDisabled?: boolean;
-  appearance?: 'default' | 'inverse';
+  appearance?: 'default' | 'inverse' | 'selected';
   pressedAppearance?: 'push' | 'static' | 'none';
 }
 
@@ -78,7 +88,7 @@ function Pressable({
               pressedAppearance !== 'none' && [
                 styles.pressable,
                 hoverStyle,
-                isPressed && [pressedStyle, pressedAppearance === 'push' && styles.push],
+                isPressed && [pressedStyle, pressedAppearance === 'push' ? styles.push : undefined],
               ]
           ),
           ...buttonProps,

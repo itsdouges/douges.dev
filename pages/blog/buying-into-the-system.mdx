@@ -1,0 +1,165 @@
+import heroImage from '/public/system-hero.png';
+import BorderMenu from 'components/examples/defining-and-buying-into-systems/border-menu';
+import BorderTabs from 'components/examples/defining-and-buying-into-systems/border-tabs';
+import BorderShadow from 'components/examples/defining-and-buying-into-systems/border-shadow';
+import InteractionsExplosion from 'components/examples/defining-and-buying-into-systems/interactions-explosion';
+import InteractionsSingle from 'components/examples/defining-and-buying-into-systems/interactions-single';
+import MarginChild from 'components/examples/defining-and-buying-into-systems/margin-child';
+import MarginParent from 'components/examples/defining-and-buying-into-systems/margin-parent';
+import MarginAbstraction from 'components/examples/defining-and-buying-into-systems/margin-abstraction';
+
+export const meta = {
+  title: 'Defining and buying into systems',
+  blurb:
+    'We all want to be aligned so we can execute with precision and speed, what systems could we define to make UI development more sensible?',
+  publishDate: '2022-01-09',
+  tags: ['UI', 'DESIGN SYSTEMS', 'WEB DEV', 'CSS', 'SCALE'],
+  heroImage,
+};
+
+Believe it or not I [play ice](https://twitter.com/itsdouges/status/1455417512707837953?s=20) [hockey](https://twitter.com/itsdouges/status/1444889172410449925?s=20) [for fun](https://twitter.com/itsdouges/status/1371743285903912960) in Sydney,
+Australia.
+The higher the competitive ladder you climb [in sport] the more common it is to have your coach define and apply systems to the way the team plays,
+whether you're attacking or defending there are systems in place ready to execute at any given moment!
+In some ways this is a pretty fitting analogy for software development except we replace the competitive ladder with scale,
+the coach with an engineering manager or architect,
+and systems,
+well,
+systems still work <abbr title="In my opinion">IMO</abbr>.
+When you're a prospect [someone trying to get onto the team] and being scouted the coach will always push for you to "[buy into their system](https://www.ncsasports.org/blog/2014/07/28/buy-program/)" and teams in software development aren't all that different,
+truly.
+We all want to be aligned so we can execute with precision and speed.
+
+What systems could we define to make <abbr title="User interface">UI</abbr> development have less friction,
+higher cohesion,
+
+# Boxes and borders
+
+Today most sites use the box sizing property to enable the [alternative box model](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#the_alternative_css_box_model) simplifying how we think about the size of an element rendered in the viewport.
+Set an elements width to `100px` and it does exactly what you think it would.
+
+But even with the alternative box model things can still be harder than we'd like them to be.
+Borders for example are pretty easy to get started with,
+but use them with multiple elements in different use cases and they start behaving quite nefariously.
+
+Let's go over a few examples with some of these use cases.
+
+<BorderMenu />
+
+> Buying in to the [system] means that you love what you are a part of and your joy is infectious to everyone [on the team].
+>
+> <sub>
+>   <sub>Passion</sub>
+> </sub>
+
+You might be thinking,
+"_Douges_,
+mate,
+this is easy!
+That work around is [fine]…" and honestly?
+You're not wrong.
+But let's look at another example first.
+
+<BorderTabs />
+
+More friction and workarounds.
+We need to think bigger,
+past a single example and towards how friction can be reduced and how it would work with the entire system.
+
+What if our system applied borders using box shadows?
+
+<BorderShadow />
+
+Well,
+that's something!
+Is it perfect in all scenarios?
+Definitely not.
+If you're a keen observer you'll notice when we "zoom" into the example [using `transform`] the box shadow bleeds around the element.
+It's a tradeoff optimizing for cohesion over perfection throwing away the need to think through multiple moving parts and workarounds.
+
+# Interactions and backgrounds
+
+Interactive <abbr title="User interface">UI</abbr> elements like borders are simple to get started.
+Pick a few different background colors,
+maybe even a little transform,
+and you're done.
+But what would it look like when we're at scale?
+Let's visualize it.
+
+<InteractionsExplosion />
+
+Given enough use cases the need to define all interaction states get pretty wild,
+and we haven't even touched on <abbr title="User interface">UI</abbr> elements that don't work with backgrounds such as avatars!
+Each needing decisions to move forward effectively from both design and engineering.
+
+> Buying in to the [system] means that you are someone who knows how to stay in the moment.
+>
+> <sub>
+>   <sub>W.I.N</sub>
+> </sub>
+
+Given the need for varying use cases and enough scale each decision is a vector for friction and potential mistakes.
+If we were to add a new use case what would the appropriate interaction states be?
+More decisions!
+
+What if our system had only a single method to add interaction states for any button like element?
+
+<InteractionsSingle />
+
+Reducing avenues of decisions goes a long way to help reduce friction.
+When there is only one choice just imagine how fast you can move!
+The rub though is if there is only one choice it needs to be damn well good.
+
+This missing piece from this abstraction is setting the appropriate color direction [darker or lighter] depending on the background color to ensure it passes accessibility contrast requirements.
+Getting it correct means the entire system has been built around it,
+else you end up with friction which we're trying to eliminate.
+
+# Margin and layouts
+
+Using margins is simple enough for a single experience,
+used in a single area of your app.
+But things get nefarious when that experience now needs to scale to fit other use cases in different areas of your app.
+
+<MarginChild />
+
+A logical next step could be to move layout concerns to parent elements instead.
+Thanks to flex box and grid both supporting the gap property [in all major browsers](https://caniuse.com/flexbox-gap) it's simple enough to accomplish...
+but also a bit fiddly by default.
+
+<MarginParent />
+
+> Buying in to the [system] means that you are willing to hold yourself to the standard of what is expected of anyone who [is on the team].
+>
+> <sub>
+>   <sub>Excellence</sub>
+> </sub>
+
+At scale we want our team mates to be productive with minimal friction,
+this includes massaging away behaviour that might have less than ideal defaults.
+
+What if our system had layout abstractions with sensible defaults and baked in design decisions?
+
+<MarginAbstraction />
+
+# Bringing it altogether
+
+These are a few examples of areas we can define in our system that aim to reduce friction and improve cohesion but they aren't exhaustive.
+Others that are on my mind include accessibility attributes that should be available to all areas of your system,
+handling layering holistically to avoid z-index fights,
+and the creation of a button abstraction using a `div` instead of a `button` element so they can be nested without it being invalid.
+
+> Buying in to the [system] means accepting your role,
+> doing your job,
+> and trusting [leadership] and your teammates.
+>
+> <sub>
+>   <sub>Team first, team last</sub>
+> </sub>
+
+Every gotcha in a system is potential for inaccessible experiences,
+code workarounds or hacks,
+and misunderstanding when coming back to the area 6 months from now.
+What would you define in your system to help alleviate these problems and make your team mates more productive?
+
+[Let me know on Twitter](https://twitter.com/itsdouges) what you thought of this blog and if there are any areas you'd be interested to go deeper in.
+More soon.

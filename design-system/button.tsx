@@ -26,6 +26,7 @@ export const appearanceBgMap = {
 export interface ButtonProps {
   appearance?: keyof typeof appearanceBgMap;
   type?: 'submit' | 'button';
+  spacing?: 'none' | 'regular';
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
   isDisabled?: boolean;
@@ -33,7 +34,16 @@ export interface ButtonProps {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { children, isSelected, onClick, appearance = 'default', type = 'button', isDisabled, ...props },
+  {
+    children,
+    isSelected,
+    onClick,
+    spacing = 'regular',
+    appearance = 'default',
+    type = 'button',
+    isDisabled,
+    ...props
+  },
   ref
 ) {
   const mappedAppearance = isSelected ? 'selected' : appearance;
@@ -43,7 +53,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     isDescendentOfWarningBox && appearance === 'inverted'
       ? 'warningInverse'
       : appearanceBgMap[mappedAppearance];
-  const pressableAppearance = isDescendentOfWarningBox ? 'inverse' : 'default';
+  const pressableAppearance = isDescendentOfWarningBox
+    ? 'inverse'
+    : isSelected
+    ? 'selected'
+    : 'default';
 
   return (
     <Pressable
@@ -56,8 +70,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
           <Box
             as="button"
             borderRadius="default"
-            paddingX="medium"
-            paddingY="regular"
+            paddingX={spacing === 'regular' ? 'medium' : undefined}
+            paddingY={spacing === 'regular' ? 'regular' : undefined}
             background={isDisabled ? 'disabled' : background}
             css={styles.button}
             type={type}

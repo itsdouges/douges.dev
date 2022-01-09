@@ -3,9 +3,15 @@ import { css, SerializedStyles } from '@emotion/react';
 import { token } from '@atlaskit/tokens';
 import { refractor, RefractorElement, Text } from 'refractor/lib/core';
 import jsx from 'refractor/lang/jsx';
+import diff from 'refractor/lang/diff';
+import csss from 'refractor/lang/css';
 import Box from 'design-system/box';
+import { ForwardedRef } from 'react';
+import { forwardRef } from 'lib/react';
 
 refractor.register(jsx);
+refractor.register(diff);
+refractor.register(csss);
 
 const codeBlockStyles = css({
   fontSize: 12,
@@ -36,9 +42,25 @@ const defaultStyles = css({
   color: token('color.text.highEmphasis'),
 });
 
+const insertedStyles = css({
+  backgroundColor: token('color.background.subtleSuccess.hover'),
+  color: token('color.text.success'),
+});
+
+const deletedStyles = css({
+  backgroundColor: token('color.background.subtleDanger.hover'),
+  color: token('color.text.danger'),
+});
+
+const maxHeight = css({
+  maxHeight: 500,
+});
+
 const elementStyles: Record<string, SerializedStyles> = {
   keyword: keywordStyles,
+  selector: functionStyles,
   function: functionStyles,
+  property: attrNameStyles,
   string: stringNumberStyles,
   number: stringNumberStyles,
   'attr-name': attrNameStyles,
@@ -48,6 +70,8 @@ const elementStyles: Record<string, SerializedStyles> = {
   script: defaultStyles,
   operator: defaultStyles,
   parameter: defaultStyles,
+  'inserted-sign': insertedStyles,
+  'deleted-sign': deletedStyles,
 };
 
 const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode => {
@@ -79,16 +103,29 @@ const toJSX = (node: RefractorElement | Text, index: number): React.ReactNode =>
 toJSX.displayName = 'CodeBlock';
 
 interface CodeBlockProps {
+  lang?: 'jsx' | 'diff' | 'auto' | 'css';
   children: string;
+  background?: 'body' | 'transparent' | 'neutralSubtle' | 'sunken';
 }
 
-function CodeBlock({ children = '' }: CodeBlockProps) {
-  const root = refractor.highlight(children, 'jsx');
+type Lang = 'jsx' | 'diff' | 'css' | undefined;
+
+function CodeBlock(
+  { children = '', lang = 'jsx', background = 'body' }: CodeBlockProps,
+  ref: ForwardedRef<HTMLPreElement>
+) {
+  const actualLang: Lang =
+    lang === 'auto' ? (children.match(/^(jsx|diff|css)/)?.[0] as Lang) || 'jsx' : lang;
+  const codeNoLang = lang === 'auto' ? children.replace(/^(jsx|diff|css)\n/, '') : children;
+  const root = refractor.highlight(codeNoLang, actualLang);
+
+
   return (
     <Box
+      ref={ref}
       width="full"
-      background="sunken"
-      css={codeBlockStyles}
+      background={background}
+      css={[codeBlockStyles, maxHeight]}
       borderRadius="default"
       as="pre"
       padding="medium">
@@ -97,4 +134,4 @@ function CodeBlock({ children = '' }: CodeBlockProps) {
   );
 }
 
-export default CodeBlock;
+export default forwardRef(CodeBlock);

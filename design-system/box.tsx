@@ -327,7 +327,7 @@ const borderRadiusStyles = css({
   declaration: {
     borderRadius: 'var(--ds-box-border-radius)',
     '::before,::after': {
-      borderRadius: 'var(--ds-box-border-radius)',
+      borderRadius: 'inherit',
     },
   },
   default: {
@@ -358,6 +358,9 @@ const displayStyles = css({
   'inline grid': {
     display: 'inline-grid',
   },
+  'inline flow': {
+    display: 'inline-block',
+  },
 });
 
 const elementResetStyles = css({
@@ -370,6 +373,9 @@ const elementResetStyles = css({
     WebkitTapHighlightColor: 'transparent',
   },
   pre: {
+    margin: 0,
+  },
+  blockquote: {
     margin: 0,
   },
   a: {
