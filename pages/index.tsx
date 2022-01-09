@@ -19,7 +19,7 @@ import { getAllBlogPosts } from 'lib/blog';
 import Text from 'design-system/text';
 import Grid from 'design-system/grid';
 
-const LatestBlogContent = dynamic(() => import('./blog/buying-into-the-system.mdx'));
+const LatestBlogContent = dynamic(() => import('./blog/performant-react-updates.mdx'));
 
 const styles = css({
   hero: {
