@@ -58,7 +58,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
         <header>
           <Stack gap="regular">
             {tags && (
-              <Inline gap="small">
+              <Inline wrap="wrap" gap="small">
                 {tags.map((tag) => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
