@@ -2,9 +2,7 @@
 import css from 'design-system/css';
 import Box from 'design-system/box';
 import ExampleStepper, { Step } from 'components/examples/example-stepper';
-import { token } from '@atlaskit/tokens';
 import Inline from 'design-system/inline';
-import Text from 'design-system/text';
 
 const styles = css({
   card: {
@@ -91,7 +89,7 @@ function MarginAbstraction() {
         description="We can even change their alignment"
         code={`diff
         -<Inline gap="regular">
-        +<Inline gap="regular" blockAlign="middle>
+        +<Inline gap="regular" blockAlign="middle">
           <div class="card" />
           <div class="card" />
           <div class="card" />
@@ -104,8 +102,8 @@ function MarginAbstraction() {
       <Step
         description="And on the bottom as well"
         code={`diff
-        -<Inline gap="regular" blockAlign="middle>
-        +<Inline gap="regular" blockAlign="bottom>
+        -<Inline gap="regular" blockAlign="middle">
+        +<Inline gap="regular" blockAlign="bottom">
           <div class="card" />
           <div class="card" />
           <div class="card" />
