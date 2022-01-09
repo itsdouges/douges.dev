@@ -1,4 +1,5 @@
 import heroImage from '/public/update-hero.png';
+import StateExample from 'components/examples/performant-react-updates/1-state';
 
 export const meta = {
   title: 'How to keep thousands of React components re-rendering without jank',
@@ -8,5 +9,15 @@ export const meta = {
   heroImage,
 };
 
-Over the end of year holidays I've been playing around with [React Three Fiber](https://github.com/pmndrs/react-three-fiber) working on a sticky note clone,
-it's been pretty fun as it's a different paradigm than I'm used to mixing 3d canvas and <abbr title="Document Object Model">DOM</abbr> elements to produce a hybrid of both worlds.
+Over the holidays I've been playing around with [React Three Fiber](https://github.com/pmndrs/react-three-fiber) working on a [sticky note clone](https://mixed-berry.vercel.app/),
+it's been pretty fun as it's a different paradigm than I'm used to mixing both 3d canvas and <abbr title="Document Object Model">DOM</abbr> elements to produce a hybrid of both worlds while still using React to tie it all together.
+One of the first features I worked on was re-creating focus state inside canvas as it doesn't exist natively,
+the requirements were similar to how focus state works in the <abbr title="Document Object Model">DOM</abbr> where only one element can be focused at a time for example when clicking on a sticky note it should become focused and the previously focused sticky note should become unfocused.
+
+# The first pass
+
+So we need to remember this is a side project and I'm just going in hard no tests guns blazing.
+So obviously I'll just slap everything into state,
+duh!
+
+<StateExample />

@@ -10,17 +10,10 @@ import Tag from 'design-system/tag';
 import Inline from 'design-system/inline';
 
 const styles = css({
-  card: {
-    ':hover': {
-      backgroundColor: token('color.background.overlay'),
-      boxShadow: token('shadow.overlay'),
-    },
-  },
   cardImage: {
     backgroundColor: token('color.background.subtleNeutral.resting'),
-    height: 168,
+    height: 88,
     position: 'relative',
-    overflow: 'hidden',
     width: '100%',
   },
 });
@@ -34,7 +27,7 @@ interface CardProps {
 
 function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
-    <Box padding="large" shadow="card" background="card" borderRadius="default" css={styles.card}>
+    <Box padding="medium" shadow="card" background="card" borderRadius="default">
       <Stack gap="medium">
         <div css={styles.cardImage}>
           {heroImage && (
@@ -47,7 +40,7 @@ function Card({ title, tags = [], secondary, heroImage }: CardProps) {
         </Text>
         <Inline gap="small">
           {tags.map((tag, index) => (
-            <Tag  key={index}>{tag}</Tag>
+            <Tag key={index}>{tag}</Tag>
           ))}
         </Inline>
       </Stack>
