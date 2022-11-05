@@ -2,7 +2,7 @@
   "name": "douges.dev",
   "version": "0.1.0",
   "private": true,
-  "description": "An interactive learning blog focusing on web development and problems at scale by Michael Dougall.",
+  "description": "An interactive blog focused on web & game dev, design systems, and scale. Written by Michael Dougall.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

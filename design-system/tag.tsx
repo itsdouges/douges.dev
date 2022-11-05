@@ -35,7 +35,7 @@ interface TagProps {
 
 function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: TagProps) {
   const background = colorBackground[color];
-  const textColor = textAppearanceMap[color] || 'medium';
+  const textColor = textAppearanceMap[color] || 'low';
 
   return (
     <Box

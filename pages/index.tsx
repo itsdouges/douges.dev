@@ -30,7 +30,7 @@ const styles = css({
     flexDirection: 'column',
     justifyContent: 'center',
     textAlign: 'center',
-    borderBottom: `2px solid ${token('color.border.neutral')}`,
+    backgroundColor: token('color.background.sunken'),
   },
 });
 
@@ -63,7 +63,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         <div css={styles.hero}>
           <Section>
             <Stack inlineAlign="center" gap="regular">
-              <Heading level={0}>douges&#8203;.dev</Heading>
+              <Heading level={0}>DOUGES&#8203;.dev</Heading>
               <Text color="medium">
                 <span
                   dangerouslySetInnerHTML={{
@@ -87,7 +87,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
         {moreBlogs.length > 0 && (
           <Section isSeparated isSunken>
             <Stack gap="large">
-              <Heading level={2}>There&apos;s more where that came from</Heading>
+              <Heading level={2}>More where that came from</Heading>
               <Grid columns={2} gap="xlarge">
                 {moreBlogs.map((blog, index) => (
                   <Link key={index} href={`/blog/${blog.slug}`} passHref>

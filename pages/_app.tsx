@@ -10,7 +10,6 @@ import IconButton from 'design-system/icon-button';
 import toggleTheme from 'lib/toggle-theme';
 import components from 'components/blog-mdx-components';
 import Button from 'design-system/button';
-import { token } from '@atlaskit/tokens';
 import LayoutBlog from 'components/layout-blog';
 import Box from 'design-system/box';
 import DropdownMenu, { MenuItem } from 'design-system/dropdown-menu';
@@ -18,7 +17,11 @@ import Inline from 'design-system/inline';
 
 const styles = css({
   header: {
-    borderTop: `8px solid ${token('color.background.boldBrand.resting')}`,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 100,
   },
 });
 
