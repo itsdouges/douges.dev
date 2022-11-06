@@ -11,17 +11,15 @@ import Image from 'next/image';
 import Text from 'design-system/text';
 import SelectionActionBar from 'components/selection-action-bar';
 import Box from 'design-system/box';
-import Button from 'design-system/button';
-import Tooltip from 'design-system/tooltip';
 import Inline from 'design-system/inline';
 import Tag from 'design-system/tag';
-import Separator from 'design-system/separator';
 
 const styles = css({
   heroImage: {
     height: 250,
     position: 'relative',
     width: 'calc(100% + 24px)',
+    overflow: 'hidden',
     alignSelf: 'center',
     '@media screen and (min-width: 1000px)': {
       width: 'calc(100% + 64px)',
@@ -49,7 +47,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
   return (
     <article>
       <Stack gap="xxxlarge" inlineAlign="stretch">
-        <Box css={styles.heroImage} background="neutralSubtle" borderRadius="default">
+        <Box css={styles.heroImage} background="neutralSubtle" borderRadius="rounded">
           {heroImage && (
             <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
           )}
@@ -72,11 +70,8 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
             </Heading>
 
             <Text color="low" size="smaller">
-              <Tooltip content={publishDate}>
-                <time dateTime={publishDate}>{friendlyDate(publishDate)}</time>
-              </Tooltip>{' '}
-              · <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min
-              read
+              <time dateTime={publishDate}>{friendlyDate(publishDate)}</time> ·{' '}
+              <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min read
             </Text>
           </Stack>
         </header>
@@ -92,10 +87,6 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
               )}" https://douges.dev${link}`}>
               Tweet
             </LinkButton>,
-            // <Separator key="separator" />,
-            // <Button key="comment" appearance="subtle">
-            //   Comment
-            // </Button>,
           ]}>
           {children}
         </SelectionActionBar>

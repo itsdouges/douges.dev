@@ -50,6 +50,13 @@ const components: MDXProviderComponents = {
   ConstrainStyles,
   CodemodStyles,
   CodeAnalysis,
+  a({ children, ...props }) {
+    return (
+      <a {...props} target="_blank">
+        {children}
+      </a>
+    );
+  },
   wrapper({ children }) {
     return (
       <div css={styles.wrapper}>
@@ -82,25 +89,25 @@ const components: MDXProviderComponents = {
   hr(props) {
     return <hr {...props} css={styles.hr} />;
   },
-  h1(props) {
+  h1({ children, ...props }) {
     return (
-      <Anchor title={props.children}>
-        <Heading {...props} level={2} />
-      </Anchor>
+      <Heading {...props} level={2}>
+        <Anchor title={children}>{children}</Anchor>
+      </Heading>
     );
   },
-  h2(props) {
+  h2({ children, ...props }) {
     return (
-      <Anchor title={props.children}>
-        <Heading {...props} level={3} />
-      </Anchor>
+      <Heading {...props} level={3}>
+        <Anchor title={children}>{children}</Anchor>
+      </Heading>
     );
   },
-  h3(props) {
+  h3({ children, ...props }) {
     return (
-      <Anchor title={props.children}>
-        <Heading {...props} level={3} />
-      </Anchor>
+      <Heading {...props} level={4}>
+        <Anchor title={children}>{children}</Anchor>
+      </Heading>
     );
   },
   pre(props) {

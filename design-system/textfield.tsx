@@ -18,7 +18,7 @@ const styles = css({
     },
   },
   input: {
-    fontSize: 14,
+    fontSize: 24,
     width: '100%',
     fontFamily: 'inherit',
     '::placeholder': {

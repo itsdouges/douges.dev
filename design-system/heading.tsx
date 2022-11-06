@@ -6,6 +6,7 @@ const styles = css({
   default: {
     margin: 0,
     wordBreak: 'break-word',
+    fontFamily: `'Merriweather', 'serif'`,
     hyphens: 'auto',
     letterSpacing: '-0.01em',
     '@media screen and (min-width: 500px)': {
@@ -17,7 +18,7 @@ const styles = css({
     fontSize: 86,
     lineHeight: 1.1,
     color: token('color.text.highEmphasis'),
-    fontWeight: 300,
+    fontStyle: 'italic',
     '@media screen and (min-width: 800px)': {
       fontSize: 112,
     },
@@ -26,20 +27,16 @@ const styles = css({
     fontSize: 64,
     lineHeight: 1.1,
     color: token('color.text.highEmphasis'),
-    fontWeight: 400,
   },
   2: {
     fontSize: 40,
     lineHeight: 1.16,
     color: token('color.text.mediumEmphasis'),
-    fontWeight: 500,
   },
   3: {
     fontSize: 22,
     lineHeight: 1.2,
     color: token('color.text.mediumEmphasis'),
-    fontWeight: 600,
-    textTransform: 'uppercase',
   },
 });
 

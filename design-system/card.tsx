@@ -13,7 +13,6 @@ const styles = css({
   card: {
     ':hover': {
       backgroundColor: token('color.background.overlay'),
-      boxShadow: token('shadow.overlay'),
     },
   },
   cardImage: {
@@ -34,7 +33,7 @@ interface CardProps {
 
 function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
-    <Box padding="large" shadow="card" background="card" borderRadius="default" css={styles.card}>
+    <Box padding="large" background="card" borderRadius="default" css={styles.card}>
       <Stack gap="medium">
         <div css={styles.cardImage}>
           {heroImage && (
@@ -47,7 +46,7 @@ function Card({ title, tags = [], secondary, heroImage }: CardProps) {
         </Text>
         <Inline gap="small">
           {tags.map((tag, index) => (
-            <Tag  key={index}>{tag}</Tag>
+            <Tag key={index}>{tag}</Tag>
           ))}
         </Inline>
       </Stack>

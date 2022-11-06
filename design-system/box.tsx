@@ -325,7 +325,7 @@ const paddingRightStyles = css({
 
 const borderRadiusStyles = css({
   declaration: {
-    borderRadius: 'var(--ds-box-border-radius)',
+    borderRadius: 'max(0px, min(var(--ds-box-border-radius), (100vw - 50px - 100%) * 9999))',
     '::before,::after': {
       borderRadius: 'inherit',
     },
@@ -379,8 +379,8 @@ const elementResetStyles = css({
     margin: 0,
   },
   a: {
+    color: token('color.text.link.resting'),
     ':hover,:active': {
-      color: 'initial',
       textDecoration: 'none',
     },
   },
@@ -422,7 +422,7 @@ export interface BoxProps<TElement extends BoxHTMLElement>
     BorderProps,
     SizeProps {
   children?: React.ReactNode;
-  background?: Background;
+  background?: Background | 'inherit';
   borderRadius?: BorderRadius;
   shadow?: Shadow;
   display?: Display;
@@ -461,7 +461,9 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   ref: ForwardedRef<HTMLElement>
 ) {
   const BoxElement = as as 'a';
-  const backgroundStyle = backgroundStyles[background!];
+  const parentBg = useBoxBackground();
+  const bgKey = background === 'inherit' ? parentBg : background;
+  const backgroundStyle = backgroundStyles[bgKey!];
   const shadowStyle = shadowStyles[shadow!];
   const paddingTopStyle = paddingTopStyles[paddingTop || paddingY || padding!];
   const paddingRightStyle = paddingRightStyles[paddingRight || paddingX || padding!];
@@ -476,7 +478,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
   const heightStyle = heightStyles[height || size!];
 
   return (
-    <BoxContext.Provider value={background}>
+    <BoxContext.Provider value={bgKey}>
       <BoxElement
         ref={ref as ForwardedRef<any>}
         css={[
@@ -496,7 +498,7 @@ function Box<TElement extends BoxHTMLElement = 'div'>(
           heightStyle,
         ]}
         className={className}
-        {...(props as unknown)}>
+        {...(props as {})}>
         {children}
       </BoxElement>
     </BoxContext.Provider>

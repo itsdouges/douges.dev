@@ -6,8 +6,9 @@ interface AnchorProps {
 }
 
 function Anchor({ children, title }: AnchorProps) {
+  const id = title.replace(/ /, '-').toLowerCase();
   return (
-    <Box as="a" id={title.replace(/ /, '-').toLowerCase()}>
+    <Box href={`#${id}`} as="a" id={id}>
       {children}
     </Box>
   );

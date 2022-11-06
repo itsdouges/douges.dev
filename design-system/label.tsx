@@ -12,7 +12,7 @@ function Label({ label, htmlFor, children }: LabelProps) {
     <Stack gap="small">
       <div>
         <label htmlFor={htmlFor}>
-          <Text weight="bolder" size="small" color="low">
+          <Text size="small" color="low">
             {label}
           </Text>
         </label>

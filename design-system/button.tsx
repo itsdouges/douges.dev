@@ -79,7 +79,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
             ref={ref}
             {...pressable}
             {...props}>
-            <Text size="small" weight="bold">
+            <Text
+              size="small"
+              color={mappedAppearance === 'default' ? 'medium' : undefined}
+              weight="bold">
               {children}
             </Text>
           </Box>
