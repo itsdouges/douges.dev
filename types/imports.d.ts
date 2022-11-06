@@ -3,3 +3,9 @@ declare module '*.m4a' {
 
   export default exportValue;
 }
+
+declare module '!!raw-loader!*' {
+  const exportValue: string;
+
+  export default exportValue;
+}
