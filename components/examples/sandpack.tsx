@@ -9,6 +9,7 @@ export function Sandpack(props: SandpackProps) {
         {...props}
         template="react"
         options={{
+          ...props.options,
           showLineNumbers: true,
         }}
         theme={{
@@ -30,7 +31,7 @@ export function Sandpack(props: SandpackProps) {
             base: token('color.background.default'),
             clickable: token('color.text.mediumEmphasis'),
             hover: token('color.text.mediumEmphasis'),
-            accent: token('color.background.subtleNeutral.resting'),
+            accent: token('color.text.selected'),
             disabled: token('color.text.disabled'),
             error: token('color.text.danger'),
             errorSurface: token('color.background.subtleDanger.resting'),
