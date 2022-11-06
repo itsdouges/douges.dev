@@ -1,4 +1,5 @@
 import heroImage from '/public/threejs-trees.png';
+import { Complete } from 'components/examples/threejs-trees/complete';
 
 export const meta = {
   blurb:
@@ -6,10 +7,10 @@ export const meta = {
   heroImage,
   publishDate: '2022-11-10',
   tags: ['GAME DEV', 'GLSL', 'R3F', 'THREEJS', 'TUTORIAL'],
-  title: 'Creating fluffy trees using ThreeJS',
+  title: 'Creating fluffy trees with ThreeJS',
 };
 
-I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769?s=20&t=u20fJ2AtyC5wih8fVl20Yg) using ThreeJS and I've gotten to the stage where I want to start filling out the environment.
+I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769?s=20&t=u20fJ2AtyC5wih8fVl20Yg) using ThreeJS (...technically React Three Fiber) and I've gotten to the stage where I want to start filling out the environment.
 I found this awesome tutorial by [Pontus Karlsson](https://www.youtube.com/user/Pomperi) going into detail of how to make fluffy stylized trees...
 
 <div style={{ textAlign: 'center' }}>
@@ -19,18 +20,17 @@ I found this awesome tutorial by [Pontus Karlsson](https://www.youtube.com/user/
     style={{ maxWidth: '100%' }}
     src="https://www.youtube.com/embed/iASMFba7GeI"
     title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
+    frameBorder="0"
   />
 </div>
 
 ...and they look _fantastic_.
 Unfortunately for me though this tutorial was made for Unity 3D...
 not ThreeJS!
-After a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've mostly figured it out.
+After a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've mostly figured it out,
+check it out!
 
-EXAMPLE HERE
+<Complete />
 
 While my trees don't look as impressive I'm still pretty chuffed for how they turned out.
 Keep reading for how I did it!

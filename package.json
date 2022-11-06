@@ -12,6 +12,7 @@
   "dependencies": {
     "@atlaskit/css-reset": "^6.1.2",
     "@atlaskit/tokens": "^0.2.1",
+    "@codesandbox/sandpack-react": "^1.17.0",
     "@emotion/react": "^11.4.1",
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/react": "^1.6.22",

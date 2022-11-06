@@ -16,11 +16,9 @@ const styles = css({
     },
   },
   cardImage: {
-    backgroundColor: token('color.background.subtleNeutral.resting'),
     height: 168,
     position: 'relative',
     overflow: 'hidden',
-    width: '100%',
   },
 });
 
@@ -33,13 +31,13 @@ interface CardProps {
 
 function Card({ title, tags = [], secondary, heroImage }: CardProps) {
   return (
-    <Box padding="large" background="card" borderRadius="default" css={styles.card}>
+    <Box padding="large" background="card" borderRadius="rounded" css={styles.card}>
       <Stack gap="medium">
-        <div css={styles.cardImage}>
+        <Box background="neutralSubtle" borderRadius="default" width="full" css={styles.cardImage}>
           {heroImage && (
             <Image placeholder="blur" objectFit="cover" layout="fill" src={heroImage} alt="" />
           )}
-        </div>
+        </Box>
         <Heading level={3}>{title}</Heading>
         <Text color="medium" size="small">
           {secondary}
