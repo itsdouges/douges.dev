@@ -119,6 +119,9 @@ const components: MDXProviderComponents = {
   inlineCode(props) {
     return <Code {...props} />;
   },
+  p({ children }) {
+    return <Text as="p">{children}</Text>;
+  },
 };
 
 export default components;

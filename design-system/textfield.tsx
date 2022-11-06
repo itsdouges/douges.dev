@@ -8,6 +8,7 @@ const styles = css({
   container: {
     maxWidth: 500,
     width: '100%',
+    fontFamily: "'Karla', sans-serif",
   },
   disabled: {
     cursor: 'not-allowed',
