@@ -2,6 +2,7 @@ import { Sandpack } from '../../sandpack';
 import appCode from '!!raw-loader!./app.js';
 import geometryCode from '!!raw-loader!./geometry.js';
 import vertexShaderCode from '!!raw-loader!./vertex.glsl';
+import fragmentShaderCode from '!!raw-loader!./fragment.glsl';
 
 export function Billboard() {
   return (
@@ -21,6 +22,8 @@ export function Billboard() {
         '/App.js': appCode,
         '/vertex.glsl.js': `const shader = \`${vertexShaderCode}\`; export default shader;`,
         '/vertex.glsl': vertexShaderCode,
+        '/fragment.glsl.js': `const shader = \`${fragmentShaderCode}\`; export default shader;`,
+        '/fragment.glsl': fragmentShaderCode,
         '/geometry.js': geometryCode,
       }}
     />

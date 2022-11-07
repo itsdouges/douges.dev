@@ -75,7 +75,7 @@ const components: MDXProviderComponents = {
       <Box
         as="blockquote"
         background="neutralSubtle"
-        padding="xlarge"
+        padding="large"
         borderRadius="rounded"
         {...props}
         css={styles.blockquote}>
@@ -120,7 +120,11 @@ const components: MDXProviderComponents = {
     return children;
   },
   code(props) {
-    return <CodeBlock css={styles.code} {...props} />;
+    return (
+      <Box background="sunken" padding="medium">
+        <CodeBlock css={styles.code} {...props} />
+      </Box>
+    );
   },
   inlineCode(props) {
     return <Code {...props} />;

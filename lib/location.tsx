@@ -1,2 +1,4 @@
 export const origin =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://douges.dev';
+  process.env.NODE_ENV === 'development'
+    ? 'https://dougesdev-git-tree-js-douges.vercel.app'
+    : 'https://douges.dev';

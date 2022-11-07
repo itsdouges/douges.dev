@@ -7,7 +7,13 @@ import css from 'design-system/css';
 const styles = css({
   overrides: {
     '.sp-tab-button': {
-      fontFamily: "'Karla', sans-serif !important",
+      fontFamily: "'Karla', sans-serif",
+    },
+    '.sp-preview-container,.sp-overlay': {
+      background: token('color.background.default'),
+    },
+    iframe: {
+      borderRadius: 6,
     },
   },
 });

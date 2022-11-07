@@ -1,5 +1,5 @@
 import { Clone, useGLTF } from '@react-three/drei';
-import { TreeFoliageMaterial } from './foliage-material';
+import { FoliageMaterial } from './foliage-material';
 
 export function Tree({ position, rotation }) {
   const tree = useGLTF('{ORIGIN}/static/tree.glb');
@@ -10,14 +10,9 @@ export function Tree({ position, rotation }) {
         receiveShadow
         castShadow
         object={tree.nodes.trunk}
-        inject={<meshBasicMaterial color="brown" />}
+        inject={<meshBasicMaterial color="black" />}
       />
-      <Clone
-        receiveShadow
-        castShadow
-        object={tree.nodes.foliage}
-        inject={<TreeFoliageMaterial />}
-      />
+      <Clone receiveShadow castShadow object={tree.nodes.foliage} inject={<FoliageMaterial />} />
     </group>
   );
 }

@@ -1,8 +1,7 @@
 import { Canvas } from '@react-three/fiber';
-import { Color } from 'three';
-import { Suspense } from 'react';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { MathUtils } from 'three';
+import { Color, MathUtils } from 'three';
+import { Suspense } from 'react';
 import { Tree } from './tree';
 
 export default function App() {
@@ -32,8 +31,8 @@ export default function App() {
         />
         <pointLight position={[-10, 0, -20]} color="#eef4aa" intensity={0.5} />
 
-        <OrbitControls />
-        <PerspectiveCamera makeDefault far={2000} fov={60} near={0.1} position={[0, 3, 5]} />
+        <PerspectiveCamera far={2000} fov={60} makeDefault near={0.1} position={[0, 3, 6]} />
+        <OrbitControls target={[0, 3, 0]} />
       </Suspense>
     </Canvas>
   );
