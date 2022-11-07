@@ -55,7 +55,10 @@ export default function ExampleStepper({ children, hasAudio }: ExampleStepperPro
   return (
     <Stack padding="medium" background="sunken" gap="regular">
       <Inline gap="small">
-        <Button onClick={() => setStep((prev) => prev - 1)} isDisabled={step <= 0}>
+        <Button
+          appearance="subtle"
+          onClick={() => setStep((prev) => prev - 1)}
+          isDisabled={step <= 0}>
           Previous
         </Button>
         {isSplash && (
@@ -65,6 +68,7 @@ export default function ExampleStepper({ children, hasAudio }: ExampleStepperPro
         )}
         {!isSplash && (
           <TimeoutButton
+            appearance="subtle"
             onClick={() => setStep((prev) => prev + 1)}
             isDisabled={step === steps - 1}>
             {isComplete ? 'Complete' : 'Next'}
@@ -146,7 +150,7 @@ export function Step({
       {!isSplash && (
         <Inline gap="small" blockAlign="middle" inlineAlign="center">
           <Text align="center">
-            <Text background="neutralBold" size="regular" weight="bold">
+            <Text background="neutralBold" size="small" weight="bold">
               {description}
             </Text>
           </Text>

@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import css from 'design-system/css';
 import { useState } from 'react';
 import Textfield from 'design-system/textfield';
 import Label from 'design-system/label';
@@ -27,7 +25,7 @@ function SignUp() {
 
   return (
     <Stack gap="regular">
-      <Heading level={2}>Don&apos;t miss a blog!</Heading>
+      <Heading level={2}>Don&apos;t miss a post!</Heading>
       <Text as="p">
         Join others and get notified early when new content is available, unsubscribe at any time.
       </Text>

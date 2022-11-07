@@ -3,7 +3,7 @@ import { useTexture } from '@react-three/drei';
 import { useMemo, useRef } from 'react';
 import { Color, FrontSide, MeshStandardMaterial } from 'three';
 import CustomShaderMaterial from 'three-custom-shader-material';
-import vert from './vertex.glsl.js';
+import vert from './vertex.glsl';
 
 export function FoliageMaterial() {
   const ref = useRef(null);

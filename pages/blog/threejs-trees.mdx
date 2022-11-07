@@ -1,5 +1,6 @@
 import heroImage from '/public/threejs-trees.png';
 import { Complete } from 'components/examples/threejs-trees/complete';
+import { Billboard } from 'components/examples/threejs-trees/billboard';
 
 export const meta = {
   blurb:
@@ -11,7 +12,7 @@ export const meta = {
 };
 
 I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769?s=20&t=u20fJ2AtyC5wih8fVl20Yg) using ThreeJS (...technically React Three Fiber) and I've gotten to the stage where I want to start filling out the environment.
-I found this [awesome tutorial by Pontus Karlsson](https://www.youtube.com/watch?v=iASMFba7GeI) going into detail of how to make fluffy stylized trees,
+I found this [awesome tutorial](https://www.youtube.com/watch?v=iASMFba7GeI) by Pontus Karlsson going into detail of how to make fluffy stylized trees,
 they look _fantastic_!
 
 Unfortunately for me this tutorial was made for Unity 3D...
@@ -30,13 +31,58 @@ Things are going to get technical fast so if you have knowledge of:
 - GLSL shaders; and
 - Math
 
-Then everything will make more sense,
-but if you don't have the knowledge don't worry!
+Then everything will make more sense but if not don't fret!
 I'll explain as we go on.
 
-# Creating the tree model
+# GLSL shaders
+
+It's important to have some context on what GLSL shaders are.
+They're small programs written in a C-like language that are ran on the GPU.
+As it turns out ThreeJS is [made up of a ton of them](https://github.com/mrdoob/three.js/tree/da820c4dabc364c221571555c6f0b7034710b5d7/src/renderers/shaders)!
+If you've ever used any ThreeJS material before you've already indirectly used them,
+how cool!
+
+With WebGL there are two kinds of shaders:
+
+1. Vertex shaders, which run over _each vertex_ of a geometry; and
+2. Fragment shaders, which run over _every pixel_ of a geometry
+
+For this article we're only going to be looking at vertex shaders as we'll be transforming the vertexes of the foliage to get the appearance we want.
+
+Unfortunately we won't be going much further into GLSL shaders but if you're keen to really dig in and learn I recommend SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)".
+I did it and really loved going through it!
+He also has a [great Youtube channel](https://www.youtube.com/channel/UCEwhtpXrg5MmwlH04ANpL8A).
+
+# Prepping the geometry
+
+Like many things that look amazing we need to use some tricks.
+The first is prepping the geometry so each quad takes up the entire space of its UV map.
+
+> UV mapping is the process of unwrapping a 3D model so it can be textured enabling something 3D to be represented as 2D.
+
+Why do this?
+Well in the vertex shader there is a uniform (a global variable in GLSL speak) that ThreeJS makes available called `uv`.
+Remember the vertex shader runs over every vertex of a geometry which means the `uv` value of every vertex will always be `0` or `1` and we can use this data to modify the vertex position accordingly.
+
+If you're using Blender like me you can do this in a few steps:
+
+1. Go to UV editing mode
+1. Select the faces of the foliage
+1. Open the UV menu and click on Reset
 
 # Billboarding the foliage
+
+For the foliage effect we want the quads of the geometry to always face the camera and as it turns out this has a name,
+"billboarding"!
+If you've used `@react-three/drei` previously (I like calling it the lodash of React Three Fiber) you might be tempted to reach for the [Billboard component](https://github.com/pmndrs/drei#billboard) but unfortunately it comes with a big caveat: it affects the entire mesh,
+not individual quads on the geometry!
+
+> Geometry is made up of triangles of which there are three vertexes to a triangle and two triangles make a "quad".
+
+But of course we have a solution.
+Thanks to the power of GLSL vertex shaders and our prepped geometry we have everything needed and as a nice bonus also have the code run on the GPU!
+
+<Billboard />
 
 # Cutting the foliage out with alpha maps
 

@@ -15,6 +15,7 @@ import CodeAnalysis from 'components/examples/taming-the-beast-that-is-css-in-js
 import ExampleContainer from 'components/examples/container';
 import Stack from 'design-system/stack';
 import Anchor from 'components/anchor';
+import Tooltip from 'design-system/tooltip';
 
 const styles = css({
   wrapper: {
@@ -34,6 +35,7 @@ const styles = css({
     width: '100%',
   },
   blockquote: {
+    textAlign: 'center',
     ':before': {
       content: '""',
     },
@@ -50,6 +52,8 @@ const components: MDXProviderComponents = {
   ConstrainStyles,
   CodemodStyles,
   CodeAnalysis,
+  Tooltip,
+  Box,
   a({ children, ...props }) {
     return (
       <a {...props} target="_blank">
@@ -70,19 +74,14 @@ const components: MDXProviderComponents = {
     return (
       <Box
         as="blockquote"
-        border="left"
         background="neutralSubtle"
-        borderColor="brand"
-        paddingLeft="xlarge"
-        paddingRight="regular"
-        paddingY="xlarge"
+        padding="xlarge"
+        borderRadius="rounded"
         {...props}
         css={styles.blockquote}>
-        <i>
-          <Text color="medium" weight="bolder" size="large">
-            {children}
-          </Text>
-        </i>
+        <Text color="low" align="center" size="small">
+          {children}
+        </Text>
       </Box>
     );
   },
@@ -110,8 +109,15 @@ const components: MDXProviderComponents = {
       </Heading>
     );
   },
-  pre(props) {
-    return props.children;
+  li({ children }) {
+    return (
+      <li>
+        <Text>{children}</Text>
+      </li>
+    );
+  },
+  pre({ children }) {
+    return children;
   },
   code(props) {
     return <CodeBlock css={styles.code} {...props} />;

@@ -1,10 +1,20 @@
+/** @jsxImportSource @emotion/react */
 import { token } from '@atlaskit/tokens';
 import { Sandpack as SP, SandpackProps } from '@codesandbox/sandpack-react';
 import Box from 'design-system/box';
+import css from 'design-system/css';
+
+const styles = css({
+  overrides: {
+    '.sp-tab-button': {
+      fontFamily: "'Karla', sans-serif !important",
+    },
+  },
+});
 
 export function Sandpack(props: SandpackProps) {
   return (
-    <Box background="sunken" padding="medium">
+    <Box css={styles.overrides} background="sunken" padding="medium">
       <SP
         {...props}
         template="react"
