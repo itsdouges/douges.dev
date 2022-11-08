@@ -1,6 +1,7 @@
 import heroImage from '/public/threejs-trees.png';
 import { Complete } from 'components/examples/threejs-trees/complete';
 import { Billboard } from 'components/examples/threejs-trees/billboard';
+import { NoAlphaTree } from 'components/examples/threejs-trees/no-alpha';
 
 export const meta = {
   blurb:
@@ -115,7 +116,7 @@ instead it kind of bends when not looking at it directly.
 
 Let's go over what's happening.
 
-## Translation relative to the camera
+## Translating relative to the camera
 
 The entire effect is built on the fact that we can translate verticies relative to the camera.
 Personally when I think of translating things in 3D space I think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can do things you wouldn't usually think of!
@@ -178,15 +179,17 @@ So we're left with these four `[x, y]` values for each vertex:
 
 ## Performing the translation
 
-All that's left is to add the offset to the `worldViewPosition`:
+All that's left is to add the offset to the `worldViewPosition`,
+we also pass the `vertexOffset` through the `normalize` function so the entire length of the vector equals `1`.
 
 ```glsl
-worldViewPosition += vec4(vertexOffset, 0.0);
+worldViewPosition += vec4(normalize(vertexOffset), 0.0);
 ```
 
-Now from whatever angle we're looking at the quad each vertex is translated across the `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same but bigger,
-and from any other angle a stretched rectangle.
-For foliage this works in our favour as it results in a subtler effect.
+Now from whatever angle we're looking at the quad each vertex is translated across the `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same but bigger and from any other angle a stretched rectangle.
+For foliage this works in our favour as it results in a subtler billboard effect.
+
+<NoAlphaTree />
 
 # Using alpha maps to make foliage
 

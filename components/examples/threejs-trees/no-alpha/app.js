@@ -1,8 +1,8 @@
 import { Canvas } from '@react-three/fiber';
-import { useState } from 'react';
-import { MathUtils } from 'three';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Geometry } from './geometry';
+import { MathUtils } from 'three';
+import { Suspense, useState } from 'react';
+import { Tree } from './tree';
 
 export default function App() {
   const [remap, setRemap] = useState(true);
@@ -10,11 +10,13 @@ export default function App() {
 
   return (
     <>
-      <Canvas style={{ position: 'absolute', inset: 0 }}>
-        <Geometry enabled={enabled} remap={remap} />
-        <OrbitControls />
-        <PerspectiveCamera makeDefault far={2000} fov={60} near={0.1} position={[0, 0, 5]} />
-        <gridHelper rotation={[MathUtils.degToRad(-90), 0, 0]} args={[5, 5]} />
+      <Canvas style={{ position: 'absolute', inset: 0 }} shadows>
+        <Suspense fallback={null}>
+          <Tree enabled={enabled} remap={remap} />
+          <gridHelper rotation={[MathUtils.degToRad(-90), 0, 0]} args={[5, 5]} />
+          <PerspectiveCamera far={2000} fov={60} makeDefault near={0.1} position={[0, 3, 7]} />
+          <OrbitControls target={[0, 3, 0]} />
+        </Suspense>
       </Canvas>
 
       <div style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 12 }}>
