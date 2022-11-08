@@ -1,11 +1,10 @@
 import { Sandpack } from '../../sandpack';
 import appCode from '!!raw-loader!./app.js';
-import treeCode from '!!raw-loader!./tree.js';
+import geometryCode from '!!raw-loader!./geometry.js';
 import vertexShaderCode from '!!raw-loader!./vertex.glsl';
 import fragmentShaderCode from '!!raw-loader!./fragment.glsl';
-import { origin } from 'lib/location';
 
-export function NoAlphaTree() {
+export function PlaneBillboard() {
   return (
     <Sandpack
       customSetup={{
@@ -16,7 +15,7 @@ export function NoAlphaTree() {
         },
       }}
       options={{
-        visibleFiles: ['/tree.js', '/vertex.glsl'],
+        visibleFiles: ['/geometry.js', '/vertex.glsl'],
         activeFile: '/vertex.glsl',
       }}
       files={{
@@ -25,7 +24,7 @@ export function NoAlphaTree() {
         '/vertex.glsl': vertexShaderCode,
         '/fragment.glsl.js': `const shader = \`${fragmentShaderCode}\`; export default shader;`,
         '/fragment.glsl': fragmentShaderCode,
-        '/tree.js': treeCode.replace(/\{ORIGIN\}/g, origin),
+        '/geometry.js': geometryCode,
       }}
     />
   );

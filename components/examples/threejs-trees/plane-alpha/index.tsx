@@ -4,7 +4,7 @@ import geometryCode from '!!raw-loader!./geometry.js';
 import vertexShaderCode from '!!raw-loader!./vertex.glsl';
 import fragmentShaderCode from '!!raw-loader!./fragment.glsl';
 
-export function Billboard() {
+export function PlaneAlpha() {
   return (
     <Sandpack
       customSetup={{

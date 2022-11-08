@@ -1,7 +1,8 @@
 import heroImage from '/public/threejs-trees.png';
-import { Complete } from 'components/examples/threejs-trees/complete';
-import { Billboard } from 'components/examples/threejs-trees/billboard';
-import { NoAlphaTree } from 'components/examples/threejs-trees/no-alpha';
+import { TreeComplete } from 'components/examples/threejs-trees/tree-complete';
+import { PlaneBillboard } from 'components/examples/threejs-trees/plane-billboard';
+import { PlaneAlpha } from 'components/examples/threejs-trees/plane-alpha';
+import { TreeNoAlpha } from 'components/examples/threejs-trees/tree-no-alpha';
 
 export const meta = {
   blurb:
@@ -12,18 +13,20 @@ export const meta = {
   title: 'Creating fluffy trees with ThreeJS',
 };
 
-I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769?s=20&t=u20fJ2AtyC5wih8fVl20Yg) using ThreeJS (...technically React Three Fiber) and I've gotten to the stage where I want to start filling out the environment.
+I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769) using ThreeJS (...technically React Three Fiber) and I've gotten to the stage where I want to start filling out the environment.
 I found this [awesome tutorial](https://www.youtube.com/watch?v=iASMFba7GeI) by Pontus Karlsson going into detail of how to make fluffy stylized trees and they look _fantastic_!
 
-Unfortunately for me though this tutorial was made for Unity 3D...
+Unfortunately though this tutorial was made for Unity 3D,
 not ThreeJS!
 After a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've figured it out,
 take a look:
 
-<Complete />
+<TreeComplete />
 
-While my trees don't look as impressive I'm still pretty chuffed for how they turned out.
-Keep reading for how I did it!
+While my trees don't look as impressive I'm still pretty chuffed for how they turned out and it's been a great learning experience.
+
+Keep reading for how the effect is made,
+it's not as obvious as it seems!
 
 # GLSL shaders
 
@@ -51,7 +54,7 @@ There's a great article on [coordinate systems](https://learnopengl.com/Getting-
 1. Transform to view space, vertex position relative to the camera
 1. Transform to clip space, verticies are discarded when outside some range
 
-The cool bit though is during each conversion we're free to change the values as we see fit!
+{{IMAGEHERE}}
 
 We won't be going much further into the fundamentals of GLSL shaders but if you're keen to really dig in I recommend SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)".
 I did it and really loved going through it!
@@ -107,7 +110,7 @@ Instead we can use GLSL vertex shaders and our prepped mesh for the effect.
 Here we've applied it to a plane,
 try and rotate around and you'll see that it always stays (mostly) in view!
 
-<Billboard />
+<PlaneBillboard />
 
 Interestingly it's not actually a traditional billboard effect!
 If it was the quad would always be in view when rotating around it with the camera,
@@ -118,7 +121,7 @@ Let's go over what's happening.
 ## Translating relative to the camera
 
 The entire effect is built on the fact that we can translate verticies relative to the camera.
-Personally when I think of translating things in 3D space I think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can do things you wouldn't usually think of!
+Personally when I think of translating things in 3D space I think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can change the position when in each space!
 
 To transform the local position into view space so it's relative to the camera we perform some math:
 
@@ -134,6 +137,8 @@ If we add `1.0` to the `x` value:
 ```glsl
 worldViewPosition.x += 1.0;
 ```
+
+{{IMAGEHERE}}
 
 We've now translated this vertex one unit to the right relative to the camera.
 If we were to subtract `1.0` it would move one unit to the left.
@@ -164,6 +169,8 @@ Instead we need them to be between `[-1.0, 1.0]`.
 Remapping values is common in shaders and so a `remap` function exists to change an inputs known min and max values to new ones,
 here we remap the `uv` min and max values from `[0.0, 1.0]` to `[-1.0, 1.0]`:
 
+> While `remap` is common it isn't actually built into GLSL so you'll see it either copied & pasted or included via pragams.
+
 ```glsl
 vec2 offset = vec2(
   remap(uv.x, 0.0, 1.0, -1.0, 1.0),
@@ -175,18 +182,43 @@ vec2 offset = vec2(
 
 ## Performing the translation
 
-All that's left is to add the offset to the `worldViewPosition`,
-we also pass the `vertexOffset` through the `normalize` function so the entire length of the vector equals `1`.
+Now we finish by adding the normalized offset to the `worldViewPosition`.
+
+> Normalizing a vector involves changing all its values such as `x` and `y` so that its length equals one.
+> Using the built in function we can take it for granted.
 
 ```glsl
-worldViewPosition += vec4(normalize(vertexOffset), 0.0);
+vertexOffset = normalize(vertexOffset);
+
+worldViewPosition += vec4(vertexOffset, 0.0);
 ```
 
-Now from whatever angle we're looking at the quad each vertex is translated across the `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same but bigger and from any other angle a stretched rectangle.
-For foliage this works in our favour as it results in a subtler billboard effect.
+From any angle each vertex is now translated across the cameras `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same but bigger and from all other angles as a stretched rectangle.
 
-<NoAlphaTree />
+<TreeNoAlpha />
+
+For foliage this works in our favour as it results in a subtler but still effective effect.
 
 # Using alpha maps to make foliage
+
+When writing shaders with ThreeJS there are two ways to do alpha maps,
+the advanced way,
+and the simple way.
+
+The advanced way involves creating a fragment shader that calculates the color of each pixel of the mesh.
+Doing this for just the alpha map isn't actually that much lines of code but then when you also want lighting to affect the mesh it's either more code you need to write in the shader (and it's a lot of math!) or alternatively you can include fragments from the ThreeJS shader library but that's still work.
+
+> Understanding fragment shaders is still a great thing to have in your toolbox,
+> definitely check out SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)" if you're serious.
+
+The simple way and what I ended up leaning on was [CustomShaderMaterial](https://github.com/FarazzShaikh/THREE-CustomShaderMaterial) —
+it let's you keep using standard materials from ThreeJS so they're affected by scene lighting,
+can take texture maps without needing to write shader code,
+and can provide a custom vertex shader,
+fragment shader,
+or both!
+In this case we only provide the vertex shader.
+
+<PlaneAlpha />
 
 # Blowing wind onto the foliage

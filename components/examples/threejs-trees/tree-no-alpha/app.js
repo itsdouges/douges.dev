@@ -17,7 +17,7 @@ export default function App() {
           <gridHelper
             position={[0, 3.5, 0]}
             rotation={[MathUtils.degToRad(-90), 0, 0]}
-            args={[5, 5]}
+            args={[7, 7]}
           />
           <PerspectiveCamera far={2000} fov={60} makeDefault near={0.1} position={[0, 3, 7]} />
           <OrbitControls enableZoom={false} target={[0, 3, 0]} />
