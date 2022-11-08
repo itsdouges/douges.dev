@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { useState } from 'react';
-import { Color, MathUtils } from 'three';
+import { MathUtils } from 'three';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Geometry } from './geometry';
 
@@ -14,11 +14,7 @@ export default function App() {
         <Geometry enabled={enabled} remap={remap} />
         <OrbitControls />
         <PerspectiveCamera makeDefault far={2000} fov={60} near={0.1} position={[0, 0, 5]} />
-        <gridHelper
-          position={[-0.5, -0.5, 0]}
-          rotation={[MathUtils.degToRad(-90), 0, 0]}
-          args={[10, 10]}
-        />
+        <gridHelper rotation={[MathUtils.degToRad(-90), 0, 0]} args={[5, 5]} />
       </Canvas>
 
       <div style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 12 }}>

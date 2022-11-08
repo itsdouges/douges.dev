@@ -24,15 +24,6 @@ check it out!
 
 While my trees don't look as impressive I'm still pretty chuffed for how they turned out.
 Keep reading for how I did it!
-Things are going to get technical fast so if you have knowledge of:
-
-- 3D modelling
-- ThreeJS
-- GLSL shaders; and
-- Math
-
-Then everything will make more sense but if not don't fret!
-I'll explain as we go on.
 
 # GLSL vertex shaders
 
@@ -78,7 +69,7 @@ The first is prepping the mesh so each quad takes up the entire space of its UV 
 > {{IMAGE}}
 
 Why do this?
-Well in the vertex shader there is a uniform (a global variable in GLSL speak) that ThreeJS makes available called `uv`.
+Well in the vertex shader there is a global variable (a "uniform" in GLSL speak) that ThreeJS makes available called `uv`.
 Remember the vertex shader runs over every vertex of a mesh which means the `uv` value of every vertex will always be `0` or `1` and we can use this data to modify the vertex position in interesting ways.
 
 {{IMAGE}}
@@ -102,7 +93,7 @@ For the foliage effect we need to do two things to the quads:
 
 As it turns out having meshes always face the camera has a name —
 "billboarding"!
-If you've used `@react-three/drei` previously (I like calling it the lodash of React Three Fiber) you might be tempted to reach for the [Billboard component](https://github.com/pmndrs/drei#billboard) but unfortunately it comes with a small caveat: it only affects the entire mesh,
+If you've used `@react-three/drei` previously (I like calling it the lodash of React Three Fiber) you might be tempted to reach for the [Billboard component](https://github.com/pmndrs/drei#billboard) but it comes with a small caveat: it only affects the entire mesh,
 not individual quads on a mesh!
 It also doesn't solve the second problem of scaling the quads up.
 
@@ -112,21 +103,64 @@ It also doesn't solve the second problem of scaling the quads up.
 >
 > {{ IMAGEHERE }}
 
-Instead thanks to GLSL vertex shaders and our prepped mesh we have everything we need for the effect.
-Here we've applied the effect to a plane try and rotate around and you'll see that it always stays view.
+Instead we can use GLSL vertex shaders and our prepped mesh for the effect.
+Here we've applied it to a plane,
+try and rotate around and you'll see that it always stays in view!
 
 <Billboard />
 
+Interestingly it's not actually a traditional billboard effect!
+If it was the entire quad would always be in view when rotating around it with the camera,
+instead it kind of bends when not looking at it directly.
+
 Let's go over what's happening.
 
-## Offset from uv
+## Translation relative to the camera
 
-First we want to get the initial offset from the uniform `uv` but we can't just use it as is.
-This is because `uv` values will be between `0.0` and `1.0` and so the effect is only partially applied,
-we need the values to instead be between `-1.0` and `1.0`.
+The entire effect is built on the fact that we can translate verticies relative to the camera.
+Personally when I think of translating things in 3D space I think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can do things you wouldn't usually think of!
 
-This is common in shaders and so a `remap` function exists to change an inputs known min and max values to new min and max values,
-here we remap the uv min and max values from `[0.0, 1.0]` to `[-1.0, 1.0]`:
+To transform the local position into view space so it's relative to the camera we perform some math:
+
+```glsl
+vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
+```
+
+> ThreeJS provides global variables to shaders for convience. The `position` variable is the vertex position in local space which is then transformed through supplied matrixes like `modelViewMatrix`.
+
+And then now we can perform some magic.
+If we add `1.0` to the `x` value:
+
+```glsl
+worldViewPosition.x += 1.0;
+```
+
+We've now translated this vertex one unit to the right relative to the camera.
+If we were to subtract `1.0` it would move one unit to the left.
+This applies to all axis!
+
+```glsl
+worldViewPosition.z -= 1.0;
+```
+
+## Using UVs as an offset
+
+Instead of hardcoding values for the translation we need to pass data to the shader somehow.
+This is what we'll be using UVs for and why we needed to unwrap them in a specific way!
+Using the value we get back from the global variable `uv` is all we need to do:
+
+```glsl
+vec2 offset = vec2(uv.x, uv.y);
+```
+
+## Remapping UV offset
+
+If you turn off the "remap UVs" checkbox in the example about you'll notice the translation is off center.
+This is because `uv` values are between `[0.0, 1.0]`!
+Instead we need them to be between `[-1.0, 1.0]`.
+
+Remapping values is common in shaders and so a `remap` function exists to change an inputs known min and max values to new ones,
+here we remap the `uv` min and max values from `[0.0, 1.0]` to `[-1.0, 1.0]`:
 
 ```glsl
 vec2 offset = vec2(
@@ -135,34 +169,24 @@ vec2 offset = vec2(
 );
 ```
 
-So for example the bottom left vertex on the UV map which would have had a value of `[0.0, 0.0]` it's now `[-1.0, -1.0]`.
+So we're left with these four `[x, y]` values for each vertex:
 
-## Moving into view space
+1. Bottom left `[-1.0, -1.0]`
+1. Top left `[1.0, -1.0]`
+1. Top right `[1.0, 1.0]`
+1. Bottom right `[1.0, -1.0]`
 
-Next we transform the position into view space so it's relative to the camera where we'll be applying the offset:
+## Performing the translation
 
-```glsl
-vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
-```
-
-## Adding the offset
-
-For each vertex of a quad we're only ever going to be applying one of four `[x, y]` values:
-
-1. Bottom left vertex `[-1.0, -1.0]`
-1. Bottom right vertex `[1.0, -1.0]`
-1. Top left vertex `[1.0, -1.0]`
-1. Top right vertex `[1.0, 1.0]`
-
-Adding to a position vector in GLSL results in translating it across that axis,
-so `vec.x` would translate it left and right, `vec.y` up and down, and so on.
-By adding it to `worldViewPosition` (which is the "camera" view) the vertices are translated by this amount causing a stretch effect.
+All that's left is to add the offset to the `worldViewPosition`:
 
 ```glsl
 worldViewPosition += vec4(vertexOffset, 0.0);
 ```
 
-Play with the example above to see what happens when it's on and off.
+Now from whatever angle we're looking at the quad each vertex is translated across the `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same but bigger,
+and from any other angle a stretched rectangle.
+For foliage this works in our favour as it results in a subtler effect.
 
 # Using alpha maps to make foliage
 
