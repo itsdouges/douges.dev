@@ -6,16 +6,21 @@ import { Tree } from './tree';
 
 export default function App() {
   const [remap, setRemap] = useState(true);
+  const [normalize, setNormalize] = useState(true);
   const [enabled, setEnabled] = useState(1.0);
 
   return (
     <>
       <Canvas style={{ position: 'absolute', inset: 0 }} shadows>
         <Suspense fallback={null}>
-          <Tree enabled={enabled} remap={remap} />
-          <gridHelper rotation={[MathUtils.degToRad(-90), 0, 0]} args={[5, 5]} />
+          <Tree enabled={enabled} remap={remap} normalize={normalize} />
+          <gridHelper
+            position={[0, 3.5, 0]}
+            rotation={[MathUtils.degToRad(-90), 0, 0]}
+            args={[5, 5]}
+          />
           <PerspectiveCamera far={2000} fov={60} makeDefault near={0.1} position={[0, 3, 7]} />
-          <OrbitControls target={[0, 3, 0]} />
+          <OrbitControls enableZoom={false} target={[0, 3, 0]} />
         </Suspense>
       </Canvas>
 
@@ -43,6 +48,21 @@ export default function App() {
             }}>
             <input type="checkbox" checked={remap} onChange={() => setRemap((prev) => !prev)} />
             Remap UVs
+          </label>
+
+          <label
+            style={{
+              color: 'rgb(68, 84, 111)',
+              marginLeft: 8,
+              marginBottom: 5,
+              display: 'inline-block',
+            }}>
+            <input
+              type="checkbox"
+              checked={normalize}
+              onChange={() => setNormalize((prev) => !prev)}
+            />
+            Normalize
           </label>
         </div>
       </div>

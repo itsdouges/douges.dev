@@ -6,13 +6,14 @@ import { Geometry } from './geometry';
 
 export default function App() {
   const [remap, setRemap] = useState(true);
+  const [normalize, setNormalize] = useState(true);
   const [enabled, setEnabled] = useState(1.0);
 
   return (
     <>
       <Canvas style={{ position: 'absolute', inset: 0 }}>
-        <Geometry enabled={enabled} remap={remap} />
-        <OrbitControls />
+        <Geometry enabled={enabled} remap={remap} normalize={normalize} />
+        <OrbitControls enableZoom={false} />
         <PerspectiveCamera makeDefault far={2000} fov={60} near={0.1} position={[0, 0, 5]} />
         <gridHelper rotation={[MathUtils.degToRad(-90), 0, 0]} args={[5, 5]} />
       </Canvas>
@@ -41,6 +42,21 @@ export default function App() {
             }}>
             <input type="checkbox" checked={remap} onChange={() => setRemap((prev) => !prev)} />
             Remap UVs
+          </label>
+
+          <label
+            style={{
+              color: 'rgb(68, 84, 111)',
+              marginLeft: 8,
+              marginBottom: 5,
+              display: 'inline-block',
+            }}>
+            <input
+              type="checkbox"
+              checked={normalize}
+              onChange={() => setNormalize((prev) => !prev)}
+            />
+            Normalize
           </label>
         </div>
       </div>

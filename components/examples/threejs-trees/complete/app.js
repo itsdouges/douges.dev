@@ -32,7 +32,7 @@ export default function App() {
         <pointLight position={[-10, 0, -20]} color="#eef4aa" intensity={0.5} />
 
         <PerspectiveCamera far={2000} fov={60} makeDefault near={0.1} position={[0, 3, 6]} />
-        <OrbitControls target={[0, 3, 0]} />
+        <OrbitControls enableZoom={false} target={[0, 3, 0]} />
       </Suspense>
     </Canvas>
   );

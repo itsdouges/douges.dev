@@ -13,25 +13,24 @@ export const meta = {
 };
 
 I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769?s=20&t=u20fJ2AtyC5wih8fVl20Yg) using ThreeJS (...technically React Three Fiber) and I've gotten to the stage where I want to start filling out the environment.
-I found this [awesome tutorial](https://www.youtube.com/watch?v=iASMFba7GeI) by Pontus Karlsson going into detail of how to make fluffy stylized trees,
-they look _fantastic_!
+I found this [awesome tutorial](https://www.youtube.com/watch?v=iASMFba7GeI) by Pontus Karlsson going into detail of how to make fluffy stylized trees and they look _fantastic_!
 
-Unfortunately for me this tutorial was made for Unity 3D...
+Unfortunately for me though this tutorial was made for Unity 3D...
 not ThreeJS!
-After a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've mostly figured it out,
-check it out!
+After a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've figured it out,
+take a look:
 
 <Complete />
 
 While my trees don't look as impressive I'm still pretty chuffed for how they turned out.
 Keep reading for how I did it!
 
-# GLSL vertex shaders
+# GLSL shaders
 
 It's important to have some context on what GLSL shaders are.
 They're small programs written in a C-like language that are ran on the GPU.
 As it turns out ThreeJS is [made up of a ton of them](https://github.com/mrdoob/three.js/tree/da820c4dabc364c221571555c6f0b7034710b5d7/src/renderers/shaders)!
-If you've ever used any ThreeJS material before you've already indirectly used them,
+If you've ever used any ThreeJS material you've already indirectly used them,
 how cool!
 
 With WebGL there are two kinds of shaders:
@@ -43,9 +42,9 @@ Shaders have a bunch of built in types and operators,
 for this article we'll primarily be playing with vectors which are classes that hold values such as xyz,
 and uvw.
 
-For this article we're only going to be looking at vertex shaders as we'll be transforming the verticies of the foliage to get the look we want.
+We'll also only focus on vertex shaders as we'll be transforming the verticies of the foliage to get the look we want.
 The responsibility of a vertex shader is to at a minimum convert the vertex position from local space to clip space assigning the result to `gl_Position`.
-There's a great article on [coordinate systems](https://learnopengl.com/Getting-started/Coordinate-Systems) if you want to learn more or look at ThreeJS' [program reference](https://threejs.org/docs/index.html?q=program#api/en/renderers/webgl/WebGLProgram) but the TL;DR is:
+There's a great article on [coordinate systems](https://learnopengl.com/Getting-started/Coordinate-Systems) if you want to learn more but the gist is:
 
 1. Start at local space, vertex position relative to itself
 1. Transform to world space, vertex position relative to the world
@@ -85,12 +84,12 @@ It'll end up looking like this:
 
 {{IMAGE}}
 
-# Getting that fluffy foliage look
+# Getting the fluffy foliage look
 
-For the foliage effect we need to do two things to the quads:
+For the foliage effect we want two things to happen to the quads:
 
-1. Have them face the camera; and
-1. Have them scaled up to cover more of the tree
+1. Keep it facing the camera; and
+1. Scale it up to cover a larger area
 
 As it turns out having meshes always face the camera has a name —
 "billboarding"!
@@ -106,13 +105,13 @@ It also doesn't solve the second problem of scaling the quads up.
 
 Instead we can use GLSL vertex shaders and our prepped mesh for the effect.
 Here we've applied it to a plane,
-try and rotate around and you'll see that it always stays in view!
+try and rotate around and you'll see that it always stays (mostly) in view!
 
 <Billboard />
 
 Interestingly it's not actually a traditional billboard effect!
-If it was the entire quad would always be in view when rotating around it with the camera,
-instead it kind of bends when not looking at it directly.
+If it was the quad would always be in view when rotating around it with the camera,
+instead stretches when not looking at it directly.
 
 Let's go over what's happening.
 
@@ -129,7 +128,7 @@ vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
 
 > ThreeJS provides global variables to shaders for convience. The `position` variable is the vertex position in local space which is then transformed through supplied matrixes like `modelViewMatrix`.
 
-And then now we can perform some magic.
+Now we can translate the vertex in view space.
 If we add `1.0` to the `x` value:
 
 ```glsl
@@ -146,13 +145,15 @@ worldViewPosition.z -= 1.0;
 
 ## Using UVs as an offset
 
-Instead of hardcoding values for the translation we need to pass data to the shader somehow.
+Instead of hardcoding values for the translation we want to instead pass data to the shader somehow.
 This is what we'll be using UVs for and why we needed to unwrap them in a specific way!
 Using the value we get back from the global variable `uv` is all we need to do:
 
 ```glsl
 vec2 offset = vec2(uv.x, uv.y);
 ```
+
+{{IMAGEHERE}}
 
 ## Remapping UV offset
 
@@ -170,12 +171,7 @@ vec2 offset = vec2(
 );
 ```
 
-So we're left with these four `[x, y]` values for each vertex:
-
-1. Bottom left `[-1.0, -1.0]`
-1. Top left `[1.0, -1.0]`
-1. Top right `[1.0, 1.0]`
-1. Bottom right `[1.0, -1.0]`
+{{IMAGEHERE}}
 
 ## Performing the translation
 

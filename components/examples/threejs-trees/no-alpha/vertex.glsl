@@ -1,5 +1,6 @@
 uniform float u_effectBlend;
 uniform float u_remap;
+uniform float u_normalize;
 
 varying vec2 v_uvs;
 
@@ -26,7 +27,7 @@ void main() {
   vertexOffset *= vec2(-1.0, 1.0);
 
   // Normalize the offset so it stays within boundaries.
-  vertexOffset = normalize(vertexOffset);
+  vertexOffset = mix(vertexOffset, normalize(vertexOffset), u_normalize);
 
   vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
 

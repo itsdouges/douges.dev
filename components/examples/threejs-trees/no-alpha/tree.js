@@ -2,11 +2,12 @@ import { Clone, useGLTF } from '@react-three/drei';
 import vert from './vertex.glsl.js';
 import frag from './fragment.glsl.js';
 
-export function Tree({ enabled, remap }) {
+export function Tree({ enabled, remap, normalize }) {
   const tree = useGLTF('{ORIGIN}/static/tree.glb');
   const uniforms = {
     u_effectBlend: { value: enabled },
     u_remap: { value: remap ? 1.0 : 0.0 },
+    u_normalize: { value: normalize ? 1.0 : 0.0 },
   };
 
   return (
