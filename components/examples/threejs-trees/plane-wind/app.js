@@ -6,11 +6,17 @@ import { Geometry } from './geometry';
 
 export default function App() {
   const [rotation, setRotation] = useState(0.0);
+  const [coordinateSpace, setCoordinateSpace] = useState('local');
+  const [applyToOffset, setApplyToOffset] = useState(false);
 
   return (
     <>
       <Canvas style={{ position: 'absolute', inset: 0 }}>
-        <Geometry rotation={MathUtils.degToRad(rotation)} />
+        <Geometry
+          applyToOffset={applyToOffset}
+          coordinateSpace={coordinateSpace}
+          rotation={MathUtils.degToRad(rotation)}
+        />
         <OrbitControls enableZoom={false} />
         <PerspectiveCamera makeDefault far={2000} fov={60} near={0.1} position={[0, 0, 5]} />
         <gridHelper rotation={[MathUtils.degToRad(-90), 0, 0]} args={[5, 5]} />
@@ -40,11 +46,64 @@ export default function App() {
               min={0}
               max={360}
               step={1}
+              style={{ width: 80 }}
               type="range"
               value={rotation}
               onChange={(e) => setRotation(e.target.value)}
             />
           </label>
+
+          <label
+            style={{
+              color: 'rgb(68, 84, 111)',
+              marginLeft: 8,
+              marginBottom: 8,
+              display: 'inline-block',
+            }}>
+            <input
+              type="radio"
+              name="coordinateSpace"
+              value="local"
+              checked={coordinateSpace === 'local'}
+              onChange={(e) => setCoordinateSpace(e.target.value)}
+            />
+            Local
+          </label>
+
+          <label
+            style={{
+              color: 'rgb(68, 84, 111)',
+              marginLeft: 8,
+              marginBottom: 8,
+              display: 'inline-block',
+            }}>
+            <input
+              type="radio"
+              name="coordinateSpace"
+              value="view"
+              checked={coordinateSpace === 'view'}
+              onChange={(e) => setCoordinateSpace(e.target.value)}
+            />
+            View
+          </label>
+
+          {coordinateSpace === 'view' && (
+            <label
+              style={{
+                color: 'rgb(68, 84, 111)',
+                marginLeft: 8,
+                marginBottom: 6,
+                display: 'inline-block',
+              }}>
+              <input
+                type="checkbox"
+                name="applyToOffset"
+                checked={applyToOffset}
+                onChange={() => setApplyToOffset((prev) => !prev)}
+              />
+              Apply to UV offset
+            </label>
+          )}
         </div>
       </div>
     </>

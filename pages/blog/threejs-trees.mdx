@@ -17,17 +17,16 @@ export const meta = {
 I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769) using ThreeJS (...technically React Three Fiber) and I've gotten to the stage where I want to start filling out the environment.
 I found this [awesome tutorial](https://www.youtube.com/watch?v=iASMFba7GeI) by Pontus Karlsson going into detail of how to make fluffy stylized trees and they look _fantastic_!
 
-Unfortunately though this tutorial was made for Unity 3D,
-not ThreeJS!
-After a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've figured it out,
+Unfortunately however this tutorial was made for Unity 3D not ThreeJS!
+After learning up on GLSL shaders and a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) I've gotten something pretty nice,
 take a look:
 
 <TreeComplete />
 
-While my trees don't look as impressive I'm still pretty chuffed for how they turned out and it's been a great learning experience.
-
+Chuffed as for how it turned out,
+it's really been a great learning experience.
 Keep reading for how the effect is made,
-it's not as obvious as it seems!
+there's a lot of opportunity here to learn something new!
 
 # GLSL shaders
 
@@ -238,17 +237,14 @@ and we can emulate it by rotating the offset by an amount.
 Previously we moved the vertex by adding values to it but we can also rotate by multiplying it with a rotation matrix.
 
 I'm not smart enough to know the formulas off by heart but there are resources we can use to get them such
-as [Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix#In_two_dimensions) which we've derived this function from:
-
-```glsl
-vec2 rotate(vec2 v, float a) {
-  float s = sin(a);
-  float c = cos(a);
-  mat2 m = mat2(c, -s, s, c);
-  return m * v;
-}
-```
-
-And then we can use it to rotate:
+as [Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix#In_two_dimensions).
+We then use the rotation matrices on the vertex position,
+remember we can apply this to any coordinate space!
 
 <PlaneWind />
+
+Because of the billboard-like effect we're using in the shader how we apply rotation is important for the wind to look great.
+Playing with the example above rotating the position in local space results in a wacky rotation,
+and if you rotate in view space and apply the rotation to the offset instead of the position you'll see a very similar result!
+
+Applying the rotation in view space so it is relative to the camera looks good.

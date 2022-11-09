@@ -43,7 +43,7 @@ export function Sandpack(props: SandpackProps) {
           colors: {
             surface1: token('color.background.default'),
             surface2: token('color.background.default'),
-            surface3: token('color.background.default'),
+            surface3: token('color.background.subtleBrand.resting'),
             base: token('color.background.default'),
             clickable: token('color.text.mediumEmphasis'),
             hover: token('color.text.mediumEmphasis'),

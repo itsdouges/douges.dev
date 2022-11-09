@@ -3,11 +3,14 @@ import { useTexture } from '@react-three/drei';
 import CustomShaderMaterial from 'three-custom-shader-material';
 import vert from './vertex.glsl.js';
 
-export function Geometry({ rotation }) {
+export function Geometry({ rotation, coordinateSpace, applyToOffset }) {
   const alphaMap = useTexture('{ORIGIN}/static/foliage_alpha3.png');
 
   const uniforms = {
-    u_rotation: { value: rotation },
+    u_rotation: { value: -rotation },
+    u_localSpace: { value: coordinateSpace === 'local' },
+    u_viewSpace: { value: coordinateSpace === 'view' },
+    u_applyToOffset: { value: applyToOffset },
   };
 
   return (

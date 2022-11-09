@@ -20,7 +20,19 @@ vec2 rotate(vec2 v, float a) {
   return m * v;
 }
 
-vec2 applyWind(vec2 offset) {
+mat4 rotationZ(float radians) {
+  float c = cos(radians);
+  float s = sin(radians);
+
+	return mat4(
+    c, -s, 0, 0,
+    s, c, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+  );
+}
+
+vec4 applyWind(vec4 v) {
   // Get the Y normal which we will use to apply difference rotation speeds to emulate wind.
   float boundedYNormal = remap(normal.y, -1.0, 1.0, 0.0, 1.0);
 
@@ -30,9 +42,9 @@ vec2 applyWind(vec2 offset) {
   // Top facing normals will move faster than bottom facing normals.
   float topFacing = remap(sin(u_windTime + posXZ), -1.0, 1.0, 0.0, power);
   float bottomFacing = remap(cos(u_windTime + posXZ), -1.0, 1.0, 0.0, 0.05);
-  float mixedValue = mix(bottomFacing, topFacing, boundedYNormal);
+  float radians = mix(bottomFacing, topFacing, boundedYNormal);
 
-  return rotate(offset, mixedValue);
+  return rotationZ(radians) * v;
 }
 
 vec2 calcInitialOffsetFromUVs() {
@@ -63,8 +75,6 @@ vec3 inflateOffset(vec3 offset) {
 void main() {
   vec2 vertexOffset = calcInitialOffsetFromUVs();
 
-  vertexOffset = applyWind(vertexOffset);
-
   vec3 inflatedVertexOffset = inflateOffset(vec3(vertexOffset, 0.0));
 
   // Transform to world view space.
@@ -72,6 +82,8 @@ void main() {
 
   // Apply the vertex offset to world view space
   worldViewPosition += vec4(mix(vec3(0.0), inflatedVertexOffset, u_effectBlend), 0.0);
+
+  worldViewPosition = applyWind(worldViewPosition);
 
   // Transform into clip space - we're done!
   csm_PositionRaw = projectionMatrix * worldViewPosition;
