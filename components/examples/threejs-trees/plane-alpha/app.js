@@ -16,6 +16,21 @@ export default function App() {
         <OrbitControls enableZoom={false} />
         <PerspectiveCamera makeDefault far={2000} fov={60} near={0.1} position={[0, 0, 5]} />
         <gridHelper rotation={[MathUtils.degToRad(-90), 0, 0]} args={[5, 5]} />
+        <hemisphereLight color="#87CEEB" intensity={0.3} groundColor="#362907" />
+        <ambientLight intensity={0.3} />
+        <directionalLight
+          castShadow
+          position={[2.5, 8, 5]}
+          intensity={0.5}
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
+          shadow-camera-far={50}
+          shadow-camera-left={-10}
+          shadow-camera-right={10}
+          shadow-camera-top={10}
+          shadow-camera-bottom={-10}
+        />
+        <pointLight position={[-10, 0, -20]} color="#eef4aa" intensity={0.5} />
       </Canvas>
 
       <div style={{ position: 'absolute', bottom: 8, left: 8, fontSize: 12 }}>
@@ -52,8 +67,9 @@ export default function App() {
               display: 'inline-block',
             }}>
             <input
+              disabled={!remap}
               type="checkbox"
-              checked={normalize}
+              checked={remap ? normalize : false}
               onChange={() => setNormalize((prev) => !prev)}
             />
             Normalize

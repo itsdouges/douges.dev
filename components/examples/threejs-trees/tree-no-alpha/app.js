@@ -58,8 +58,9 @@ export default function App() {
               display: 'inline-block',
             }}>
             <input
+              disabled={!remap}
               type="checkbox"
-              checked={normalize}
+              checked={remap ? normalize : false}
               onChange={() => setNormalize((prev) => !prev)}
             />
             Normalize

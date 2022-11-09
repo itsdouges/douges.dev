@@ -26,9 +26,6 @@ const styles = css({
     h2: { marginTop: 40 },
     h3: { marginTop: 32 },
   },
-  code: {
-    verticalAlign: 'top',
-  },
   hr: {
     border: 0,
     borderTop: `4px solid ${token('color.border.neutral')}`,
@@ -119,10 +116,10 @@ const components: MDXProviderComponents = {
   pre({ children }) {
     return children;
   },
-  code(props) {
+  code({ className, children }) {
     return (
       <Box background="sunken" padding="medium">
-        <CodeBlock css={styles.code} {...props} />
+        <CodeBlock lang={className.split('-')[1]}>{children}</CodeBlock>
       </Box>
     );
   },

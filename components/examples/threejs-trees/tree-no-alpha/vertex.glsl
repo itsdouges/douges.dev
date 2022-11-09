@@ -27,7 +27,9 @@ void main() {
   vertexOffset *= vec2(-1.0, 1.0);
 
   // Normalize the offset so it stays within boundaries.
-  vertexOffset = mix(vertexOffset, normalize(vertexOffset), u_normalize);
+  if (u_remap == 1.0) {
+    vertexOffset = mix(vertexOffset, normalize(vertexOffset), u_normalize);
+  }
 
   vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
 

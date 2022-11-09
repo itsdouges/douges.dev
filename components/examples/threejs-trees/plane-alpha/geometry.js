@@ -1,7 +1,11 @@
+import { Color, MeshStandardMaterial } from 'three';
+import { useTexture } from '@react-three/drei';
+import CustomShaderMaterial from 'three-custom-shader-material';
 import vert from './vertex.glsl.js';
-import frag from './fragment.glsl.js';
 
 export function Geometry({ enabled, remap, normalize }) {
+  const alphaMap = useTexture('{ORIGIN}/static/foliage_alpha3.png');
+
   const uniforms = {
     u_effectBlend: { value: enabled },
     u_remap: { value: remap ? 1.0 : 0.0 },
@@ -11,11 +15,13 @@ export function Geometry({ enabled, remap, normalize }) {
   return (
     <mesh>
       <planeGeometry args={[1, 1]} />
-      <shaderMaterial
-        key={vert + frag + JSON.stringify(uniforms)}
+      <CustomShaderMaterial
+        alphaMap={alphaMap}
+        alphaTest={0.5}
+        baseMaterial={MeshStandardMaterial}
+        color={new Color('#3f6d21').convertLinearToSRGB()}
         uniforms={uniforms}
         vertexShader={vert}
-        fragmentShader={frag}
       />
     </mesh>
   );

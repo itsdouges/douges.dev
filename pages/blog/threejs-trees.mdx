@@ -213,12 +213,21 @@ Doing this for just the alpha map isn't actually that much lines of code but the
 
 The simple way and what I ended up leaning on was [CustomShaderMaterial](https://github.com/FarazzShaikh/THREE-CustomShaderMaterial) —
 it let's you keep using standard materials from ThreeJS so they're affected by scene lighting,
-can take texture maps without needing to write shader code,
-and can provide a custom vertex shader,
+can take texture maps without needing to write a fragment shader,
+and can be provided a custom vertex shader,
 fragment shader,
 or both!
-In this case we only provide the vertex shader.
+In this case we've provided just the vertex shader.
 
 <PlaneAlpha />
+
+Perfect!
+We had to make one change to the vertex shader however to apply the result to `csm_PositionRaw` instead of `gl_Position`.
+This is because CustomShaderMaterial will pass it onto the ThreeJS material shader.
+
+```diff
+-gl_Position = projectionMatrix * worldViewPosition;
++csm_PositionRaw = projectionMatrix * worldViewPosition;
+```
 
 # Blowing wind onto the foliage

@@ -2,7 +2,7 @@ import { Sandpack } from '../../sandpack';
 import appCode from '!!raw-loader!./app.js';
 import geometryCode from '!!raw-loader!./geometry.js';
 import vertexShaderCode from '!!raw-loader!./vertex.glsl';
-import fragmentShaderCode from '!!raw-loader!./fragment.glsl';
+import { origin } from 'lib/location';
 
 export function PlaneAlpha() {
   return (
@@ -11,20 +11,19 @@ export function PlaneAlpha() {
         dependencies: {
           '@react-three/drei': '9.14.3',
           '@react-three/fiber': '8.0.27',
+          'three-custom-shader-material': '4.0.0',
           three: '0.144.0',
         },
       }}
       options={{
-        visibleFiles: ['/geometry.js', '/vertex.glsl'],
-        activeFile: '/vertex.glsl',
+        visibleFiles: ['/geometry.js', 'vertex.glsl'],
+        activeFile: '/geometry.glsl',
       }}
       files={{
         '/App.js': appCode,
         '/vertex.glsl.js': `const shader = \`${vertexShaderCode}\`; export default shader;`,
         '/vertex.glsl': vertexShaderCode,
-        '/fragment.glsl.js': `const shader = \`${fragmentShaderCode}\`; export default shader;`,
-        '/fragment.glsl': fragmentShaderCode,
-        '/geometry.js': geometryCode,
+        '/geometry.js': geometryCode.replace(/\{ORIGIN\}/g, origin),
       }}
     />
   );
