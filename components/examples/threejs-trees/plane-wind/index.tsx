@@ -4,7 +4,7 @@ import geometryCode from '!!raw-loader!./geometry.js';
 import vertexShaderCode from '!!raw-loader!./vertex.glsl';
 import { origin } from 'lib/location';
 
-export function PlaneAlpha() {
+export function PlaneWind() {
   return (
     <Sandpack
       customSetup={{
@@ -17,7 +17,7 @@ export function PlaneAlpha() {
       }}
       options={{
         visibleFiles: ['/geometry.js', 'vertex.glsl'],
-        activeFile: '/geometry.js',
+        activeFile: '/vertex.glsl',
       }}
       files={{
         '/App.js': appCode,

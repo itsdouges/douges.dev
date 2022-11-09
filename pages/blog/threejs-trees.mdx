@@ -3,6 +3,7 @@ import { TreeComplete } from 'components/examples/threejs-trees/tree-complete';
 import { PlaneBillboard } from 'components/examples/threejs-trees/plane-billboard';
 import { PlaneAlpha } from 'components/examples/threejs-trees/plane-alpha';
 import { TreeNoAlpha } from 'components/examples/threejs-trees/tree-no-alpha';
+import { PlaneWind } from 'components/examples/threejs-trees/plane-wind';
 
 export const meta = {
   blurb:
@@ -118,9 +119,9 @@ instead stretches when not looking at it directly.
 
 Let's go over what's happening.
 
-## Translating relative to the camera
+## Moving relative to the camera
 
-The entire effect is built on the fact that we can translate verticies relative to the camera.
+The entire effect is built on the fact that we can move verticies relative to the camera.
 Personally when I think of translating things in 3D space I think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can change the position when in each space!
 
 To transform the local position into view space so it's relative to the camera we perform some math:
@@ -131,7 +132,7 @@ vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
 
 > ThreeJS provides global variables to shaders for convience. The `position` variable is the vertex position in local space which is then transformed through supplied matrixes like `modelViewMatrix`.
 
-Now we can translate the vertex in view space.
+Now we can move the vertex in view space.
 If we add `1.0` to the `x` value:
 
 ```glsl
@@ -140,7 +141,7 @@ worldViewPosition.x += 1.0;
 
 {{IMAGEHERE}}
 
-We've now translated this vertex one unit to the right relative to the camera.
+We've now moved this vertex one unit to the right relative to the camera.
 If we were to subtract `1.0` it would move one unit to the left.
 This applies to all axis!
 
@@ -193,7 +194,7 @@ vertexOffset = normalize(vertexOffset);
 worldViewPosition += vec4(vertexOffset, 0.0);
 ```
 
-From any angle each vertex is now translated across the cameras `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same but bigger and from all other angles as a stretched rectangle.
+From any angle each vertex is now moved across the cameras `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same but bigger and from all other angles as a stretched rectangle.
 
 <TreeNoAlpha />
 
@@ -231,3 +232,23 @@ This is because CustomShaderMaterial will pass it onto the ThreeJS material shad
 ```
 
 # Blowing wind onto the foliage
+
+The icing on the cake for this effect is to have the foliage be affected by wind,
+and we can emulate it by rotating the offset by an amount.
+Previously we moved the vertex by adding values to it but we can also rotate by multiplying it with a rotation matrix.
+
+I'm not smart enough to know the formulas off by heart but there are resources we can use to get them such
+as [Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix#In_two_dimensions) which we've derived this function from:
+
+```glsl
+vec2 rotate(vec2 v, float a) {
+  float s = sin(a);
+  float c = cos(a);
+  mat2 m = mat2(c, -s, s, c);
+  return m * v;
+}
+```
+
+And then we can use it to rotate:
+
+<PlaneWind />
