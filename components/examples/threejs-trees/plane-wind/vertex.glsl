@@ -23,7 +23,7 @@ mat2 rotate2(float radians) {
   );
 }
 
-mat3 rotationZ3(float radians) {
+mat3 rotateZ3(float radians) {
   float c = cos(radians);
   float s = sin(radians);
 
@@ -34,7 +34,7 @@ mat3 rotationZ3(float radians) {
   );
 }
 
-mat4 rotationZ4(float radians) {
+mat4 rotateZ4(float radians) {
   float c = cos(radians);
   float s = sin(radians);
 
@@ -50,7 +50,7 @@ void main() {
   vec3 localPosition = position;
 
   if (u_localSpace) {
-    localPosition *= rotationZ3(u_rotation);
+    localPosition *= rotateZ3(u_rotation);
   }
 
   vec2 vertexOffset = vec2(
@@ -69,7 +69,7 @@ void main() {
   worldViewPosition += vec4(vertexOffset, 1.0, 0.0);
 
   if (u_viewSpace && !u_applyToOffset) {
-    worldViewPosition *= rotationZ4(u_rotation);
+    worldViewPosition *= rotateZ4(u_rotation);
   }
 
   csm_PositionRaw = projectionMatrix * worldViewPosition;

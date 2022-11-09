@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { token } from '@atlaskit/tokens';
 import css from 'design-system/css';
 import Button from './button';
 import VisuallyHidden from './visually-hidden';
@@ -8,6 +9,7 @@ const styles = css({
     width: 20,
     height: 20,
     fontSize: 20,
+    color: token('color.text.mediumEmphasis'),
   },
 });
 

@@ -27,7 +27,7 @@ function SignUp() {
     <Stack gap="regular">
       <Heading level={2}>Don&apos;t miss a post!</Heading>
       <Text as="p">
-        Join others and get notified early when new content is available, unsubscribe at any time.
+        Join others and get notified early when new content is available unsubscribe at any time.
       </Text>
 
       <form
@@ -49,7 +49,7 @@ function SignUp() {
               onChange={setEmail}
             />
             <Button type="submit" isDisabled={isLoading} appearance="primary">
-              {isComplete ? <Text color="success">✓</Text> : 'JOIN'}
+              {isComplete ? <Text color="success">✓</Text> : 'Subscribe'}
             </Button>
           </Inline>
         </Label>

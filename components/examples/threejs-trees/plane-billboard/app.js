@@ -27,6 +27,7 @@ export default function App() {
               min={0}
               max={1}
               step={0.1}
+              style={{ width: 80 }}
               type="range"
               value={enabled}
               onChange={(e) => setEnabled(e.target.value)}

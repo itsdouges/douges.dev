@@ -23,10 +23,6 @@ const styles = css({
     right: 0,
     zIndex: 100,
   },
-  left: {
-    display: 'inline-block',
-    transform: 'scaleX(-1)',
-  },
 });
 
 const themeHacks = `
@@ -84,11 +80,7 @@ function App({ Component, pageProps, router }: AppProps) {
         <Box as="nav" padding="large">
           <Inline>
             {isBlogRoute && (
-              <IconButton
-                icon={<span css={styles.left}>➜</span>}
-                label="Go home"
-                onClick={() => router.push('/')}
-              />
+              <IconButton icon="←" label="Go home" onClick={() => router.push('/')} />
             )}
             <Inline blockAlign="middle" width="full" inlineAlign="end" gap="regular">
               {isPlayground || (

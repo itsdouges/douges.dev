@@ -40,6 +40,7 @@ export default function App() {
             <br />
             <input
               min={0}
+              style={{ width: 80 }}
               max={1}
               step={0.1}
               type="range"

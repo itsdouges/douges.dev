@@ -81,7 +81,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
             {...props}>
             <Text
               size="small"
-              color={mappedAppearance === 'default' ? 'medium' : undefined}
+              color={
+                mappedAppearance === 'default' || mappedAppearance === 'subtle'
+                  ? 'medium'
+                  : undefined
+              }
               weight="bold">
               {children}
             </Text>

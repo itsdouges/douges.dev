@@ -32,6 +32,7 @@ export default function App() {
             <input
               min={0}
               max={1}
+              style={{ width: 80 }}
               step={0.1}
               type="range"
               value={enabled}
