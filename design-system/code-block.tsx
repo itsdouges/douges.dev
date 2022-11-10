@@ -4,6 +4,7 @@ import { token } from '@atlaskit/tokens';
 import { refractor, RefractorElement, Text } from 'refractor/lib/core';
 import jsx from 'refractor/lang/jsx';
 import diff from 'refractor/lang/diff';
+import glsl from 'refractor/lang/glsl';
 import csss from 'refractor/lang/css';
 import Box from 'design-system/box';
 import { ForwardedRef } from 'react';
@@ -11,10 +12,11 @@ import { forwardRef } from 'lib/react';
 
 refractor.register(jsx);
 refractor.register(diff);
+refractor.register(glsl);
 refractor.register(csss);
 
 const codeBlockStyles = css({
-  fontSize: 12,
+  fontSize: 13,
   overflow: 'auto',
 });
 
@@ -118,7 +120,6 @@ function CodeBlock(
     lang === 'auto' ? (children.match(/^(jsx|diff|css)/)?.[0] as Lang) || 'jsx' : lang;
   const codeNoLang = lang === 'auto' ? children.replace(/^(jsx|diff|css)\n/, '') : children;
   const root = refractor.highlight(codeNoLang, actualLang);
-
 
   return (
     <Box

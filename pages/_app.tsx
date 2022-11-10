@@ -27,27 +27,28 @@ const styles = css({
 
 const themeHacks = `
 :root, html[data-theme="light"] {
-  --background-inverse: rgba(0, 0, 0, 0.16);
-  --background-warning-inverse: rgba(255, 255, 255, 0.20);
-  --background-interaction-hovered: rgba(0, 0, 0, 0.16);
-  --background-interaction-pressed: rgba(0, 0, 0, 0.32);
-  --background-interaction-inverse-hovered: rgba(255, 255, 255, 0.20);
-  --background-interaction-inverse-pressed: rgba(255, 255, 255, 0.36);
+  --background-inverse: rgba(0, 0, 0, 0.1);
+  --background-warning-inverse: rgba(255, 255, 255, 0.1);
+  --background-interaction-hovered: rgba(0, 0, 0, 0.1);
+  --background-interaction-pressed: rgba(0, 0, 0, 0.2);
+  --background-interaction-inverse-hovered: rgba(255, 255, 255, 0.1);
+  --background-interaction-inverse-pressed: rgba(255, 255, 255, 0.2);
 }
 
 html[data-theme="dark"] {
-  --background-inverse: rgba(255, 255, 255, 0.20);
-  --background-warning-inverse: rgba(255, 255, 255, 0.20);
-  --background-interaction-hovered: rgba(255, 255, 255, 0.20);
-  --background-interaction-pressed: rgba(255, 255, 255, 0.36);
-  --background-interaction-inverse-hovered: rgba(255, 255, 255, 0.20);
-  --background-interaction-inverse-pressed: rgba(255, 255, 255, 0.36);
+  --background-inverse: rgba(255, 255, 255, 0.1);
+  --background-warning-inverse: rgba(255, 255, 255, 0.1);
+  --background-interaction-hovered: rgba(255, 255, 255, 0.1);
+  --background-interaction-pressed: rgba(255, 255, 255, 0.2);
+  --background-interaction-inverse-hovered: rgba(255, 255, 255, 0.1);
+  --background-interaction-inverse-pressed: rgba(255, 255, 255, 0.2);
 }
 `;
 
 function App({ Component, pageProps, router }: AppProps) {
   const isBlogRoute = router.route.startsWith('/blog');
   const isPlayground = router.route.startsWith('/playground');
+  const isHome = router.route === '/';
 
   return (
     <MDXProvider components={components}>
@@ -72,7 +73,10 @@ function App({ Component, pageProps, router }: AppProps) {
         <script data-respect-dnt async src="https://cdn.splitbee.io/sb.js" />
       </Head>
 
-      <header css={isPlayground || styles.header}>
+      <Box
+        as="header"
+        background={isHome ? 'transparent' : 'inherit'}
+        css={isPlayground || styles.header}>
         <Box as="nav" padding="large">
           <Inline>
             {isBlogRoute && (
@@ -98,7 +102,7 @@ function App({ Component, pageProps, router }: AppProps) {
             </Inline>
           </Inline>
         </Box>
-      </header>
+      </Box>
 
       {isBlogRoute ? (
         <LayoutBlog blog={(Component as any).meta}>

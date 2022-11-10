@@ -4,6 +4,9 @@ import css from 'design-system/css';
 import Box, { Background } from 'design-system/box';
 
 const styles = css({
+  base: {
+    fontFamily: "'Karla', sans-serif",
+  },
   truncate: {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
@@ -123,6 +126,7 @@ function Text({
       as={element}
       background={background}
       css={[
+        styles.base,
         alignStyle,
         styles.textAbovePressable,
         textSize,

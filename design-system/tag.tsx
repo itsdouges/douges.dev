@@ -45,7 +45,7 @@ function Tag({ children, icon, color = 'greyLight', appearance = 'default' }: Ta
       borderRadius={appearance}>
       <Inline gap="small" blockAlign="middle">
         {icon}
-        <Text color={textColor} size="smaller">
+        <Text color={textColor} size="smallest">
           {children}
         </Text>
       </Inline>

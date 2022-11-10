@@ -1,0 +1,238 @@
+import heroImage from '/public/threejs-trees.png';
+import { PlaneBillboard } from 'components/examples/threejs-trees/plane-billboard';
+import { PlaneAlpha } from 'components/examples/threejs-trees/plane-alpha';
+import { TreeComplete } from 'components/examples/threejs-trees/tree-complete';
+import { TreeNoAlpha } from 'components/examples/threejs-trees/tree-no-alpha';
+import Shaders from 'components/svg/shaders';
+import Vertices from 'components/svg/vertices';
+import Translate from 'components/svg/translations';
+import UVW from 'components/svg/uvw';
+import UVPoints from 'components/svg/uv-points';
+import ModifiedUVs from 'components/svg/modified-uvs';
+import RemappedUVs from 'components/svg/remapped-uvs';
+
+export const meta = {
+  blurb: 'Learn how to make beautiful fluffy trees for ThreeJS using GLSL shaders.',
+  heroImage,
+  publishDate: '2022-11-11',
+  tags: ['GAME DEV', 'GLSL', 'REACT', 'R3F', 'THREEJS', 'TUTORIAL'],
+  title: 'Creating fluffy trees with ThreeJS (part 1)',
+};
+
+As a side project I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769) using ThreeJS with React Three Fiber and I'm now filling out the world environment.
+I found this [awesome tutorial](https://www.youtube.com/watch?v=iASMFba7GeI) by Pontus Karlsson going into detail of how to make fluffy stylized trees and they look fantastic!
+
+Unfortunately it was made for Unity 3D not ThreeJS... but after some soul searching,
+taking a [GLSL shader course](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022),
+and a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've gotten something looking great,
+take a look:
+
+<TreeComplete />
+
+Really chuffed for how it has turned out!
+In this two part series I'm going to go over how the effect works and break down each part of it.
+There's loads of opportunity here to learn something new so buckle up!
+Make sure to subscribe below and [follow me on Twitter](https://twitter.com/itsdouges) so you don't miss the next one.
+
+# GLSL shaders
+
+It's important to have some context on what GLSL shaders are.
+They're small programs written in a C-like language ran on the GPU.
+As it turns out ThreeJS is [made up of a ton of them](https://github.com/mrdoob/three.js/tree/da820c4dabc364c221571555c6f0b7034710b5d7/src/renderers/shaders)!
+If you've ever used any ThreeJS material you've already indirectly used them.
+
+WebGL has two kinds of shaders that run in sequence:
+
+1. Vertex shaders, that position _every vertex_ of a mesh; and
+2. Fragment shaders, that color _every pixel_ of a mesh displayed on screen
+
+<Box padding="xlarge">
+  <Shaders />
+</Box>
+
+Shaders have a bunch of built in types,
+operators,
+and functions
+of which we'll primarily use vectors which are classes that hold values such as `xyz` and `uvw`.
+
+We'll be using vertex shaders in this series,
+their responsibility is to at a minimum convert the vertex position from local coordinate space to clip coordinate space assigning the result to `gl_Position`.
+There's a great article on [coordinate systems](https://learnopengl.com/Getting-started/Coordinate-Systems) if you want to learn more but the gist is:
+
+1. Start at local space, vertex position is relative to itself
+1. Transform to world space, vertex position is now relative to the world origin
+1. Transform to view space, vertex position is now relative to the camera origin
+1. Transform to clip space, vertices are discarded when outside some range
+
+> We won't be going much further into the fundamentals of GLSL shaders if you're keen to dig in I recommend SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)".
+> I did it and really loved going through it!
+> He also has a [great Youtube channel](https://www.youtube.com/channel/UCEwhtpXrg5MmwlH04ANpL8A).
+
+# Getting the fluffy look
+
+For the foliage effect we want two things to happen to the quads:
+
+1. Keep it mostly facing the camera; and
+1. Scale it up to cover a larger surface area
+
+As it turns out having meshes always face the camera has a name —
+"billboarding"!
+If you've used `@react-three/drei` previously (I like calling it the lodash of React Three Fiber) you might be tempted to reach for the [Billboard component](https://github.com/pmndrs/drei#billboard) but it comes with a small caveat: it only affects the entire mesh,
+not individual quads on a mesh!
+It also doesn't solve the second problem of scaling the quads up.
+
+> <Box paddingY="large">
+>   <Vertices />
+> </Box>
+>
+> A mesh is made up of triangles of which there are three vertices to a triangle and two triangles make a quad.
+
+Instead we can use GLSL vertex shaders and UVs from the mesh for the effect.
+Here we've applied it to a plane,
+try and rotate around and you'll see that it always stays in view!
+
+<PlaneBillboard />
+
+Interestingly it's not actually a traditional billboard effect!
+If it was the quad would always face the camera with no distortion when rotating around,
+instead it stretches when not looking at it face on.
+
+Let's go over what's happening.
+
+## Translating relative to the camera
+
+The effect is built on the fact that we can translate (move) vertices relative to the camera.
+Personally when I think of moving things in 3D space I think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can change the position in each!
+
+To transform the local position into view space so it's relative to the camera we perform some math:
+
+```glsl
+vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
+```
+
+> ThreeJS provides global variables to shaders for convenience. The `position` variable is the vertex position in local space which is then transformed through supplied matrixes like `modelViewMatrix`.
+
+Now we can translate the vertex in view space,
+for example adding `1.0` to the `x` value results in the vertex moving one unit to the right:
+
+```glsl
+worldViewPosition.x += 1.0;
+```
+
+<Box padding="xlarge">
+  <Translate />
+</Box>
+
+If we were to subtract `1.0` it would move one unit to the left and so on.
+The key aspect here is the translation is _relative to the camera_,
+when rotating around the mesh if the vertices are translated far enough they'll always stay in view.
+
+## Using UVs as offset values
+
+Instead of hardcoding values for the translation we want to instead pass data to the shader and we can do this by abusing how UV maps work as each vertex has an assigned `[u, v]` position.
+
+> <Box paddingY="large">
+>   <UVW />
+> </Box>
+> UV mapping is the process of unwrapping a 3D model so it can be textured enabling something 3D to be
+> represented as 2D.
+
+In the vertex shader there is a global variable (a "uniform" in GLSL speak) that ThreeJS makes available called `uv` for each vertex.
+Remember the vertex shader runs over every vertex of a mesh meaning the `uv` value of each vertex will be wherever it is on the UV map.
+
+<Box padding="xlarge">
+  <UVPoints />
+</Box>
+
+What we want to do is for every quad of the foliage have it take up the entire UV area.
+If you're using Blender like me you can do this in a few steps:
+
+1. Go to UV editing mode
+1. Select the faces of the foliage
+1. Open the UV menu and click on reset
+
+This makes all selected quads cover the entire UV area.
+
+<Box padding="xlarge">
+  <ModifiedUVs />
+</Box>
+
+Now when accessing `uv` for any vertex of the foliage there are only 4 possible values that will be returned.
+
+```glsl
+vec2 vertexOffset = vec2(uv.x, uv.y);
+```
+
+## Remapping the UV offset
+
+If you turn off the "remap UVs" checkbox in the [example above](#plane-billboard) you'll see the translation is off center.
+This is because `uv` values are between `[0.0, 1.0]`,
+instead they should be between `[-1.0, 1.0]` so the translation is centered.
+
+Remapping values is common in shaders and so a `remap` function exists to interpolate an inputs value from previous known min and max values to new ones,
+here we pass the `uv` values through remap with new min and max values of `[-1.0, 1.0]`:
+
+> While `remap` is common it isn't actually built into GLSL so you'll see it either copied &
+> pasted or included via pragmas.
+
+<Box padding="xlarge">
+  <RemappedUVs />
+</Box>
+
+```glsl
+vec2 vertexOffset = vec2(
+  remap(uv.x, 0.0, 1.0, -1.0, 1.0),
+  remap(uv.y, 0.0, 1.0, -1.0, 1.0)
+);
+```
+
+## Translating the vertices with the offset
+
+Now we finish by adding the normalized offset to the `worldViewPosition` (position relative to the camera).
+Normalizing a vector involves changing all its values (such as `x` and `y`) so that its length equals one.
+Using the built in function we can take it for granted.
+
+```glsl
+vertexOffset = normalize(vertexOffset);
+
+worldViewPosition += vec4(vertexOffset, 0.0);
+```
+
+From any angle each vertex is now translated across the cameras `xy` axis resulting in a billboard-like effect where from the front it looks proportionally the same and from all other angles as a stretched rectangle.
+This works in our favour as it results in a subtler yet effective effect.
+
+<TreeNoAlpha />
+
+# Using alpha maps to make foliage
+
+When using custom shaders with ThreeJS there are two ways to use textures,
+the advanced way,
+and the simpler way.
+
+The advanced way involves creating a fragment shader that calculates the color of each pixel of the mesh.
+Doing this for just the alpha map isn't that much lines of code but when you also want lighting to affect the mesh it's either more code you need to write with a load of math or including fragments from the ThreeJS shader library.
+
+> Understanding fragment shaders is still a great thing to have in your toolbox,
+> definitely check out SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)" if you get a chance.
+
+The simpler way which and what I ended up doing was using the [CustomShaderMaterial](https://github.com/FarazzShaikh/THREE-CustomShaderMaterial) library —
+it enables your material to be affected by scene lighting and be assigned textures without needing to write a custom fragment shader,
+unless you want to.
+
+<PlaneAlpha />
+
+Perfect!
+If you dig into the vertex shader you'll notice one change was made to apply the result to `csm_PositionRaw` instead of `gl_Position` as CustomShaderMaterial takes the value and passes it onto the ThreeJS material shader.
+
+```diff
+-gl_Position = projectionMatrix * worldViewPosition;
++csm_PositionRaw = projectionMatrix * worldViewPosition;
+```
+
+# Up next
+
+Stay tuned for more content,
+in the next blog post I'll be going over updating the shader to add variance to the foliage so every tree can have its own flavor as well as going into detail how wind can be added.
+
+Make sure to subscribe below and [follow me on Twitter](https://twitter.com/itsdouges) so you don't miss the next one,
+cheers for reading!

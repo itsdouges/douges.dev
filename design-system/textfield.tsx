@@ -8,6 +8,7 @@ const styles = css({
   container: {
     maxWidth: 500,
     width: '100%',
+    fontFamily: "'Karla', sans-serif",
   },
   disabled: {
     cursor: 'not-allowed',
@@ -18,7 +19,7 @@ const styles = css({
     },
   },
   input: {
-    fontSize: 14,
+    fontSize: 24,
     width: '100%',
     fontFamily: 'inherit',
     '::placeholder': {

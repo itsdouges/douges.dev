@@ -2,7 +2,7 @@
   "name": "douges.dev",
   "version": "0.1.0",
   "private": true,
-  "description": "An interactive blog focused on web & game dev, design systems, and scale. Written by Michael Dougall.",
+  "description": "An interactive blog focusing on web & game dev. Written by Michael Dougall.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,12 +12,14 @@
   "dependencies": {
     "@atlaskit/css-reset": "^6.1.2",
     "@atlaskit/tokens": "^0.2.1",
+    "@codesandbox/sandpack-react": "^1.17.0",
     "@emotion/react": "^11.4.1",
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@next/mdx": "^11.1.0",
     "dedent": "^0.7.0",
     "next": "11.1.0",
+    "raw-loader": "^4.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "refractor": "^4.1.1"
