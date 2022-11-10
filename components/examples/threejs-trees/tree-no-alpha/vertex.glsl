@@ -17,16 +17,12 @@ void main() {
   v_uvs = uv;
 
   vec2 vertexOffset = vec2(
-    // Each UV value starts off from a value of [0, 1].
-    // We remap it to [-1, 1] so it is nicely centered.
     remap(uv.x, 0.0, 1.0, -u_remap, 1.0),
     remap(uv.y, 0.0, 1.0, -u_remap, 1.0)
   );
 
-  // Invert the x offset else it results in the quad facing the wrong way.
   vertexOffset *= vec2(-1.0, 1.0);
 
-  // Normalize the offset so it stays within boundaries.
   if (u_remap == 1.0) {
     vertexOffset = mix(vertexOffset, normalize(vertexOffset), u_normalize);
   }
