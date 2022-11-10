@@ -3,6 +3,10 @@ import { PlaneBillboard } from 'components/examples/threejs-trees/plane-billboar
 import { PlaneAlpha } from 'components/examples/threejs-trees/plane-alpha';
 import { TreeComplete } from 'components/examples/threejs-trees/tree-complete';
 import { TreeNoAlpha } from 'components/examples/threejs-trees/tree-no-alpha';
+import Shaders from 'components/svg/shaders';
+import Vertices from 'components/svg/vertices';
+import Translate from 'components/svg/translations';
+import UVW from 'components/svg/uvw';
 
 export const meta = {
   blurb: 'Learn how to make beautiful fluffy trees for ThreeJS using GLSL shaders.',
@@ -15,13 +19,15 @@ export const meta = {
 As a side project I've been working on a [point & click game](https://twitter.com/itsdouges/status/1583776108943904769) using ThreeJS (React Three Fiber) and I've started filling out the environment.
 I found this [awesome tutorial](https://www.youtube.com/watch?v=iASMFba7GeI) by Pontus Karlsson going into detail of how to make fluffy stylized trees and they look fantastic!
 
-Unfortunately it was made for Unity 3D not ThreeJS but after learning more about GLSL shaders recently and a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) I've gotten something looking great,
+Unfortunately it was made for Unity 3D not ThreeJS... but after some soul searching,
+taking a [GLSL shader course](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022),
+and a few days of [posting on Twitter](https://twitter.com/itsdouges/status/1587314407520235520) about it I've gotten something looking great,
 take a look:
 
 <TreeComplete />
 
 Really chuffed for how it has turned out!
-In this two part series I'm going to go over how the effect is made and break down each area.
+In this two part series I'm going to go over how the effect works and break down each part of it.
 There's loads of opportunity here to learn something new so buckle up!
 Make sure to subscribe below and [follow me on Twitter](https://twitter.com/itsdouges) so you don't miss the next one.
 
@@ -34,26 +40,26 @@ If you've ever used any ThreeJS material you've already indirectly used them.
 
 WebGL has two kinds of shaders:
 
-1. Vertex shaders, that run over _each vertex_ of a mesh; and
-2. Fragment shaders, that run over _every pixel_ of a mesh displayed on screen
+1. Vertex shaders, that positions _every vertex_ of a mesh; and
+2. Fragment shaders, that colors _every pixel_ of a mesh displayed on screen
+
+<Box padding="xlarge">
+  <Shaders />
+</Box>
 
 Shaders have a bunch of built in types,
 operators,
 and functions
 of which we'll primarily use vectors which are classes that hold values such as xyz and uvw.
 
-{{image of vertex shader to fragment shader}}
-
-We'll only be using vertex shaders in this series,
+We'll be using vertex shaders in this series,
 their responsibility is to at a minimum convert the vertex position from local coordinate space to clip coordinate space assigning the result to `gl_Position`.
 There's a great article on [coordinate systems](https://learnopengl.com/Getting-started/Coordinate-Systems) if you want to learn more but the gist is:
 
 1. Start at local space, position relative to itself
 1. Transform to world space, position relative to the world
 1. Transform to view space, position relative to the camera
-1. Transform to clip space, verticies are discarded when outside some range
-
-{{image of different coordinate systems}}
+1. Transform to clip space, vertices are discarded when outside some range
 
 > We won't be going much further into the fundamentals of GLSL shaders if you're keen to dig in I recommend SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)".
 > I did it and really loved going through it!
@@ -72,11 +78,11 @@ If you've used `@react-three/drei` previously (I like calling it the lodash of R
 not individual quads on a mesh!
 It also doesn't solve the second problem of scaling the quads up.
 
-> A mesh is made up of triangles of which there are three verticies to a triangle and two triangles make a "quad".
+> <Box paddingY="large">
+>   <Vertices />
+> </Box>
 >
-> <br />
->
-> {{image showing vertex into triangles into quad}}
+> A mesh is made up of triangles of which there are three vertices to a triangle and two triangles make a quad.
 
 Instead we can use GLSL vertex shaders and UVs from the mesh for the effect.
 Here we've applied it to a plane,
@@ -92,7 +98,7 @@ Let's go over what's happening.
 
 ## Moving relative to the camera
 
-The entire effect is built on the fact that we can translate verticies relative to the camera.
+The entire effect is built on the fact that we can translate vertices relative to the camera.
 Personally when I think of moving things in 3D space I generally think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can change the position when in each space!
 
 To transform the local position into view space so it's relative to the camera we perform some math:
@@ -110,7 +116,9 @@ If we add `1.0` to the `x` value:
 worldViewPosition.x += 1.0;
 ```
 
-{{image showing translation}}
+<Box padding="xlarge">
+  <Translate />
+</Box>
 
 We've now translated this vertex one unit to the right relative to the camera.
 If we were to subtract `1.0` it would translate one unit to the left.
@@ -122,21 +130,21 @@ worldViewPosition.z -= 1.0;
 
 ## Using UVs as offset values
 
-Instead of hardcoding values for the translation we want to instead pass data to the shader somehow.
-The first step is to have each quad take up the entire space of the UV map.
+Instead of hardcoding values for the translation we want to instead pass data to the shader,
+and we can do this by abusing how UV maps work as each vertex has an assigned `[u, v]` numeric position.
 
-> UV mapping is the process of unwrapping a 3D model so it can be textured enabling something 3D to be represented as 2D.
->
-> <br />
->
-> {{image explaining uvw mapping}}
+> <Box paddingY="large">
+>   <UVW />
+> </Box>
+> UV mapping is the process of unwrapping a 3D model so it can be textured enabling something 3D to be
+> represented as 2D.
 
-Why do this?
-In the vertex shader there is a global variable (a "uniform" in GLSL speak) that ThreeJS makes available called `uv`.
-Remember the vertex shader runs over every vertex of a mesh which means the `uv` value of every vertex will always be `0` or `1` and we can use this data in interesting ways.
+In the vertex shader there is a global variable (a "uniform" in GLSL speak) that ThreeJS makes available called `uv` for each vertex.
+Remember the vertex shader runs over every vertex of a mesh which means the `uv` value of each vertex will be whever it is on the UV map.
 
 {{image for each vertex offset value here}}
 
+What we want to do is for every quad of the foliage have it take up the entire UV area.
 If you're using Blender like me you can do this in a few steps:
 
 1. Go to UV editing mode
@@ -173,7 +181,7 @@ vec2 offset = vec2(
 
 {{image showing the updated vertex values for a quad}}
 
-## Moving the verticies with the offset
+## Moving the vertices with the offset
 
 Now we finish by adding the normalized offset to the `worldViewPosition`.
 
