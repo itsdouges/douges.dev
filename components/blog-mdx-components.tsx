@@ -7,6 +7,7 @@ import Code from 'design-system/code';
 import Text from 'design-system/text';
 import { token } from '@atlaskit/tokens';
 import Box from 'design-system/box';
+import { Children, ReactElement } from 'react';
 import AvatarExample from 'components/examples/taming-the-beast-that-is-css-in-js/avatar-ssr';
 import DynamicStyles from 'components/examples/taming-the-beast-that-is-css-in-js/dynamic-styles';
 import ConstrainStyles from 'components/examples/taming-the-beast-that-is-css-in-js/constrain-styles';
@@ -77,7 +78,13 @@ const components: MDXProviderComponents = {
         {...props}
         css={styles.blockquote}>
         <Text color="low" align="center" size="small">
-          {children}
+          {Children.map(children, (child: ReactElement) => {
+            if (typeof child === 'object' && child.props.originalType === 'p') {
+              return child.props.children;
+            }
+
+            return child;
+          })}
         </Text>
       </Box>
     );
