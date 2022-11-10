@@ -7,6 +7,9 @@ import Shaders from 'components/svg/shaders';
 import Vertices from 'components/svg/vertices';
 import Translate from 'components/svg/translations';
 import UVW from 'components/svg/uvw';
+import UVPoints from 'components/svg/uv-points';
+import ModifiedUVs from 'components/svg/modified-uvs';
+import RemappedUVs from 'components/svg/remapped-uvs';
 
 export const meta = {
   blurb: 'Learn how to make beautiful fluffy trees for ThreeJS using GLSL shaders.',
@@ -96,7 +99,7 @@ instead it stretches when not looking at it directly.
 
 Let's go over what's happening.
 
-## Moving relative to the camera
+## Translating relative to the camera
 
 The entire effect is built on the fact that we can translate vertices relative to the camera.
 Personally when I think of moving things in 3D space I generally think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can change the position when in each space!
@@ -120,13 +123,8 @@ worldViewPosition.x += 1.0;
   <Translate />
 </Box>
 
-We've now translated this vertex one unit to the right relative to the camera.
-If we were to subtract `1.0` it would translate one unit to the left.
-This applies to all axis!
-
-```glsl
-worldViewPosition.z -= 1.0;
-```
+Resulting in the vertex moving one unit to the right relative to the camera.
+If we were to subtract `1.0` it would translate one unit to the left and so on.
 
 ## Using UVs as offset values
 
@@ -142,7 +140,9 @@ and we can do this by abusing how UV maps work as each vertex has an assigned `[
 In the vertex shader there is a global variable (a "uniform" in GLSL speak) that ThreeJS makes available called `uv` for each vertex.
 Remember the vertex shader runs over every vertex of a mesh which means the `uv` value of each vertex will be whever it is on the UV map.
 
-{{image for each vertex offset value here}}
+<Box padding="xlarge">
+  <UVPoints />
+</Box>
 
 What we want to do is for every quad of the foliage have it take up the entire UV area.
 If you're using Blender like me you can do this in a few steps:
@@ -151,23 +151,29 @@ If you're using Blender like me you can do this in a few steps:
 1. Select the faces of the foliage
 1. Open the UV menu and click on reset
 
-It'll end up looking like this:
+This will cause all selected quads to cover the entire UV area.
 
-{{blender uvw image}}
+<Box padding="xlarge">
+  <ModifiedUVs />
+</Box>
 
-Using the value we get back from the global variable `uv` is all we need to do now:
+Now when accessing `uv` there are only 4 possible values that will be returned.
 
 ```glsl
 vec2 offset = vec2(uv.x, uv.y);
 ```
 
-## Remapping the offset
+## Remapping the UV offset
 
 If you turn off the "remap UVs" checkbox in the example above you'll see the translation is off center.
 This is because `uv` values are between `[0.0, 1.0]`!
 Instead we need them to be between `[-1.0, 1.0]`.
 
-Remapping values is common in shaders and so a `remap` function can be used to change an inputs known min and max values to new ones,
+<Box padding="xlarge">
+  <RemappedUVs />
+</Box>
+
+Remapping values is common in shaders and so a `remap` function can be used to interpolate an inputs value from between known min and max values to new ones,
 here we remap the `uv` min and max values from `[0.0, 1.0]` to `[-1.0, 1.0]`:
 
 > While `remap` is common it isn't actually built into GLSL so you'll see it either copied & pasted or included via pragmas.
@@ -179,9 +185,7 @@ vec2 offset = vec2(
 );
 ```
 
-{{image showing the updated vertex values for a quad}}
-
-## Moving the vertices with the offset
+## Translating the vertices with the offset
 
 Now we finish by adding the normalized offset to the `worldViewPosition`.
 

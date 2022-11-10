@@ -98,7 +98,7 @@ const SvgComponent = () => (
       d="M390.242 45.857h90.499v93.297h-90.499z"
     />
     <text
-      x={39.368}
+      x={50}
       y={183.167}
       style={{
         fontFamily: "'Karla', sans-serif",
@@ -108,7 +108,7 @@ const SvgComponent = () => (
       {'x += 1.0'}
     </text>
     <text
-      x={213.779}
+      x={230}
       y={183.167}
       style={{
         fontFamily: "'Karla', sans-serif",
@@ -118,7 +118,7 @@ const SvgComponent = () => (
       {'x -= 1.0'}
     </text>
     <text
-      x={393.534}
+      x={405}
       y={183.167}
       style={{
         fontFamily: "'Karla', sans-serif",

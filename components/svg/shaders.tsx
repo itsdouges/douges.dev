@@ -88,7 +88,7 @@ const SvgComponent = () => (
       }}
     />
     <text
-      x={18.022}
+      x={28}
       y={168.966}
       style={{
         fontFamily: "'Karla', sans-serif",
@@ -98,7 +98,7 @@ const SvgComponent = () => (
       {'[0,0]'}
     </text>
     <text
-      x={24.486}
+      x={40}
       y={205.78}
       style={{
         fontFamily: "'Karla', sans-serif",
@@ -108,7 +108,7 @@ const SvgComponent = () => (
       {'Vertex shader'}
     </text>
     <text
-      x={301.47}
+      x={310}
       y={205.78}
       style={{
         fontFamily: "'Karla', sans-serif",
@@ -118,7 +118,7 @@ const SvgComponent = () => (
       {'Fragment shader'}
     </text>
     <text
-      x={120.595}
+      x={130}
       y={168.966}
       style={{
         fontFamily: "'Karla', sans-serif",
@@ -128,7 +128,7 @@ const SvgComponent = () => (
       {'[1,0]'}
     </text>
     <text
-      x={120.595}
+      x={135}
       y={66.753}
       style={{
         fontFamily: "'Karla', sans-serif",
