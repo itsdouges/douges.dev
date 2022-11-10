@@ -110,7 +110,7 @@ To transform the local position into view space so it's relative to the camera w
 vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
 ```
 
-> ThreeJS provides global variables to shaders for convience. The `position` variable is the vertex position in local space which is then transformed through supplied matrixes like `modelViewMatrix`.
+> ThreeJS provides global variables to shaders for convenience. The `position` variable is the vertex position in local space which is then transformed through supplied matrixes like `modelViewMatrix`.
 
 Now we can translate the vertex in view space,
 for example adding `1.0` to the `x` value:
@@ -139,7 +139,7 @@ Instead of hardcoding values for the translation we want to instead pass data to
 > represented as 2D.
 
 In the vertex shader there is a global variable (a "uniform" in GLSL speak) that ThreeJS makes available called `uv` for each vertex.
-Remember the vertex shader runs over every vertex of a mesh which means the `uv` value of each vertex will be whever it is on the UV map.
+Remember the vertex shader runs over every vertex of a mesh which means the `uv` value of each vertex will be wherever it is on the UV map.
 
 <Box padding="xlarge">
   <UVPoints />
@@ -232,7 +232,7 @@ If you dig into the vertex shader you'll notice one change was made to apply the
 # Up next
 
 Stay tuned for more content,
-in the next blog post I'll be going over updating the shader to add variance to the foliage so every tree can have its own flavor as well as going into detail how they can be affected by wind.
+in the next blog post I'll be going over updating the shader to add variance to the foliage so every tree can have its own flavor as well as going into detail how it can be affected by wind.
 
 Make sure to subscribe below and [follow me on Twitter](https://twitter.com/itsdouges) so you don't miss the next one,
 cheers for reading!
