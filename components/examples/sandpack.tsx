@@ -18,9 +18,9 @@ const styles = css({
   },
 });
 
-export function Sandpack(props: SandpackProps) {
+export function Sandpack({ id, ...props }: SandpackProps & { id?: string }) {
   return (
-    <Box css={styles.overrides} background="sunken" padding="medium">
+    <Box id={id} css={styles.overrides} background="sunken" padding="medium">
       <SP
         {...props}
         template="react"

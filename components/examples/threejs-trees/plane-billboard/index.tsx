@@ -7,6 +7,7 @@ import fragmentShaderCode from '!!raw-loader!./fragment.glsl';
 export function PlaneBillboard() {
   return (
     <Sandpack
+      id="plane-billboard"
       customSetup={{
         dependencies: {
           '@react-three/drei': '9.14.3',

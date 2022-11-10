@@ -53,27 +53,27 @@ WebGL has two kinds of shaders:
 Shaders have a bunch of built in types,
 operators,
 and functions
-of which we'll primarily use vectors which are classes that hold values such as xyz and uvw.
+of which we'll primarily use vectors which are classes that hold values such as `xyz` and `uvw`.
 
 We'll be using vertex shaders in this series,
 their responsibility is to at a minimum convert the vertex position from local coordinate space to clip coordinate space assigning the result to `gl_Position`.
 There's a great article on [coordinate systems](https://learnopengl.com/Getting-started/Coordinate-Systems) if you want to learn more but the gist is:
 
 1. Start at local space, position relative to itself
-1. Transform to world space, position relative to the world
-1. Transform to view space, position relative to the camera
+1. Transform to world space, position relative to the world origin
+1. Transform to view space, position relative to the camera origin
 1. Transform to clip space, vertices are discarded when outside some range
 
 > We won't be going much further into the fundamentals of GLSL shaders if you're keen to dig in I recommend SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)".
 > I did it and really loved going through it!
 > He also has a [great Youtube channel](https://www.youtube.com/channel/UCEwhtpXrg5MmwlH04ANpL8A).
 
-# Getting the fluffy foliage look
+# Getting the fluffy look
 
 For the foliage effect we want two things to happen to the quads:
 
-1. Keep it facing the camera; and
-1. Scale it up to cover a larger area
+1. Keep it mostly facing the camera; and
+1. Scale it up to cover a larger surface area
 
 As it turns out having meshes always face the camera has a name —
 "billboarding"!
@@ -89,7 +89,7 @@ It also doesn't solve the second problem of scaling the quads up.
 
 Instead we can use GLSL vertex shaders and UVs from the mesh for the effect.
 Here we've applied it to a plane,
-try and rotate around and you'll see that it always stays (mostly) in view!
+try and rotate around and you'll see that it always stays in view!
 
 <PlaneBillboard />
 
@@ -101,8 +101,8 @@ Let's go over what's happening.
 
 ## Translating relative to the camera
 
-The entire effect is built on the fact that we can translate vertices relative to the camera.
-Personally when I think of moving things in 3D space I generally think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can change the position when in each space!
+The entire effect is built on the fact that we can translate (move) vertices relative to the camera.
+Personally when I think of moving things in 3D space I generally think in local & world space so the mind blowing thing here is since GLSL shaders can move between coordinate spaces you can change the position in each space!
 
 To transform the local position into view space so it's relative to the camera we perform some math:
 
@@ -112,8 +112,8 @@ vec4 worldViewPosition = modelViewMatrix * vec4(position, 1.0);
 
 > ThreeJS provides global variables to shaders for convience. The `position` variable is the vertex position in local space which is then transformed through supplied matrixes like `modelViewMatrix`.
 
-Now we can translate the vertex in view space.
-If we add `1.0` to the `x` value:
+Now we can translate the vertex in view space,
+for example adding `1.0` to the `x` value:
 
 ```glsl
 worldViewPosition.x += 1.0;
@@ -123,13 +123,14 @@ worldViewPosition.x += 1.0;
   <Translate />
 </Box>
 
-Resulting in the vertex moving one unit to the right relative to the camera.
+This results in the vertex moving one unit to the right relative to the camera.
 If we were to subtract `1.0` it would translate one unit to the left and so on.
+The key aspect here is it's _relative to the camera_,
+so when rotating around the mesh if the vertices are translated far enough they'll always stay in view.
 
 ## Using UVs as offset values
 
-Instead of hardcoding values for the translation we want to instead pass data to the shader,
-and we can do this by abusing how UV maps work as each vertex has an assigned `[u, v]` numeric position.
+Instead of hardcoding values for the translation we want to instead pass data to the shader and we can do this by abusing how UV maps work as each vertex has an assigned `[u, v]` numeric position.
 
 > <Box paddingY="large">
 >   <UVW />
@@ -165,18 +166,19 @@ vec2 offset = vec2(uv.x, uv.y);
 
 ## Remapping the UV offset
 
-If you turn off the "remap UVs" checkbox in the example above you'll see the translation is off center.
-This is because `uv` values are between `[0.0, 1.0]`!
-Instead we need them to be between `[-1.0, 1.0]`.
+If you turn off the "remap UVs" checkbox in the [example above](#plane-billboard) you'll see the translation is off center.
+This is because `uv` values are between `[0.0, 1.0]`,
+instead they should be between `[-1.0, 1.0]` so the translation is centered.
+
+Remapping values is common in shaders and so a `remap` function can be used to interpolate an inputs value from between known min and max values to new ones,
+here we can pass the `uv` values through remap with new min and max values from `[0.0, 1.0]` to `[-1.0, 1.0]`:
+
+> While `remap` is common it isn't actually built into GLSL so you'll see it either copied &
+> pasted or included via pragmas.
 
 <Box padding="xlarge">
   <RemappedUVs />
 </Box>
-
-Remapping values is common in shaders and so a `remap` function can be used to interpolate an inputs value from between known min and max values to new ones,
-here we remap the `uv` min and max values from `[0.0, 1.0]` to `[-1.0, 1.0]`:
-
-> While `remap` is common it isn't actually built into GLSL so you'll see it either copied & pasted or included via pragmas.
 
 ```glsl
 vec2 offset = vec2(
@@ -188,9 +190,8 @@ vec2 offset = vec2(
 ## Translating the vertices with the offset
 
 Now we finish by adding the normalized offset to the `worldViewPosition`.
-
-> Normalizing a vector involves changing all its values such as `x` and `y` so that its length equals one.
-> Using the built in function we can take it for granted.
+Normalizing a vector involves changing all its values such as `x` and `y` so that its length equals one.
+Using the built in function we can take it for granted.
 
 ```glsl
 vertexOffset = normalize(vertexOffset);
@@ -207,36 +208,31 @@ This works in our favour as it results in a subtler yet effective effect.
 
 When using custom shaders with ThreeJS there are two ways to use textures,
 the advanced way,
-and the simple way.
+and the simpler way.
 
 The advanced way involves creating a fragment shader that calculates the color of each pixel of the mesh.
-Doing this for just the alpha map isn't that much lines of code but when you also want lighting to affect the mesh it's either more code you need to write in the shader (and it's a lot of math!) or you including fragments from the ThreeJS shader library but that's still _work_.
+Doing this for just the alpha map isn't that much lines of code but when you also want lighting to affect the mesh it's either more code you need to write with a load of math or including fragments from the ThreeJS shader library.
 
 > Understanding fragment shaders is still a great thing to have in your toolbox,
 > definitely check out SimonDev's paid course "[The Easiest Way to Learn GLSL](https://simondev.teachable.com/p/glsl-shaders-from-scratch?coupon_code=EARLYBIRD2022)" if you get a chance.
 
-The simple way and what I ended up leaning on was using [CustomShaderMaterial](https://github.com/FarazzShaikh/THREE-CustomShaderMaterial) —
-it let's you keep using standard materials from ThreeJS so they're affected by scene lighting,
-can take textures without needing to write a fragment shader,
-and can be provided a custom vertex shader,
-fragment shader,
-or both!
-In this case we've provided just the vertex shader.
+The simpler way which is what I ended up doing was using the [CustomShaderMaterial](https://github.com/FarazzShaikh/THREE-CustomShaderMaterial) library —
+it enables your mesh to be affected by scene lighting and be assigned textures without needing to write a custom fragment shader unless you want to.
 
 <PlaneAlpha />
 
 Perfect!
-If you dig into the vertex shader you'll notice one change had to be made to apply the result to `csm_PositionRaw` instead of `gl_Position`.
-This is because CustomShaderMaterial will pass it onto the ThreeJS material shader.
+If you dig into the vertex shader you'll notice one change was made to apply the result to `csm_PositionRaw` instead of `gl_Position` as CustomShaderMaterial takes the value and passes it onto the ThreeJS material shader.
 
 ```diff
 -gl_Position = projectionMatrix * worldViewPosition;
 +csm_PositionRaw = projectionMatrix * worldViewPosition;
 ```
 
-We now have tree foliage in the look we're going for!
-In the next blog post I'll be going over how we can add variance to the foliage so not every tree looks the same,
-as well as detailing how the foliage can be affected by wind.
+# Up next
 
-Make sure to subscribe below and [follow me on Twitter](https://twitter.com/itsdouges) so you don't miss the next one!
-Cheers for reading.
+Stay tuned for more content,
+in the next blog post I'll be going over updating the shader to add variance to the foliage so every tree can have its own flavor as well as going into detail how they can be affected by wind.
+
+Make sure to subscribe below and [follow me on Twitter](https://twitter.com/itsdouges) so you don't miss the next one,
+cheers for reading!
