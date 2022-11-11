@@ -3,12 +3,12 @@ import { TreeWind } from 'components/examples/threejs-trees/tree-wind';
 import heroImage from '/public/threejs-trees.png';
 
 export const meta = {
-  blurb: 'Learn how to make beautiful fluffy trees for ThreeJS using GLSL shaders.',
+  blurb: 'Learn how to make beautiful fluffy trees for Three.js using GLSL shaders.',
   draft: true,
   heroImage,
   publishDate: '2022-11-17',
   tags: ['GAME DEV', 'GLSL', 'REACT', 'R3F', 'THREEJS', 'TUTORIAL'],
-  title: 'Creating fluffy trees with ThreeJS (part 2)',
+  title: 'Creating fluffy trees with Three.js (part 2)',
 };
 
 Some intro words
@@ -42,8 +42,8 @@ Let's run with that.
 Now all that's left is to figure out a formula for the wind so we can apply different rotations over time to the foliage.
 For that we will use a few variables and functions:
 
-- `normal`, supplied by ThreeJS, used to know the direction a vertex is facing. Vertices facing up should be more affected by wind.
-- `position`, supplied by ThreeJS, used to offset the rotation value for varied rotations; and
+- `normal`, supplied by Three.js, used to know the direction a vertex is facing. Vertices facing up should be more affected by wind.
+- `position`, supplied by Three.js, used to offset the rotation value for varied rotations; and
 - `u_windTime`, supplied by us, the total time elapsed in seconds
 - `cos()` / `sin()`, inbuilt functions, ensures that the value from `u_windTime` stays between a certain range
 
