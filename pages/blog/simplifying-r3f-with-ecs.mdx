@@ -16,14 +16,14 @@ If this is your first time hearing ECS,
 well,
 think of it as both as a design pattern akin to Model-View-Controller that constrains the code we write to promote flexibility and better performance,
 and libraries that implement the pattern.
-I'm using [miniplex](https://github.com/hmans/miniplex) by Hendrik),
+I'm using [miniplex](https://github.com/hmans/miniplex) by Hendrik,
 you should check it out.
-On the tin ECS is a compositional alternative to inheritance for extending behavior but in a React world where we already lean on composition to compose components together I find its value prop instead to be:
+On the tin ECS is a performant compositional alternative to inheritance for extending behavior but in a React world where we already lean on composition to compose components together I find its value props to be:
 
 - simplify how code that interacts with multiple areas is wired up, such as a camera system
 - enable systems that need to operate on all world entities, such as collision detection
 
-In this post I'll talk through how I initially implemented a camera system using idiomatic React patterns and how I refactored it to use ECS.
+In this post I'll talk through how I implemented a camera system using idiomatic React patterns and how I refactored it to use ECS.
 
 # Idiomatic React
 
@@ -60,8 +60,7 @@ function FollowingCamera({ children }) {
 ```
 
 <small>
-  The following camera uses state and context and moves the camera every frame towards the target
-  position.
+  The following camera uses state and context and moves the camera towards the target every frame.
 </small>
 
 ```jsx
