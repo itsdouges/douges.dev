@@ -4,7 +4,7 @@ export const meta = {
   heroImage,
   title: 'Simplifying React Three Fiber with Entity Component System',
   blurb:
-    "Entity Component System separates behaviour from data commonly used in native games but that doesn't mean it's out of reach for the web.",
+    "Entity Component System separates behavior from data commonly used in native games but that doesn't mean it's out of reach for the web.",
   publishDate: '2022-12-30',
   tags: ['GAME DEV', 'REACT', 'ECS', 'R3F', 'THREEJS'],
 };
@@ -15,14 +15,15 @@ a point & click game I'm hacking on as a side project.
 If this is your first time hearing ECS,
 well,
 think of it as both as a design pattern akin to Model-View-Controller that constrains the code we write to promote flexibility and better performance,
-and a libraries that implement the pattern (in this case I'm using [miniplex](https://github.com/hmans/miniplex) by Hendrik).
-On the tin it's a compositional alternative to inheritence for extending behavior,
-but in a React world where we already lean on composition to compose components together I find its value prop instead to be:
+and libraries that implement the pattern.
+I'm using [miniplex](https://github.com/hmans/miniplex) by Hendrik),
+you should check it out.
+On the tin ECS is a compositional alternative to inheritance for extending behavior but in a React world where we already lean on composition to compose components together I find its value prop instead to be:
 
 - simplify how code that interacts with multiple areas is wired up, such as a camera system
 - enable systems that need to operate on all world entities, such as collision detection
 
-In this post I'll talk through how I initially implemented a camera system using idiomatic React patterns and how I refectored it to use ECS.
+In this post I'll talk through how I initially implemented a camera system using idiomatic React patterns and how I refactored it to use ECS.
 
 # Idiomatic React
 
@@ -147,7 +148,7 @@ we need the mesh that has its position set else the target will always have `[0,
 # Refactor to ECS
 
 Initially I moved to ECS as I needed to implement collision detection and a basic physics system in FAZE and for this there needed to be a single place that owns the current world state,
-lest it become unweildly.
+lest it become unwieldy.
 Afterwards I wanted to see what it would take for other systems to move to ECS and the camera was something I was keen to try out.
 
 For the camera system we're interested in a few components:
