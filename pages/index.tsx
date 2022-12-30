@@ -19,7 +19,7 @@ import { getAllBlogPosts } from 'lib/blog';
 import Text from 'design-system/text';
 import Grid from 'design-system/grid';
 
-const LatestBlogContent = dynamic(() => import('./blog/threejs-trees-1.mdx'));
+const LatestBlogContent = dynamic(() => import('./blog/simplifying-r3f-with-ecs.mdx'));
 
 const styles = css({
   hero: {

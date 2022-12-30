@@ -93,7 +93,9 @@ function App({ Component, pageProps, router }: AppProps) {
                   <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
                     Twitter
                   </MenuItem>
-                  <MenuItem href="https://github.com/madou/douges.dev" secondary="madou/douges.dev">
+                  <MenuItem
+                    href="https://github.com/itsdouges/douges.dev"
+                    secondary="itsdouges/douges.dev">
                     Github
                   </MenuItem>
                 </DropdownMenu>
