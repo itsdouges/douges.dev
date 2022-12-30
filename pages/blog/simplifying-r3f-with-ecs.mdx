@@ -1,0 +1,95 @@
+import heroImage from '/public/ecs-hero.png';
+
+export const meta = {
+  heroImage,
+  title: 'Simplifying React Three Fiber with Entity Component System',
+  blurb:
+    "Entity Component System separates behaviour from data commonly used in native games but that doesn't mean it's out of reach for the web.",
+  publishDate: '2022-12-31',
+  tags: ['GAME DEV', 'REACT', 'ECS', 'R3F', 'THREEJS'],
+};
+
+So this is a bit of a short and simple one but I wanted to finish the year with one last blog post about how I used Entity Component System (ECS) to simplify my camera system in [FAZE](https://faze.vercel.app/play),
+a point & click game I'm hacking on as a side project.
+
+If this is your first time hearing ECS,
+well,
+think of it as both as a design pattern akin to Model-View-Controller that constrains the code we write to promote flexibility and better performance,
+and a libraries that implement the pattern (in this case I'm using [miniplex](https://github.com/hmans/miniplex) by Hendrik).
+On the tin it's a compositional alternative to inheritence for extending behavior,
+but in a React world where we already lean on composition to compose components together I find its value prop instead to be:
+
+- simplify how code that interacts with multiple parts is wired up, such as a camera system
+- enable systems to operate on all world entities, such as collision detection
+
+In this post I'll talk through how I initially implemented a camera system using idiomatic React patterns,
+how I refectored it to use ECS,
+and finish on why ECS has a lot of potential.
+
+# Idiomatic React
+
+Initially FAZE didn't use ECS at all,
+relying instead on idiomatic React patterns (state and context).
+For the camera system I had one primary goal: that the camera should smoothly transition from one entity to another.
+To accomplish this I figured it made the most sense to use a single camera and then lean on React context for the wiring up.
+
+Using a single top level camera provider and child camera target components to mark entities to be focused.
+
+```jsx
+<FollowingCamera>
+  <PlayerEntity />
+  <NPCEntity />
+</FollowingCamera>
+```
+
+```jsx
+const TargetContext = createContext();
+
+function FollowingCamera({ children }) {
+  const ref = useRef();
+  // Hold an array for all focused targets.
+  const [targets] = useState([]);
+  // The last element is considered the target.
+  const [target] = targets.at(-1);
+
+  useFrame((_, delta) => {
+    // Every frame damp torwards the targets position.
+    damp(ref.current.position, target.position, 3, delta);
+  });
+
+  return (
+    <TargetContext.Provider value={targets}>
+      <PerspectiveCamera ref={ref} />
+      {children}
+    </TargetContext.Provider>
+  );
+}
+```
+
+```jsx
+function PlayerEntity() {
+  // The player is always focused.
+  return (
+    <CameraTarget>
+      <mesh>
+        <boxGeometry args={[1, 1, 1]} />
+      </mesh>
+    </CameraTarget>
+  );
+}
+```
+
+```jsx
+function NPCEntity() {
+  // NPCs are conditionally focused depending on some state.
+  const [focused] = useState(false);
+
+  return (
+    <CameraTarget disabled={!focused}>
+      <mesh>
+        <boxGeometry args={[1, 1, 1]} />
+      </mesh>
+    </CameraTarget>
+  );
+}
+```
