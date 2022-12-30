@@ -136,6 +136,13 @@ const components: MDXProviderComponents = {
   p({ children }) {
     return <Text as="p">{children}</Text>;
   },
+  small({ children }) {
+    return (
+      <Text align="center" as="span" size="smaller" color="low">
+        {children}
+      </Text>
+    );
+  },
 };
 
 export default components;

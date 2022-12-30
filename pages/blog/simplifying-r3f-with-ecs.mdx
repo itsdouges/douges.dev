@@ -5,7 +5,7 @@ export const meta = {
   title: 'Simplifying React Three Fiber with Entity Component System',
   blurb:
     "Entity Component System separates behaviour from data commonly used in native games but that doesn't mean it's out of reach for the web.",
-  publishDate: '2022-12-31',
+  publishDate: '2022-12-30',
   tags: ['GAME DEV', 'REACT', 'ECS', 'R3F', 'THREEJS'],
 };
 
@@ -19,12 +19,10 @@ and a libraries that implement the pattern (in this case I'm using [miniplex](ht
 On the tin it's a compositional alternative to inheritence for extending behavior,
 but in a React world where we already lean on composition to compose components together I find its value prop instead to be:
 
-- simplify how code that interacts with multiple parts is wired up, such as a camera system
-- enable systems to operate on all world entities, such as collision detection
+- simplify how code that interacts with multiple areas is wired up, such as a camera system
+- enable systems that need to operate on all world entities, such as collision detection
 
-In this post I'll talk through how I initially implemented a camera system using idiomatic React patterns,
-how I refectored it to use ECS,
-and finish on why ECS has a lot of potential.
+In this post I'll talk through how I initially implemented a camera system using idiomatic React patterns and how I refectored it to use ECS.
 
 # Idiomatic React
 
@@ -33,14 +31,8 @@ relying instead on idiomatic React patterns (state and context).
 For the camera system I had one primary goal: that the camera should smoothly transition from one entity to another.
 To accomplish this I figured it made the most sense to use a single camera and then lean on React context for the wiring up.
 
-Using a single top level camera provider and child camera target components to mark entities to be focused.
-
-```jsx
-<FollowingCamera>
-  <PlayerEntity />
-  <NPCEntity />
-</FollowingCamera>
-```
+Using a single top level camera provider and child camera target component to mark entities that can be focused.
+The following code is slightly simplified but hopefully you get the picture.
 
 ```jsx
 const TargetContext = createContext();
@@ -53,7 +45,7 @@ function FollowingCamera({ children }) {
   const [target] = targets.at(-1);
 
   useFrame((_, delta) => {
-    // Every frame damp torwards the targets position.
+    // Every frame damp towards the target position.
     damp(ref.current.position, target.position, 3, delta);
   });
 
@@ -66,12 +58,47 @@ function FollowingCamera({ children }) {
 }
 ```
 
+<small>
+  The following camera uses state and context and moves the camera every frame towards the target
+  position.
+</small>
+
 ```jsx
-function PlayerEntity() {
-  // The player is always focused.
+function CameraTarget({ children, disabled }) {
+  const targets = useContext(TargetContext);
+  const ref = useRef(null);
+
+  useLayoutEffect(() => {
+    // On first effect when enabled add the target to the provider.
+    if (disabled) {
+      return;
+    }
+
+    // Traverse through children until we find a mesh with "camera-target" as its name.
+    const target = findTarget(ref.current.children);
+    targets.push(target);
+
+    return () => {
+      // On last effect remove the target from the provider.
+      targets.splice(targets.indexOf(data), 1);
+    };
+  }, [disabled, targets, zoom]);
+
+  return <group ref={ref}>{children}</group>;
+}
+```
+
+<small>
+  The camera target finds and adds the target to the following camera on mount and removes on
+  unmount.
+</small>
+
+```jsx
+function PlayerEntity({ position }) {
   return (
+    // The player is always focused.
     <CameraTarget>
-      <mesh>
+      <mesh position={position} name="camera-target">
         <boxGeometry args={[1, 1, 1]} />
       </mesh>
     </CameraTarget>
@@ -79,17 +106,168 @@ function PlayerEntity() {
 }
 ```
 
+<small>
+  The player entity wraps itself with the camera target and names the target with "camera-target",
+  it is always focused.
+</small>
+
 ```jsx
-function NPCEntity() {
+function NPCEntity({ position }) {
   // NPCs are conditionally focused depending on some state.
   const [focused] = useState(false);
 
   return (
     <CameraTarget disabled={!focused}>
-      <mesh>
+      <mesh position={position} name="camera-target">
         <boxGeometry args={[1, 1, 1]} />
       </mesh>
     </CameraTarget>
   );
 }
 ```
+
+<small>
+  The npc entity wraps itself with the camera target and names the target with "camera-target", it
+  is conditionally focused.
+</small>
+
+```jsx
+<FollowingCamera>
+  <PlayerEntity />
+  <NPCEntity />
+</FollowingCamera>
+```
+
+The main point here is that there is a lot of wiring up,
+and some leaky abstractions -
+namely meshes needing the name `"camera-target"`.
+We can't just get the top most child of the `CameraTarget` component and call it done -
+we need the mesh that has its position set else the target will always have `[0,0,0]` world coordinates!
+
+# Refactor to ECS
+
+Initially I moved to ECS as I needed to implement collision detection and a basic physics system in FAZE and for this there needed to be a single place that owns the current world state,
+lest it become unweildly.
+Afterwards I wanted to see what it would take for other systems to move to ECS and the camera was something I was keen to try out.
+
+For the camera system we're interested in a few components:
+
+1. sceneObject — the Object3D that is to be operated on, e.g. have its position updated
+1. focused — the entity is currently focused
+1. camera — the entity is a camera
+
+This is why ECS is considered declarative,
+we can add any number of components to an entity to enable behavior.
+With miniplex this comes down to declaring a few components (...on the Component, component).
+Entities now become simple declarations _describing_ what it is:
+
+```jsx
+function CameraEntity() {
+  return (
+    <Entity>
+      <Component name="camera" data={true} />
+      <Component name="sceneObject">
+        <PerspectiveCamera />
+      </Component>
+    </Entity>
+  );
+}
+```
+
+<small>The camera entity declares the camera tag, and scene object component.</small>
+
+```jsx
+function PlayerEntity({ position }) {
+  return (
+    <Entity>
+      {/* The player is always focused. */}
+      <Component name="focused" data={true} />
+      <Component name="sceneObject">
+        <mesh position={position}>
+          <boxGeometry args={[1, 1, 1]} />
+        </mesh>
+      </Component>
+    </Entity>
+  );
+}
+```
+
+<small>The player entity declares the focused tag, and scene object component.</small>
+
+```jsx
+function NPCEntity({ position }) {
+  const [focused] = useState(false);
+
+  return (
+    <Entity>
+      {/* NPCs are conditionally focused depending on some state. */}
+      {focused && <Component name="focused" data={true} />}
+      <Component name="sceneObject">
+        <mesh position={position}>
+          <boxGeometry args={[1, 1, 1]} />
+        </mesh>
+      </Component>
+    </Entity>
+  );
+}
+```
+
+<small>The npc entity conditionally declares the focused tag, and scene object component.</small>
+
+```jsx
+<CameraEntity />
+<PlayerEntity />
+<NPCEntity />
+```
+
+> Here we've used two kinds of components according to ECS.
+> An <strong>entity component</strong> is used to hold arbitrary data while an <strong>entity tag</strong> is used to categorize entities.
+> Miniplex doesn't currently differentiate between them.
+
+Now it's just a matter of writing some systems (functions) to act on the world,
+thankfully miniplex provides hooks for this.
+Hooks in,
+hooks out!
+
+```js
+function useCamera() {
+  const { entities: focused } = useEntities(world.with('focused', 'sceneObject'));
+  const { entities: cameras } = useEntities(world.with('camera', 'sceneObject'));
+
+  // The first element is considered the primary camera.
+  const camera = cameras[0];
+  // The last element is considered the target.
+  const target = focused.at(-1);
+
+  useFrame((_, delta) => {
+    // Every frame damp towards the target position.
+    damp(camera.sceneObject.position, target.sceneObject.position, 3, delta);
+  });
+}
+```
+
+<small>
+  The camera system moves the first camera entity towards the last focused entity every frame.
+</small>
+
+We define a component to house our systems.
+If this component is mounted the world ticks along one frame at a time,
+if it isn't mounted the world is frozen in time.
+
+```jsx
+function WorldSystems() {
+  useCamera();
+  return null;
+}
+```
+
+```jsx
+<WorldSystems />
+```
+
+Comparing the ECS implementation to the idiomatic React implementation you can see the separation of data and behavior being very effective.
+We also got rid of the leaky abstraction now as each entity declares the scene object that is to be acted on.
+
+I'm a big fan of this pattern and would love to hear if you've started using it too, why not join [Web Game Dev's discord](https://twitter.com/webgamedevs/status/1603079426832740352?s=20) and share?
+Hope to see you soon,
+have a happy new year!
