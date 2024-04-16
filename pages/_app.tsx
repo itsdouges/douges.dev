@@ -90,7 +90,7 @@ function App({ Component, pageProps, router }: AppProps) {
                       Links
                     </Button>
                   )}>
-                  <MenuItem href="https://twitter.com/itsdouges" secondary="@itsdouges">
+                  <MenuItem href="https://twitter.com/_douges" secondary="@itsdouges">
                     Twitter
                   </MenuItem>
                   <MenuItem

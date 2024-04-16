@@ -69,7 +69,7 @@ const Home: NextPage<{ latest: BlogMeta; moreBlogs: BlogMeta[] }> = ({ latest, m
                   dangerouslySetInnerHTML={{
                     __html: pkg.description.replace(
                       'Michael Dougall',
-                      '<a href="https://twitter.com/itsdouges">Michael Dougall</a>'
+                      '<a href="https://twitter.com/_douges">Michael Dougall</a>'
                     ),
                   }}
                 />

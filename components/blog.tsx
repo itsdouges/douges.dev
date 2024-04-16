@@ -71,7 +71,7 @@ function Blog({ title, publishDate, children, slug, minutesToRead, heroImage, ta
 
             <Text color="low" size="smaller">
               <time dateTime={publishDate}>{friendlyDate(publishDate)}</time> ·{' '}
-              <a href="https://twitter.com/itsdouges">Michael Dougall</a> · {minutesToRead} min read
+              <a href="https://twitter.com/_douges">Michael Dougall</a> · {minutesToRead} min read
             </Text>
           </Stack>
         </header>
